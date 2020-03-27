@@ -1,0 +1,6 @@
+@inproceedings{wang2020instance,
+  title={Instance Credibility Inference for Few-Shot Learning},
+  author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2020}
+} 
