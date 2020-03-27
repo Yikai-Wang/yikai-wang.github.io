@@ -23,7 +23,7 @@
       ga('create', 'UA-29643011-3', 'auto');
       ga('send', 'pageview');
     </script>
-
+    <script type="text/javascript" src="javascripts/hidebib.js"></script>
     <!-- For all browsers -->
     <link rel="stylesheet" href="assets/css/academicons.min.css"/>
     <link rel="stylesheet" href="assets/css/academicons.css"/>
@@ -55,16 +55,20 @@
       <p></p>
       <h1>Publications</h1>
         <p></p>
-      <ul>
-        <li>
-          <p> Instance Credibility Inference for Few-Shot Learning.[<a href="https://arxiv.org/pdf/2003.11853.pdf">paper</a>][<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>][<a href="https://yikai-wang.github.io/bibtex/wang2020instance.html">bib</a>] <br>
+          <div class="paper" id="ici">
+          <p> Instance Credibility Inference for Few-Shot Learning.[<a href="https://arxiv.org/pdf/2003.11853.pdf">paper</a>][<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>][<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>] <br>
             <b>Yikai Wang</b>, Chengming Xu, Chen Liu, Li Zhang, Yanwei Fu. In CVPR, 2020.
-        </li>
-      </ul>
+            <pre xml:space="preserve">
+@inproceedings{wang2020instance,
+  title={Instance Credibility Inference for Few-Shot Learning},
+  author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2020}
+}</pre></div>
       <h1>Teaching</h1>
-      <ul><li><p>
+      <p>
         Neural Network and Deep Learning, <br><div align='right'>2019-2020 Spring in School of Data Science, Fudan University.</div>
-      </p></li></ul>
+      </p>
       <p></p>
       <p></p>
       <p></p>
@@ -83,5 +87,9 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
+    <script xml:space="preserve" language="JavaScript">
+      hideallbibs();
+      hideallabs();
+      </script>
   </body>
 </html>
