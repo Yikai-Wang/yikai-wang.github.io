@@ -8,8 +8,8 @@
   <title>Yikai Wang</title>
   <link rel="icon" type="image/x-icon" href="index.ico" />
 
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <link rel="stylesheet" href="stylesheets/github-light.css">
+  <link rel="stylesheet" href="../stylesheets/styles.css">
+  <link rel="stylesheet" href="../stylesheets/github-light.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -26,17 +26,17 @@
     ga('create', 'UA-29643011-3', 'auto');
     ga('send', 'pageview');
   </script>
-  <script type="text/javascript" src="javascripts/hidebib.js"></script>
+  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
   <!-- For all browsers -->
-  <link rel="stylesheet" href="assets/css/academicons.min.css" />
-  <link rel="stylesheet" href="assets/css/academicons.css" />
+  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
+  <link rel="stylesheet" href="../assets/css/academicons.css" />
 
 </head>
 
 <body>
   <div class="wrapper">
     <header>
-      <h3><img src="projects/wang2020instance/teaser-image.gif" height="140" width="140"></h3>
+      <h3><img src="teaser-image.gif" height="140" width="140"></h3>
       <!-- <nav id="nav"> -->
       <!-- <ul> -->
       <!-- <a href="#top" id="top-link">Home</a> -->
@@ -48,9 +48,8 @@
       <!-- </ul> -->
       <!-- </nav> -->
       <nav id="nav">
-        <p><a href="#abstract" id="intro-link">Abstract</a></p>
-        <!-- <p><a href="#intro" id="intro-link">Introduction</a></p> -->
-        <!-- <p><a href="#method" id="method-link">Methodology</a></p> -->
+        <p><a href="#intro" id="intro-link">Introduction</a></p>
+        <p><a href="#method" id="method-link">Methodology</a></p>
         <p><a href="#experiment" id="experiment-link">Experiments</a></p>
         <p><a href="https://yikai-wang.github.io">HomePage</a></p>
 
@@ -62,11 +61,11 @@
     <section>
       <div class="paper" id="ici">
       <h1>Instance Credibility Inference for Few-Shot Learning</h1>
-      <a href="https://yikai-wang.github.io">Yikai Wang</a>, Chengming Xu, Chen Liu, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yanweifu.github.io/">Yanwei Fu</a>.<br>
+     Yikai Wang, Chengming Xu, Chen Liu, Li Zhang, Yanwei Fu.<br>
       [<a href="https://arxiv.org/pdf/2003.11853.pdf">paper</a>]
       [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
       [<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>]
-      [<a href="https://zhuanlan.zhihu.com/p/120354934">中文介绍</a>]<br>
+      <br>
       <pre xml:space="preserve">
 @inproceedings{wang2020instance,
   title={Instance Credibility Inference for Few-Shot Learning},
@@ -80,27 +79,7 @@
 <!-- <iframe src="//player.bilibili.com/player.html?aid=838095120&bvid=BV11g4y1q7iV&cid=185758376&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 640px; max-width: 100%"> </iframe> -->
 <!-- </div> --> 
     </section>
-    <section id="abstract" class="two">
-      <div class="container" align="left">
-        <h2>Abstract</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-Few-shot learning (FSL) aims to recognize new objects with extremely limited training data for each category. 
-Previous efforts are made by either leveraging meta-learning paradigm or novel principles in data augmentation to alleviate this extremely data-scarce problem. 
-In contrast, 
-this paper presents a simple statistical approach, 
-dubbed Instance Credibility Inference (ICI) to exploit the distribution support of unlabeled instances for few-shot learning. 
-Specifically, 
-we first train a linear classifier with the labeled few-shot examples and use it to infer the pseudo-labels for the unlabeled data. 
-To measure the credibility of each pseudo-labeled instance, 
-we then propose to solve another linear regression hypothesis by increasing the sparsity of the incidental parameters and rank the pseudo-labeled instances with their sparsity degree. 
-We select the most trustworthy pseudo-labeled instances alongside the labeled examples to re-train the linear classifier. 
-This process is iterated until all the unlabeled samples are included in the expanded training set, 
-i.e. the pseudo-label is converged for unlabeled data pool.
-Extensive experiments under two few-shot settings show that our simple approach can establish new state-of-the-arts on four widely used few-shot learning benchmark datasets including <i>mini</i>ImageNet, <i>tiered</i>ImageNet, CIFAR-FS, and CUB. 
-        </p>
-      </div>
-    </section>
-    <!-- <section id="intro" class="two">
+         <section id="intro" class="two">
       <div class="container" align="left">
         <h2>Introduction</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
@@ -223,13 +202,13 @@ Extensive experiments under two few-shot settings show that our simple approach 
         at this time the pseudo-labels of all unlabeled samples have been uniquely determined.
       </p>
       </div>
-    </section> -->
+    </section> 
     <section id="experiment" class="two">
       <div class="container" align="left">
         <h2>Experiments</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
           We conducted experiments on four few-shot learning datasets, and the results are as follows:
-          <center><img src="projects/wang2020instance/exp.jpg" width="600"></center>
+          <center><img src="exp.jpg" width="600"></center>
           Please refer to our <a href="https://arxiv.org/pdf/2003.11853.pdf">paper</a> for more details.
         </p>
       </div>
