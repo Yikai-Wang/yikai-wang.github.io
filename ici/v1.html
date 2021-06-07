@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>ICI</title>
+  <link rel="icon" type="image/x-icon" href="index.ico" />
+
+  <link rel="stylesheet" href="../stylesheets/styles.css">
+  <link rel="stylesheet" href="../stylesheets/github-light.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-29643011-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
+  <!-- For all browsers -->
+  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
+  <link rel="stylesheet" href="../assets/css/academicons.css" />
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <h3><img src="teaser-image.gif" height="140" width="140"></h3>
+      <!-- <nav id="nav"> -->
+      <!-- <ul> -->
+      <!-- <a href="#top" id="top-link">Home</a> -->
+      <!-- <a href="#about" id="about-link">About</a> -->
+      <!-- <li></li>
+            <li></li>
+            <li><a href="#research" id="research-link">Research</a></li>
+            <li><a href="#contact" id="contact-link">Contact</a></li> -->
+      <!-- </ul> -->
+      <!-- </nav> -->
+      <nav id="nav">
+        <p><a href="#abstract" id="intro-link">Abstract</a></p>
+        <p><a href="#experiment" id="experiment-link">Experiments</a></p>
+        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
+
+      </nav>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      </script>
+    </header>
+    <section>
+      <div class="paper" id="ici">
+      <h1>Instance Credibility Inference for Few-Shot Learning</h1>
+      Yikai Wang, Chengming Xu, Chen Liu, Li Zhang, Yanwei Fu.<br>
+      [<a href="https://arxiv.org/pdf/2003.11853.pdf">paper</a>]
+      [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
+      [<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>]
+    <br>
+      <pre xml:space="preserve">
+@inproceedings{wang2020instance,
+  title={Instance Credibility Inference for Few-Shot Learning},
+  author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2020}
+}</pre><br>
+    </section>
+    <section id="abstract" class="two">
+      <div class="container" align="left">
+        <h2>Abstract</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+Few-shot learning (FSL) aims to recognize new objects with extremely limited training data for each category. 
+Previous efforts are made by either leveraging meta-learning paradigm or novel principles in data augmentation to alleviate this extremely data-scarce problem. 
+In contrast, 
+this paper presents a simple statistical approach, 
+dubbed Instance Credibility Inference (ICI) to exploit the distribution support of unlabeled instances for few-shot learning. 
+Specifically, 
+we first train a linear classifier with the labeled few-shot examples and use it to infer the pseudo-labels for the unlabeled data. 
+To measure the credibility of each pseudo-labeled instance, 
+we then propose to solve another linear regression hypothesis by increasing the sparsity of the incidental parameters and rank the pseudo-labeled instances with their sparsity degree. 
+We select the most trustworthy pseudo-labeled instances alongside the labeled examples to re-train the linear classifier. 
+This process is iterated until all the unlabeled samples are included in the expanded training set, 
+i.e. the pseudo-label is converged for unlabeled data pool.
+Extensive experiments under two few-shot settings show that our simple approach can establish new state-of-the-arts on four widely used few-shot learning benchmark datasets including <i>mini</i>ImageNet, <i>tiered</i>ImageNet, CIFAR-FS, and CUB. 
+        </p>
+      </div>
+    </section>
+
+    <section id="experiment" class="two">
+      <div class="container" align="left">
+        <h2>Experiments</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          We conducted experiments on four few-shot learning datasets, and the results are as follows:
+          <center><img src="exp.jpg" width="600"></center>
+          Please refer to our <a href="https://arxiv.org/pdf/2003.11853.pdf">paper</a> for more details.
+        </p>
+      </div>
+    </section>
+
+
+    <footer>
+      <p><small>Hosted on GitHub Pages <br>
+          Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </footer>
+  </div>
+  <script src="javascripts/scale.fix.js"></script>
+  <script xml:space="preserve" language="JavaScript">
+    hideallbibs();
+    hideallabs();
+  </script>
+</body>
+
+</html>
