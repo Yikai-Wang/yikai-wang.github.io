@@ -1,0 +1,363 @@
+
+ <!doctype html>
+<html>
+ <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+     <meta name="description" content="Sparsity Learning in Neural Networks and Robust Statistical Analysis">
+     <meta name="author" content="">
+ 
+     <title>Sparsity Learning</title>
+ 
+     <!-- Bootstrap core CSS -->
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+  
+     <!-- Custom Google Web Font -->
+     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+     
+     <!-- Custom CSS-->
+     <link href="css/general.css" rel="stylesheet">
+     
+      <!-- Owl-Carousel -->
+     <link href="css/custom.css" rel="stylesheet">
+     <link href="css/owl.carousel.css" rel="stylesheet">
+     <link href="css/owl.theme.css" rel="stylesheet">
+     <link href="css/style.css" rel="stylesheet">
+     <link href="css/animate.css" rel="stylesheet">
+     
+     <!-- Magnific Popup core CSS file -->
+     <link rel="stylesheet" href="css/magnific-popup.css"> 
+     
+     <script src="js/modernizr-2.8.3.min.js"></script>  
+ 
+ </head>
+ 
+ <body id="home">
+ 
+     <!-- Preloader -->
+     <div id="preloader">
+         <div id="status"></div>
+     </div>
+     
+     <!-- FullScreen -->
+     <div class="intro-header">
+         <div class="col-xs-12 text-center abcen1">
+             <h1 class="h1_home wow fadeIn" data-wow-delay="0.4s" style="text-shadow: 0 0 8px #000000;"> Sparsity Learning in Neural Networks and Robust Statistical Analysis</h1>
+             <h3 class="h3_home wow fadeIn" data-wow-delay="0.6s" style="text-shadow: 0px 8px 4px black, 0 0 25px black"> 
+                 <a style="color:white" href="http://cvpr2022.thecvf.com/" target="_blank"><b>CVPR 2022</b></a> tutorial </p> 
+                 June [DAY]<sup>th</sup> 2022 ([TIME] AM - [TIME] PM PDT)</p>
+                 Location: Virtual</p>
+             </h3>
+         </div>    
+         <!-- /.container -->
+         <!-- <div class="col-xs-12 text-center abcen wow fadeIn">
+             <div class="button_down "> 
+                 <a class="imgcircle wow bounceInUp" data-wow-duration="1.5s"  href="#scope"> <img class="img_scroll" src="img/icon/circle.png" alt=""> </a>
+             </div>
+         </div>
+         <span class="intro-caption">
+             Photo by <a href="https://unsplash.com/@nasa">NASA</a> on <a href="https://unsplash.com/">Unsplash</a>
+         </span> -->
+     </div>
+     
+     <!-- NavBar-->
+     <nav class="navbar-default" role="navigation">
+         <div class="container">
+             <div class="navbar-header">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
+                 <a class="navbar-brand" href="#home">SLNN&RSA 2022</a>
+             </div>
+ 
+             <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                 <ul class="nav navbar-nav">
+                     
+                     <li class="menuItem"><a href="#scope">Home</a></li>
+                     <li class="menuItem"><a href="#program">Program</a></li>
+                     <li class="menuItem"><a href="#organizers">Organizers</a></li>	
+                     <li class="menuItem"><a href="#contacts">Contact</a></li>
+                 </ul>
+             </div>
+            
+         </div>
+     </nav> 
+     
+     <!-- Scope -->
+     <div id ="scope" class="content-section-a" style="border-top: 0">
+ 
+         <div class="container">
+             
+             <div class="row">
+             
+                 <div class="wow fadeInRightBig" data-animation-delay="200"> 
+                     <h3 class="section-heading">CVPR 2022 Tutorial on "Sparsity Learning in Neural Networks and Robust Statistical Analysis"</h3>
+                     <h4 class="section-heading">Sparsity Learning in Neural Networks</h4>
+                     <p class="lead"  style="text-align:justify">
+                        The great success of deep neural networks is built upon their over-parameterization, which smooths the optimization landscape without degrading the generalization ability. 
+                        Despite the beneﬁts of over-parameterization, a huge amount of parameters makes deep networks cumbersome in daily life applications. 
+                        On the other hand, training neural networks without over-parameterization faces many practical problems, e.g., being trapped in the local optimal. 
+                        Though techniques such as pruning and distillation are developed, they are expensive in fully training a dense network as backward selection methods; 
+                        and there is still a void on systematically exploring forward selection methods for learning structural sparsity in deep networks. <br>
+                        <br>
+                        To fill in this gap, this talk will introduce a series of novel approaches based on differential inclusions of inverse scale spaces. 
+                        Speciﬁcally, these methods can generate a family of models from simple to complex ones along the dynamics via coupling a pair of parameters, such that over-parameterized deep models and their structural sparsity can be explored simultaneously. 
+                     </p>
+                     <h4 class="section-heading">Sparsity Learning in Robust Statistical Analysis</h4>
+                     <p class="lead"  style="text-align:justify">
+                        Deep learning based models have excelled in many computer vision tasks and appear to surpass human performance. However, these models require an avalanche of expensive human labeled training data and many iterations to train their large number of parameters. This severely limits their scalability to the real-world long-tail distributed categories of noisy training set, some of which are with a large number of instances, but with only a few manually annotated. Learning from such extremely limited labeled examples is known as Few-Shot Learning (FSL). On the other hand, the noisy training set usually leads to the degradation of generalization and robustness of neural networks. The task of Learning With noisy Labels (LNL) has also attracted the research attention from the community. <br>
+                        <br>
+                        In this tutorial, we will introduce a theoretically guaranteed framework that explore and learn from few-shot or noisy training data. The introduced approached are motivated from the Statistical outlier detection methods, and in support of unlabeled instances for few-shot visual recognition, and the task of learning with noisy labels.<br>
+                        <br>
+                         The tutorial will be a half-day event ([TIME]) with several middle breaks.
+                     </p> 
+ 
+                 </div>   
+             </div>
+         </div>
+         <!-- /.container -->
+     </div>
+ 
+     <!-- Program -->
+     <div id ="program" class="content-section-a">
+ 
+         <div class="container">				
+                 <div class="wow fadeInLeftBig" data-animation-delay="200">   
+                     <h3 class="section-heading">Program (PDT, UTC-7)</h3>
+ 
+                     <p class="lead">
+                         Our program is divided into two sub-sessions: (1) Sparsity Learning in Neural Networks and (2) Sparsity Learning in Robust Statistical Analysis. 
+                         <!-- Recording of panel discussion will be available after the tutorial. -->
+                     </p>
+                 </div>
+             
+   <table class="table" style="width:100%">
+    <tr class="info">
+        <td colspan = 2><strong>Prerecorded Sessions
+        </strong></td>
+        <td></td>
+      </tr>
+       <tr class="success">
+         <td>10 min</td>
+         <td><strong>Opening Remarks &emsp;
+             <!-- [<a href="https://youtu.be/qrQTA9orWLg" style="color:orange">Video</a>] -->
+         </strong></td>
+         <td>Yanwei Fu</td>
+       </tr>
+ 
+       <tr>
+         <td>30 min</td>
+         <td><strong>Introduction &emsp;
+            <!-- [<a href="https://youtu.be/ToP9jI0kBtw" style="color:orange">Video</a>]&nbsp;&nbsp;[<a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLP_part1.pdf" style="color:orange">Slides</a>]</strong> -->
+             <!-- [<a href="./talks/Angel_ALVR.pdf" style="color:orange">Slides</a>]</strong><br />Invited Talk & QA -->
+         </td>
+         <td>Yanwei Fu</td>
+       </tr>
+ 
+       <tr class="success">
+         <td>20 min</td>
+         <td><strong>Huber-LASSO and ICI &emsp;
+            <!-- [<a href="https://youtu.be/5XRYFLPBA1U" style="color:orange">Video</a>]&nbsp;&nbsp;[<a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLP_part2.pdf" style="color:orange">Slides</a>]</strong> -->
+             <!-- [<a href="https://slideslive.com/38929761/robot-control-in-situated-instruction-following" style="color:orange">Video</a>] [<a href="./talks/yoav-control-alvr.pdf" style="color:orange">Slides</a>]</strong><br />Invited Talk & QA -->
+         </td>
+         <td>Yikai Wang</td>
+       </tr>
+ 
+       <tr>
+         <td>45 min</td>
+        
+         <td><strong>Inverse Scale Space method and Statistical Properties &emsp;
+            <!-- [<a href="https://youtu.be/19Z6cghHWMc" style="color:orange">Video</a>]&nbsp;&nbsp;[<a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLP_part3.pdf" style="color:orange">Slides</a>]</strong> -->
+             <!-- <br />Invited Talk & QA -->
+         </td>
+         <td>Yuan Yao</td>
+       </tr>
+ 
+       <tr class="success">
+         <td>15 min</td>
+         <td><strong>Break &emsp;
+            <!-- [<a href="https://youtu.be/r1ZeomlYXmo" style="color:orange">Video</a>]&nbsp;&nbsp;[<a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLN_part1.pdf" style="color:orange">Slides</a>] -->
+         </strong></td>
+         <td></td>
+       </tr>
+ 
+       <tr>
+         <td>30 min</td>
+         <td><strong>[TITLE] &emsp;
+            <!-- [<a href="https://youtu.be/uCNka0lR2Bw" style="color:orange">Video</a>]&nbsp;&nbsp;[<a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLN_part2.pdf" style="color:orange">Slides</a>] -->
+        </strong></td>
+         <td>Xinwen Sun</td>
+       </tr>
+ 
+       <tr class="success">
+         <td>45 min</td>
+         <td><strong>Learning to Optimize &emsp;
+            <!-- [<a href="https://youtu.be/XGB1EJuUgBg" style="color:orange">Video</a>]&nbsp;&nbsp;[ -->
+            <!-- <a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLN_part3-yoav.pdf" style="color:orange">Slides</a>]</strong> -->
+             <!-- [<a href="https://slideslive.com/38929766/agument-intelligence-with-multimodal-information" style="color:orange">Video</a>]</li></strong><br />Invited Talk & QA -->
+         </td>
+         <td>Wotao Yin</td>
+       </tr>
+ 
+       <!-- <tr>
+         <td>15min</td>
+         <td><strong>VLN Summary
+            &emsp;
+            [<a href="https://youtu.be/IeZxjlizl7U" style="color:orange">Video</a>]&nbsp;&nbsp;[
+            <a href="https://datarelease.blob.core.windows.net/tutorial/VQA2VLN2021/VLN_part4.pdf" style="color:orange">Slides</a>]
+         </strong>
+             <!-- [<a href="https://slideslive.com/38929764/dungeons-and-dqns-grounding-language-in-shared-experience" style="color:orange">video (SlidesLive)</a>] [<a href="https://youtu.be/YemciyRtYeI" style="color:orange">video (YouTube)</a>]</li></strong><br />Invited Talk & QA -->
+         <!-- </td>
+         <td>Qi Wu</td>
+       </tr> --> 
+       
+       <!-- <tr class="info">
+        <td colspan = 2><strong>Live Session
+        </strong></td>
+        <td></td>
+       </tr>
+        <tr class="success">
+         <td>16:00-17:00</td>
+         <td><strong>Panel Discussion</strong> &emsp;
+             <!-- [<a href="https://slideslive.com/38929764/dungeons-and-dqns-grounding-language-in-shared-experience" style="color:orange">video (SlidesLive)</a>] [<a href="https://youtu.be/YemciyRtYeI" style="color:orange">video (YouTube)</a>]</li></strong><br />Invited Talk & QA -->
+             <!-- <img height="20"  src="img/live.png" alt=""> <strong >LIVE on <u>Zoom</u>
+                &emsp;
+                [<a href="https://youtu.be/jzuJVfGtGXg" style="color:orange">Video</a>] </strong>
+         </td>
+         <td>All speakers</td>
+       </tr> --> 
+ 
+     </table>
+ 
+             <div class="container">				
+                 <div class="wow fadeInRightBig" data-animation-delay="200">
+                 </div>
+             </div>
+         </div>
+     </div>
+     
+     <!-- Organizers -->
+     <div id="organizers" class="content-section-a"> 
+         
+         <div class="container">
+                 <div class="row wow fadeInRightBig"  data-animation-delay="200">
+                 <h3 class="section-heading">Organizers</h3>
+ 
+                 <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">   
+                     <center><img  class="img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/fuyanwei.png" alt=""></center>
+                     <h4 class="section-heading"><center><a href="https://yanweifu.github.io">Yanwei Fu</a></center></h4>
+                     <h5 class="section-heading"><center><i>Fudan University</i></center></h5>
+                </div>
+                 
+ 
+                <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">   
+                    <center><img  class="img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/sunxinwei.jpg" alt=""></center>
+                    <h4 class="section-heading"><center><a href="">Xinwei Sun</a></center></h4>
+                    <h5 class="section-heading"><center><i>Fudan University</i></center></h5>
+                </div>
+                 
+
+                <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">   
+                    <center><img  class="img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/yaoyuan.jpg" alt=""></center>
+                    <h4 class="section-heading"><center><a href="https://yao-lab.github.io">Yuan Yao</a></center></h4>
+                    <h5 class="section-heading"><center><i>Hong Kong University of Science and Technology</i></center></h5>
+                </div>
+                
+                <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">   
+                    <center><img  class="img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/yinwotao.png" alt=""></center>
+                    <h4 class="section-heading"><center><a href="https://wotaoyin.mathopt.com">Wotao Yin</a></center></h4>
+                    <h5 class="section-heading"><center><i>Alibaba US</i></center></h5>
+                </div>
+ 
+                <!-- <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">   
+                    <center><img  class="img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/wangyikai.png" alt=""></center>
+                    <h4 class="section-heading"><center><a href="https://yikai-wang.github.io">Yikai Wang</a></center></h4>
+                    <h5 class="section-heading"><center><i>Fudan University</i></center></h5>
+                </div> -->
+ 
+ 
+         </div>
+     </div>
+ 
+         <!-- /.container -->
+     
+     <div id="contacts" class="content-section-c ">
+              <!-- Contacts -->
+         <div class="container">
+             <div class="row">
+             
+                 <!--div class="col-sm-6 pull-right wow fadeInRightBig">
+                     <img class="img-responsive " src="img/ipad.png" alt="">
+                 </div-->
+                 
+                 <div class="wow fadeInLeftBig" data-animation-delay="200">   
+                     <h3 class="section-heading" style="color:white">Contacts</h3>
+                     <!--div class="sub-title lead3">Lorem ipsum dolor sit atmet sit dolor greand fdanrh<br> sdfs sit atmet sit dolor greand fdanrh sdfs</div-->
+                     <p class="lead"  style="text-align:left;color:white">
+                         Contact the Organizing Committee: [EMAIL]
+                     </p>
+                     
+                 </div>   
+                 <!-- <div class="wow fadeInLeftBig" data-animation-delay="200">   
+                     <h3 class="section-heading"></h3>
+                     <p class="lead"  style="text-align:right">
+                         ©MULA2019
+                     </p>
+                     
+                 </div>   	 -->				
+             </div>
+             <div class="row">
+             
+                         <div class="col-md-6 col-md-offset-3 text-center">
+                             <div >
+                                     <div class="morph-button ">
+                                         <button type="button"></button>
+                                         
+                                     </div>
+                             </div>
+                         </div>	
+             </div>
+ 
+         </div>
+     </div>	
+ 
+    
+     <footer>
+     
+     </footer>
+ 
+     <!-- JavaScript -->
+     <script src="js/jquery-1.10.2.js"></script>
+     <script src="js/bootstrap.js"></script>
+     <script src="js/owl.carousel.js"></script>
+     <script src="js/script.js"></script>
+     <!-- StikyMenu -->
+     <script src="js/stickUp.min.js"></script>
+     <script type="text/javascript">
+       jQuery(function($) {
+         $(document).ready( function() {
+           $('.navbar-default').stickUp();
+           
+         });
+       });
+     
+     </script>
+     <!-- Smoothscroll -->
+     <script type="text/javascript" src="js/jquery.corner.js"></script> 
+     <script src="js/wow.min.js"></script>
+     <script>
+      new WOW().init();
+     </script>
+     <script src="js/classie.js"></script>
+     <script src="js/uiMorphingButton_inflow.js"></script>
+     <!-- Magnific Popup core JS file -->
+     <script src="js/jquery.magnific-popup.js"></script> 
+ </body>
+ 
+ </html>
+ 
