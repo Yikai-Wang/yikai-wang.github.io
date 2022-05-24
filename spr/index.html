@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>SPR: Scalable Penalized Regression</title>
+  <link rel="icon" type="image/x-icon" href="index.ico" />
+
+  <link rel="stylesheet" href="../stylesheets/styles.css">
+  <link rel="stylesheet" href="../stylesheets/github-light.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-29643011-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
+  <!-- For all browsers -->
+  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
+  <link rel="stylesheet" href="../assets/css/academicons.css" />
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <!-- <h3><img src="teaser-image.gif" height="140" width="140"></h3> -->
+      <!-- <nav id="nav"> -->
+      <!-- <ul> -->
+      <!-- <a href="#top" id="top-link">Home</a> -->
+      <!-- <a href="#about" id="about-link">About</a> -->
+      <!-- <li></li>
+            <li></li>
+            <li><a href="#research" id="research-link">Research</a></li>
+            <li><a href="#contact" id="contact-link">Contact</a></li> -->
+      <!-- </ul> -->
+      <!-- </nav> -->
+      <nav id="nav">
+        <!-- <p><a href="#abstract" id="intro-link">Abstract</a></p>
+        <p><a href="#video-intro" id="video-intro-link">ICI in 1 minute</a></p>
+        <p><a href="#framework" id="framework-link">Framework</a></p>
+        <p><a href="#methodology" id="methodology-link">Methodology</a></p>
+        <p><a href="#identifiability" id="identifiability-link">Identifiability of ICI</a></p>
+        <p><a href="#experiment" id="experiment-link">Experiments</a></p>
+        <p><a href="https://yikai-wang.github.io">HomePage</a></p> -->
+
+      </nav>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      </script>
+    </header>
+    <section>
+      <div class="paper" id="ici">
+      <h1>Scalable Penalized Regression</h1>
+      <!-- [Papers:<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>]
+      [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
+      [<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>]
+    <br>
+      <pre xml:space="preserve">
+@inproceedings{wang2020instance,
+  title={Instance Credibility Inference for Few-Shot Learning},
+  author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2020}
+}
+@article{wang2021trust,
+  title={How to Trust Unlabeled Data? Instance Credibility Inference for Few-Shot Learning},
+  author={Wang, Yikai and Zhang, Li and Yao, Yuan and Fu, Yanwei},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2021},
+  doi={10.1109/TPAMI.2021.3086140}}
+</pre><br>
+    </section>
+    <section id="abstract" class="two">
+      <div class="container" align="left">
+        <h2>Abstract</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          <b>ICI</b> is a statistical method for measuring the credibility of pseudo-labeled instances, to improve the performance of few-shot learning with theoretical guarantees.
+          <ul>
+            <li>The algorithm iteratively selects the pseudo-labeled instances according to its credibility measured by the proposed ICI for classifier training.
+              </li>
+            <li>We solve the regularization path of LM/GLM with incidental parameter and regard the sparsity level as the credibility for each pseudo-labeled instance. 
+            </li>
+            <li>Under the conditions of <i>restricted eigenvalue</i>, <i>irrepresentability</i>, and <i>large error</i>, our method will collect <b>all</b> the correctly-predicted pseudo-labeled instances.
+            </li>
+          </ul>
+        </p>
+      </div>
+    </section>
+    <section id="video-intro" class="two">
+      <div class="container" align="left">
+        <h2>ICI in 1 minute</h2>
+        <div style="position: relative; padding: 30% 45%;">
+  <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://player.bilibili.com/player.html?aid=838095120&bvid=BV11g4y1q7iV&cid=185758376&page=1&as_wide=1&high_quality=1&danmaku=0" frameborder="no" scrolling="no"></iframe>
+  </div>
+      </div>
+    </section>
+    <section id="framework" class="two">
+      <div class="container" align="left">
+        <h2>Framework</h2>
+        <center><img src="framework.pdf" width="600"></center>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        This figure illustrate the inference process of our proposed framework.
+We extract features of each labeled and unlabeled instance, 
+train a linear classifier with the support set, 
+provide pseudo-label for the unlabeled instances, 
+and use ICI to select the most trustworthy subset to expand the support set.
+This process is repeated until all the unlabeled data are included in the support set.</p>
+    </section>
+
+    <section id="methodology" class="two">
+      <div class="container" align="left">
+        <h2>Methodology</h2>
+        <h3>Linear regression case</h3>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        The linear regression model with incidental parameter is expressed as
+        \[y_i=x_i^{\top}\beta+\gamma_i+\varepsilon_i\]
+        where the <b>data-dependent</b> \(\gamma_i\) is considered as a metric of the credibility of the corresponding pseudo-labeled instance.
+        The larger of \(\Vert \gamma_i \Vert \), the more difficult it is for the model to fit the instance. </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        Our optimization problem is as follows
+        \[(\hat{\beta},\hat{\gamma})=\underset{\beta,\gamma}{\mathrm{argmin}}\Vert Y-X\beta-\gamma\Vert_\mathrm{F}^2+\lambda R(\gamma)\]
+        By finding the closed-form solution of \(\beta\) with respect to \(\gamma\), we can transform the problem into
+        \[\underset{\gamma}{\mathrm{argmin}}\left\Vert \tilde{Y}-\tilde{X}\gamma\right\Vert_\mathrm{F}^2+\lambda R\left(\gamma\right)\]
+        with some variable substitutions.
+        Then we can solve the regularization path of \(\gamma\) to get the sparsity level of each instance.
+        </p>
+        <h3>Logistic regression case</h3>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        The logistic regression model with incidental parameters can be formed as
+        \[y_{i,c} = \dfrac{\exp(x_{i,\cdot} \beta_{\cdot,c}+\gamma_{i,c})}{\sum_{l=1}^C\exp(x_{i,\cdot}\beta_{\cdot,l}+\gamma_{i,l})} + \varepsilon_{i,c}\]
+        We can reformulate it into a standard logistic regression model by setting 
+        \[\bar{X}=(X,I),\bar{\beta}=(\beta,\gamma)^\top\]
+        Our optimization problem is as follows
+        \[\underset{\bar{\beta}=(\beta,\gamma)^\top}{\mathrm{argmin}} - \frac{1}{n} \sum_{i=1}^N (\sum_{l=1}^C Y_{i,l}(\bar{X}_{i,\cdot}\bar{\beta}_{\cdot,l})-\log(\sum_{l=1}^C\exp(\bar{X}_{i,\cdot}\bar{\beta}_{\cdot,l})))
+        + \lambda_1 R(\beta) + \lambda_2 R(\gamma).\]</p>
+        <h3>Regularization path</h3>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        We regard \(\hat{\gamma}\) as a function of \(\lambda\). 
+        When \(\lambda\) changes from \(0\) to \(\infty\), the sparsity of \(\hat{\gamma}\) is increased until all of its elements are forced to vanish.
+        Further, we use the penalty \(R(\gamma)\) to encourage \(\gamma\) vanishes row by row, <i>i.e.</i>, instance by instance. 
+        For example, \(R(\gamma)=\sum_{i=1}^n\sum_{j=1}^c|\gamma_{i,j}|\) or \(R(\gamma)=\sum_{i=1}^n\Vert\gamma_{i}\Vert_2\).
+        Moreover, the penalty tends to vanish the subset of \(\tilde{X}\) with the lowest deviations, indicating less discrepancy between the prediction and the ground truth.
+        Hence we could rank the pseudo-labeled data by the smallest \(\lambda\) value when the corresponding \(\hat{\gamma}_i\) vanishes. </p>
+      </div>
+    </section>
+
+    <section id="identifiability" class="two">
+      <div class="container" align="left">
+        <h2>Identifiability of ICI</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        We provide a theory for identifiability of ICI with linear regression model based on the model selection consistency for a linear regression model with \(\ell_1\) sparsity regularization.
+        Assume \(\varepsilon\) is zero-mean sub-Gaussian noise. We give three assumptions:
+        <ul>
+          <li>(C1: Restricted eigenvalue)
+            \[\lambda_{\min }\left(\tilde{U}_{S}^{\top} \tilde{U}_{S}\right)=C_{\min }>0.\]
+          </li>
+          <li>(C2: Irrepresentability) \(\exists\ \eta\in\left(0,1\right]\),
+          \[\|\tilde{U}_{S^{c}}^{\top} \tilde{U}_{S}(\tilde{U}_{S}^{\top} \tilde{U}_{S})^{-1}  \|_{\infty} \leq 1-\eta.
+          \]</li>
+          <li>(C3: Large error)
+          \[\min _{i \in S}|\vec{\gamma}_{i}^{*}|>  h(\lambda, \eta, \tilde{U}, \vec{\gamma}^{*})\]
+          </li>
+        </ul>
+        Based on these conditions, we could provide the following theorem:
+        <b>Theorem</b>(Identifiability of ICI). Let 
+        \[\lambda \geq \frac{2 \sigma \sqrt{\mu_{\tilde{U}}}}{\eta } \sqrt{ \log cn}\]
+        Then with probability greater than
+        \[1-2 cn \exp \left\{-\frac{\lambda^{2} \eta^{2}}{2  \sigma^{2} \mu_{\tilde{U}}}\right\} \geq 1-2 \left(cn\right)^{-1},
+        \]
+        The equation has a unique solution \(\hat{\gamma}\) satisfies the following properties:
+        <ul>
+          <li>If C1 and C2 hold, the wrong-predicted instances indicated by ICI has no false positive error, i.e., \(\hat{S}\subseteq S\),
+            and hence \(\hat{O}\subseteq O\), and
+            \[\|\hat{\vec{\gamma}}_{S}-\vec{\gamma}_{S}^{*}\|_{\infty} \leq  h(\lambda, \eta, \tilde{U}, \vec{\gamma}^{*})
+            \]
+          </li>
+          <li>
+            If C1, C2, and C3 hold, ICI will identify all the correctly-predicted instances, i.e. \(\hat{S}= S\) and hence \(\hat{O} = O\), in fact \(\mathrm{sign} (\hat{\vec{\gamma}})=\mathrm{sign} (\vec{\gamma}^*)\).
+          </li>
+        </ul>
+
+        </p>
+      </div>
+    </section>
+
+    <section id="experiment" class="two">
+      <div class="container" align="left">
+        <h2>Experiments</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          We conducted experiments on four few-shot learning datasets, and the results are as follows:
+          <center><img src="exp.png" width="600"></center>
+          Please refer to our papers(<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>) for more details.
+        </p>
+      </div>
+    </section> -->
+
+
+    <!-- <footer>
+      <p><small>Hosted on GitHub Pages <br>
+          Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </footer> -->
+  </div>
+  <script src="javascripts/scale.fix.js"></script>
+  <script xml:space="preserve" language="JavaScript">
+    hideallbibs();
+    hideallabs();
+  </script>
+</body>
+
+</html>
