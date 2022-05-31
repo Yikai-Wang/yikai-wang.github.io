@@ -36,25 +36,15 @@
 <body>
   <div class="wrapper">
     <header>
-      <!-- <h3><img src="teaser-image.gif" height="140" width="140"></h3> -->
-      <!-- <nav id="nav"> -->
-      <!-- <ul> -->
-      <!-- <a href="#top" id="top-link">Home</a> -->
-      <!-- <a href="#about" id="about-link">About</a> -->
-      <!-- <li></li>
-            <li></li>
-            <li><a href="#research" id="research-link">Research</a></li>
-            <li><a href="#contact" id="contact-link">Contact</a></li> -->
-      <!-- </ul> -->
-      <!-- </nav> -->
+      <h3></h3>
       <nav id="nav">
-        <!-- <p><a href="#abstract" id="intro-link">Abstract</a></p>
-        <p><a href="#video-intro" id="video-intro-link">ICI in 1 minute</a></p>
+        <p><a href="#summary" id="intro-link">Summary</a></p>
+        <!-- <p><a href="#video-intro" id="video-intro-link">SPR in 5 minutes</a></p> -->
         <p><a href="#framework" id="framework-link">Framework</a></p>
         <p><a href="#methodology" id="methodology-link">Methodology</a></p>
-        <p><a href="#identifiability" id="identifiability-link">Identifiability of ICI</a></p>
+        <p><a href="#recovery" id="recovery-link">Noise Set Recovery</a></p>
         <p><a href="#experiment" id="experiment-link">Experiments</a></p>
-        <p><a href="https://yikai-wang.github.io">HomePage</a></p> -->
+        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
 
       </nav>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -64,134 +54,146 @@
     <section>
       <div class="paper" id="ici">
       <h1>Scalable Penalized Regression</h1>
-      <!-- [Papers:<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>]
-      [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
-      [<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>]
+      [<a href="https://arxiv.org/abs/2203.07788">paper</a>]
+      [<a href="https://github.com/Yikai-Wang/SPR-LNL">code</a>]
+      [<a shape="rect" href="javascript:togglebib('spr')" class="togglebib">bib</a>]
     <br>
       <pre xml:space="preserve">
-@inproceedings{wang2020instance,
-  title={Instance Credibility Inference for Few-Shot Learning},
-  author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},
-  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
-  year={2020}
+@inproceedings{wang2022scalable,
+  title={Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels},
+  author={Wang, Yikai and Xinwei Sun and Fu, Yanwei},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2022}
 }
-@article{wang2021trust,
-  title={How to Trust Unlabeled Data? Instance Credibility Inference for Few-Shot Learning},
-  author={Wang, Yikai and Zhang, Li and Yao, Yuan and Fu, Yanwei},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2021},
-  doi={10.1109/TPAMI.2021.3086140}}
 </pre><br>
     </section>
-    <section id="abstract" class="two">
+    <section id="summary" class="two">
       <div class="container" align="left">
-        <h2>Abstract</h2>
+        <h2>Summary</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          <b>ICI</b> is a statistical method for measuring the credibility of pseudo-labeled instances, to improve the performance of few-shot learning with theoretical guarantees.
+          <b>SPR</b> is a theoretically guaranteed noisy label detection framework to detect and remove noisy data for learning with noisy labels. 
           <ul>
-            <li>The algorithm iteratively selects the pseudo-labeled instances according to its credibility measured by the proposed ICI for classifier training.
+            <li>It produces a penalized regression to model the linear relation between network features and one-hot labels, where the noisy data are identified by the non-zero mean shift parameters solved in the regression model. 
               </li>
-            <li>We solve the regularization path of LM/GLM with incidental parameter and regard the sparsity level as the credibility for each pseudo-labeled instance. 
+            <li>A non-asymptotic probabilistic condition for SPR is provided to correctly identify the noisy data.  
             </li>
-            <li>Under the conditions of <i>restricted eigenvalue</i>, <i>irrepresentability</i>, and <i>large error</i>, our method will collect <b>all</b> the correctly-predicted pseudo-labeled instances.
+            <li>SPR can also be combined with semi-supervised algorithm to further exploit the support of noisy data as unlabeled data.
             </li>
           </ul>
         </p>
       </div>
     </section>
-    <section id="video-intro" class="two">
+    <!-- <section id="video-intro" class="two">
       <div class="container" align="left">
-        <h2>ICI in 1 minute</h2>
+        <h2>SPR in 5 minutes</h2>
         <div style="position: relative; padding: 30% 45%;">
   <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://player.bilibili.com/player.html?aid=838095120&bvid=BV11g4y1q7iV&cid=185758376&page=1&as_wide=1&high_quality=1&danmaku=0" frameborder="no" scrolling="no"></iframe>
   </div>
       </div>
-    </section>
+    </section> -->
     <section id="framework" class="two">
       <div class="container" align="left">
         <h2>Framework</h2>
         <center><img src="framework.pdf" width="600"></center>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        This figure illustrate the inference process of our proposed framework.
-We extract features of each labeled and unlabeled instance, 
-train a linear classifier with the support set, 
-provide pseudo-label for the unlabeled instances, 
-and use ICI to select the most trustworthy subset to expand the support set.
-This process is repeated until all the unlabeled data are included in the support set.</p>
+          Our framework can be divided into two stages.
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          In the first stage, the network is trained with cross-entropy to extract features and classify labels. 
+          As there are noisy labels, the network is not well trained.
+          To solve this problem, we need to identify noisy data and remove them from the training set.
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          In the second sample selection stage,
+          <ul>
+            <li>We assume a linear relation between the features and one-hot labels,
+              and those break this assumption will be identified as noisy data.</li>
+            <li>We solve this linear model with sparse penalty on the noisy data indicators.</li>
+            <li>With the solution path, we rank the data by their selecting time and remove the identified noisy data.</li>
+          </ul>
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          Then we return to the feature learning stage and repeat the two stages iteratively until converge.
+        </p> 
+          </p>
     </section>
 
     <section id="methodology" class="two">
       <div class="container" align="left">
         <h2>Methodology</h2>
-        <h3>Linear regression case</h3>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        The linear regression model with incidental parameter is expressed as
+        We start with the inherent linear relation existed in neural networks.
+        For an ideally trained network, we have 
+        \[y_i=\textrm{SoftMax}(x_i^{\top}\beta)\]
+        between the feature vector and one-hot labels.
+        We approximate this by dropping the soft-max operator as:
+        \[y_i=x_i^{\top}\beta+\varepsilon_i\]
+        This approximation is weak, but helpful for our target.
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        As we know, linear regression model is very sensitive to outliers.
+        We can use the residual prediction error to identify them by 
+        \[r_i=y_i-x_i^{\top}\hat{\beta}\]
+        or more statistically, using the leave-one-out testing hypothesis.
+        But this is cost when we have lots of training data.
+        Thus, we introduce an explicit parameter \(\gamma_i\), to denote the predict error as 
         \[y_i=x_i^{\top}\beta+\gamma_i+\varepsilon_i\]
-        where the <b>data-dependent</b> \(\gamma_i\) is considered as a metric of the credibility of the corresponding pseudo-labeled instance.
-        The larger of \(\Vert \gamma_i \Vert \), the more difficult it is for the model to fit the instance. </p>
+        For clean data, the linear relation is strong, thus we should have a small or even zero \(\gamma_i\).
+        If the data is mis-labeled, a large \(\gamma_i\) will returned by the linear model.
+        </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
+        Now our target is to solve \(\gamma_i\) in this model and identify noisy data if \(\gamma_i\neq 0\).
         Our optimization problem is as follows
         \[(\hat{\beta},\hat{\gamma})=\underset{\beta,\gamma}{\mathrm{argmin}}\Vert Y-X\beta-\gamma\Vert_\mathrm{F}^2+\lambda R(\gamma)\]
         By finding the closed-form solution of \(\beta\) with respect to \(\gamma\), we can transform the problem into
         \[\underset{\gamma}{\mathrm{argmin}}\left\Vert \tilde{Y}-\tilde{X}\gamma\right\Vert_\mathrm{F}^2+\lambda R\left(\gamma\right)\]
         with some variable substitutions.
-        Then we can solve the regularization path of \(\gamma\) to get the sparsity level of each instance.
         </p>
-        <h3>Logistic regression case</h3>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        The logistic regression model with incidental parameters can be formed as
-        \[y_{i,c} = \dfrac{\exp(x_{i,\cdot} \beta_{\cdot,c}+\gamma_{i,c})}{\sum_{l=1}^C\exp(x_{i,\cdot}\beta_{\cdot,l}+\gamma_{i,l})} + \varepsilon_{i,c}\]
-        We can reformulate it into a standard logistic regression model by setting 
-        \[\bar{X}=(X,I),\bar{\beta}=(\beta,\gamma)^\top\]
-        Our optimization problem is as follows
-        \[\underset{\bar{\beta}=(\beta,\gamma)^\top}{\mathrm{argmin}} - \frac{1}{n} \sum_{i=1}^N (\sum_{l=1}^C Y_{i,l}(\bar{X}_{i,\cdot}\bar{\beta}_{\cdot,l})-\log(\sum_{l=1}^C\exp(\bar{X}_{i,\cdot}\bar{\beta}_{\cdot,l})))
-        + \lambda_1 R(\beta) + \lambda_2 R(\gamma).\]</p>
-        <h3>Regularization path</h3>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-        We regard \(\hat{\gamma}\) as a function of \(\lambda\). 
-        When \(\lambda\) changes from \(0\) to \(\infty\), the sparsity of \(\hat{\gamma}\) is increased until all of its elements are forced to vanish.
-        Further, we use the penalty \(R(\gamma)\) to encourage \(\gamma\) vanishes row by row, <i>i.e.</i>, instance by instance. 
-        For example, \(R(\gamma)=\sum_{i=1}^n\sum_{j=1}^c|\gamma_{i,j}|\) or \(R(\gamma)=\sum_{i=1}^n\Vert\gamma_{i}\Vert_2\).
-        Moreover, the penalty tends to vanish the subset of \(\tilde{X}\) with the lowest deviations, indicating less discrepancy between the prediction and the ground truth.
-        Hence we could rank the pseudo-labeled data by the smallest \(\lambda\) value when the corresponding \(\hat{\gamma}_i\) vanishes. </p>
+        As it is hard to choose a proper \(\lambda\) in advance, we instead regard the estimate \(\hat{\gamma}\) as a function of \(\lambda\). 
+        Then we can generate the solution path of \(\hat{\gamma}\) with respect to \(\lambda\) as:
+        <center><img src="solution-path.pdf" width="600"></center>
+        Then we can use the \(\lambda\) where \(\hat{\gamma}_i\) turns into zero to rank the data and denote the last vanished instances as noisy data, as:
+        \[C_{i}=\sup \left\{\lambda: \gamma_{i}(\lambda) \neq 0\right\}\]
+        </p>
       </div>
     </section>
 
-    <section id="identifiability" class="two">
+    <section id="recovery" class="two">
       <div class="container" align="left">
-        <h2>Identifiability of ICI</h2>
+        <h2>Noise Set Recovery of SPR</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        We provide a theory for identifiability of ICI with linear regression model based on the model selection consistency for a linear regression model with \(\ell_1\) sparsity regularization.
-        Assume \(\varepsilon\) is zero-mean sub-Gaussian noise. We give three assumptions:
+        Based on the model selection consistency of LASSO model, we can provide a thoery for the noise set recovery of SPR with L1 penalty.
+        Assume \(\varepsilon\) is zero-mean sub-Gaussian noise. We give three conditions:
         <ul>
           <li>(C1: Restricted eigenvalue)
-            \[\lambda_{\min }\left(\tilde{U}_{S}^{\top} \tilde{U}_{S}\right)=C_{\min }>0.\]
+            \[\lambda_{\min}(\mathring{X}_{S}^{\top}\mathring{X}_{S})=C_{\min} >0\]
           </li>
           <li>(C2: Irrepresentability) \(\exists\ \eta\in\left(0,1\right]\),
-          \[\|\tilde{U}_{S^{c}}^{\top} \tilde{U}_{S}(\tilde{U}_{S}^{\top} \tilde{U}_{S})^{-1}  \|_{\infty} \leq 1-\eta.
+          \[\Vert\mathring{X}_{S^c}^{\top}\mathring{X}_{S}(\mathring{X}_{S}^{\top}\mathring{X}_{S})^{-1}\Vert_\infty \leq 1-\eta
           \]</li>
           <li>(C3: Large error)
-          \[\min _{i \in S}|\vec{\gamma}_{i}^{*}|>  h(\lambda, \eta, \tilde{U}, \vec{\gamma}^{*})\]
+          \[\gamma^*_{\min}:= \min_{i\in S}|\gamma^*_{i}|>h(\lambda,\eta,\mathring{X},\gamma^*)\]
+          where \(\Vert A\Vert_\infty:= \max_i \sum_j |A_{i,j}|\), and 
+          \(h(\lambda,\eta,\mathring{X},\gamma^*)=\lambda\eta/\sqrt{C_{\min}\mu_{\mathring{X}}}+\lambda \Vert(\mathring{X}_{S}^{\top}\mathring{X}_{S})^{-1}\mathrm{sign}(\gamma_{S}^*)\Vert_\infty\)
           </li>
         </ul>
         Based on these conditions, we could provide the following theorem:
-        <b>Theorem</b>(Identifiability of ICI). Let 
-        \[\lambda \geq \frac{2 \sigma \sqrt{\mu_{\tilde{U}}}}{\eta } \sqrt{ \log cn}\]
-        Then with probability greater than
-        \[1-2 cn \exp \left\{-\frac{\lambda^{2} \eta^{2}}{2  \sigma^{2} \mu_{\tilde{U}}}\right\} \geq 1-2 \left(cn\right)^{-1},
-        \]
-        The equation has a unique solution \(\hat{\gamma}\) satisfies the following properties:
+        </p>  
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        <b>Theorem</b>(Noise Set Recovery of SPR).
+        Let \(\lambda\geq \frac{2\sigma \sqrt{\mu_{\mathring{X}}}}{\eta}\sqrt{\log cn}\). 
+        Then with probability greater than \(1-2(cn)^{-1}\), SPR has a unique solution \(\hat{\gamma}\) such that: 
         <ul>
-          <li>If C1 and C2 hold, the wrong-predicted instances indicated by ICI has no false positive error, i.e., \(\hat{S}\subseteq S\),
-            and hence \(\hat{O}\subseteq O\), and
-            \[\|\hat{\vec{\gamma}}_{S}-\vec{\gamma}_{S}^{*}\|_{\infty} \leq  h(\lambda, \eta, \tilde{U}, \vec{\gamma}^{*})
-            \]
+          <li>If C1 and C2 hold, \(\hat{O}\subseteq O\). That is, the noisy set identified by SPR is the subset of ground-truth noisy set;
           </li>
           <li>
-            If C1, C2, and C3 hold, ICI will identify all the correctly-predicted instances, i.e. \(\hat{S}= S\) and hence \(\hat{O} = O\), in fact \(\mathrm{sign} (\hat{\vec{\gamma}})=\mathrm{sign} (\vec{\gamma}^*)\).
+            If C1, C2 and C3 hold, \(\hat{O}= O\), which means SPR can identify all the noisy data.
           </li>
         </ul>
-
+        Basically, this theorem tells us that if we have C1, we can get a unique solution.
+        If C2 holds, clean data and noisy data are diverged to some extent.
+        If we have C3, the error is large enough to be identified from random noise.
         </p>
       </div>
     </section>
@@ -200,18 +202,18 @@ This process is repeated until all the unlabeled data are included in the suppor
       <div class="container" align="left">
         <h2>Experiments</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          We conducted experiments on four few-shot learning datasets, and the results are as follows:
-          <center><img src="exp.png" width="600"></center>
-          Please refer to our papers(<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>) for more details.
+          We conducted experiments on two synthetic label noise datasets, MNIST and CIFAR-10.
+          We also test SPR on two real-world noisy datasets, ANIMAL10 and WebVision. 
+          Please refer to our <a href="https://arxiv.org/abs/2203.07788">paper</a> for more details.
         </p>
       </div>
-    </section> -->
+    </section>
 
 
-    <!-- <footer>
+    <footer>
       <p><small>Hosted on GitHub Pages <br>
-          Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-    </footer> -->
+        Theme by <a href="https://github.com/orderedlist/minimal">minimal</a></small></p>
+    </footer>
   </div>
   <script src="javascripts/scale.fix.js"></script>
   <script xml:space="preserve" language="JavaScript">
