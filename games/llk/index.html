@@ -14,18 +14,39 @@ function initial()
 {
     
     document.write("<link href='css/outstyle.css' rel='stylesheet' type='text/css' />");
+    // document.write("<div  id='debug_info'><h1 >  debug imformation </h1></div>");
     document.write("<div  id='llk_layout'>");
+    
+    var all = count = n*m;
+	var halfAll = all/2;
+	var tmp = [];
+	for(var i=0;i<halfAll;i++){
+		k=parseInt(characters.length*Math.random());
+        imgpath=imgdir+characters[k];
+        str_element=" src="+imgpath+" onmousedown='myclick(event)' class='llk_layout_img'/>";
+		tmp.push(str_element);
+		tmp.push(str_element);
+	}
+	// for(var i=all-1;i>=0;i--){
+	// 	var r = Math.floor(Math.random()*i);
+	// 	var c = tmp.splice(r,1);
+	// 	var y = Math.floor(i/nx);
+	// 	var x = i-y*nx;
+	// 	fc(x+1,y+1).innerHTML = c;
+	// }
     var i, j;
     //生成连连看布局
     for(i=0;i<=n+1;i++)
     {
         for(j=0;j<=m+1;j++)
         {
-            k=parseInt(10*Math.random());
-            imgpath=imgdir+characters[k];
-            str_element="<img id="+(i*(n+2)+j)+" src="+imgpath+" onmousedown='myclick(event)' class='llk_layout_img'/>";
+            // k=parseInt(characters.length*Math.random());
+            // imgpath=imgdir+characters[k];
+            // str_element="<img id="+(i*(m+2)+j)+" src="+imgpath+" onmousedown='myclick(event)' class='llk_layout_img'/>";
             if(i==0||j==0||i==n+1||j==m+1)
-                str_element="<img id="+(i*(n+2)+j)+" src='imgs/blank.gif' width=0 height=0 dispaly='hidden'/>";
+                str_element="<img id="+(i*(m+2)+j)+" src='imgs/blank.gif' width=0 height=0 dispaly='hidden'/>";
+            else
+                str_element="<img id="+(i*(m+2)+j)+tmp.splice(Math.floor(Math.random() * tmp.length),1);
             document.write(str_element);
         }
         document.write("<br/>");
@@ -47,8 +68,9 @@ function myclick(myevent)
     obj=document.elementFromPoint(myevent.clientX,myevent.clientY);
     id_obj=obj.id;
     //得到点击对象的行号与列号 并给出提示信息
-    row=parseInt(id_obj/n);
-    col=id_obj%n;
+    row=parseInt(id_obj/(m+2));
+    col=id_obj%(m+2);
+    // document.getElementById("debug_info").innerHTML = row + " " + col + "; " + obj + " name:" + obj.name + " id:" + obj.id + " x:" + myevent.clientX + " y:" + myevent.clientY + " " + obj.src;
     if (obj.src == obj0.src)
     {return;}
     //判断当前是第几次点击
@@ -98,7 +120,7 @@ function judgeHealth()
 		    break;
 	    for(j=1;j<=m;j++)
 	    {
-	        tempId=i*(n+2)+j;
+	        tempId=i*(m+2)+j;
             tempObj=document.getElementById(tempId);
 			if(tempObj.src!=obj0.src)
 			{
@@ -117,7 +139,7 @@ function judgeHealth()
 		    return 1;//break;
 	    for(j=1;j<=m;j++)
 	    {
-	        tempId1=i*(n+2)+j;
+	        tempId1=i*(m+2)+j;
             tempObj1=document.getElementById(tempId1);
 			if(tempObj1.src==obj0.src)
 			    continue;
@@ -127,7 +149,7 @@ function judgeHealth()
 				{
 			        if(ii==i&&jj==j)
 					    continue;
-					tempId2=ii*(n+2)+jj;
+					tempId2=ii*(m+2)+jj;
 					tempObj12=document.getElementById(tempId2);
 					if(tempObj1.src==obj0.src)
   			    	    continue;
@@ -150,10 +172,10 @@ function judgeHealth()
 function shuffle() {
     for (i = 1; i <= n; i++) {
         for (j = 1; j <= m; j++) {
-            tempId = i * (n + 2) + j;
+            tempId = i * (m + 2) + j;
             tempObj = document.getElementById(tempId);
             if (tempObj.src != obj0.src) {
-                k=parseInt(10*Math.random());
+                k=parseInt(characters.length*Math.random());
                 imgpath=imgdir+characters[k];
                tempObj.src=imgpath;
             }
@@ -168,10 +190,10 @@ function judgeSame(o1, o2)
    {
         return 0;
    }
-   row1=parseInt(o1.id/(n+2));
-   col1=parseInt(o1.id%(n+2));
-   row2=parseInt(o2.id/(n+2));
-   col2=parseInt(o2.id%(n+2));
+   row1=parseInt(o1.id/(m+2));
+   col1=parseInt(o1.id%(m+2));
+   row2=parseInt(o2.id/(m+2));
+   col2=parseInt(o2.id%(m+2));
    
    obj0=document.getElementById(0);
    //判断两张图片是否可以通过某一行可达
@@ -189,7 +211,7 @@ function judgeSame(o1, o2)
             if(row==row2&&col==col2)
                 continue;
             //路径上的一个图片，图片的行号为row，列号为col
-            cur_id=(n+2)*row+col;
+            cur_id=(m+2)*row+col;
             obj=document.getElementById(cur_id);
             //该位置不为空
             if(obj.src!=obj0.src)
@@ -202,7 +224,7 @@ function judgeSame(o1, o2)
         {
             if(row_temp==row1)
                 continue;
-            cur_id=(n+2)*row_temp+col1;
+            cur_id=(m+2)*row_temp+col1;
             obj=document.getElementById(cur_id);
             if(obj.src!=obj0.src)
             {flag=0;break;}
@@ -214,7 +236,7 @@ function judgeSame(o1, o2)
         {
             if(row_temp==row2)
                 continue;
-            cur_id=(n+2)*row_temp+col2;
+            cur_id=(m+2)*row_temp+col2;
             obj=document.getElementById(cur_id);
             if(obj.src!=obj0.src)
             {flag=0;break;}
@@ -228,11 +250,11 @@ function judgeSame(o1, o2)
         }    
    }
    //行列转换再次判断
-   col1=parseInt(o1.id/(n+2));
-   row1=parseInt(o1.id%(n+2));
-   col2=parseInt(o2.id/(n+2));
-   row2=parseInt(o2.id%(n+2));
-   for(row=0;row<=n+1;row++)
+   col1=parseInt(o1.id/(m+2));
+   row1=parseInt(o1.id%(m+2));
+   col2=parseInt(o2.id/(m+2));
+   row2=parseInt(o2.id%(m+2));
+   for(row=0;row<=m+1;row++)
    {
         flag=1;
         for(col=mymin(col1,col2);col<=mymax(col1,col2);col++)
@@ -241,7 +263,7 @@ function judgeSame(o1, o2)
                 continue;
             if(row==row2&&col==col2)
                 continue;
-            cur_id=(n+2)*col+row;
+            cur_id=(m+2)*col+row;
             obj=document.getElementById(cur_id);
             if(obj.src!=obj0.src)
             {flag=0;break;}
@@ -252,7 +274,7 @@ function judgeSame(o1, o2)
         {
             if(row_temp==row1)
                 continue;
-            cur_id=(n+2)*col1+row_temp;
+            cur_id=(m+2)*col1+row_temp;
             obj=document.getElementById(cur_id);
             if(obj.src!=obj0.src)
             {flag=0;break;}
@@ -263,7 +285,7 @@ function judgeSame(o1, o2)
         {
             if(row_temp==row2)
                 continue;
-            cur_id=(n+2)*col2+row_temp;
+            cur_id=(m+2)*col2+row_temp;
             obj=document.getElementById(cur_id);
             if(obj.src!=obj0.src)
             {flag=0;break;}
