@@ -4,15 +4,19 @@ img:hover{
 	background-color: #00F;
 	}
 .llk_layout_img {
-	margin: 2px;
+	/* margin: 2px;
 	padding: 1px;
 	height: 60px;
-	width: 60px;
+	width: 60px; */
+	margin: auto;
+	padding: 0.5%;
+	/* height: 60px; */
+	width: 11%;
 	border: thin solid #FFF;
 }
 #llk_layout {
 	margin: auto;
-	padding: 1px;
-	width: 77%;
+	/* padding: 1%; */
+	width: 100%;
 	border: thick solid #FFF;
 	}

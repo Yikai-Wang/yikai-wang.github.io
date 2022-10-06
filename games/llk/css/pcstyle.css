@@ -1,0 +1,22 @@
+p{color:red; border:thick solid groove;}
+h1{color:green;border:1pt;}
+img:hover{
+	background-color: #00F;
+	}
+.llk_layout_img {
+	/* margin: 2px;
+	padding: 1px;
+	height: 60px;
+	width: 60px; */
+	margin: auto;
+	padding: 0.1%;
+	/* height: 60px; */
+	width: 5.5%;
+	border: thin solid #FFF;
+}
+#llk_layout {
+	margin: auto;
+	/* padding: 1%; */
+	width: 100%;
+	border: thick solid #FFF;
+	}
