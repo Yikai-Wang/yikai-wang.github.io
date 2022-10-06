@@ -195,17 +195,36 @@ function judgeHealth()
 	}
 }
 function shuffle() {
+    var tmp = [];
     for (i = 1; i <= n; i++) {
         for (j = 1; j <= m; j++) {
             tempId = i * (m + 2) + j;
             tempObj = document.getElementById(tempId);
             if (tempObj.src != obj0.src) {
-                k=parseInt(characters.length*Math.random());
-                imgpath=imgdir+characters[k];
-               tempObj.src=imgpath;
+                tmp.push(tempObj.src)
             }
         }
     }
+    for (i = 1; i <= n; i++) {
+        for (j = 1; j <= m; j++) {
+            tempId = i * (m + 2) + j;
+            tempObj = document.getElementById(tempId);
+            if (tempObj.src != obj0.src) {
+               tempObj.src=tmp.splice(Math.floor(Math.random() * tmp.length),1);
+            }
+        }
+    }
+    // for (i = 1; i <= n; i++) {
+    //     for (j = 1; j <= m; j++) {
+    //         tempId = i * (m + 2) + j;
+    //         tempObj = document.getElementById(tempId);
+    //         if (tempObj.src != obj0.src) {
+    //             k=parseInt(characters.length*Math.random());
+    //             imgpath=imgdir+characters[k];
+    //            tempObj.src=imgpath;
+    //         }
+    //     }
+    // }
 }
 //判断两张图片是否可以消掉
 function judgeSame(o1, o2) 
