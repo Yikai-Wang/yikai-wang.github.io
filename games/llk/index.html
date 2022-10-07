@@ -1,13 +1,6 @@
 ﻿<!doctype html>
 <html>
 <head>
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
-<!-- <head> -->
-<!-- <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<title>Genshin Lianliankan</title>
-<link rel="icon" type="image/x-icon" href="index.ico"/> -->
 <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -46,11 +39,11 @@ else{
     var m=9;
 }
 var imgdir="imgs/characters/";
-var characters = ['yoimiya.980da504.png', 'mona.5684b936.png', 'keqing.31cd1d85.png', 'barbara.ce107187.png', 'rosaria.006d21fa.png', 'hutao.e503b077.png', 'yunjin.2081d90b.png', 'dori.4d3d853e.png', 'fischl.0b5311af.png', 'shogun.58342142.png', 'xiangling.39c3dd5a.png', 'ayaka.6bd20b9b.png', 'qiqi.a96414fd.png', 'shenhe.34e110b4.png', 'eula.813cb2d3.png', 'aloy.44d2833a.png', 'yelan.061dd1a6.png', 'sucrose.f16dc95b.png', 'shinobu.660c75b2.png', 'sara.775cc8cd.png', 'xinyan.94fd5d7c.png', 'noelle.67b50cb5.png', 'jean.fcc02d45.png', 'lisa.7641fd0c.png', 'collei.54328636.png', 'ningguang.8272e5de.png', 'amber.9124b3aa.png', 'yanfei.1c34aa49.png', 'kokomi.3300f4d7.png', 'beidou.c910c736.png', 'yae.b20a25d2.png', 'sayu.702ce53c.png', 'ganyu.babfc5c8.png', 'diona.735393f7.png', 'klee.c0c4a0b5.png'];
+var characters = ['noel_034_icon.png', 'xiangling_023_icon.png', 'layla_074_icon.png', 'kokomi_054_icon.png', 'yoimiya_049_icon.png', 'sara_056_icon.png', 'sayu_053_icon.png', 'fischl_031_icon.png', 'klee_029_icon.png', 'yelan_060_icon.png', 'playergirl_007_icon.png', 'barbara_014_icon.png', 'dori_068_icon.png', 'collei_067_icon.png', 'beidou_024_icon.png', 'feiyan_048_icon.png', 'qin_003_icon.png', 'diona_039_icon.png', 'yae_058_icon.png', 'eula_051_icon.png', 'hutao_046_icon.png', 'candace_072_icon.png', 'sucrose_043_icon.png', 'ambor_021_icon.png', 'shinobu_065_icon.png', 'aloy_062_icon.png', 'ningguang_027_icon.png', 'lisa_006_icon.png', 'nilou_070_icon.png', 'xinyan_044_icon.png', 'shougun_052_icon.png', 'qiqi_035_icon.png', 'ayaka_002_icon.png', 'keqing_042_icon.png', 'rosaria_045_icon.png', 'shenhe_063_icon.png', 'nahida_073_icon.png', 'mona_041_icon.png', 'ganyu_037_icon.png', 'yunjin_064_icon.png'];
 function initial()
 {
     document.write("<title>Genshin Lianliankan</title>");
-    document.write("<link rel='icon' href='imgs/characters/eula.813cb2d3.png' />");
+    document.write("<link rel='icon' href='imgs/characters/eula_051_icon.png' />");
     if(os.isPc){
         document.write("<link href='css/pcstyle.css' rel='stylesheet' type='text/css' />");
     }
@@ -70,22 +63,12 @@ function initial()
 		tmp.push(str_element);
 		tmp.push(str_element);
 	}
-	// for(var i=all-1;i>=0;i--){
-	// 	var r = Math.floor(Math.random()*i);
-	// 	var c = tmp.splice(r,1);
-	// 	var y = Math.floor(i/nx);
-	// 	var x = i-y*nx;
-	// 	fc(x+1,y+1).innerHTML = c;
-	// }
     var i, j;
     //生成连连看布局
     for(i=0;i<=n+1;i++)
     {
         for(j=0;j<=m+1;j++)
         {
-            // k=parseInt(characters.length*Math.random());
-            // imgpath=imgdir+characters[k];
-            // str_element="<img id="+(i*(m+2)+j)+" src="+imgpath+" onmousedown='myclick(event)' class='llk_layout_img'/>";
             if(i==0||j==0||i==n+1||j==m+1)
                 str_element="<img id="+(i*(m+2)+j)+" src='imgs/blank.gif' width=0 height=0 dispaly='hidden'/>";
             else
@@ -121,7 +104,6 @@ function myclick(myevent)
     {
         obj1=obj;
         num_cli=1;
-        //obj1.class="img_selected";
     }
     else//点击的是第二张图片，送入判断逻辑
     {
@@ -232,17 +214,6 @@ function shuffle() {
             }
         }
     }
-    // for (i = 1; i <= n; i++) {
-    //     for (j = 1; j <= m; j++) {
-    //         tempId = i * (m + 2) + j;
-    //         tempObj = document.getElementById(tempId);
-    //         if (tempObj.src != obj0.src) {
-    //             k=parseInt(characters.length*Math.random());
-    //             imgpath=imgdir+characters[k];
-    //            tempObj.src=imgpath;
-    //         }
-    //     }
-    // }
 }
 //判断两张图片是否可以消掉
 function judgeSame(o1, o2) 
