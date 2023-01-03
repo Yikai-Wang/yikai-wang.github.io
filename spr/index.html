@@ -36,13 +36,14 @@
 <body>
   <div class="wrapper">
     <header>
-      <h3></h3>
+      <h3><img src="knockoffs.pdf"  width="140"></h3>
       <nav id="nav">
         <p><a href="#summary" id="intro-link">Summary</a></p>
-        <!-- <p><a href="#video-intro" id="video-intro-link">SPR in 5 minutes</a></p> -->
         <p><a href="#framework" id="framework-link">Framework</a></p>
-        <p><a href="#methodology" id="methodology-link">Methodology</a></p>
-        <p><a href="#recovery" id="recovery-link">Noise Set Recovery</a></p>
+        <p><a href="#SPR" id="SPR-link">SPR</a></p>
+        <p><a href="#recovery" id="recovery-link">Noise Set Recovery of SPR</a></p>
+        <p><a href="#knockoffs-SPR" id="knockoffs-SPR-link">Knockoffs-SPR</a></p>
+        <p><a href="#FSR" id="FSR-link">FSR control of Knockoffs-SPR</a></p>
         <p><a href="#experiment" id="experiment-link">Experiments</a></p>
         <p><a href="https://yikai-wang.github.io">HomePage</a></p>
 
@@ -54,7 +55,7 @@
     <section>
       <div class="paper" id="spr">
       <h1>Scalable Penalized Regression</h1>
-      [<a href="https://arxiv.org/abs/2203.07788">paper</a>]
+      [Papers:<a href="https://arxiv.org/abs/2203.07788">CVPR22</a>,<a href="https://arxiv.org/abs/2301.00545">Journal extension</a>]
       [<a href="https://github.com/Yikai-Wang/SPR-LNL">code</a>]
       [<a shape="rect" href="javascript:togglebib('spr')" class="togglebib">bib</a>]
     <br>
@@ -65,62 +66,41 @@
   booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2022}
 }
+@article{wang2023knockoffs,
+  title={Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels},
+  author={Wang, Yikai and Fu, Yanwei and Sun, Xinwei},
+  journal={arXiv preprint arXiv:2301.00545},
+  year={2023}
+}
 </pre><br>
     </section>
     <section id="summary" class="two">
       <div class="container" align="left">
         <h2>Summary</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          <b>SPR</b> is a theoretically guaranteed noisy label detection framework to detect and remove noisy data for learning with noisy labels. 
+          <b>SPR</b> is a theoretically guaranteed noisy label detection framework to select clean data for learning with noisy labels. 
           <ul>
-            <li>It produces a penalized regression to model the linear relation between network features and one-hot labels, where the noisy data are identified by the non-zero mean shift parameters solved in the regression model. 
-              </li>
-            <li>A non-asymptotic probabilistic condition for SPR is provided to correctly identify the noisy data.  
-            </li>
-            <li>SPR can also be combined with semi-supervised algorithm to further exploit the support of noisy data as unlabeled data.
-            </li>
+            <li><b>Ideologically</b>, we propose to control the False-Selection-Rate in selecting clean data, under general scenarios.</li>
+            <li><b>Methodologically</b>, we propose Knockoffs-SPR, a data-adaptive method to control the FSR.</li>
+            <li><b>Theoretically</b>, we prove that the Knockoffs-SPR can control the FSR under any desired level.</li>
+            <li><b>Algorithmically</b>, we propose a splitting algorithm for better sample selection with balanced identifiability and complexity in large datasets.</li>
+            <li><b>Experimentally</b>, we demonstrate the effectiveness and efficiency of our method on several benchmark datasets and real-world noisy datasets.</li>
           </ul>
         </p>
       </div>
     </section>
-    <!-- <section id="video-intro" class="two">
-      <div class="container" align="left">
-        <h2>SPR in 5 minutes</h2>
-        <div style="position: relative; padding: 30% 45%;">
-  <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://player.bilibili.com/player.html?aid=838095120&bvid=BV11g4y1q7iV&cid=185758376&page=1&as_wide=1&high_quality=1&danmaku=0" frameborder="no" scrolling="no"></iframe>
-  </div>
-      </div>
-    </section> -->
     <section id="framework" class="two">
       <div class="container" align="left">
         <h2>Framework</h2>
         <center><img src="framework.pdf" width="600"></center>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          Our framework can be divided into two stages.
-        </p>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-          In the first stage, the network is trained with cross-entropy to extract features and classify labels. 
-          As there are noisy labels, the network is not well trained.
-          To solve this problem, we need to identify noisy data and remove them from the training set.
-        </p>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-          In the second sample selection stage,
-          <ul>
-            <li>We assume a linear relation between the features and one-hot labels,
-              and those break this assumption will be identified as noisy data.</li>
-            <li>We solve this linear model with sparse penalty on the noisy data indicators.</li>
-            <li>With the solution path, we rank the data by their selecting time and remove the identified noisy data.</li>
-          </ul>
-        </p>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-          Then we return to the feature learning stage and repeat the two stages iteratively until converge.
-        </p> 
+          Knockoffs-SPR runs a cycle between network learning and sample selection, where clean data are selected via the comparison of the mean-shift parameters between its original label and permuted label.
           </p>
     </section>
 
-    <section id="methodology" class="two">
+    <section id="SPR" class="two">
       <div class="container" align="left">
-        <h2>Methodology</h2>
+        <h2>SPR</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
         We start with the inherent linear relation existed in neural networks.
         For an ideally trained network, we have 
@@ -181,7 +161,7 @@
         Based on these conditions, we could provide the following theorem:
         </p>  
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        <b>Theorem</b>(Noise Set Recovery of SPR).
+        <b>Theorem</b>(Noisy Set Recovery of SPR).
         Let \(\lambda\geq \frac{2\sigma \sqrt{\mu_{\mathring{X}}}}{\eta}\sqrt{\log cn}\). 
         Then with probability greater than \(1-2(cn)^{-1}\), SPR has a unique solution \(\hat{\gamma}\) such that: 
         <ul>
@@ -198,13 +178,99 @@
       </div>
     </section>
 
+    <section id="knockoffs-SPR" class="two">
+      <div class="container" align="left">
+        <h2>Knockoffs-SPR</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+    The irrepresentable condition and the information of the ground-truth clean set in the noisy set recovery theorem are practically unknown, making this theory hard to be used in the real life. Particularly, with \(O\) unknown, the algorithm can stop at an improper time such that the noisy rate of the selected clean data can be still high, making the next-round trained model corrupted a lot by noisy patterns. 
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          To resolve the problem of false selection in SPR, we in this section propose a data-adaptive early stopping method for the solution path, that targets controlling the expected noisy rate of the selected data dubbed as False-Selection-Rate (FSR) under the desired level \(q\) (\(0 < q < 1\)): 
+\[
+\mathrm{FSR}=\mathbb{E}\left[\frac{\#\left\{ j: j\not\in \mathcal{H}_0 \cap \hat{C}\right\} }{\#\left\{ j:j\in\hat{C}\right\} \lor1}\right],
+\]
+where \(\hat{C}=\{j:\hat{\gamma}_j= 0\}\) is the recovered clean set of \(\gamma\), and \(\mathcal{H}_0: \gamma^*_i = 0\) denotes the null hypothesis, i.e., the sample \(i\) belonging to the clean dataset. Therefore, the FSR targets controlling the false rate among selected null hypotheses, which is also called the expected rate of the type-II error in hypothesis testing. 
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          Formally speaking, we split the whole data \(\mathcal{D}\) into \(\mathcal{D}_1:=(X_1,Y_1)\) and \(\mathcal{D}_2:=(X_2,Y_2)\) with \(n_i:=|\mathcal{D}_i|\), and implement Knockoffs-SPR on both \(\mathcal{D}_1\) and \(\mathcal{D}_2\). In the following, we only introduce the procedure on \(\mathcal{D}_2\), as the procedure for \(\mathcal{D}_1\) shares the same spirit. Roughly speaking, the procedure is composed of three steps: <b>i)</b> estimate \(\beta\) on \(\mathcal{D}_1\); <b>ii)</b> estimate \(\tilde{\gamma}(\lambda))\) on \(\mathcal{D}_2\); and  <b>iii)</b> construct the comparison statistics and selection filters.
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          <b>Step i)</b>: Estimating \(\beta\) on \(\mathcal{D}_1\).
+          Our target is to provide an estimate of \(\beta\) that is independent of \(\mathcal{D}_2\).
+          The simplest strategy is to use the standard OLS estimator to obtain \(\hat{\beta}_1\).
+          However, this estimator may not be accurate since it is corrupted by noisy samples. For this consideration, we first run SPR on \(\mathcal{D}_1\) to get clean data and then solve \(\beta\) via OLS on the estimated clean data.
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          <b>Step ii)</b>: Estimating \(\left(\gamma(\lambda),\tilde{\gamma}(\lambda)\right)\) on \(\mathcal{D}_2\).
+          After obtaining the solution 
+          \(\hat{\beta}_1\) on \(\mathcal{D}_1\)
+          , we learn the \(\gamma(\lambda)\) on \(\mathcal{D}_2\): 
+          \begin{equation}
+          \frac{1}{2}\left\Vert Y_2-X_2\hat{\beta}_1-\gamma_{2}\right\Vert_{\mathrm{F}}^{2}+P(\gamma_{2};\lambda).
+          \end{equation}
+          For each one-hot encoded vector \(y_{2,j}\), we randomly permute the position of 1 and obtain another one-hot vector \(\tilde{y}_{2,j}\neq y_{2,j}\). 
+          For clean data \(j\), the \(\tilde{y}_{2,j}\) turns to be a noisy label; while for noisy data, the \(\tilde{y}_{2,j}\) is switched to another noisy label with probability \(\frac{c-2}{c-1}\) or clean label with probability \(\frac{1}{c-1}\). 
+          After obtaining the permuted matrix as \(\tilde{Y}_2\), we learn the solution paths \(\left(\gamma_{2}(\lambda), \tilde{\gamma}_2(\lambda)\right)\) using the same algorithm as SPR via: 
+          \begin{equation}
+          \begin{cases}
+          \frac{1}{2}\left\Vert Y_2-X_2\tilde{\beta}_1-\gamma_2\right\Vert _{\mathrm{F}}^{2}+\sum_j P(\gamma_{2,j};\lambda),\\
+          \frac{1}{2}\left\Vert \tilde{Y}_2-X_2\tilde{\beta}_1-\tilde{\gamma}_2\right\Vert _{\mathrm{F}}^{2}+\sum_j P(\tilde{\gamma}_{2,j};\lambda).
+          \end{cases}
+          \end{equation}
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          <b>Step iii)</b>: Comparison statistics and selection filters. After obtaining the solution path \(\left(\gamma_{2}(\lambda), \tilde{\gamma}_2(\lambda)\right)\), we define sample significance scores  with respect to \(Y_{2,i}\) and \(\tilde{Y}_{2,i}\) of  each \(i\) respectively, as the selection time: \(Z_i := \sup\{\lambda: \Vert \gamma_{2,i}(\lambda) \Vert_2 \neq 0\}\) and \(\tilde{Z}_i := \sup\{\lambda: \Vert \tilde{\gamma}_{2,i} (\lambda) \Vert_2 \neq 0\}\). With \(Z_i, \tilde{Z}_i\), we define the \(W_i\) as: 
+          \begin{equation}
+          \label{eq:w}
+              W_i := Z_i \cdot \mathrm{sign}(Z_i - \tilde{Z}_i). 
+          \end{equation}
+          Based on these statistics, we define a data-dependent threshold \(T\) as 
+          \begin{equation}
+          T=\max\left\{ t>0:\frac{1 + \#\left\{ j:0 < W_{j} \leq t\right\} }{\#\left\{ j:-t\leq W_{j} < 0 \right\} \lor 1}\leq q\right\},
+          \end{equation}
+or \(T=0\) if this set is empty,
+where \(q\) is the pre-defined upper bound.
+Our algorithm will select the clean subset identified by 
+\begin{equation}
+\label{eq:clean-set}
+C_2:=\{j:-T\leq W_j < 0 \}.
+\end{equation}
+Empirically, \(T\) may be equal to \(0\) if the threshold \(q\) is sufficiently small. In this regard, no clean data are selected, which is meaningless.
+Therefore, we start with a small \(q\) and iteratively increase \(q\) and calculate \(T\), until an attainable \(T\) such that \(T > 0\) to bound the FSR as small as possible.
+In practice, when the FSR cannot be bounded by \(q=50\%\), we will end the selection and simply select half of the most possible clean examples via \(\{W_j\}\).
+        </p>
+      </div>
+    </section>
+    <section id="FSR" class="two">
+      <div class="container" align="left">
+        <h2>FSR control of Knockoffs-SPR</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+Our target is to show that \(\mathrm{FSR}\leq q\) with our data-adaptive threshold \(T\).
+Our main result is as follows:</p>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+<b>Theorem</b>(FSR control).
+For \(c\)-class classification task, and for all \(0 < q \leq1\), the solution of Knockoffs-SPR holds
+\begin{equation}
+\mathrm{FSR}(T)\leq q
+\end{equation}
+with the threshold \(T\) for two subsets defined respectively as
+\begin{equation*}
+T_i=\max\left\{ t\in\mathcal{W}:\frac{1+\#\left\{ j:0 < W_{j}\leq t\right\} }{\#\left\{ j:-t\leq W_{j} < 0 \right\} \lor 1}\leq \frac{c-2}{2c}q\right\}.
+\end{equation*}
+</p>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+This theorem tells us that FSR can be controlled by the given threshold \(q\) using the procedure of Knockoffs-SPR. 
+Compared to SPR, this procedure is more practical and useful in real-world experiments.</p>
+      </div>
+    </section>
+
     <section id="experiment" class="two">
       <div class="container" align="left">
         <h2>Experiments</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          We conducted experiments on two synthetic label noise datasets, MNIST and CIFAR-10.
-          We also test SPR on two real-world noisy datasets, ANIMAL10 and WebVision. 
-          Please refer to our <a href="https://arxiv.org/abs/2203.07788">paper</a> for more details.
+          We conducted experiments on two synthetic label noise datasets, CIFAR-10 and CIFAR-100.
+          We also test SPR on two real-world noisy datasets, WebVision and Clothing1M. 
+          Please refer to our paper for more details.
         </p>
       </div>
     </section>
@@ -212,7 +278,7 @@
 
     <footer>
       <p><small>Hosted on GitHub Pages <br>
-        Theme by <a href="https://github.com/orderedlist/minimal">minimal</a></small></p>
+        Theme modified from <a href="https://github.com/orderedlist/minimal">minimal</a></small></p>
     </footer>
   </div>
   <script src="javascripts/scale.fix.js"></script>
