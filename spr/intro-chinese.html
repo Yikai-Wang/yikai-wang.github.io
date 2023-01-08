@@ -85,7 +85,7 @@
             <li><b>方法上</b>，我们提出了 Knockoffs-SPR，一个控制错误选择率的数据自适应干净样本选择算法。</li>
             <li><b>理论上</b>，我们证明了 Knockoffs-SPR 可以将错误选择率控制在任何期望的水平。</li>
             <li><b>算法上</b>，我们提出了一种划分算法，以便在大型数据集中进行样本选择时平衡可识别性和复杂性。</li>
-            <li><b>实验上</b>，我们证明了我们的方法在几个基准数据集和真实世界的噪声数据集上的有效性。</li>
+            <li><b>实验上</b>，我们验证了我们的方法在几个基准数据集和真实世界的噪声数据集上的有效性。</li>
           </ul>
           本文将首先介绍我们发表在CVPR22的算法SPR及其理论性质，之后介绍针对SPR所存在的问题进行改进提出的Knockoffs-SPR及其理论性质。
         </p>
@@ -174,10 +174,10 @@
         令 \(\lambda\geq \frac{2\sigma \sqrt{\mu_{\mathring{X}}}}{\eta}\sqrt{\log cn}\)。
         那么在概率大于\(1-2(cn)^{-1}\)的情况下, SPR有唯一解\(\hat{\gamma}\)使得: 
         <ul>
-          <li>如果 C1 和 C2 成立，\(\hat{O}\subseteq O\)。 即SPR识别的噪声集是真实噪声集的子集；
+          <li>如果 C1 和 C2 成立，SPR识别的噪声集是真实噪声集的子集；
           </li>
           <li>
-            如果 C1、C2 和 C3 成立，\(\hat{O}= O\)，这意味着 SPR 可以识别所有噪声数据。
+            如果 C1、C2 和 C3 成立，SPR 可以识别所有噪声数据。
           </li>
         </ul>
         基本上，这个定理告诉我们，如果我们有 C1，我们可以获得唯一解。
@@ -191,7 +191,7 @@
       <div class="container" align="left">
         <h2>Knockoffs-SPR</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-            噪声集恢复定理中的不可表示条件和真实噪声集的信息实际上是未知的，使得该理论很难在现实生活中使用。 特别是，在 \(O\) 未知的情况下，算法可能会在不适当的时间停止，从而导致所选干净数据的噪声率仍然很高，使下一轮训练的模型被噪声严重破坏。
+            噪声集恢复定理中的不可表示条件和真实噪声集的信息实际上是未知的，使得该理论很难在现实生活中使用。 特别是，在真实噪声集未知的情况下，算法可能会在不适当的时间停止，从而导致所选干净数据的噪声率仍然很高，使下一轮训练的模型被噪声严重破坏。
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
             为了解决 SPR 中的错误选择问题，我们在本节中提出了一种数据自适应的样本选择方法，其目标是控制所选数据的预期噪声率，称为错误选择率（False-Selection-Rate, FSR），在期望水平 \(q\) (\(0 < q < 1\)): 
@@ -201,7 +201,7 @@
 其中 \(\hat{C}=\{j:\hat{\gamma}_j= 0\}\) 是我们所估计的干净集，\(\mathcal{H}_0: \gamma^*_i = 0\) 表示零假设，即样本 \(i\)属于干净数据集。 因此，FSR 的目标是控制选定原假设中的错误率，也称为假设检验中 II 类错误的期望。
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-            具体而言，我们将整个数据 \(\mathcal{D}\) 拆分为 \(\mathcal{D}_1:=(X_1,Y_1)\) 和 \(\mathcal{D}_2:=(X_2,Y_2 )\)， \(n_i:=|\mathcal{D}_i|\)，并在 \(\mathcal{D}_1\) 和 \(\mathcal{D}_2\) 上分别运行 Knockoffs-SPR。 下面我们只介绍Knockoffs-SPR在\(\mathcal{D}_2\)上选择干净样本的过程，在\(\mathcal{D}_1\)的选择过程是类似的。 粗略地说，该过程由三个步骤组成： <b>i)</b> 在\(\mathcal{D}_1\)上估计 \(\beta\); <b>ii)</b> 在 \(\mathcal{D}_2\) 上估计 \(\tilde{\gamma}(\lambda))\); 和<b>iii)</b>构建比较统计量和选择过滤器。
+            具体而言，我们将整个数据 \(\mathcal{D}\) 拆分为 \(\mathcal{D}_1:=(X_1,Y_1)\) 和 \(\mathcal{D}_2:=(X_2,Y_2 )\)，并在 \(\mathcal{D}_1\) 和 \(\mathcal{D}_2\) 上分别运行 Knockoffs-SPR。 下面我们只介绍Knockoffs-SPR在\(\mathcal{D}_2\)上选择干净样本的过程，在\(\mathcal{D}_1\)的选择过程是类似的。 粗略地说，该过程由三个步骤组成： <b>i)</b> 在\(\mathcal{D}_1\)上估计 \(\beta\); <b>ii)</b> 在 \(\mathcal{D}_2\) 上估计 \(\tilde{\gamma}(\lambda))\); 和<b>iii)</b>构建比较统计量和选择过滤器。
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
           <b>步骤 i)</b>: 在 \(\mathcal{D}_1\) 上估计 \(\beta\)。
