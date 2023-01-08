@@ -39,6 +39,7 @@
       <h3><img src="knockoffs.pdf"  width="140"></h3>
       <nav id="nav">
         <p><a href="#summary" id="intro-link">Summary</a></p>
+        <p><a href="#background" id="background-link">Background</a></p>
         <p><a href="#framework" id="framework-link">Framework</a></p>
         <p><a href="#SPR" id="SPR-link">SPR</a></p>
         <p><a href="#recovery" id="recovery-link">Noise Set Recovery of SPR</a></p>
@@ -78,7 +79,7 @@
       <div class="container" align="left">
         <h2>Summary</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          <b>SPR</b> is a theoretically guaranteed noisy label detection framework to select clean data for learning with noisy labels. 
+          <b>SPR</b> is a theoretically guaranteed clean sample selection framework for learning with noisy labels. 
           <ul>
             <li><b>Ideologically</b>, we propose to control the False-Selection-Rate in selecting clean data, under general scenarios.</li>
             <li><b>Methodologically</b>, we propose Knockoffs-SPR, a data-adaptive method to control the FSR.</li>
@@ -89,6 +90,14 @@
         </p>
       </div>
     </section>
+    <section id="background" class="two">
+      <div class="container" align="left">
+        <h2>Background</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          In classification, neural networks often require a large amount of labeled data for training. In this process, the quality of the annotation is crucial. Since the neural network has a strong fitting ability, it can even effectively fit the randomly generated labels, so when the label used for training is wrong, it will damage the classification ability of the neural network. This paper studies the sample selection algorithm that selects a subset of the training set and removes the noisy labels to better train the neural network. In this paper, we call mislabeled samples as noisy samples and correctly labeled samples as clean samples.
+        </p>
+      </div>
+  </section>
     <section id="framework" class="two">
       <div class="container" align="left">
         <h2>Framework</h2>
@@ -115,11 +124,11 @@
         We can use the residual prediction error to identify them by 
         \[r_i=y_i-x_i^{\top}\hat{\beta}\]
         or more statistically, using the leave-one-out testing hypothesis.
-        But this is cost when we have lots of training data.
+        But this is costly when we have lots of training data.
         Thus, we introduce an explicit parameter \(\gamma_i\), to denote the predict error as 
         \[y_i=x_i^{\top}\beta+\gamma_i+\varepsilon_i\]
-        For clean data, the linear relation is strong, thus we should have a small or even zero \(\gamma_i\).
-        If the data is mis-labeled, a large \(\gamma_i\) will returned by the linear model.
+        For clean data, the linear relation is strong, thus we should have a small or even zero \(\Vert\gamma_i\Vert\).
+        If the data is mis-labeled, a large \(\Vert\gamma_i\Vert\) will returned by the linear model.
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
         Now our target is to solve \(\gamma_i\) in this model and identify noisy data if \(\gamma_i\neq 0\).
@@ -133,7 +142,7 @@
         As it is hard to choose a proper \(\lambda\) in advance, we instead regard the estimate \(\hat{\gamma}\) as a function of \(\lambda\). 
         Then we can generate the solution path of \(\hat{\gamma}\) with respect to \(\lambda\) as:
         <center><img src="solution-path.pdf" width="600"></center>
-        Then we can use the \(\lambda\) where \(\hat{\gamma}_i\) turns into zero to rank the data and denote the last vanished instances as noisy data, as:
+        Then we can use the \(\lambda\) where \(\hat{\gamma}_i\) turns into zero to rank the data and denote the last vanished instances (red lines) as noisy data, as:
         \[C_{i}=\sup \left\{\lambda: \gamma_{i}(\lambda) \neq 0\right\}\]
         </p>
       </div>
@@ -143,7 +152,7 @@
       <div class="container" align="left">
         <h2>Noise Set Recovery of SPR</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        Based on the model selection consistency of LASSO model, we can provide a thoery for the noise set recovery of SPR with L1 penalty.
+        Based on the model selection consistency of LASSO model, we can provide a theory for the noise set recovery of SPR with L1 penalty.
         Assume \(\varepsilon\) is zero-mean sub-Gaussian noise. We give three conditions:
         <ul>
           <li>(C1: Restricted eigenvalue)
@@ -172,8 +181,8 @@
           </li>
         </ul>
         Basically, this theorem tells us that if we have C1, we can get a unique solution.
-        If C2 holds, clean data and noisy data are diverged to some extent.
-        If we have C3, the error is large enough to be identified from random noise.
+        If C2 holds, clean data and noisy data are diverged to some extent. Then SPR can identify a subset of noisy labels.
+        If we have C3, the error is large enough to be identified from random noise. Then SPR can identify all the noisy labels.
         </p>
       </div>
     </section>
@@ -185,7 +194,7 @@
     The irrepresentable condition and the information of the ground-truth clean set in the noisy set recovery theorem are practically unknown, making this theory hard to be used in the real life. Particularly, with \(O\) unknown, the algorithm can stop at an improper time such that the noisy rate of the selected clean data can be still high, making the next-round trained model corrupted a lot by noisy patterns. 
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          To resolve the problem of false selection in SPR, we in this section propose a data-adaptive early stopping method for the solution path, that targets controlling the expected noisy rate of the selected data dubbed as False-Selection-Rate (FSR) under the desired level \(q\) (\(0 < q < 1\)): 
+          To resolve the problem of false selection in SPR, we in this section propose a data-adaptive sample selection method, that targets controlling the expected noisy rate of the selected data dubbed as False-Selection-Rate (FSR) under the desired level \(q\) (\(0 < q < 1\)): 
 \[
 \mathrm{FSR}=\mathbb{E}\left[\frac{\#\left\{ j: j\not\in \mathcal{H}_0 \cap \hat{C}\right\} }{\#\left\{ j:j\in\hat{C}\right\} \lor1}\right],
 \]
@@ -269,7 +278,7 @@ Compared to SPR, this procedure is more practical and useful in real-world exper
         <h2>Experiments</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
           We conducted experiments on two synthetic label noise datasets, CIFAR-10 and CIFAR-100.
-          We also test SPR on two real-world noisy datasets, WebVision and Clothing1M. 
+          We also test Knockoffs-SPR on two real-world noisy datasets, WebVision and Clothing1M. 
           Please refer to our papers (<a href="https://arxiv.org/abs/2203.07788">CVPR22</a>,<a href="https://arxiv.org/abs/2301.00545">Journal extension</a>) for more details.
         </p>
       </div>
