@@ -104,7 +104,7 @@
         <h2>框架</h2>
         <center><img src="framework.pdf" width="600"></center>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-            Knockoffs-SPR 在网络学习和样本选择之间运行一个循环。其中，干净样本是通过对原始标签和置换标签的均值漂移参数进行比较所选择出来的。
+            Knockoffs-SPR 在网络学习和样本选择之间运行一个循环。我们基于特征和one-hot向量之间的近似线性关系刻画标签的可信度，从中选择干净样本。
           </p>
     </section>
 
@@ -129,6 +129,7 @@
         \[y_i=x_i^{\top}\beta+\gamma_i+\varepsilon_i\]
         对于干净的数据，特征和标签之间的线性关系很强，因此我们应该有一个小的甚至为零的 \(\Vert\gamma_i\Vert\)。
          如果数据被错误标记，线性模型很难拟合该数据，将返回一个大的 \(\Vert\gamma_i\Vert\)。
+         基于干净样本与噪声样本的这种差异，我们设计算法利用\(\gamma_i\)将两者区分开。
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
             现在我们的目标是求解此模型中的 \(\gamma_i\) ，其中\(\gamma_i = 0\)对应的样本为干净样本， \(\gamma_i\neq 0\) 对应的样本为噪声样本。
@@ -143,7 +144,7 @@
         <center><img src="solution-path.pdf" width="600"></center>
         我们使用使 \(\hat{\gamma}_i\) 变为零的 \(\lambda\) 的值对数据进行排序，如下所示：
         \[C_{i}=\sup \left\{\lambda: \gamma_{i}(\lambda) \neq 0\right\}\]
-        其中，最后消失的样本为噪声样本（图示红色线条），最先消失的样本为干净样本（图示蓝色线条）。
+        其中，最后消失的样本为噪声样本（图示红色线条），最先消失的样本为干净样本（图示蓝色线条）。在实际使用中，我们选择50%的样本为干净样本。
         </p>
       </div>
     </section>
@@ -226,12 +227,12 @@
           \end{equation}
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          <b>步骤 iii)</b>: 比较统计量和选择过滤器。 在获得解路径 \(\left(\gamma_{2}(\lambda), \tilde{\gamma}_2(\lambda)\right)\) 后，我们定义关于 \(Y_{2 ,i}\) 和 \(\tilde{Y}_{2,i}\) 中每个样本 \(i\) 的选择时间： \(Z_i := \sup\{\lambda: \Vert \gamma_{2,i}(\lambda) \Vert_2 \neq 0\}\) 和 \(\tilde{Z}_i := \sup\{\lambda: \Vert \tilde{\gamma}_{2,i } (\lambda) \Vert_2 \neq 0\}\)。 使用 \(Z_i, \tilde{Z}_i\)，我们将 \(W_i\) 定义为：
+          <b>步骤 iii)</b>: 比较统计量和选择过滤器。 在获得解路径 \(\left(\gamma_{2}(\lambda), \tilde{\gamma}_2(\lambda)\right)\) 后，我们定义关于 \(Y_{2 ,i}\) 和 \(\tilde{Y}_{2,i}\) 中每个样本 \(i\) 的选择时间： \(Z_i := \sup\{\lambda: \Vert \gamma_{2,i}(\lambda) \Vert_2 \neq 0\}\) 和 \(\tilde{Z}_i := \sup\{\lambda: \Vert \tilde{\gamma}_{2,i } (\lambda) \Vert_2 \neq 0\}\)。 我们的出发点为，对于干净样本，我们将更可能有\(Z_i < \tilde{Z}_i\)，而对于噪声样本，若其置换标签依然为噪声标签，我们无法判断\(Z_i, \tilde{Z}_i\)的大小关系，因此假设\(Z_i < \tilde{Z}_i\)与\(Z_i > \tilde{Z}_i\)的概率接近，而若置换标签为干净标签，则更可能有\(Z_i > \tilde{Z}_i\)。基于这种差异性，使用\(Z_i, \tilde{Z}_i\)，我们构造比较统计量为
           \begin{equation}
           \label{eq:w}
               W_i := Z_i \cdot \mathrm{sign}(Z_i - \tilde{Z}_i). 
           \end{equation}
-          根据该比较统计量，我们定义一个数据相关的选择阈值\(T\) 
+          根据该比较统计量，我们定义一个数据自适应的选择阈值\(T\) 
           \begin{equation}
           T=\max\left\{ t>0:\frac{1 + \#\left\{ j:0 < W_{j} \leq t\right\} }{\#\left\{ j:-t\leq W_{j} < 0 \right\} \lor 1}\leq q\right\},
           \end{equation}
