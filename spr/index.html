@@ -87,6 +87,7 @@
             <li><b>Algorithmically</b>, we propose a splitting algorithm for better sample selection with balanced identifiability and complexity in large datasets.</li>
             <li><b>Experimentally</b>, we demonstrate the effectiveness and efficiency of our method on several benchmark datasets and real-world noisy datasets.</li>
           </ul>
+          In this paper, to solve the problem of clean sample selection in learning with noisy labels, we first introduce the algorithm SPR we published in CVPR22. Under irrepresentable condition, the noise samples identified by SPR are a subset of ground-truth noise samples. Further, under the large error condition, the identified noise sample set is equal to the ground-truth noise sample set. In practical applications, we cannot know whether the irrepresentable condition is satisfied. In this case, we argue that in the general clean sample selection algorithm, controlling the false selection rate (FSR) of selected clean samples is critical. Based on this, we propose Knockoffs-SPR, an algorithm capable of controlling FSR below a pre-specified upper bound \(q\).
         </p>
       </div>
     </section>
@@ -103,8 +104,18 @@
         <h2>Framework</h2>
         <center><img src="framework.pdf" width="600"></center>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          Knockoffs-SPR runs a cycle between network learning and sample selection, where clean data are selected via the comparison of the mean-shift parameters between its original label and permuted label.
-          </p>
+          Knockoffs-SPR runs a cycle between network learning and sample selection. We characterize the confidence of labels based on an approximately linear relationship between features and one-hot vectors, from which clean samples are selected.
+        </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+        In SPR, we make a linear approximation to the relationship between neural network features and one-hot labels. The linear approximation is very weak, so if a very weak approximation can still well fit the feature label pair of a sample, we consider the sample to be a clean sample; and if the approximation cannot fit a sample well, the sample is likely to be a noise sample. Based on this difference, we introduce a variable to describe the fitting degree of the linear model to the sample, and obtain the credibility of each sample by solving the variable, so as to select clean samples. </p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+According to the model selection consistency theory of LASSO, we can prove that under certain conditions, SPR can identify all noise samples.
+<p style="text-align:justify; text-justify:inter-ideograph;">
+However, the theoretical conditions of SPR cannot be known in advance whether it is true in reality, so the practical significance is limited. When the theoretical condition of SPR is not established, there may be noise samples in the selected clean samples. To address this issue, we propose Knockoffs-SPR in our journal extension article. </p>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+In Knockoffs-SPR, we study how to control the false selection rate of clean samples as much as possible in the general sample selection environment. We still rely on a linear approximation of the relationship between neural network features and one-hot labels. But in Knockoffs-SPR, we first focus on a single sample and compare its label confidence with that of a randomly permuted label. The comparison between the two has different behaviour when the label of the sample is a clean label and a noisy label, and we construct a comparison statistic based on this difference. Afterwards, we compare the comparison statistics of each sample among samples to identify clean samples. We demonstrate that, under such a series of configurations, Knockoffs-SPR is naturally capable of controlling the false selection rate of clean samples. </p>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+Next, we introduce the algorithm details and theoretical results of SPR and Knockoffs-SPR. </p>
     </section>
 
     <section id="SPR" class="two">
@@ -228,7 +239,7 @@ where \(\hat{C}=\{j:\hat{\gamma}_j= 0\}\) is the recovered clean set of \(\gamma
           \end{equation}
         </p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-          <b>Step iii)</b>: Comparison statistics and selection filters. After obtaining the solution path \(\left(\gamma_{2}(\lambda), \tilde{\gamma}_2(\lambda)\right)\), we define sample significance scores  with respect to \(Y_{2,i}\) and \(\tilde{Y}_{2,i}\) of  each \(i\) respectively, as the selection time: \(Z_i := \sup\{\lambda: \Vert \gamma_{2,i}(\lambda) \Vert_2 \neq 0\}\) and \(\tilde{Z}_i := \sup\{\lambda: \Vert \tilde{\gamma}_{2,i} (\lambda) \Vert_2 \neq 0\}\). With \(Z_i, \tilde{Z}_i\), we define the \(W_i\) as: 
+          <b>Step iii)</b>: Comparison statistics and selection filters. After obtaining the solution path \(\left(\gamma_{2}(\lambda), \tilde{\gamma}_2(\lambda)\right)\), we define sample significance scores  with respect to \(Y_{2,i}\) and \(\tilde{Y}_{2,i}\) of  each \(i\) respectively, as the selection time: \(Z_i := \sup\{\lambda: \Vert \gamma_{2,i}(\lambda) \Vert_2 \neq 0\}\) and \(\tilde{Z}_i := \sup\{\lambda: \Vert \tilde{\gamma}_{2,i} (\lambda) \Vert_2 \neq 0\}\). Our motivation is that for clean samples, we will be more likely to have \(Z_i < \tilde{Z}_i\), and for noisy samples, if the permuted label is still a noise label, we have no information to compare\(Z_i, \tilde {Z}_i\), so it is assumed that \(Z_i < \tilde{Z}_i\) is close to the probability of \(Z_i > \tilde{Z}_i\), and if the permuted label is a clean label, then it is more likely to have \(Z_i > \tilde{Z}_i\). Based on this difference, using \(Z_i, \tilde{Z}_i\), we construct a comparison statistic as: 
           \begin{equation}
           \label{eq:w}
               W_i := Z_i \cdot \mathrm{sign}(Z_i - \tilde{Z}_i). 
@@ -279,6 +290,13 @@ Compared to SPR, this procedure is more practical and useful in real-world exper
         <p style="text-align:justify; text-justify:inter-ideograph;">
           We conducted experiments on two synthetic label noise datasets, CIFAR-10 and CIFAR-100.
           We also test Knockoffs-SPR on two real-world noisy datasets, WebVision and Clothing1M. 
+          The experimental results are as follows:
+            <center><img src="cifar.png" width="600"></center>
+            <center><img src="webvision.png" width="600"></center>
+            <center><img src="clothing.png" width="600"></center>
+             We take CIFAR-10 as an example to test the quality of several sample selection algorithms to select clean samples in different noise environments, and the results are as follows:
+             <center><img src="jiugongge.png" width="600"></center>
+             It can be seen that Knockoff-SPR can well control FSR, and at the same time has an advantage in the overall sample selection quality (F-score).
           Please refer to our papers (<a href="https://arxiv.org/abs/2203.07788">CVPR22</a>,<a href="https://arxiv.org/abs/2301.00545">Journal extension</a>) for more details.
         </p>
       </div>
