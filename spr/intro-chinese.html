@@ -106,6 +106,16 @@
         <p style="text-align:justify; text-justify:inter-ideograph;">
             Knockoffs-SPR 在网络学习和样本选择之间运行一个循环。我们基于特征和one-hot向量之间的近似线性关系刻画标签的可信度，从中选择干净样本。
           </p>
+          <p style="text-align:justify; text-justify:inter-ideograph;">
+          在SPR中，我们对神经网络特征和one-hot标签之间的关系进行线性近似。该线性近似是很弱的，因此如果一个很弱的近似依然能够很好的拟合一个样本的特征标签对，我们就认为该样本是干净样本；而如果该近似不能很好的拟合一个样本，该样本就很可能是噪声样本。基于这种差异性，我们引入变量刻画线性模型对样本的拟合程度，通过对该变量的求解得出每个样本的可信度，从而筛选出干净样本。</p>
+          <p style="text-align:justify; text-justify:inter-ideograph;">
+依据LASSO的模型选择理论，我们可以证明在一定条件下，SPR能够识别出所有噪声样本。
+<p style="text-align:justify; text-justify:inter-ideograph;">
+然而，SPR的理论条件在现实中无法提前知道是否成立，因此现实意义有限。当SPR的理论条件不成立时，所选择的干净样本中可能存在噪声样本。为了解决这个问题，我们的期刊拓展文章中提出了Knockoffs-SPR。</p>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+在Knockoffs-SPR中，我们研究在一般的样本选择环境中，尽可能的控制干净样本的错误选择率。我们同样依赖于神经网络特征和one-hot标签之间的关系的线性近似。但是在Knockoffs-SPR中，我们首先关注于单个样本，将其标签的可信度与一个随机置换（permute）的标签的可信度进行比较。这两者的对比在该样本的标签为干净标签和噪声标签时具有不同的表现，我们基于这种差异性构建比较统计量。之后，我们对每个样本的比较统计量在样本之间进行比较，筛选出可信的样本。我们证明，在这样的一系列构造下，Knockoffs-SPR天然的能够控制干净样本的错误选择率。</p>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+接下来我们对SPR和Knockoffs-SPR的算法细节和理论结果进行介绍。</p>
     </section>
 
     <section id="SPR" class="two">
@@ -277,7 +287,13 @@ T_i=\max\left\{ t\in\mathcal{W}:\frac{1+\#\left\{ j:0 < W_{j}\leq t\right\} }{\#
         <h2>实验</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
             我们对两个合成标签噪声数据集 CIFAR-10 和 CIFAR-100 进行了实验。
-            我们还在两个真实世界的嘈杂数据集 WebVision 和 Clothing1M 上测试了 Knockoffs-SPR。
+            我们还在两个真实世界的嘈杂数据集 WebVision 和 Clothing1M 上测试了 Knockoffs-SPR。实验结果如下：
+            <center><img src="cifar.png" width="600"></center>
+            <center><img src="webvision.png" width="600"></center>
+            <center><img src="clothing.png" width="600"></center>
+            同时，我们以CIFAR-10为例，在不同的噪声环境中测试了几个样本选择算法选择干净样本的质量，结果如下：
+            <center><img src="jiugongge.png" width="600"></center>
+            可以看出，Knockoff-SPR能够很好的控制FSR，同时在整体样本选择质量（F-score）上占据优势。
             更多细节请阅读我们的论文 (<a href="https://arxiv.org/abs/2203.07788">CVPR22</a>,<a href="https://arxiv.org/abs/2301.00545">期刊拓展</a>)。 
         </p>
       </div>
