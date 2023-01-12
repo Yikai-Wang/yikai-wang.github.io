@@ -45,7 +45,11 @@
         <h1>About me</h1>
         <hr />
         <p></p>
-      <p style="text-align:justify; text-justify:inter-ideograph;">I am currently a Ph.D. candidate under the supervision of <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>. My research interests include theoretically guaranteed machine learning algorithms and applications to computer vision and other artificial intelligence fields.</p>
+      <p style="text-align:justify; text-justify:inter-ideograph;">
+        I am currently a Ph.D. candidate under the supervision of <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>. My research interests include theoretically guaranteed machine learning algorithms and applications to computer vision and other artificial intelligence fields. Specifically, I focus on the statistical sparse learning for sample selection, with successful application in few-shot learning (<a href="https://yikai-wang.github.io/ici">ICI</a>, <a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>, <a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI21</a>) and learning with noisy labels (<a href="https://yikai-wang.github.io/spr">SPR</a>, <a href="https://arxiv.org/abs/2203.07788">CVPR22</a>).
+        Further, we tackle the false selection problem of sample selection and propose a label-knockoff method (<a href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a href="https://arxiv.org/abs/2301.00545">paper</a>) with application on learning with noisy labels.
+
+      </p>
       <p></p>
       <p></p>
       <p></p>
@@ -64,8 +68,50 @@
       </ul>
       <h1>Publications</h1>
       <hr />
-        <h3>Journal Articles</h3>
+      <h2>Sparse Learning</h2>
         <ul>
+          <li>
+            <div class="paper" id="knockoffs-spr">
+              <p>Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels.<br>
+                [<a href="https://arxiv.org/abs/2301.00545">paper</a>]
+                [<a shape="rect" href="javascript:togglebib('knockoffs-spr')" class="togglebib">bib</a>]
+                [<a href="https://yikai-wang.github.io/spr">intro</a>]
+                [<a href="https://yikai-wang.github.io/spr/intro-chinese">简介</a>]
+                <br>
+                <b>Yikai Wang</b>, 
+                <a href="https://yanweifu.github.io/">Yanwei Fu</a>,
+                <a href="https://scholar.google.com/citations?user=128t-IMAAAAJ">Xinwei Sun</a>.
+                <br>
+                Preprint, 2023.
+                <pre xml:space="preserve">
+  @article{wang2023knockoffs,
+    title={Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels},
+    author={Wang, Yikai and Fu, Yanwei and Sun, Xinwei},
+    journal={arXiv preprint arXiv:2301.00545},
+    year={2023}
+  }</pre>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="paper" id="spr">
+              <p>Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels.<br>
+                [<a href="https://arxiv.org/abs/2203.07788">paper</a>]
+                [<a href="https://github.com/Yikai-Wang/SPR-LNL">code</a>]
+                [<a shape="rect" href="javascript:togglebib('spr')" class="togglebib">bib</a>]
+                [<a href="https://yikai-wang.github.io/spr">intro</a>]
+                [<a href="https://yikai-wang.github.io/spr/intro-chinese">简介</a>]
+                 <br>
+                <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=128t-IMAAAAJ">Xinwei Sun</a>, <a href="https://yanweifu.github.io/">Yanwei Fu</a>.<br>
+                <i>The IEEE/CVF Conference on Computer Vision and Pattern Recognition</i> (CVPR), 2022.
+                <pre xml:space="preserve">
+@inproceedings{wang2022scalable,
+  title={Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels},
+  author={Wang, Yikai and Xinwei Sun and Fu, Yanwei},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2022}
+}</pre></div>
+          </li>
           <li>
             <div class="paper" id="ici-pami">
               <p>
@@ -87,48 +133,6 @@
               </p>
             </div>
           </li>
-        </ul>
-        <h3>Conference Papers</h3>
-        <ul>
-          <li>
-            <div class="paper" id="spr">
-              <p>Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels.<br>
-                [<a href="https://arxiv.org/abs/2203.07788">paper</a>]
-                [<a href="https://github.com/Yikai-Wang/SPR-LNL">code</a>]
-                [<a shape="rect" href="javascript:togglebib('spr')" class="togglebib">bib</a>]
-                [<a href="https://yikai-wang.github.io/spr">intro</a>]
-                [<a href="https://yikai-wang.github.io/spr/intro-chinese">简介</a>]
-                 <br>
-                <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=128t-IMAAAAJ">Xinwei Sun</a>, <a href="https://yanweifu.github.io/">Yanwei Fu</a>.<br>
-                <i>The IEEE/CVF Conference on Computer Vision and Pattern Recognition</i> (CVPR), 2022.
-                <pre xml:space="preserve">
-@inproceedings{wang2022scalable,
-  title={Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels},
-  author={Wang, Yikai and Xinwei Sun and Fu, Yanwei},
-  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2022}
-}</pre></div>
-          </li>
-          <li>
-            <div class="paper" id="ffd">
-              <p>FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch.<br>
-                [<a href="https://openaccess.thecvf.com/content/ACCV2022/papers/Zhao_FFD_Augmentor_Towards_Few-Shot_Oracle_Character_Recognition_from_Scratch_ACCV_2022_paper.pdf">paper</a>]
-                [<a href="https://github.com/Hide-A-Pumpkin/FFDAugmentor">code</a>]
-                [<a shape="rect" href="javascript:togglebib('ffd')" class="togglebib">bib</a>]
-                 <br>
-                 Xinyi Zhao, Siyuan Liu, <b>Yikai Wang</b>, <a href="https://yanweifu.github.io/">Yanwei Fu</a>.<br>
-                <i>Asian Conference on Computer Vision</i> (ACCV), 2022.<br>
-                Note: This paper is the final project in NNDL 2022(Instructor: Dr. Yanwei Fu; TA: Yikai Wang).
-                <pre xml:space="preserve">
-@InProceedings{Zhao_2022_ACCV,
-  author    = {Zhao, Xinyi and Liu, Siyuan and Wang, Yikai and Fu, Yanwei},
-  title     = {FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch},
-  booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
-  month     = {December},
-  year      = {2022},
-  pages     = {1622-1639}
-}</pre></div>
-          </li>
           <li>
             <div class="paper" id="ici">
               <p> Instance Credibility Inference for Few-Shot Learning.<br>
@@ -149,55 +153,51 @@
   year={2020}
 }</pre></div>
           </li>
-          
         </ul>
-      <h3>Preprints</h3>
-      <ul>
-        <li>
-          <div class="paper" id="knockoffs-spr">
-            <p>Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels.<br>
-              [<a href="https://arxiv.org/abs/2301.00545">paper</a>]
-              [<a shape="rect" href="javascript:togglebib('knockoffs-spr')" class="togglebib">bib</a>]
-              [<a href="https://yikai-wang.github.io/spr">intro</a>]
-              [<a href="https://yikai-wang.github.io/spr/intro-chinese">简介</a>]
-              <br>
-              <b>Yikai Wang</b>, 
-              <a href="https://yanweifu.github.io/">Yanwei Fu</a>,
-              <a href="https://scholar.google.com/citations?user=128t-IMAAAAJ">Xinwei Sun</a>.
-              <br>
-              Preprint, 2023.
-              <pre xml:space="preserve">
-@article{wang2023knockoffs,
-  title={Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels},
-  author={Wang, Yikai and Fu, Yanwei and Sun, Xinwei},
-  journal={arXiv preprint arXiv:2301.00545},
-  year={2023}
-}</pre>
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="paper" id="ttm-ood">
-            <p>A Simple Test-Time Method for Out-of-Distribution Detection.<br>
-              [<a href="https://arxiv.org/abs/2207.08210">paper</a>]
-              [<a shape="rect" href="javascript:togglebib('ttm-ood')" class="togglebib">bib</a>]<br>
-              <a href="https://scholar.google.com/citations?hl=zh-CN&user=426Vf3kAAAAJ">Ke Fan</a>, 
-              <b>Yikai Wang</b>, 
-              <a href="https://yuqian1023.github.io">Qian Yu</a>, 
-              <a href="https://dali-dl.github.io">Da Li</a>, 
-              <a href="https://yanweifu.github.io/">Yanwei Fu</a>.
-              <br>
-              Preprint, 2022.
-              <pre xml:space="preserve">
-@article{fan2022simple,
-  title={A Simple Test-Time Method for Out-of-Distribution Detection},
-  author={Fan, Ke and Wang, Yikai and Yu, Qian and Li, Da and Fu, Yanwei},
-  journal={arXiv preprint arXiv:2207.08210},
-  year={2022}
-}</pre>
-            </p>
-          </div>
-        </li>
+          <h2>Misellenous</h2>
+          <ul>
+            <li>
+              <div class="paper" id="ttm-ood">
+                <p>A Simple Test-Time Method for Out-of-Distribution Detection.<br>
+                  [<a href="https://arxiv.org/abs/2207.08210">paper</a>]
+                  [<a shape="rect" href="javascript:togglebib('ttm-ood')" class="togglebib">bib</a>]<br>
+                  <a href="https://scholar.google.com/citations?hl=zh-CN&user=426Vf3kAAAAJ">Ke Fan</a>, 
+                  <b>Yikai Wang</b>, 
+                  <a href="https://yuqian1023.github.io">Qian Yu</a>, 
+                  <a href="https://dali-dl.github.io">Da Li</a>, 
+                  <a href="https://yanweifu.github.io/">Yanwei Fu</a>.
+                  <br>
+                  Preprint, 2022.
+                  <pre xml:space="preserve">
+    @article{fan2022simple,
+      title={A Simple Test-Time Method for Out-of-Distribution Detection},
+      author={Fan, Ke and Wang, Yikai and Yu, Qian and Li, Da and Fu, Yanwei},
+      journal={arXiv preprint arXiv:2207.08210},
+      year={2022}
+    }</pre>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div class="paper" id="ffd">
+                <p>FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch.<br>
+                  [<a href="https://openaccess.thecvf.com/content/ACCV2022/papers/Zhao_FFD_Augmentor_Towards_Few-Shot_Oracle_Character_Recognition_from_Scratch_ACCV_2022_paper.pdf">paper</a>]
+                  [<a href="https://github.com/Hide-A-Pumpkin/FFDAugmentor">code</a>]
+                  [<a shape="rect" href="javascript:togglebib('ffd')" class="togglebib">bib</a>]
+                   <br>
+                   Xinyi Zhao, Siyuan Liu, <b>Yikai Wang</b>, <a href="https://yanweifu.github.io/">Yanwei Fu</a>.<br>
+                  <i>Asian Conference on Computer Vision</i> (ACCV), 2022.<br>
+                  Note: This paper is the final project in NNDL 2022(Instructor: Dr. Yanwei Fu; TA: Yikai Wang).
+                  <pre xml:space="preserve">
+  @InProceedings{Zhao_2022_ACCV,
+    author    = {Zhao, Xinyi and Liu, Siyuan and Wang, Yikai and Fu, Yanwei},
+    title     = {FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch},
+    booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
+    month     = {December},
+    year      = {2022},
+    pages     = {1622-1639}
+  }</pre></div>
+            </li>
       <li>
             <div class="paper" id="baseline-fsl">
               <p>An Embarrassingly Simple Baseline to One-Shot Learning.<br>
