@@ -38,7 +38,7 @@
     <header>
       <h3><img src="knockoffs.pdf"  width="140"></h3>
       <nav id="nav">
-        <p><a href="#summary" id="intro-link">Summary</a></p>
+        <p><a href="#abstract" id="intro-link">Abstract</a></p>
         <p><a href="#background" id="background-link">Background</a></p>
         <p><a href="#framework" id="framework-link">Framework</a></p>
         <p><a href="#SPR" id="SPR-link">SPR</a></p>
@@ -75,18 +75,11 @@
 }
 </pre><br>
     </section>
-    <section id="summary" class="two">
+    <section id="abstract" class="two">
       <div class="container" align="left">
-        <h2>Summary</h2>
+        <h2>Abstract</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
           <b>SPR</b> is a theoretically guaranteed clean sample selection framework for learning with noisy labels. 
-          <ul>
-            <li><b>Ideologically</b>, we propose to control the False-Selection-Rate in selecting clean data, under general scenarios.</li>
-            <li><b>Methodologically</b>, we propose Knockoffs-SPR, a data-adaptive method to control the FSR.</li>
-            <li><b>Theoretically</b>, we prove that the Knockoffs-SPR can control the FSR under any desired level.</li>
-            <li><b>Algorithmically</b>, we propose a splitting algorithm for better sample selection with balanced identifiability and complexity in large datasets.</li>
-            <li><b>Experimentally</b>, we demonstrate the effectiveness and efficiency of our method on several benchmark datasets and real-world noisy datasets.</li>
-          </ul>
           In this paper, to solve the problem of clean sample selection in learning with noisy labels, we first introduce the algorithm SPR we published in CVPR22. Under irrepresentable condition, the noise samples identified by SPR are a subset of ground-truth noise samples. Further, under the large error condition, the identified noise sample set is equal to the ground-truth noise sample set. In practical applications, we cannot know whether the irrepresentable condition is satisfied. In this case, we argue that in the general clean sample selection algorithm, controlling the false selection rate (FSR) of selected clean samples is critical. Based on this, we propose Knockoffs-SPR, an algorithm capable of controlling FSR below a pre-specified upper bound \(q\).
         </p>
       </div>
@@ -301,6 +294,10 @@ Compared to SPR, this procedure is more practical and useful in real-world exper
         </p>
       </div>
     </section>
+
+    <p>
+      
+    </p>
 
 
     <footer>

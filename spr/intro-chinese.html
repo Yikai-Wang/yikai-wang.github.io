@@ -38,7 +38,7 @@
     <header>
       <h3><img src="knockoffs.pdf"  width="140"></h3>
       <nav id="nav">
-        <p><a href="#summary" id="intro-link">总结</a></p>
+        <p><a href="#abstract" id="intro-link">摘要</a></p>
         <p><a href="#background" id="background-link">背景</a></p>
         <p><a href="#framework" id="framework-link">框架</a></p>
         <p><a href="#SPR" id="SPR-link">SPR</a></p>
@@ -75,18 +75,11 @@
 }
 </pre><br>
     </section>
-    <section id="summary" class="two">
+    <section id="abstract" class="two">
       <div class="container" align="left">
-        <h2>总结</h2>
+        <h2>摘要</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
           <b>SPR</b>是一个有理论保证的干净样本选择算法，用于含噪学习中。 
-          <ul>
-            <li><b>思想上</b>，我们建议在一般场景下控制所选干净样本的错误选择率。</li>
-            <li><b>方法上</b>，我们提出了 Knockoffs-SPR，一个控制错误选择率的数据自适应干净样本选择算法。</li>
-            <li><b>理论上</b>，我们证明了 Knockoffs-SPR 可以将错误选择率控制在任何期望的水平。</li>
-            <li><b>算法上</b>，我们提出了一种划分算法，以便在大型数据集中进行样本选择时平衡可识别性和复杂性。</li>
-            <li><b>实验上</b>，我们验证了我们的方法在几个基准数据集和真实世界的噪声数据集上的有效性。</li>
-          </ul>
           本文针对含噪学习中的样本选择问题，首先介绍我们发表在CVPR22的算法SPR，该算法在不可表示（irrepresentable）条件下所识别的噪声样本为真实噪声样本的子集，进一步的，在大误差（large error）条件下能够保证所识别的噪声样本集等于真实噪声样本集。在实际应用中，我们无法知晓不可表示条件是否得到满足，在这种情况下，我们提出在一般性的干净样本选择算法中，控制干净样本的错误选择率（False-Selection-Rate, FSR）是至关重要的。基于此，我们提出Knockoffs-SPR，该算法能够将FSR控制在预先指定的上界\(q\)之下。
         </p>
       </div>
