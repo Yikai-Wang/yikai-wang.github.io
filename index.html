@@ -36,6 +36,15 @@
           Fudan University<br>
           Shanghai, China<br>
         </p>
+        <nav id="nav">
+          <!-- <p><a href="#Biography" id="Biography-link">Biography</a><br> -->
+            <!-- <a href="#News" id="News-link">News</a><br> -->
+          <a href="#Talks" id="Talks-link">Talks</a><br>
+          <a href="#Publications" id="Publications-link">Publications</a><br>
+          <!-- <a href="#Activaties" id="Activaties-link">Activaties</a><br> -->
+          <!-- <a href="#Education" id="Education-link">Education</a></p> -->
+        </nav>
+        <p></p>
     <p class="view"><b>Links</b><br>
       <a href="mailto:yi-kai.wang@outlook.com" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a><br>
       <a href="https://orcid.org/0000−0001−6107−5063"><i class="ai ai-fw ai-orcid-square"></i> ORCID</a><br>
@@ -44,22 +53,23 @@
         
       </header>
       
-      <section>
+      <section id="Biography" class="two">
         <h1>Biography</h1>
         <hr />
-        <p></p>
       <p style="text-align:justify; text-justify:inter-ideograph;">
         I am a Ph.D. candidate under the supervision of <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a> in the School of Data Science at Fudan University. Previously, I obtained a Bachelor of Science in Mathematics from Fudan University.
       </p>
       <p style="text-align:justify; text-justify:inter-ideograph;">
-        My research revolves around theoretically-guaranteed machine learning algorithms and their applications in computer vision, with a focus on statistical sparsity for learning problems and applications in few-shot learning (<a href="https://yikai-wang.github.io/ici">ICI</a>, <a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>, <a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI21</a>) and learning with noisy labels (<a href="https://yikai-wang.github.io/spr">SPR</a>, <a href="https://arxiv.org/abs/2203.07788">CVPR22</a>).
-        Further, I study the false selection problem of sample selection and propose a label-knockoff method (<a href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a href="https://arxiv.org/abs/2301.00545">paper</a>) to control the false selection rate with application in learning with noisy labels.
-
+        My research revolves around theoretically-guaranteed machine learning algorithms and their applications in computer vision, with a focus on statistical sparsity for learning problems, particularly sample selection, and applications in few-shot learning (<a href="https://yikai-wang.github.io/ici">ICI</a>, <a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>, <a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI21</a>) and learning with noisy labels (<a href="https://yikai-wang.github.io/spr">SPR</a>, <a href="https://arxiv.org/abs/2203.07788">CVPR22</a>).
+        Further, I study the false selection problem of sample selection and propose a label-knockoff algorithm (<a href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a href="https://arxiv.org/abs/2301.00545">paper</a>) to control the false selection rate with application in learning with noisy labels.
       </p>
-      <p></p>
-      <p></p>
-      <p></p>
-      <h1>Talks</h1>
+      <h1><div id="News"></div>News</h1>
+      <hr />
+      <ul>
+        <li>2022.10, I received recognition for my exceptional performance (<a href="https://nips.cc/Conferences/2022/ProgramCommittee">top 8%</a>) as a reviewer at NeurIPS 2022 and was awarded a complimentary registration. </li>
+        <li>2021.07, ICI (CVPR20, TPAMI21) was recognized with the Outstanding Doctoral Academic Achievement award in the CSIAM-BDAI 2021.</li>
+      </ul>
+      <h1><div id="Talks">Talks</div></h1>
       <hr />
       <ul>
         <li>
@@ -72,7 +82,7 @@
           
         </li>
       </ul>
-      <h1>Publications</h1>
+      <h1><div id="Publications">Publications</div></h1>
       <hr />
       <p><i>Note: Asterisk (*) indicates equal contribution and dagger (&dagger;) indicates corresponding author(s).</i></p>
       <h2>Sparsity for Learning</h2>
@@ -97,6 +107,28 @@
   author={Wang, Yikai and Fu, Yanwei and Sun, Xinwei},
   journal={arXiv preprint arXiv:2301.00545},
   year={2023}
+}</pre>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="paper" id="ttm-ood">
+              <p>A Simple Test-Time Method for Out-of-Distribution Detection.<br>
+                [<a href="https://arxiv.org/abs/2207.08210">arxiv</a>]
+                [<a shape="rect" href="javascript:togglebib('ttm-ood')" class="togglebib">bib</a>]<br>
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=426Vf3kAAAAJ">Ke Fan</a>, 
+                <b>Yikai Wang</b>, 
+                <a href="https://yuqian1023.github.io">Qian Yu</a>, 
+                <a href="https://dali-dl.github.io">Da Li</a>, 
+                <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.
+                <br>
+                Preprint, 2022. Work in progress.
+                <pre xml:space="preserve">
+@article{fan2022simple,
+title={A Simple Test-Time Method for Out-of-Distribution Detection},
+author={Fan, Ke and Wang, Yikai and Yu, Qian and Li, Da and Fu, Yanwei},
+journal={arXiv preprint arXiv:2207.08210},
+year={2022}
 }</pre>
               </p>
             </div>
@@ -131,7 +163,8 @@
                 [<a shape="rect" href="javascript:togglebib('ici-pami')" class="togglebib">bib</a>]
                 [<a href="https://yikai-wang.github.io/ici">intro</a>]<br>
                 <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yao-lab.github.io">Yuan Yao&dagger;</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
-                <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i> (TPAMI). Accepted in 2021.06. Published in Volume: 44, Issue: 10, 2022.10.01.
+                <i>IEEE Transactions on Pattern Analysis and Machine Intelligence</i> (TPAMI). Accepted in 2021.06. 
+                <!-- Published in Volume: 44, Issue: 10, 2022.10.01. -->
                 <pre xml:space="preserve">
 @article{wang2021trust,
   title={How to Trust Unlabeled Data? Instance Credibility Inference for Few-Shot Learning},
@@ -163,31 +196,27 @@
   year={2020}
 }</pre></div>
           </li>
+          <li>
+            <div class="paper" id="baseline-fsl">
+              <p>An Embarrassingly Simple Baseline to One-Shot Learning.<br>
+                [<a href="http://openaccess.thecvf.com/content_CVPRW_2020/papers/w54/Liu_An_Embarrassingly_Simple_Baseline_to_One-Shot_Learning_CVPRW_2020_paper.pdf">paper</a>]
+                [<a href="http://github.com/corwinliu9669/embarrassingly-simple-baseline">code</a>]
+                [<a shape="rect" href="javascript:togglebib('baseline-fsl')" class="togglebib">bib</a>]<br>
+                <a href="https://corwinliu9669.github.io/">Chen Liu</a>, <a href="https://scholar.google.com/citations?user=pjcYzvYAAAAJ&hl=zh-CN">Chengming Xu</a>, <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
+                CVPR Workshop, 2020.
+                <pre xml:space="preserve">
+@InProceedings{Liu_2020_CVPR_Workshops,
+  author = {Liu, Chen and Xu, Chengming and Wang, Yikai and Zhang, Li and Fu, Yanwei},
+  title = {An Embarrassingly Simple Baseline to One-Shot Learning},
+  booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year = {2020}
+}</pre>
+              </p>
+            </div>
+          </li>
         </ul>
           <h2>Miscellaneous</h2>
           <ul>
-            <li>
-              <div class="paper" id="ttm-ood">
-                <p>A Simple Test-Time Method for Out-of-Distribution Detection.<br>
-                  [<a href="https://arxiv.org/abs/2207.08210">arxiv</a>]
-                  [<a shape="rect" href="javascript:togglebib('ttm-ood')" class="togglebib">bib</a>]<br>
-                  <a href="https://scholar.google.com/citations?hl=zh-CN&user=426Vf3kAAAAJ">Ke Fan</a>, 
-                  <b>Yikai Wang</b>, 
-                  <a href="https://yuqian1023.github.io">Qian Yu</a>, 
-                  <a href="https://dali-dl.github.io">Da Li</a>, 
-                  <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.
-                  <br>
-                  Preprint, 2022. Work in progress.
-                  <pre xml:space="preserve">
-@article{fan2022simple,
-  title={A Simple Test-Time Method for Out-of-Distribution Detection},
-  author={Fan, Ke and Wang, Yikai and Yu, Qian and Li, Da and Fu, Yanwei},
-  journal={arXiv preprint arXiv:2207.08210},
-  year={2022}
-}</pre>
-                </p>
-              </div>
-            </li>
             <li>
               <div class="paper" id="ffd">
                 <p>FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch.<br>
@@ -208,38 +237,14 @@
   pages     = {1622-1639}
 }</pre></div>
             </li>
-            <li>
-              <div class="paper" id="baseline-fsl">
-                <p>An Embarrassingly Simple Baseline to One-Shot Learning.<br>
-                  [<a href="http://openaccess.thecvf.com/content_CVPRW_2020/papers/w54/Liu_An_Embarrassingly_Simple_Baseline_to_One-Shot_Learning_CVPRW_2020_paper.pdf">paper</a>]
-                  [<a href="http://github.com/corwinliu9669/embarrassingly-simple-baseline">code</a>]
-                  [<a shape="rect" href="javascript:togglebib('baseline-fsl')" class="togglebib">bib</a>]<br>
-                  <a href="https://corwinliu9669.github.io/">Chen Liu</a>, <a href="https://scholar.google.com/citations?user=pjcYzvYAAAAJ&hl=zh-CN">Chengming Xu</a>, <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
-                  CVPR Workshop, 2020.
-                  <pre xml:space="preserve">
-  @InProceedings{Liu_2020_CVPR_Workshops,
-    author = {Liu, Chen and Xu, Chengming and Wang, Yikai and Zhang, Li and Fu, Yanwei},
-    title = {An Embarrassingly Simple Baseline to One-Shot Learning},
-    booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
-    year = {2020}
-  }</pre>
-                </p>
-              </div>
-            </li>
       </ul>
-      <h1>News</h1>
-      <hr />
-      <ul>
-        <li>2022.10, I received recognition for my exceptional performance (<a href="https://nips.cc/Conferences/2022/ProgramCommittee">top 8%</a>) as a reviewer at NeurIPS 2022 and was awarded a complimentary registration. </li>
-        <li>2021.07, ICI (CVPR20, TPAMI21) was recognized with the Outstanding Doctoral Academic Achievement award in the CSIAM-BDAI 2021.</li>
-      </ul>
-      <h1>Services</h1>
+      <h1><div id="Activaties"></div>Services</h1>
       <hr />
       <ul>
         <li>I have served as a reviewer for the CVPR, ICCV, ICML, and NeurIPS conferences.</li>
       </ul>
 
-      <h1>Teaching</h1>
+      <h1><div id="Teaching"></div> Teaching</h1>
       <hr />
       <p>
         Neural Network and Deep Learning, <br><div align='right'>TA, 2019-2022 Springs in School of Data Science, Fudan University.</div>
@@ -247,7 +252,7 @@
       <p></p>
       <p></p>
       <p></p>
-      <h1>Education</h1>
+      <h1><div id="Education"></div>Education</h1>
       <hr />
         <p></p>
       <p>2019.9 - Present, Ph.D. of Statistics (Machine Learning track), <br>
