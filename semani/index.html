@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>SeMani: Semantic Manipulation for Entity-Level Text-Guided Image Manipulation</title>
+  <link rel="icon" type="image/x-icon" href="index.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="index.ico"/>
+  <link rel="stylesheet" href="../stylesheets/styles.css">
+  <link rel="stylesheet" href="../stylesheets/github-light.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-29643011-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
+  <!-- For all browsers -->
+  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
+  <link rel="stylesheet" href="../assets/css/academicons.css" />
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <nav id="nav">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p><a href="#Introduction" id="intro-link">Introduction</a></p>
+        <p><a href="#framework" id="framework-link">Framework</a></p>
+        <p><a href="#experiment" id="experiment-link">Experiments</a></p>
+        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
+      </nav>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      </script>
+    </header>
+    <section>
+      <div class="paper" id="semani">
+      <h1>SeMani: Semantic Manipulation for <br>Entity-Level Text-Guided Image Manipulation</h1>
+      [Papers: <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html">CVPR22 oral</a>, <a href="">journal extension</a> (<a href="semani.pdf">Full-size PDF</a>)]
+      [<a href="https://github.com/Yikai-Wang/SeMani">code</a>]
+      [<a shape="rect" href="javascript:togglebib('semani')" class="togglebib">bib</a>]
+    <br>
+      <pre xml:space="preserve">
+@inproceedings{wang2022manitrans,
+    author    = {Wang, Jianan and Lu, Guansong and Xu, Hang and Li, Zhenguo and Xu, Chunjing and Fu, Yanwei},
+    title     = {ManiTrans: Entity-Level Text-Guided Image Manipulation via Token-Wise Semantic Alignment and Generation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    year      = {2022},
+}
+</pre><br>
+    </section>
+    <section id="Introduction" class="two">
+      <div class="container" align="left">
+        <h2>Introduction</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+            Entity-Level Text-Guided Image Manipulation (eL-TGIM) is a novel task of text-guided image manipulation on the entity level in the real world.
+            eL-TGIM takes as inputs the entity prompt word, the target text description, and the original image from the real world.
+            Below is an illustration of eL-TGIM.
+            <center><img src="eL-TGIM.pdf" width="600"></center>
+            eL-TGIM imposes three basic requirements, 
+            <ul>
+                <li> To edit the entity consistent with the text descriptions; </li>
+                <li> To preserve the entity-irrelevant regions; </li>
+                <li> To merge the manipulated entity into the image naturally.</li>
+        </ul>
+          Most current image editors partially satisfy the first requirement while ignores the other two, especially the preservation of entity-irrelevant regions. 
+          Further, many editors rely on the user-provided mask to identify the entity-relevant region.
+          Below are some corresponding examples.
+          <center><img src="teaser-diffusion.pdf" width="600"></center>
+            Muse and Imagic generate new entity-irrelevant regions while DALLE2 requires user-provided mask to perform manipulation. 
+            Thus it is non-trivial to directly adopt current editors for eL-TGIM.
+        </p>
+      </div>
+    </section>
+
+    <section id="framework" class="two">
+      <div class="container" align="left">
+        <h2>Framework</h2>
+        To solve eL-TGIM, we propose a framework, dubbed as <b>SeMani</b>, forming the Semantic Manipulation of real-world images. 
+        SeMani decomposes the task into two phases:
+        the semantic alignment phase and the image manipulation phase.
+        In the semantic alignment phase, SeMani incorporates a semantic alignment module to locate the image regions to be manipulated.
+        In the image manipulation phase, SeMani adopts a generative model to synthesis new images conditioned on the unchanged regions and target descriptions.
+        Below is an illustration of SeMani.
+        <center><img src="framework.pdf" width="600"></center>
+        To implement SeMani, we resort to the two popular perspectives of viewing images, the discrete and the continuous perspectives.
+        The discrete viewing is inspired by the auto-regressive transformers while the continuous viewing is inspired by the denoising diffusion probabilistic models, forming <b>SeMani-Trans</b> and <b>SeMani-Diff</b>, respectively.
+        Each varient of SeMani adopts specific architectures and generation processes.
+        SeMani can perform multiple-objects manipulation simultaneously or sequentially, as shown in below.
+        <center><img src="teaser.pdf" width="600"></center>
+        See our paper for details of SeMani-Trans and SeMani-Diff.
+      </div>
+    </section>
+
+    <section id="experiment" class="two">
+      <div class="container" align="left">
+        <h2>Experiments</h2>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          We conducted experiments on CUB, Oxford, and COCO datasets, results are shown in below.
+          <center><img src="exp-quantitative.png" width="600"></center>
+          <center><img src="comparison.pdf" width="600"></center>
+          <center><img src="user-study.png" width="600"></center>
+          We also design an interface to use SeMani.
+          <center><img src="interface.png" width="600"></center>
+          Please refer to our papers(<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html">CVPR22 oral</a>, <a href="">journal extension</a>) for more details.
+        </p>
+      </div>
+    </section>
+
+
+    <footer>
+      <p><small>Hosted on GitHub Pages <br>
+        Theme modified from <a href="https://github.com/orderedlist/minimal">minimal</a></small></p>
+    </footer>
+  </div>
+  <script src="javascripts/scale.fix.js"></script>
+  <script xml:space="preserve" language="JavaScript">
+    hideallbibs();
+    hideallabs();
+  </script>
+</body>
+
+</html>
