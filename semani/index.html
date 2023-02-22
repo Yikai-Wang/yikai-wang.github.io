@@ -74,7 +74,11 @@
             Entity-Level Text-Guided Image Manipulation (eL-TGIM) is a novel task of text-guided image manipulation on the entity level in the real world.
             eL-TGIM takes as inputs the entity prompt word, the target text description, and the original image from the real world.
             Below is an illustration of eL-TGIM.
+        </p>
+        <p></p>
             <center><img src="eL-TGIM.pdf" width="600"></center>
+            <p></p>
+            <p  style="text-align:justify; text-justify:inter-ideograph;">
             eL-TGIM imposes three basic requirements, 
             <ul>
                 <li> To edit the entity consistent with the text descriptions; </li>
@@ -84,7 +88,10 @@
           Most current image editors partially satisfy the first requirement while ignores the other two, especially the preservation of entity-irrelevant regions. 
           Further, many editors rely on the user-provided mask to identify the entity-relevant region.
           Below are some corresponding examples.
+        </p>
+        <p></p>
           <center><img src="teaser-diffusion.pdf" width="600"></center>
+          <p  style="text-align:justify; text-justify:inter-ideograph;">
             Muse and Imagic generate new entity-irrelevant regions while DALLE2 requires user-provided mask to perform manipulation. 
             Thus it is non-trivial to directly adopt current editors for eL-TGIM.
         </p>
@@ -100,12 +107,20 @@
         In the semantic alignment phase, SeMani incorporates a semantic alignment module to locate the image regions to be manipulated.
         In the image manipulation phase, SeMani adopts a generative model to synthesis new images conditioned on the unchanged regions and target descriptions.
         Below is an illustration of SeMani.
+    </p>
+    <p></p>
         <center><img src="framework.pdf" width="600"></center>
+        <p></p>
+        <p  style="text-align:justify; text-justify:inter-ideograph;">
         To implement SeMani, we resort to the two popular perspectives of viewing images, the discrete and the continuous perspectives.
         The discrete viewing is inspired by the auto-regressive transformers while the continuous viewing is inspired by the denoising diffusion probabilistic models, forming <b>SeMani-Trans</b> and <b>SeMani-Diff</b>, respectively.
         Each varient of SeMani adopts specific architectures and generation processes.
         SeMani can perform multiple-objects manipulation simultaneously or sequentially, as shown in below.
+    </p>
+    <p></p>
         <center><img src="teaser.pdf" width="600"></center>
+        <p></p>
+        <p  style="text-align:justify; text-justify:inter-ideograph;">
         See our paper for details of SeMani-Trans and SeMani-Diff.
       </div>
     </section>
@@ -115,11 +130,21 @@
         <h2>Experiments</h2>
         <p style="text-align:justify; text-justify:inter-ideograph;">
           We conducted experiments on CUB, Oxford, and COCO datasets, results are shown in below.
+        </p>
+        <p></p>
           <center><img src="exp-quantitative.png" width="600"></center>
+          <p></p>
           <center><img src="comparison.pdf" width="600"></center>
+          <p></p>
           <center><img src="user-study.png" width="600"></center>
+          <p></p>
+          <p style="text-align:justify; text-justify:inter-ideograph;">
           We also design an interface to use SeMani.
+        </p>
+        <p></p>
           <center><img src="interface.png" width="600"></center>
+          <p></p>
+          <p style="text-align:justify; text-justify:inter-ideograph;">
           Please refer to our papers(<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html">CVPR22 oral</a>, <a href="">journal extension</a>) for more details.
         </p>
       </div>
