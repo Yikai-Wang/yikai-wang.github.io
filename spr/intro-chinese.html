@@ -36,7 +36,7 @@
 <body>
   <div class="wrapper">
     <header>
-      <h3><img src="knockoffs.pdf"  width="140"></h3>
+      <h3><img src="knockoffs.png"  width="140"></h3>
       <nav id="nav">
         <p><a href="#abstract" id="intro-link">摘要</a></p>
         <p><a href="#background" id="background-link">背景</a></p>
@@ -95,7 +95,7 @@
     <section id="framework" class="two">
       <div class="container" align="left">
         <h2>框架</h2>
-        <center><img src="framework.pdf" width="600"></center>
+        <center><img src="framework.png" width="600"></center>
         <p style="text-align:justify; text-justify:inter-ideograph;">
             Knockoffs-SPR 在网络学习和样本选择之间运行一个循环。我们基于特征和one-hot向量之间的近似线性关系刻画标签的可信度，从中选择干净样本。
           </p>
@@ -144,7 +144,7 @@
         <p style="text-align:justify; text-justify:inter-ideograph;">
             由于很难提前选择合适的 \(\lambda\)，我们改为将估计值 \(\hat{\gamma}\) 视为 \(\lambda\) 的函数。
             然后我们可以生成 \(\hat{\gamma}\) 关于 \(\lambda\) 的解路径：
-        <center><img src="solution-path.pdf" width="600"></center>
+        <center><img src="solution-path.png" width="600"></center>
         我们使用使 \(\hat{\gamma}_i\) 变为零的 \(\lambda\) 的值对数据进行排序，如下所示：
         \[C_{i}=\sup \left\{\lambda: \gamma_{i}(\lambda) \neq 0\right\}\]
         其中，最后消失的样本为噪声样本（图示红色线条），最先消失的样本为干净样本（图示蓝色线条）。在实际使用中，我们选择50%的样本为干净样本。
