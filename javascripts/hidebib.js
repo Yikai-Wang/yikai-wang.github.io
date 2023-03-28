@@ -3,7 +3,7 @@ function hideallbibs()
     var el = document.getElementsByTagName("div") ;
     for (var i = 0 ; i < el.length ; ++i) {
         if (el[i].className == "paper") {
-            var bib = el[i].getElementsByTagName("pre") ;
+            var bib = el[i].getElementsByTagName("code") ;
             if (bib.length > 0) {
                 bib [0] .style.display = 'none' ;
             }
@@ -14,7 +14,7 @@ function hideallbibs()
 function togglebib(paperid)
 {
     var paper = document.getElementById(paperid) ;
-    var bib = paper.getElementsByTagName('pre') ;
+    var bib = paper.getElementsByTagName('code') ;
     if (bib.length > 0) {
         if (bib [0] .style.display == 'none') {
             bib [0] .style.display = 'block' ;
