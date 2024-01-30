@@ -42,7 +42,7 @@
         <p><a href="#Introduction" id="intro-link">Introduction</a></p>
         <p><a href="#framework" id="framework-link">SEELE</a></p>
         <p><a href="#dataset" id="dataset-link">ReS</a></p>
-        <p><a href="exp" id="experiments-link">Results</a></p>
+        <p><a href="#exp" id="experiments-link">Results</a></p>
         <p><a href="https://yikai-wang.github.io">HomePage</a></p>
       </nav>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -80,12 +80,24 @@ ss
 
     <section id="framework" class="two">
       <div class="container" align="left">
-        <h2>Framework</h2>
+        <h2>SEELE</h2>
         
     <p></p>
         <center><img src="seele.jpeg" width="800"></center>
         <p></p>
         <p style="text-align:justify; text-justify:inter-ideograph;">SEELE employs an interactive pre-processing, manipulation, and post-processing pipeline for subject repositioning. During the pre-processing phase, SEELE identifies the subject using the segmentation model, guided by user-provided conditions, and maintains the occlusion relationships between subjects intact. In the manipulation stage, SEELE manipulates the image to fill in any left gaps. Furthermore, SEELE rectifies the obscured subject with user-specified incomplete masks. In the post-processing phase, SEELE addresses any disparities between the repositioned subject and its new surroundings.
+        </p>
+      </div>
+    </section>
+
+    <section id="dataset" class="two">
+      <div class="container" align="left">
+        <h2>ReS</h2>
+        
+    <p></p>
+        <center><img src="res.jpeg" width="800"></center>
+        <p></p>
+        <p style="text-align:justify; text-justify:inter-ideograph;">We curated a benchmark dataset called ReS. This dataset includes 100 paired images, each with dimensions 4032×3024, where one image features a repositioned subject while the other elements remain constant. These images were collected from over 20 indoor and outdoor scenes, showcasing subjects from more than 50 categories. This diversity enables effective simulation of realworld open-vocabulary applications. The dataset is available at <a href="https://github.com/Yikai-Wang/ReS">here</a>.
         </p>
       </div>
     </section>
@@ -103,7 +115,7 @@ ss
           We also assess the effectiveness of various components within SEELE during both pre-processing and post-processing phases.
     </p>
     <p></p>
-        <center><img src="ablation.png" width="800"></center>
+        <center><img src="ablation.jpeg" width="800"></center>
         <p></p>
         Please refer to our paper(<a href="">arxiv</a>) for more details.
         </p>
