@@ -53,15 +53,17 @@
         <hr />
       <p style="text-align:justify; text-justify:inter-ideograph;">
         Yikai Wang is a Ph.D. candidate in Statistics under the supervision of <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>  at Fudan University. Prior to this, He completed B.S. in Mathematics from Fudan University. 
-        His research ambitiously spans several areas, including statistical machine learning, computer vision, and foundational models. He has published 2 TPAMI articles and 2 CVPR papers as first author, and contributed to 2 CVPR, 1 ICCV and some other papers.
+        His research ambitiously spans several areas, including statistical machine learning, computer vision, and foundational models. He has published 2 TPAMI, 4 CVPR, 1 ICCV and some other papers.
         <br>
+      </p>
+      <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;"><i>Feel free to get in touch, please let me know who you are.</i></p>
       <br>
       <h1>Research</h1>
       <hr />
       <ul>
         <li style="margin-left:-20px;padding: 0;">
           <b>Sample Selection</b>: <br>
-          <b>Trajectory: </b> Semi-supervised setting &#8594; Establish selection consistency &#8594; Extension to supervised setting&#8594;  General FSR control.
+          <b>Trajectory: </b> Semi-supervised setting &#8594; Selection consistency &#8594; Supervised setting&#8594; False-selection-rate control.
           <ul>
             <li style="margin-left:-20px; padding: 0;">
               <b>(Sparsity Induced) Selection Theory</b>: consistency [<a href="https://yikai-wang.github.io/ici">ICI</a>, <a href="https://arxiv.org/abs/2007.08461">TPAMI21</a>], false-selection-rate control [<a href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a href="https://arxiv.org/abs/2301.00545">TPAMI23</a>];
@@ -126,38 +128,41 @@
       
       <h1><div id="Publications">Publications</div></h1>
       <hr />
-      <p><i>Note: Asterisk (*) indicates equal contribution and dagger (&dagger;) indicates corresponding author(s).</i></p>
+      <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;"><i>Arranged by topic and in chronological order. (*): equal contribution; (&dagger;): corresponding author(s).</i></p>
       <h2>Sample Selection</h2>
 
 <table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
+          <img src='figures/rtl.png'>
+    </td>
+    <td style="padding:5px;width:75%;vertical-align:middle">
+        <p> <b>Test-Time Linear Out-of-Distribution Detection.</b><br>
+          [paper]
+           <br>
+           Ke Fan, Tong Liu, Xingyu Qiu, <b>Yikai Wang</b>, Lian Huai, Zeyu Shangguan, Shuang Gou, Fengjian Liu, Yuqian Fu, Yanwei Fu, Xingqun Jiang.<br>
+            <b>CVPR</b>, 2024.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='spr/knockoffs.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="knockoffs-spr">
         <p><b>Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels.</b><br>
           [<a href="https://arxiv.org/abs/2301.00545">arxiv</a>]
           [<a href="https://ieeexplore.ieee.org/document/10337771">paper</a>]
           [<a href="https://github.com/Yikai-Wang/Knockoffs-SPR">code</a>]
-          [<a shape="rect" href="javascript:togglebib('knockoffs-spr')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/spr">intro</a>]
           [<a href="https://yikai-wang.github.io/spr/intro-chinese">简介</a>]
           <br>
           <b>Yikai Wang</b>*, 
-          <a href="https://yanweifu.github.io/">Yanwei Fu*</a>,
-          <a href="https://scholar.google.com/citations?user=128t-IMAAAAJ">Xinwei Sun&dagger;</a>.<br>
+          Yanwei Fu*,
+          Xinwei Sun&dagger;.<br>
           <b>TPAMI</b>. Accepted in 2023. 
-          <code>
-@article{wang2023knockoffs,<br>
-title={Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels},<br>
-author={Wang, Yikai and Fu, Yanwei and Sun, Xinwei},<br>
-journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},<br>
-year={2023},<br>
-doi={10.1109/TPAMI.2023.3338268}<br>
-}</code>
         </p>
-      </div>
     </td>
   </tr>
 
@@ -166,24 +171,16 @@ doi={10.1109/TPAMI.2023.3338268}<br>
           <img src='figures/spr.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="spr">
         <p><b>Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels.</b><br>
           [<a href="https://arxiv.org/abs/2203.07788">arxiv</a>]
           [<a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Scalable_Penalized_Regression_for_Noise_Detection_in_Learning_With_Noisy_CVPR_2022_paper.pdf">paper</a>]
           [<a href="https://github.com/Yikai-Wang/SPR-LNL">code</a>]
-          [<a shape="rect" href="javascript:togglebib('spr')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/spr">intro</a>]
           [<a href="https://yikai-wang.github.io/spr/intro-chinese">简介</a>]
            <br>
-          <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=128t-IMAAAAJ">Xinwei Sun</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
+          <b>Yikai Wang</b>, Xinwei Sun, Yanwei Fu&dagger;.<br>
             <b>CVPR</b>, 2022.
-          <code>
-@inproceedings{wang2022scalable,<br>
-title={Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels},<br>
-author={Wang, Yikai and Xinwei Sun and Fu, Yanwei},<br>
-booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},<br>
-year={2022}<br>
-}</code></p></div>
+      </p>
     </td>
   </tr>
 
@@ -192,26 +189,15 @@ year={2022}<br>
           <img src='figures/ici.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="ici-pami">
         <p>
           <b>How to Trust Unlabeled Data? Instance Credibility Inference for Few-Shot Learning.</b><br>
           [<a href="https://arxiv.org/abs/2007.08461">arxiv</a>]
           [<a href="https://ieeexplore.ieee.org/document/9446583/">paper</a>]
           [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
-          [<a shape="rect" href="javascript:togglebib('ici-pami')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/ici">intro</a>]<br>
-          <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yao-lab.github.io">Yuan Yao&dagger;</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
+          <b>Yikai Wang</b>, Li Zhang, Yuan Yao&dagger;, Yanwei Fu&dagger;.<br>
             <b>TPAMI</b>. Accepted in 2021. 
-          <code>
-@article{wang2021trust,<br>
-title={How to Trust Unlabeled Data? Instance Credibility Inference for Few-Shot Learning},<br>
-author={Wang, Yikai and Zhang, Li and Yao, Yuan and Fu, Yanwei},<br>
-journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},<br>
-year={2021},<br>
-doi={10.1109/TPAMI.2021.3086140}<br>
-}</code>
         </p>
-      </div>
     </td>
   </tr>
 
@@ -220,70 +206,31 @@ doi={10.1109/TPAMI.2021.3086140}<br>
           <img src='ici/framework.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="ici">
         <p> <b>Instance Credibility Inference for Few-Shot Learning.</b><br>
           [<a href="https://arxiv.org/abs/2003.11853">arxiv</a>]
           [<a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Instance_Credibility_Inference_for_Few-Shot_Learning_CVPR_2020_paper.pdf">paper</a>]
           [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
-          [<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/ici">intro</a>]
           [<a href="https://yikai-wang.github.io/ici/intro-chinese">简介</a>]
            <br>
-          <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=pjcYzvYAAAAJ&hl=zh-CN">Chengming Xu</a>, <a href="https://corwinliu9669.github.io/">Chen Liu</a>, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
-            <b>CVPR</b>, 2020.
-          <code>
-@inproceedings{wang2020instance,<br>
-title={Instance Credibility Inference for Few-Shot Learning},<br>
-author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},<br>
-booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},<br>
-year={2020}<br>
-}</code></p></div>
+          <b>Yikai Wang</b>, Chengming Xu, Chen Liu, Li Zhang, Yanwei Fu&dagger;.<br>
+            <b>CVPR</b>, 2020.</p>
     </td>
   </tr>
 
-  <tr>
-    <td style="padding:5px;width:25%;vertical-align:middle">
-          <img src='figures/rtl.png'>
-    </td>
-    <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="ici">
-        <p> <b>Test-Time Linear Out-of-Distribution Detection.</b><br>
-          [paper]
-           <br>
-           Ke Fan, Tong Liu, Xingyu Qiu, <b>Yikai Wang</b>, Lian Huai, Zeyu Shangguan, Shuang Gou, Fengjian Liu, Yuqian Fu, Yanwei Fu, Xingqun Jiang.<br>
-            <b>CVPR</b>, 2024.
-          <!-- <code>
-@inproceedings{wang2020instance,<br>
-title={Instance Credibility Inference for Few-Shot Learning},<br>
-author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},<br>
-booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},<br>
-year={2020}<br>
-}</code> -->
-</p></div>
-    </td>
-  </tr>
+
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/fsl-baseline.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="baseline-fsl">
         <p><b>An Embarrassingly Simple Baseline to One-Shot Learning.</b><br>
           [<a href="http://openaccess.thecvf.com/content_CVPRW_2020/papers/w54/Liu_An_Embarrassingly_Simple_Baseline_to_One-Shot_Learning_CVPRW_2020_paper.pdf">paper</a>]
-          [<a href="http://github.com/corwinliu9669/embarrassingly-simple-baseline">code</a>]
-          [<a shape="rect" href="javascript:togglebib('baseline-fsl')" class="togglebib">bib</a>]<br>
-          <a href="https://corwinliu9669.github.io/">Chen Liu</a>, <a href="https://scholar.google.com/citations?user=pjcYzvYAAAAJ&hl=zh-CN">Chengming Xu</a>, <b>Yikai Wang</b>, <a href="https://scholar.google.com/citations?user=-wOTCE8AAAAJ&hl=en">Li Zhang</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
+          [<a href="http://github.com/corwinliu9669/embarrassingly-simple-baseline">code</a>]<br>
+          Chen Liu, Chengming Xu, <b>Yikai Wang</b>, Li Zhang, Yanwei Fu&dagger;.<br>
           CVPR Workshop, 2020.
-          <code>
-@InProceedings{Liu_2020_CVPR_Workshops,<br>
-author = {Liu, Chen and Xu, Chengming and Wang, Yikai and Zhang, Li and Fu, Yanwei},<br>
-title = {An Embarrassingly Simple Baseline to One-Shot Learning},<br>
-booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},<br>
-year = {2020}<br>
-}</code>
         </p>
-      </div>
     </td>
   </tr>
 
@@ -291,30 +238,37 @@ year = {2020}<br>
 </table>
         <h2>Generative Decoding</h2>
 
+
 <table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:collapse;">
+
+  <tr>
+    <td style="padding:5px;width:25%;vertical-align:middle">
+          <img src='figures/arci.png'>
+    </td>
+    <td style="padding:5px;width:75%;vertical-align:middle">
+        <p><b>LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion Model.</b><br>
+          [<a href="https://arxiv.org/abs/2305.11577">arxiv</a>]
+          [<a href="https://ewrfcas.github.io/ARCI/">intro</a>]
+           <br>
+           Chenjie Cao, Yunuo Cai, Qiaole Dong, <b>Yikai Wang</b>, Yanwei Fu&dagger;.<br>
+          <b>CVPR</b>, 2024.<br>
+          </p>
+    </td>
+  </tr>
+
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/inpainting.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="asuka">
         <p><b>Towards Stable and Faithful Inpainting.</b><br>
           [<a href="https://arxiv.org/abs/2312.04831">arxiv</a>]
-          [<a shape="rect" href="javascript:togglebib('asuka')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/asuka/">intro</a>]
           [demo: <a href="https://www.youtube.com/shorts/q8WwvEtqiJ4">Youtube</a>, <a href="https://b23.tv/wp2qCk6">Bilibili</a>]
           
            <br>
-           <b>Yikai Wang</b>*, <a href="https://ewrfcas.github.io">Chenjie Cao</a>*, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>. <br>
-          Preprint, 2023.<br>
-          <code>
-@article{wang2023towards,<br>
-title={Towards Stable and Faithful Inpainting}, <br>
-author={Wang, Yikai and Cao, Chenjie and Fu, Yanwei},<br>
-year={2023},<br>
-journal={arXiv preprint arXiv:2312.04831},<br>
-}
-            </code></p></div>
+           <b>Yikai Wang</b>*, Chenjie Cao*, Yanwei Fu&dagger;. <br>
+          Preprint, 2023.<br></p>
     </td>
   </tr>
   <tr>
@@ -322,25 +276,15 @@ journal={arXiv preprint arXiv:2312.04831},<br>
           <img src='figures/moving.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="moving">
         <p><b>Repositioning the Subject within Image.</b><br>
           [<a href="https://arxiv.org/abs/2401.16861">arxiv</a>]
           [<a href="https://github.com/Yikai-Wang/ReS">dataset</a>]
-          [<a shape="rect" href="javascript:togglebib('moving')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/seele/">intro</a>]
           [demo: <a href="https://www.youtube.com/watch?v=dJb-lWaPT6E">Youtube</a>, <a href="https://b23.tv/iVIyvgj">Bilibili</a>]
            <br>
-           <b>Yikai Wang</b>, <a href="https://ewrfcas.github.io">Chenjie Cao</a>, <a href="https://dqiaole.github.io">Qiaole Dong</a>, Yifan Li, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>. <br>
+           <b>Yikai Wang</b>, Chenjie Cao, Qiaole Dong, Yifan Li, Yanwei Fu&dagger;. <br>
            Preprint, 2023.<br>
-          <code>
-@article{wang2023repositioning,<br>
-title={Repositioning the Subject within Image}, <br>
-author={Wang, Yikai and Cao, Chenjie and Dong, Qiaole and Li, Yifan and Fu, Yanwei},<br>
-year={2023},<br>
-journal={arXiv preprint arXiv: 2401.16861},<br>
-}
-            </code>
-          </p></div>
+          </p>
     </td>
   </tr>
   <tr>
@@ -348,74 +292,34 @@ journal={arXiv preprint arXiv: 2401.16861},<br>
           <img src='semani/eL-TGIM.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="semani">
         <p><b>Entity-Level Text-Guided Image Manipulation.</b><br>
           [<a href="https://arxiv.org/abs/2302.11383">arxiv</a>]
           [<a href="semani/semani.pdf">full-size PDF</a>]
           [<a href="https://github.com/Yikai-Wang/SeMani">code</a>]
-          [<a shape="rect" href="javascript:togglebib('semani')" class="togglebib">bib</a>]
           [<a href="https://yikai-wang.github.io/semani/">intro</a>]
           [demo: <a href="https://www.youtube.com/watch?v=qbNKhDh9TzM">Youtube</a>, <a href="https://www.bilibili.com/video/BV1gY4y1U7XK/">Bilibili</a>]
            <br>
-           <b>Yikai Wang</b>*, Jianan Wang*, <a href="https://scholar.google.com/citations?user=YIt8thUAAAAJ">Guansong Lu</a>, <a href="https://xuhangcn.github.io">Hang Xu</a>, <a href="https://scholar.google.com/citations?user=XboZC1AAAAAJ">Zhenguo Li</a>, <a href="https://openreview.net/profile?id=~Wei_Zhang45">Wei Zhang</a>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
+           <b>Yikai Wang</b>*, Jianan Wang*, Guansong Lu, Hang Xu, Zhenguo Li, Wei Zhang, Yanwei Fu&dagger;.<br>
           Preprint, 2023.<br>
-          <code>
-@article{wang2023entitylevel,<br>
-title={Entity-Level Text-Guided Image Manipulation}, <br>
-author={Wang, Yikai and Wang, Jianan and Lu, Guansong and Xu, Hang and Li, Zhenguo and Zhang, Wei and Fu, Yanwei},<br>
-year={2023},<br>
-journal={arXiv preprint arXiv:2302.11383},<br>
-}
-</code></p></div>
+          </p>
     </td>
   </tr>
 
-  <tr>
-    <td style="padding:5px;width:25%;vertical-align:middle">
-          <img src='figures/arci.png'>
-    </td>
-    <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="arci">
-        <p><b>LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion Model.</b><br>
-          [<a href="https://arxiv.org/abs/2305.11577">arxiv</a>]
-          [<a shape="rect" href="javascript:togglebib('arci')" class="togglebib">bib</a>]
-          [<a href="https://ewrfcas.github.io/ARCI/">intro</a>]
-           <br>
-           <a href="https://ewrfcas.github.io">Chenjie Cao</a>, Yunuo Cai, <a href="https://dqiaole.github.io">Qiaole Dong</a>, <b>Yikai Wang</b>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
-          <b>CVPR</b>, 2024.<br>
-          <code>
-@article{cao2024leftrefill,<br>
-  title={LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion Model},<br>
-  author={Cao, Chenjie and Cai, Yunuo and Dong, Qiaole and Wang, Yikai and Fu, Yanwei},<br>
-  journal={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},<br>
-  year={2024}}<br>
-</code></p></div>
-    </td>
-  </tr>
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/c2f-seg.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="c2f-seg">
         <p><b>Coarse-to-Fine Amodal Segmentation with Shape Prior.</b><br>
           [<a href="https://arxiv.org/abs/2308.16825">arxiv</a>]
           [<a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Gao_Coarse-to-Fine_Amodal_Segmentation_with_Shape_Prior_ICCV_2023_paper.pdf">paper</a>]
           [<a href="https://github.com/JianxGao/C2F-Seg">code</a>]
-          [<a shape="rect" href="javascript:togglebib('c2f-seg')" class="togglebib">bib</a>]
           [<a href="https://jianxgao.github.io/C2F-Seg/">intro</a>]
            <br>
-           <a href="https://jianxgao.github.io">Jianxiong Gao</a>, <a href="https://naiq.github.io">Xuelin Qian</a>&dagger;, <b>Yikai Wang</b>, Tianjun Xiao&dagger;, Tong He, Zheng Zhang, <a href="https://yanweifu.github.io/">Yanwei Fu</a>.<br>
+           Jianxiong Gao, Xuelin Qian&dagger;, <b>Yikai Wang</b>, Tianjun Xiao&dagger;, Tong He, Zheng Zhang, Yanwei Fu.<br>
           <b>ICCV</b>, 2023.<br>
-          <code>
-@inproceedings{gao2023coarse,<br>
-title={Coarse-to-Fine Amodal Segmentation with Shape Prior}, <br>
-author={Jianxiong Gao and Xuelin Qian and Yikai Wang and Tianjun Xiao and Tong He and Zheng Zhang and Yanwei Fu},<br>
-year={2023},<br>
-booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},<br>
-}
-</code></p></div>
+          </p>
     </td>
   </tr>
 
@@ -429,24 +333,15 @@ booktitle={Proceedings of the IEEE/CVF International Conference on Computer Visi
           <img src='figures/ffd.png'>
     </td>
     <td style="padding:5px;width:75%;vertical-align:middle">
-      <div class="paper" id="ffd">
         <p><b>FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch.</b><br>
           [<a href="https://openaccess.thecvf.com/content/ACCV2022/papers/Zhao_FFD_Augmentor_Towards_Few-Shot_Oracle_Character_Recognition_from_Scratch_ACCV_2022_paper.pdf">paper</a>]
           [<a href="https://github.com/Hide-A-Pumpkin/FFDAugmentor">code</a>]
-          [<a shape="rect" href="javascript:togglebib('ffd')" class="togglebib">bib</a>]
            <br>
-           Xinyi Zhao, <a href="https://scholar.google.com/citations?user=3H6K-o8AAAAJ">Siyuan Liu</a>, <b>Yikai Wang</b>, <a href="https://yanweifu.github.io/">Yanwei Fu&dagger;</a>.<br>
+           Xinyi Zhao, Siyuan Liu, <b>Yikai Wang</b>, Yanwei Fu&dagger;.<br>
             ACCV, 2022.<br>
+        <i style="color: darkgray;">
           Note: This is the final project of undergraduate course NNDL 2022, for which I served as TA.
-          <code>
-@InProceedings{Zhao_2022_ACCV,<br>
-author    = {Zhao, Xinyi and Liu, Siyuan and Wang, Yikai and Fu, Yanwei},<br>
-title     = {FFD Augmentor: Towards Few-Shot Oracle Character Recognition from Scratch},<br>
-booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},<br>
-month     = {December},<br>
-year      = {2022},<br>
-pages     = {1622-1639}<br>
-}</code></p></div>
+        </i>
     </td>
   </tr>
 </table>
