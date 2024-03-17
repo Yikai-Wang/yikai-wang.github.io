@@ -49,18 +49,11 @@
     </header>
     <section>
       <div class="paper" id="asuka">
-      <h1>Towards Stable and Faithful Inpainting</h1>
+      <h1>Towards Context-Stable and Visual-Consistent Image Inpainting</h1>
       [<a href="https://arxiv.org/abs/2312.04831">Preprint</a>]
-      [<a shape="rect" href="javascript:togglebib('asuka')" class="togglebib">bib</a>]
-    <br>
-      <code>
-@article{wang2023towards,<br>
-title={Towards Stable and Faithful Inpainting}, <br>
-author={Wang, Yikai and Cao, Chenjie and Fu, Yanwei},<br>
-year={2023},<br>
-journal={arXiv preprint arXiv:2312.04831},<br>
-}
-      </code><br>
+      [<a href="asuka/ASUKA.pdf">Full-size PDF</a>]
+      [<a href="https://github.com/Yikai-Wang/asuka-misato">MISATO dataset</a>]
+      <br>
 
       <div style="position: relative; padding: 30% 45%;">
         <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.youtube.com/embed/q8WwvEtqiJ4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
@@ -75,7 +68,7 @@ journal={arXiv preprint arXiv:2312.04831},<br>
         MAE offers stable masked region estimates, yet <b>falls short in texture detail</b>. <br>
         GAN-based inpainting struggles with low fidelity, such as <b>omitted white horizontal lines</b>. <br>
         SD is powerful but unstable, often <b>introducing random elements</b> and suffers from <b>mask-unmask color inconsistency</b>. <br>
-        <b>ASUKA</b> ensures consistency of masked-unmasked areas during diffusion and decoding processes, achieving stable and faithful inpainting.
+        <b>ASUKA</b> ensures consistency of masked-unmasked areas during diffusion and decoding processes, achieving context-stable and visual-consistent inpainting.
         <p></p>
         <h2>Introduction</h2>
             <p  style="text-align:justify; text-justify:inter-ideograph;">
@@ -87,7 +80,7 @@ journal={arXiv preprint arXiv:2312.04831},<br>
         <p></p>
         <center><img src="asuka.png" width="800"></center>
         <p></p>
-        ASUKA adopts the reconstruction-based Masked Auto-Encoder (MAE) to provide a low-resolution stable prior for frozen Stable Diffusion Inpainting Model (SD) to maintain the generation capacity while increasing stability. A better decoder is utilized to achieve mask-unmask semantic consistency when decoding SD results from latent to image for better fidelity.
+        ASUKA adopts the reconstruction-based Masked Auto-Encoder (MAE) to provide a low-resolution stable prior for frozen Stable Diffusion Inpainting Model (SD) to maintain the generation capacity while increasing context-stability. A better decoder is utilized to achieve mask-unmask visual consistency when decoding SD results from latent to image for better fidelity.
         </p>
       </div>
     </section>
