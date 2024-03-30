@@ -24,30 +24,44 @@
     <link rel="stylesheet" href="assets/css/academicons.min.css"/>
     <link rel="stylesheet" href="assets/css/academicons.css"/>
 
+    <style>
+      .float-right {
+        float: right;
+        width: 150px;
+        margin-top: 0px;
+        margin-left: 20px; /* Add some margin for space between the image and text */
+      }
+    
+      /* Clearfix for container */
+      .clearfix::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .image-text-container {
+        display: flex;
+        align-items: center;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <h3><img src="photo.png" height="110" width="110"></h3>
-        <h3><img src="figures/name.png"width="110"></h3>
+        <h2><img src="figures/name.png"width="110"></h2>
         <h2>Yikai Wang</h2>
         <p>Ph.D. candidate in Statistics<br>
-          School of Data Science<br>
           Fudan University<br>
-          Shanghai, China<br>
         </p>
         <nav id="nav">
           <a href="#About" id="About-link">About</a><br>
           <a href="#Research" id="Research-link">Research</a><br>
           <a href="#Talks" id="Talks-link">Talks</a><br>
           <a href="#Publications" id="Publications-link">Publications</a><br>
-          <a href="#Service" id="Service-link">Service</a><br>
-          <a href="#Teaching" id="Teaching-link">Teaching</a><br>
-          <a href="#Timeline" id="Timeline-link">Timeline</a><br>
+          <a href="#Miscellaneous" id="Service-link">Miscellaneous</a><br>
         </nav>
         <p></p>
     <p class="view"><b>Links</b><br>
-        <!-- <a href="http://github.com/yikai-wang"><i class="fa fa-fw fa-github-square"></i> GitHub</a><br> -->
         <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank"><i class="ai ai-fw ai-google-scholar-square"></i>Google Scholar</a><br>
         <a class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i>yi-kai.wang@outlook.com</a><br>
         
@@ -56,11 +70,16 @@
       <section id="Biography" class="two">
         <h1><div id="About">About</div></h1>
         <hr />
-      <p style="text-align:justify; text-justify:inter-ideograph;">
-        Yikai Wang is a Ph.D. candidate in Statistics under the supervision of <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>  at the School of Data Science, Fudan University. Prior to this, He completed B.S. in Mathematics from Fudan University. 
+        <div  class="clearfix">
+          <div class="image-text-container">
+      <p style="text-align:justify; text-justify:inter-ideograph; position: relative;align-items: center;">
+        <img src="photo.png"  class="float-right">
+        Yikai Wang is a Ph.D. candidate in Statistics under the supervision of <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>  at the School of Data Science, Fudan University. Prior to this, He completed B.S. in Mathematics from Fudan University. <br>
         His research ambitiously spans several areas, including statistical machine learning, computer vision, and foundation models. He has published 2 TPAMI, 4 CVPR, 1 ICCV and some other papers.
         <br>
       </p>
+    </div>
+    </div>
       <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;"><i>Always available to get in touch with <a class="author-social" target="_blank">yi-kai.wang@outlook.com</a>, please let me know who you are.</i></p>
       <br>
       <h1><div id="Research">Research</div></h1>
@@ -98,7 +117,7 @@
       </p>
       <h1><div id="Talks">Talks</div></h1>
       <hr />
-<table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
@@ -137,7 +156,7 @@
         (*): equal contribution; (&dagger;): corresponding author(s).</i></p>
       <h2>Sample Selection</h2>
 
-<table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/rtl.png'>
@@ -245,7 +264,7 @@
         <h2>Generative Decoding</h2>
 
 
-<table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:collapse;">
+<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;">
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
@@ -339,8 +358,6 @@
     <td style="padding:5px;width:75%;vertical-align:middle">
         <p><b>NeuroPictor: Refining fMRI-to-Image Reconstruction via Multi-individual Pretraining and Multi-level Modulation.</b><br>
           [<a href="https://arxiv.org/abs/2403.18211">arxiv</a>]
-          <!-- [<a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Gao_Coarse-to-Fine_Amodal_Segmentation_with_Shape_Prior_ICCV_2023_paper.pdf">paper</a>] -->
-          <!-- [<a href="https://github.com/JianxGao/C2F-Seg">code</a>] -->
           [<a href="https://jingyanghuo.github.io/neuropictor/">intro</a>]
            <br>
            Jingyang Huo*, <b>Yikai Wang</b>*, Xuelin Qian, Yun Wang, Chong Li, Jianfeng Feng, Yanwei Fu&dagger;.<br>
@@ -356,9 +373,6 @@
     <td style="padding:5px;width:75%;vertical-align:middle">
         <p><b>LEA: Learning Latent Embedding Alignment Model for fMRI Decoding and Encoding.</b><br>
           [<a href="https://arxiv.org/abs/2303.14730">arxiv</a>]
-          <!-- [<a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Gao_Coarse-to-Fine_Amodal_Segmentation_with_Shape_Prior_ICCV_2023_paper.pdf">paper</a>] -->
-          <!-- [<a href="https://github.com/JianxGao/C2F-Seg">code</a>] -->
-          <!-- [<a href="https://jingyanghuo.github.io/neuropictor/">intro</a>] -->
            <br>
            Xuelin Qian*, <b>Yikai Wang</b>*, Xinwei Sun, Yanwei Fu, Xiangyang Xue, Jianfeng Feng&dagger;.<br>
           <b>Preprint</b>, 2023.<br>
@@ -369,8 +383,8 @@
   
 </table>
 
-          <h2>Miscellaneous</h2>
-<table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+          <h2>Others</h2>
+<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/ffd.png'>
@@ -388,7 +402,14 @@
     </td>
   </tr>
 </table>
-      <h1><div id="Service"></div>Service</h1>
+<div id="Miscellaneous"></div>
+<!-- <h1>Awards</h1>
+<hr />
+<ul>
+  <li>Outstanding Graduates, Shanghai, 2024. (Top 2 Ph.D. graduates in the School of Data Science)</li>
+  <li>Outstanding Freshmen, Fudan University, 2015. (Top 0.02% in Gaokao, the National Higher Education Entrance Examination in China.)</li>
+</ul> -->
+      <h1>Service</h1>
       <hr />
       <ul>
         <li>I have served as a reviewer for conferences and journals, some of which are listed below:
