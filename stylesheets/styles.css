@@ -110,7 +110,6 @@ header {
   width:200px;
   float:left;
   top: 20%;
-  transform: translateX(-50%);
   position:fixed;
   -webkit-font-smoothing:subpixel-antialiased;
 }
