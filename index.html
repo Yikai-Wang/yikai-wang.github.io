@@ -8,15 +8,12 @@
     <link rel="icon" type="image/x-icon" href="index.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="index.ico"/>
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-29643011-3', 'auto');
       ga('send', 'pageview');
     </script>
@@ -33,7 +30,7 @@
       }
       .subject-block {
         width: 100%;
-        height: 200px;
+        height: 150px;
         overflow-y: auto;
         word-wrap: break-word;
         word-break: break-all;
@@ -67,42 +64,45 @@
       .invisible-font {
         visibility: hidden;
       }
+      .ref_anchor {
+        scroll-margin-top: 80px;
+      }
     </style>
   </head>
   <body>
     <div class="wrapper">
-      <header>
-        <h2><img src="figures/name.png"width="110"></h2>
-        <h2>Yikai Wang</h2>
-        <p>
-        </p>
-        <nav id="nav">
-          <a href="#About" id="About-link">About</a><br>
-          <a href="#Research" id="Research-link">Research</a><br>
-          <a href="#Talks" id="Talks-link">Talks</a><br>
-          <a href="#Publications" id="Publications-link">Publications</a><br>
-          <a href="#Miscellaneous" id="Service-link">Miscellaneous</a><br>
-        </nav>
-        <p></p>
-    <p class="view"><b>Links</b><br>
-        <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank"><i class="ai ai-fw ai-google-scholar-square"></i>Google Scholar</a><br>
+      <div class="header" id="header">
+        <div class="nav" id="navbar">
+          <a href="/index.html" class="active title">Yikai Wang</a>
+      <div class="menu">
+          <a href="#About">About</a>
+          <a href="#Research">Research</a>
+          <a href="#Talks">Talks</a>
+          <a href="#Publications">Publications</a>
+          <a href="#Miscellaneous">Miscellaneous</a>
+          <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank"><i class="ai ai-fw ai-google-scholar-square"></i></a>
 
-      </header>
+      </div>
+        </div>
 
+    </div>
       <section id="Biography" class="two">
-        <h1><div id="About">About</div></h1>
+        <h1><div id="About" class="ref_anchor">About</div></h1>
         <hr />
-        <div  class="clearfix">
-          <div class="image-text-container">
-      <p style="text-align:justify; text-justify:inter-ideograph; position: relative;align-items: center;">
-        <img src="photo.png"  class="float-right">
-        Yikai Wang is a Postdoctoral Research Fellow at the <a href="https://www.mmlab-ntu.com">MMLab@NTU</a>, working with <a href="https://www.mmlab-ntu.com/person/ccloy/index.html">Prof. Chen Change Loy</a>, affiliated with S-Lab, Nanyang Technological University, Singapore.<br>
-        He obtained his Ph.D. in Statistics at Fudan University in 2024, advised by <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>. Prior to this, He completed B.S. in Mathematics at Fudan University in 2019. <br>
-        His research ambitiously spans statistical machine learning, computer vision, and foundation models, with a focus on content creation, multi-modal models and sample selection.
-        <br>
-      </p>
-    </div>
-    </div>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding-left: 0px; padding-right:50px;width:90%;vertical-align:left">
+                <p style="text-align:justify; text-justify:inter-ideograph; ">
+                  Yikai Wang is a Postdoctoral Research Fellow at the <a href="https://www.mmlab-ntu.com">MMLab@NTU</a>, working with <a href="https://www.mmlab-ntu.com/person/ccloy/index.html">Prof. Chen Change Loy</a>, affiliated with S-Lab, Nanyang Technological University, Singapore.
+                  He obtained his Ph.D. in Statistics at Fudan University in 2024, advised by <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>. Prior to this, He completed B.S. in Mathematics at Fudan University in 2019.
+                  His research ambitiously spans statistical machine learning, computer vision, and foundation models, with a focus on content creation, multi-modal models and sample selection.
+                </p>
+            </td>
+            <td style="padding:5px;width:10%;vertical-align:middle">
+              <img src="photo.png">
+        </td>
+          </tr>
+        </table>
 
       <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;">Always available with <a class="author-social" target="_blank">yi-kai.wang@outlook.com</a>, please let me know who you are. <br>
         My Fudan email is no longer active.</p>
@@ -131,7 +131,7 @@
         </ul>
       </div>
       <br>
-      <h1><div id="Research">Research</div></h1>
+      <h1><div id="Research"  class="ref_anchor">Research</div></h1>
       <hr />
       <ul>
         <li style="margin-left:-20px;padding: 0;">
@@ -190,9 +190,9 @@
 
       </ul>
       </p>
-      <h1><div id="Talks">Talks</div></h1>
+      <h1><div id="Talks"  class="ref_anchor">Talks</div></h1>
       <hr />
-<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/arci.png'>
@@ -270,7 +270,7 @@
   </tr>
 </table>
 
-      <h1><div id="Publications">Publications</div></h1>
+      <h1><div id="Publications"  class="ref_anchor">Publications</div></h1>
       <hr />
       <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;">Arranged by topic and in chronological order. Updated list can be found at <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank">Google Scholar</a>.
         (*): equal contribution; (&dagger;): corresponding author(s).</p>
@@ -278,7 +278,7 @@
         <h2>Content Creation</h2>
 
 
-<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;">
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/arci.png'>
@@ -386,7 +386,7 @@
 </table>
 
 <h2>Multi-modal Models</h2>
-<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;">
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
@@ -436,7 +436,7 @@
 
 <h2>Sample Selection</h2>
 
-<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
@@ -544,7 +544,7 @@
 </table>
 
           <h2>Miscellaneous</h2>
-<table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
 
 
 
@@ -579,7 +579,7 @@
     </td>
   </tr>
 </table>
-<div id="Miscellaneous"></div>
+<div id="Miscellaneous"  class="ref_anchor"></div>
 
 
 
