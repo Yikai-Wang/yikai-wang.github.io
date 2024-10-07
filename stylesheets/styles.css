@@ -241,6 +241,7 @@ footer {
 @media print, screen and (max-width: 720px) {
   body {
     word-wrap:break-word;
+    padding-top: 0px;
   }
 
   header {
@@ -259,6 +260,7 @@ footer {
 @media print, screen and (max-width: 480px) {
   body {
     padding:15px;
+    padding-top: 0px;
   }
 
   header ul {
