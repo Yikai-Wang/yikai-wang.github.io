@@ -296,9 +296,16 @@ td{
     float: middle;
     right: 0;
     left: 0;
+    top: 0;
     position: fixed;
     background-color: #fff;
     border-bottom: 1px solid #030303;
+}
+
+.nav.responsive {
+  position: fixed;  /* Fixes position when responsive is triggered */
+  top: 0;  /* Keeps it at the top of the screen */
+  width: 100%;  /* Ensures full width in responsive mode */
 }
 
 
@@ -342,7 +349,7 @@ td{
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
 @media screen and (max-width: 600px) {
-  .nav.responsive {position: relative;}
+  .nav.responsive {position: fixed;}
   .nav.responsive a.icon {
     position: absolute;
     right: 0;

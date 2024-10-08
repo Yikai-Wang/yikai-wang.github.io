@@ -74,15 +74,15 @@
       <div class="header" id="header">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="nav" id="navbar">
-          <a href="/index.html" class="active title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yikai Wang</a>
-      <div class="menu">
-          <a href="#About">About</a>
-          <a href="#Research">Research</a>
-          <a href="#Talks">Talks</a>
-          <a href="#Publications">Publications</a>
-          <a href="#Miscellaneous">Miscellaneous</a>
-          <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank"><i class="ai ai-fw ai-google-scholar-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <a class="active title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yikai Wang</a>
+      <div class="menu" id="topmenu">
+          <a href="#About" class="menu-item"  onclick="closeMenu()">About</a>
+          <a href="#Research" class="menu-item"  onclick="closeMenu()">Research</a>
+          <a href="#Talks" class="menu-item"  onclick="closeMenu()">Talks</a>
+          <a href="#Publications" class="menu-item"  onclick="closeMenu()">Publications</a>
+          <a href="#Miscellaneous" class="menu-item"  onclick="closeMenu()">Miscellaneous</a>
+          <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank"  class="menu-item"><i class="ai ai-fw ai-google-scholar-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          <a href="javascript:void(0);" class="icon" onclick="clickMenu()"  id="menuToggle">
             <i class="fa fa-bars"></i>
           </a>
       </div>
@@ -666,14 +666,21 @@
 
 </div>
 <script>
-  function myFunction() {
-    var x = document.getElementById("header");
-    if (x.className === "nav") {
-      x.className += " responsive";
-    } else {
-      x.className = "nav";
-    }
+function clickMenu() {
+  var nav = document.getElementById("navbar");
+  if (nav.classList.contains("responsive")) {
+      // Close the menu
+  } else {
+    nav.classList.add("responsive");  // Open the menu
   }
+}
+
+function closeMenu() {
+  var nav = document.getElementById("navbar");
+  if (nav.classList.contains("responsive")) {
+    nav.classList.remove("responsive");  // Close the menu when item is clicked
+  }
+}
   </script>
     <script src="javascripts/scale.fix.js"></script>
     <script xml:space="preserve" language="JavaScript">
