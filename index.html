@@ -72,6 +72,7 @@
   <body>
     <div class="wrapper">
       <div class="header" id="header">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="nav" id="navbar">
           <a href="/index.html" class="active title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yikai Wang</a>
       <div class="menu">
@@ -81,7 +82,9 @@
           <a href="#Publications">Publications</a>
           <a href="#Miscellaneous">Miscellaneous</a>
           <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ&hl=en" target="_blank"><i class="ai ai-fw ai-google-scholar-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+          </a>
       </div>
         </div>
 
@@ -662,6 +665,16 @@
 
 
 </div>
+<script>
+  function myFunction() {
+    var x = document.getElementById("header");
+    if (x.className === "nav") {
+      x.className += " responsive";
+    } else {
+      x.className = "nav";
+    }
+  }
+  </script>
     <script src="javascripts/scale.fix.js"></script>
     <script xml:space="preserve" language="JavaScript">
       hideallbibs();
