@@ -332,6 +332,12 @@ td{
   padding: 10.6px 16px 10.6px 0px;
   font-weight: 800;
   font-size: 0.5cm;
+  display: inline-flex;
+  align-items: center; /* 水平对齐文本和图片 */
+}
+.nav a.title img {
+  height: 1.5em; /* 高度等于文字的高度 */
+  /* vertical-align: middle; */
 }
 
 .nav .icon {
