@@ -2,18 +2,36 @@
 <html>
 
 <head>
-  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <title>SeMani: Semantic Manipulation for Entity-Level Text-Guided Image Manipulation</title>
-  <link rel="icon" type="image/x-icon" href="../index.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="../index.ico"/>
-  <link rel="stylesheet" href="../stylesheets/styles.css">
-  <link rel="stylesheet" href="../stylesheets/github-light.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/bulma.min.css">
+<link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="../static/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="../static/js/fontawesome.all.min.js"></script>
+<script src="../static/js/bulma-carousel.min.js"></script>
+<script src="../static/js/bulma-slider.min.js"></script>
+<script src="../static/js/index.js"></script>
 
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -26,66 +44,119 @@
     ga('create', 'UA-29643011-3', 'auto');
     ga('send', 'pageview');
   </script>
-  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
-  <!-- For all browsers -->
-  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
-  <link rel="stylesheet" href="../assets/css/academicons.css" />
-
+<style>
+  .inverted {
+    filter: invert(100%);
+}
+</style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <nav id="nav">
-        <p><a href="#Introduction" id="intro-link">Introduction</a></p>
-        <p><a href="#framework" id="framework-link">Framework</a></p>
-        <p><a href="#experiment" id="experiment-link">Experiments</a></p>
-        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
-      </nav>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-      </script>
-    </header>
-    <section>
-      <div class="paper" id="semani">
-      <h1>SeMani: Semantic Manipulation for <br>Entity-Level Text-Guided Image Manipulation</h1>
-      [Papers: <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html">CVPR22 oral</a>, <a href="https://arxiv.org/abs/2302.11383">journal extension</a> (<a href="semani.pdf">Full-size PDF</a>)]
-      [<a href="https://github.com/Yikai-Wang/SeMani">code</a>]
-      [<a shape="rect" href="javascript:togglebib('semani')" class="togglebib">bib</a>]
-    <br>
-      <code>
-@inproceedings{wang2022manitrans,<br>
-    author    = {Wang, Jianan and Lu, Guansong and Xu, Hang and Li, Zhenguo and Xu, Chunjing and Fu, Yanwei},<br>
-    title     = {ManiTrans: Entity-Level Text-Guided Image Manipulation via Token-Wise Semantic Alignment and Generation},<br>
-    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},<br>
-    year      = {2022},<br>
-}<br>
-@article{wang2023entitylevel,<br>
-    title={Entity-Level Text-Guided Image Manipulation}, <br>
-    author={Wang, Yikai and Wang, Jianan and Lu, Guansong and Xu, Hang and Li, Zhenguo and Zhang, Wei and Fu, Yanwei},<br>
-    year={2023},<br>
-    journal={arXiv preprint arXiv:2302.11383},<br>
-}<br>
-      </code><br>
 
-<div style="position: relative; padding: 30% 45%;">
-    <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.youtube.com/embed/qbNKhDh9TzM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+      <h1 class="title is-1 publication-title">SeMani: Semantic Manipulation for <br>Entity-Level Text-Guided Image Manipulation</h1>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">
+          Yikai Wang*, Jianan Wang*, Guansong Lu, Hang Xu, Zhenguo Li, Wei Zhang, Yanwei Fu†.
+        </span>
+      </div>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">Fudan University, Huawei Noah's Ark Lab.</span>
+      </div>
+
+      <div class="column has-text-centered">
+        <div class="publication-links">
+          <!-- PDF Link. -->
+          <span class="link-block">
+            <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>CVPR22 oral</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/2302.11383"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+              </span>
+              <span>extension</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="semani.pdf"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>Full-size PDF</span>
+            </a>
+          </span>
+          <!-- Video Link. -->
+          <span class="link-block">
+            <a href="https://www.youtube.com/watch?v=qbNKhDh9TzM"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fab fa-youtube"></i>
+              </span>
+              <span>Youtube Video</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://www.bilibili.com/video/BV1gY4y1U7XK/"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                        <img src="../static/images/bilibili-brands-solid.svg" class="inverted">
+              </span>
+              <span>BiliBili Video</span>
+            </a>
+          </span>
+          <!-- Code Link. -->
+          <span class="link-block">
+            <a href="https://github.com/Yikai-Wang/SeMani"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+              </a>
+          </span>
+          <!-- Dataset Link. -->
+
+        </div>
+
+      </div>
     </div>
-    Watch the demo video at <a href="https://www.bilibili.com/video/BV1gY4y1U7XK/">bilibili</a>.
-    </section>
-    <section id="Introduction" class="two">
-      <div class="container" align="left">
-        <h2>Introduction</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-            Entity-Level Text-Guided Image Manipulation (eL-TGIM) is a novel task of text-guided image manipulation on the entity level in the real world.
+  </div>
+</div>
+</div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          Entity-Level Text-Guided Image Manipulation (eL-TGIM) is a novel task of text-guided image manipulation on the entity level in the real world.
             eL-TGIM takes as inputs the entity prompt word, the target text description, and the original image from the real world.
             The following illustration provides a visual representation of eL-TGIM.
-        </p>
-        <p></p>
+            <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
             <center><img src="eL-TGIM.png" width="600"></center>
-            <p></p>
-            <p  style="text-align:justify; text-justify:inter-ideograph;">
-            eL-TGIM imposes three basic requirements, 
+          </div>
+        </div>
+        <!--/ Paper video. -->
+        eL-TGIM imposes three basic requirements,
             <ul>
                 <li> To edit the entity consistent with the text descriptions; </li>
                 <li> To preserve the entity-irrelevant regions; </li>
@@ -94,68 +165,102 @@
         Although most current image editors partially satisfy the first requirement, they tend to neglect the other two, particularly the preservation of entity-irrelevant regions.
         Moreover, many editors depend on the user-provided mask to identify the entity-relevant region.
         Examples below illustrate these points.
-        </p>
-        <p></p>
-          <center><img src="teaser-diffusion.png" width="600"></center>
-          <p  style="text-align:justify; text-justify:inter-ideograph;">
-            Muse and Imagic can create new entity-irrelevant regions instead of preserve these regions, while DALLE2 needs a user-provided mask to perform image manipulation and can only generate square images. As a result, it is not straightforward to apply existing editors to eL-TGIM.
-        </p>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="teaser-diffusion.png" width="600"></center>
+          </div>
+        </div>
+        Muse and Imagic can create new entity-irrelevant regions instead of preserve these regions, while DALLE2 needs a user-provided mask to perform image manipulation and can only generate square images. As a result, it is not straightforward to apply existing editors to eL-TGIM.
+        </div>
       </div>
-    </section>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
 
-    <section id="framework" class="two">
-      <div class="container" align="left">
-        <h2>Framework</h2>
-        To address eL-TGIM, we propose a framework called <b>SeMani</b> (Semantic Manipulation of real-world images), which consists of two phases: semantic alignment and image manipulation.
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework</h2>
+        <div class="content has-text-justified">
+          To address eL-TGIM, we propose a framework called <b>SeMani</b> (Semantic Manipulation of real-world images), which consists of two phases: semantic alignment and image manipulation.
 In the semantic alignment phase, SeMani utilizes a semantic alignment module to identify the regions of the image that need to be manipulated.
 In the image manipulation phase, SeMani employs a generative model to create new images based on the entity-irrelevant regions and target descriptions.
         Below is an illustration of SeMani.
-    </p>
-    <p></p>
-        <center><img src="framework.png" width="600"></center>
-        <p></p>
-        <p  style="text-align:justify; text-justify:inter-ideograph;">
-            To implement SeMani, we resort to two popular perspectives for viewing images: discrete and continuous. The discrete perspective draws inspiration from auto-regressive transformers, while the continuous perspective is inspired by denoising diffusion probabilistic models. These perspectives give rise to two variants of SeMani: <b>SeMani-Trans</b> and <b>SeMani-Diff</b>. Each variant of SeMani uses specific architectures and generation processes. SeMani can perform manipulation on multiple objects either simultaneously or sequentially, as shown below.
-    </p>
-    <p></p>
-        <center><img src="teaser.png" width="600"></center>
-        <p></p>
-        <p  style="text-align:justify; text-justify:inter-ideograph;">
-            For details about SeMani-Trans and SeMani-Diff, please refer to our paper.
+            <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="framework.png" width="600"></center>
+          </div>
+        </div>
+        <!--/ Paper video. -->
+        To implement SeMani, we resort to two popular perspectives for viewing images: discrete and continuous. The discrete perspective draws inspiration from auto-regressive transformers, while the continuous perspective is inspired by denoising diffusion probabilistic models. These perspectives give rise to two variants of SeMani: <b>SeMani-Trans</b> and <b>SeMani-Diff</b>. Each variant of SeMani uses specific architectures and generation processes. SeMani can perform manipulation on multiple objects either simultaneously or sequentially, as shown below.
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="teaser.png" width="600"></center>
+          </div>
+        </div>
+        For details about SeMani-Trans and SeMani-Diff, please refer to our paper.
+        </div>
       </div>
-    </section>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
 
-    <section id="experiment" class="two">
-      <div class="container" align="left">
-        <h2>Experiments</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
           We conducted experiments on CUB, Oxford, and COCO datasets, results are shown in below.
-        </p>
-        <p></p>
-          <center><img src="exp-quantitative.png" width="600"></center>
+            <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="exp-quantitative.png" width="600"></center>
           <p></p>
           <center><img src="comparison.png" width="600"></center>
           <p></p>
           <center><img src="user-study.png" width="600"></center>
-          <p></p>
-          <p style="text-align:justify; text-justify:inter-ideograph;">
-          We also design an interface for using SeMani.
-        </p>
-        <p></p>
-          <center><img src="interface.png" width="600"></center>
-          <p></p>
-          <p style="text-align:justify; text-justify:inter-ideograph;">
-          Please refer to our papers(<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html">CVPR22 oral</a>, <a href="https://arxiv.org/abs/2302.11383">journal extension</a>) for more details.
-        </p>
+          </div>
+        </div>
+        <!--/ Paper video. -->
+        We also design an interface for using SeMani.
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="interface.png" width="600"></center>
+          </div>
+        </div>
+        Please refer to our papers(<a href="https://openaccess.thecvf.com/content/CVPR2022/html/Wang_ManiTrans_Entity-Level_Text-Guided_Image_Manipulation_via_Token-Wise_Semantic_Alignment_and_CVPR_2022_paper.html">CVPR22 oral</a>, <a href="https://arxiv.org/abs/2302.11383">extension</a>) for more details.
+        </div>
       </div>
-    </section>
-
+    </div>
+    <!--/ Abstract. -->
   </div>
-  <script src="javascripts/scale.fix.js"></script>
-  <script xml:space="preserve" language="JavaScript">
-    hideallbibs();
-    hideallabs();
-  </script>
-</body>
+</section>
 
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center; color: darkgray;"><small>
+            Theme modified from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>
