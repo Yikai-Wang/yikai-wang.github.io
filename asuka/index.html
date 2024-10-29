@@ -1,16 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ASUKA: Towards Stable and Faithful Inpainting</title>
-  <link rel="icon" type="image/x-icon" href="../index.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="../index.ico"/>
-  <link rel="stylesheet" href="../stylesheets/styles.css">
-  <link rel="stylesheet" href="../stylesheets/github-light.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/bulma.min.css">
+<link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="../static/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="../static/js/fontawesome.all.min.js"></script>
+<script src="../static/js/bulma-carousel.min.js"></script>
+<script src="../static/js/bulma-slider.min.js"></script>
+<script src="../static/js/index.js"></script>
 
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -23,83 +44,195 @@
     ga('create', 'UA-29643011-3', 'auto');
     ga('send', 'pageview');
   </script>
-  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
-  <!-- For all browsers -->
-  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
-  <link rel="stylesheet" href="../assets/css/academicons.css" />
 
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <nav id="nav">
-        <h3><img src="asuka.jpg" width="100"></h3>
-        <p><a href="#Introduction" id="intro-link">Introduction</a></p>
-        <p><a href="#exp" id="experiments-link">Results</a></p>
-        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
-      </nav>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-      </script>
-    </header>
-    <section>
-      <div class="paper" id="asuka">
-      <h1>Towards Context-Stable and Visual-Consistent Image Inpainting</h1>
-      [<a href="https://arxiv.org/abs/2312.04831">Preprint</a>]
-      [<a href="asuka/ASUKA.pdf">Full-size PDF</a>]
-      [<a href="https://github.com/Yikai-Wang/asuka-misato">MISATO dataset</a>]
-      <br>
 
-      <div style="position: relative; padding: 30% 45%;">
-        <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.youtube.com/embed/q8WwvEtqiJ4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Towards Context-Stable and Visual-Consistent Image Inpainting</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Yikai Wang*, Chenjie Cao*, Ke Fan, Xiangyang Xue, Yanwei Fu†.
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Fudan University</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2312.04831"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="asuka/ASUKA.pdf"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Full-size PDF</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=q8WwvEtqiJ4"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Youtube Video</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://b23.tv/wp2qCk6"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>BiliBili Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <!-- <span class="link-block">
+                  <a href=""
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                    </a>
+                </span> -->
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/Yikai-Wang/asuka-misato"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="far fa-images"></i>
+                    </span>
+                    <span>MISATO dataset</span>
+                    </a>
+              </div>
+
+            </div>
+          </div>
         </div>
-        Watch the demo video at <a href="https://b23.tv/wp2qCk6">Bilibili</a>.
-    </section>
-    <section id="Introduction" class="two">
-      <div class="container" align="left">
-        <p></p>
-        <center><img src="teaser.png" width="800"></center>
-        <p></p>
-        MAE offers stable masked region estimates, yet <b>falls short in texture detail</b>. <br>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div style="position: relative;">
+          <iframe width="800" height="450" src="https://www.youtube.com/embed/q8WwvEtqiJ4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+          </div>
+          Watch the demo video at <a href="https://b23.tv/wp2qCk6">Bilibili</a>.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            MAE offers stable masked region estimates, yet <b>falls short in texture detail</b>. <br>
         GAN-based inpainting struggles with low fidelity, such as <b>omitted white horizontal lines</b>. <br>
         SD is powerful but unstable, often <b>introducing random elements</b> and suffers from <b>mask-unmask color inconsistency</b>. <br>
         <b>ASUKA</b> ensures consistency of masked-unmasked areas during diffusion and decoding processes, achieving context-stable and visual-consistent inpainting.
-        <p></p>
-        <h2>Introduction</h2>
-            <p  style="text-align:justify; text-justify:inter-ideograph;">
-            <ul>
-                <li style="margin-left:-20px; padding: 0;"> We <b>emphasize stability</b> in inpainting tasks as the generative models suffers from the instability problem;</li>
-                <li style="margin-left:-20px; padding: 0;"> We <b>balance fidelity and stability</b> through aligning reconstruction-based and generation-based inpainting models; </li>
-                <li style="margin-left:-20px; padding: 0;"> We ensure <b>mask-unmask consistency</b> in the decoding process of SD.</li>
-        </ul>
-        <p></p>
-        <center><img src="asuka.png" width="800"></center>
-        <p></p>
-        ASUKA adopts the reconstruction-based Masked Auto-Encoder (MAE) to provide a low-resolution stable prior for frozen Stable Diffusion Inpainting Model (SD) to maintain the generation capacity while increasing context-stability. A better decoder is utilized to achieve mask-unmask visual consistency when decoding SD results from latent to image for better fidelity.
-        </p>
+        <p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <!-- <h2 class="title is-3">Video</h2> -->
+          <center><img src="teaser.png" width="800"></center>
+        </div>
+      </div>
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h2 class="title is-3">Introduction</h2>
+            <div class="content has-text-justified">
+              <ul>
+                  <li style="margin-left:-20px; padding: 0;"> We <b>emphasize stability</b> in inpainting tasks as the generative models suffers from the instability problem;</li>
+                  <li style="margin-left:-20px; padding: 0;"> We <b>balance fidelity and stability</b> through aligning reconstruction-based and generation-based inpainting models; </li>
+                  <li style="margin-left:-20px; padding: 0;"> We ensure <b>mask-unmask consistency</b> in the decoding process of SD.</li>
+          </ul>
+          <p></p>
+          <center><img src="asuka.png" width="800"></center>
+          <p></p>
+          ASUKA adopts the reconstruction-based Masked Auto-Encoder (MAE) to provide a low-resolution stable prior for frozen Stable Diffusion Inpainting Model (SD) to maintain the generation capacity while increasing context-stability. A better decoder is utilized to achieve mask-unmask visual consistency when decoding SD results from latent to image for better fidelity.
+        </div>
+          </div>
+        </div>
       </div>
     </section>
+        <!--/ Visual Effects. -->
 
-    <section id="exp" class="two">
-      <div class="container" align="left">
-        <h2>Results</h2>
-    <p></p>
+        <!-- Matting. -->
+        <section class="section">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+          <h2 class="title is-3">Results</h2>
+          <div class="columns is-centered">
+            <div class="column content">
+              <p></p>
         <center><img src="results.jpeg" width="800"></center>
         <p></p>
         <p style="text-align:justify; text-justify:inter-ideograph;">
         Please refer to our paper(<a href="https://arxiv.org/abs/2312.04831">preprint</a>) for more details.
         </p>
+            </div>
+
+          </div>
+        </div>
       </div>
-    </section>
+      <!--/ Matting. -->
 
+    </div>
+  </section>
 
-  </div>
-  <script src="javascripts/scale.fix.js"></script>
-  <script xml:space="preserve" language="JavaScript">
-    hideallbibs();
-    hideallabs();
-  </script>
-</body>
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p style="text-align: center; color: darkgray;"><small>
+              Theme modified from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-</html>
+  </body>
+  </html>
