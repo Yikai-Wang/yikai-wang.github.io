@@ -2,15 +2,36 @@
 <html>
 
 <head>
-  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <title>SEELE</title>
-  <link rel="icon" type="image/x-icon" href="../index.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="../index.ico"/>
-  <link rel="stylesheet" href="../stylesheets/styles.css">
-  <link rel="stylesheet" href="../stylesheets/github-light.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/bulma.min.css">
+<link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="../static/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="../static/js/fontawesome.all.min.js"></script>
+<script src="../static/js/bulma-carousel.min.js"></script>
+<script src="../static/js/bulma-slider.min.js"></script>
+<script src="../static/js/index.js"></script>
 
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -23,113 +44,220 @@
     ga('create', 'UA-29643011-3', 'auto');
     ga('send', 'pageview');
   </script>
-  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
-  <!-- For all browsers -->
-  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
-  <link rel="stylesheet" href="../assets/css/academicons.css" />
-
+<style>
+  .inverted {
+    filter: invert(100%);
+}
+</style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <nav id="nav">
-        <p><a href="#Introduction" id="intro-link">Introduction</a></p>
-        <p><a href="#framework" id="framework-link">SEELE</a></p>
-        <p><a href="#dataset" id="dataset-link">ReS</a></p>
-        <p><a href="#exp" id="experiments-link">Results</a></p>
-        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
-      </nav>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-      </script>
-    </header>
-    <section>
-      <div class="paper" id="seele">
-      <h1>Repositioning The Subject Within Image</h1>
-      [<a href="https://arxiv.org/abs/2401.16861">arxiv</a>][<a href="https://github.com/Yikai-Wang/ReS">ReS dataset</a>][<a href="SEELE.pdf">Full-size PDF</a>]
-      [<a shape="rect" href="javascript:togglebib('seele')" class="togglebib">bib</a>]
-    <br>
-      <code>
-@article{wang2023repositioning,<br>
-title={Repositioning the Subject within Image}, <br>
-author={Wang, Yikai and Cao, Chenjie and Dong, Qiaole and Li, Yifan and Fu, Yanwei},<br>
-year={2023},<br>
-journal={arXiv preprint arXiv: 2401.16861},<br>
-}
-      </code><br>
-      <div style="position: relative; padding: 30% 45%;">
-        <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.youtube.com/embed/dJb-lWaPT6E?si=YGVRJAe43KJB8pLk" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+      <h1 class="title is-1 publication-title">Repositioning The Subject Within Image</h1>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">
+          Yikai Wang, Chenjie Cao, Ke Fan, Qiaole Dong, Yifan Li, Xiangyang Xue, Yanwei Fu†.
+        </span>
+      </div>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">Fudan University</span>
+      </div>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block"><b>Accepted by TMLR</b></span>
+      </div>
+
+      <div class="column has-text-centered">
+        <div class="publication-links">
+          <!-- PDF Link. -->
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/2401.16861"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="SEELE.pdf"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>Full-size PDF</span>
+            </a>
+          </span>
+          <!-- Video Link. -->
+          <span class="link-block">
+            <a href="https://www.youtube.com/watch?v=dJb-lWaPT6E"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fab fa-youtube"></i>
+              </span>
+              <span>Youtube Video</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://b23.tv/iVIyvgj"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                        <img src="../static/images/bilibili-brands-solid.svg" class="inverted">
+              </span>
+              <span>BiliBili Video</span>
+            </a>
+          </span>
+          <!-- Code Link. -->
+          <!-- <span class="link-block">
+            <a href=""
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+              </a>
+          </span> -->
+          <!-- Dataset Link. -->
+          <span class="link-block">
+            <a href="https://github.com/Yikai-Wang/ReS"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                  <i class="far fa-images"></i>
+              </span>
+              <span>ReS dataset</span>
+              </a>
         </div>
-        Watch the demo video at <a href="https://b23.tv/iVIyvgj">Bilibili</a>.
-      </section>
-    <section id="Introduction" class="two">
-      <h2>Introduction</h2>
-      <div class="container" align="left">
-        <p></p>
-        <center><img src="task.jpeg" width="800"></center>
-        <p></p>
-        Illustrated generative sub-tasks encompassed by subject repositioning: <br>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+        <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="task.jpeg" width="800"></center>
+          </div>
+        </div>
+        <!--/ Paper video. -->
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          Illustrated generative sub-tasks encompassed by subject repositioning: <br>
         i) <b>Subject removal</b>: Fill the void created when moving the subject to maintain consistency and avoid generating new, random subjects. <br>
         ii) <b>Subject completion</b>: Completing the occluded portions of the moved subject is necessary. <br>
         iii) <b>Subject harmonization</b>: The appearance of repositioned subject should blend with the surrounding areas.<br>
-        <p></p>
-        
-            
+        </div>
       </div>
-    </section>
-
-    <section id="framework" class="two">
-      <div class="container" align="left">
-        <h2>SEELE</h2>
-        
-    <p></p>
-        <center><img src="seele.jpeg" width="800"></center>
-        <p></p>
-        <p style="text-align:justify; text-justify:inter-ideograph;">SEELE employs an interactive pre-processing, manipulation, and post-processing pipeline for subject repositioning. During the pre-processing phase, SEELE identifies the subject using the segmentation model, guided by user-provided conditions, and maintains the occlusion relationships between subjects intact. In the manipulation stage, SEELE manipulates the image to fill in any left gaps. Furthermore, SEELE rectifies the obscured subject with user-specified incomplete masks. In the post-processing phase, SEELE addresses any disparities between the repositioned subject and its new surroundings.
-        </p>
-      </div>
-    </section>
-
-    <section id="dataset" class="two">
-      <div class="container" align="left">
-        <h2>ReS</h2>
-        
-    <p></p>
-        <center><img src="res.jpeg" width="800"></center>
-        <p></p>
-        <p style="text-align:justify; text-justify:inter-ideograph;">We curated a benchmark dataset called ReS. This dataset includes 100 paired images, each with dimensions 4032×3024, where one image features a repositioned subject while the other elements remain constant. These images were collected from over 20 indoor and outdoor scenes, showcasing subjects from more than 50 categories. This diversity enables effective simulation of realworld open-vocabulary applications. The dataset is available at <a href="https://github.com/Yikai-Wang/ReS">here</a>.
-        </p>
-      </div>
-    </section>
-
-    <section id="exp" class="two">
-      <div class="container" align="left">
-        <h2>Results</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-          We present results of SEELE on 1024 x 1024 images.
-    </p>
-    <p></p>
-        <center><img src="high-res.jpeg" width="800"></center>
-        <p></p>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-          We also assess the effectiveness of various components within SEELE during both pre-processing and post-processing phases.
-    </p>
-    <p></p>
-        <center><img src="ablation.jpeg" width="800"></center>
-        <p></p>
-        Please refer to our paper(<a href="https://arxiv.org/abs/2401.16861">arxiv</a>) for more details.
-        </p>
-      </div>
-    </section>
+    </div>
+    <!--/ Abstract. -->
 
 
   </div>
-  <script src="javascripts/scale.fix.js"></script>
-  <script xml:space="preserve" language="JavaScript">
-    hideallbibs();
-    hideallabs();
-  </script>
-</body>
+</section>
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+        <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="seele.jpeg" width="800"></center>
+          </div>
+        </div>
+        <!--/ Paper video. -->
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">SEELE</h2>
+        <div class="content has-text-justified">
+          SEELE employs an interactive pre-processing, manipulation, and post-processing pipeline for subject repositioning. During the pre-processing phase, SEELE identifies the subject using the segmentation model, guided by user-provided conditions, and maintains the occlusion relationships between subjects intact. In the manipulation stage, SEELE manipulates the image to fill in any left gaps. Furthermore, SEELE rectifies the obscured subject with user-specified incomplete masks. In the post-processing phase, SEELE addresses any disparities between the repositioned subject and its new surroundings.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+        <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="res.jpeg" width="800"></center>
+          </div>
+        </div>
+        <!--/ Paper video. -->
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">ReS</h2>
+        <div class="content has-text-justified">
+          We curated a benchmark dataset called ReS. This dataset includes 100 paired images, each with dimensions 4032×3024, where one image features a repositioned subject while the other elements remain constant. These images were collected from over 20 indoor and outdoor scenes, showcasing subjects from more than 50 categories. This diversity enables effective simulation of realworld open-vocabulary applications. The dataset is available at <a href="https://github.com/Yikai-Wang/ReS">here</a>.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+        <!--/ Paper video. -->
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          We present results of SEELE on 1024 x 1024 images.
+        </div>
+        <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="high-res.jpeg" width="800"></center>
+          </div>
+        </div>
+        <p>We also assess the effectiveness of various components within SEELE during both pre-processing and post-processing phases.</p>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="ablation.jpeg" width="800"></center>
+          </div>
+        </div>
+        Please refer to our paper(<a href="https://arxiv.org/abs/2401.16861">arxiv</a>) for more details.
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center; color: darkgray;"><small>
+            Theme modified from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>
