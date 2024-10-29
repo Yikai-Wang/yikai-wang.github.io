@@ -2,18 +2,36 @@
 <html>
 
 <head>
-  <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <title>ICI: Instance Credibility Inference</title>
-  <link rel="icon" type="image/x-icon" href="../index.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="../index.ico"/>
-  <link rel="stylesheet" href="../stylesheets/styles.css">
-  <link rel="stylesheet" href="../stylesheets/github-light.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/bulma.min.css">
+<link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="../static/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="../static/js/fontawesome.all.min.js"></script>
+<script src="../static/js/bulma-carousel.min.js"></script>
+<script src="../static/js/bulma-slider.min.js"></script>
+<script src="../static/js/index.js"></script>
 
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -26,104 +44,139 @@
     ga('create', 'UA-29643011-3', 'auto');
     ga('send', 'pageview');
   </script>
-  <script type="text/javascript" src="../javascripts/hidebib.js"></script>
-  <!-- For all browsers -->
-  <link rel="stylesheet" href="../assets/css/academicons.min.css" />
-  <link rel="stylesheet" href="../assets/css/academicons.css" />
-
+<style>
+  .inverted {
+    filter: invert(100%);
+}
+</style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <h3><img src="teaser-image.gif" height="140" width="140"></h3>
-      <!-- <nav id="nav"> -->
-      <!-- <ul> -->
-      <!-- <a href="#top" id="top-link">Home</a> -->
-      <!-- <a href="#about" id="about-link">About</a> -->
-      <!-- <li></li>
-            <li></li>
-            <li><a href="#research" id="research-link">Research</a></li>
-            <li><a href="#contact" id="contact-link">Contact</a></li> -->
-      <!-- </ul> -->
-      <!-- </nav> -->
-      <nav id="nav">
-        <p><a href="#abstract" id="intro-link">Abstract</a></p>
-        <p><a href="#video-intro" id="video-intro-link">ICI in 1 minute</a></p>
-        <p><a href="#framework" id="framework-link">Framework</a></p>
-        <p><a href="#methodology" id="methodology-link">Methodology</a></p>
-        <p><a href="#identifiability" id="identifiability-link">Identifiability of ICI</a></p>
-        <p><a href="#experiment" id="experiment-link">Experiments</a></p>
-        <p><a href="https://yikai-wang.github.io">HomePage</a></p>
 
-      </nav>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-      </script>
-    </header>
-    <section>
-      <div class="paper" id="ici">
-      <h1>Instance Credibility Inference</h1>
-      [Papers:<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>]
-      [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
-      [<a shape="rect" href="javascript:togglebib('ici')" class="togglebib">bib</a>]
-    <br>
-      <code>
-@inproceedings{wang2020instance,<br>
-  title={Instance Credibility Inference for Few-Shot Learning},<br>
-  author={Wang, Yikai and Xu, Chengming and Liu, Chen and Zhang, Li and Fu, Yanwei},<br>
-  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},<br>
-  year={2020}<br>
-}<br>
-@article{wang2021trust,<br>
-  title={How to Trust Unlabeled Data? Instance Credibility Inference for Few-Shot Learning},<br>
-  author={Wang, Yikai and Zhang, Li and Yao, Yuan and Fu, Yanwei},<br>
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},<br>
-  year={2021},<br>
-  doi={10.1109/TPAMI.2021.3086140}}<br>
-      </code><br>
-    </section>
-    <section id="abstract" class="two">
-      <div class="container" align="left">
-        <h2>Abstract</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
+<header>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</header>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+    <h1 class="title is-1 publication-title">Instance Credibility Inference</h1>
+
+    <div class="column has-text-centered">
+      <div class="publication-links">
+        <!-- PDF Link. -->
+        <span class="link-block">
+          <a href="https://arxiv.org/pdf/2003.11853.pdf"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>CVPR20</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://arxiv.org/pdf/2007.08461.pdf"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>TPAMI</span>
+          </a>
+        </span>
+        <!-- Video Link. -->
+        <span class="link-block">
+          <a href="https://www.bilibili.com/video/BV11g4y1q7iV/"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+                      <img src="../static/images/bilibili-brands-solid.svg" class="inverted">
+            </span>
+            <span>BiliBili Video</span>
+          </a>
+        </span>
+        <!-- Code Link. -->
+        <span class="link-block">
+          <a href="https://github.com/Yikai-Wang/ICI-FSL"
+             class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+                <i class="fab fa-github"></i>
+            </span>
+            <span>Code</span>
+            </a>
+        </span>
+        <!-- Dataset Link. -->
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
           <b>ICI</b> is a statistical method for measuring the credibility of pseudo-labeled instances, to improve the performance of few-shot learning with theoretical guarantees.
           <ul>
             <li>The algorithm iteratively selects the pseudo-labeled instances according to its credibility measured by the proposed ICI for classifier training.
               </li>
-            <li>We solve the regularization path of LM/GLM with incidental parameter and regard the sparsity level as the credibility for each pseudo-labeled instance. 
+            <li>We solve the regularization path of LM/GLM with incidental parameter and regard the sparsity level as the credibility for each pseudo-labeled instance.
             </li>
             <li>Under the conditions of <i>restricted eigenvalue</i>, <i>irrepresentability</i>, and <i>large error</i>, our method will collect <b>all</b> the correctly-predicted pseudo-labeled instances.
             </li>
           </ul>
-        </p>
+            <!-- Paper video. -->
+        </div>
       </div>
-    </section>
-    <section id="video-intro" class="two">
-      <div class="container" align="left">
-        <h2>ICI in 1 minute</h2>
-        <div style="position: relative; padding: 30% 45%;">
-  <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://player.bilibili.com/player.html?aid=838095120&bvid=BV11g4y1q7iV&cid=185758376&page=1&as_wide=1&high_quality=1&danmaku=0" frameborder="no" scrolling="no"></iframe>
+    </div>
+    <!--/ Abstract. -->
   </div>
-      </div>
-    </section>
-    <section id="framework" class="two">
-      <div class="container" align="left">
-        <h2>Framework</h2>
-        <center><img src="framework.png" width="600"></center>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-        This figure illustrate the inference process of our proposed framework.
-We extract features of each labeled and unlabeled instance, 
-train a linear classifier with the support set, 
-provide pseudo-label for the unlabeled instances, 
-and use ICI to select the most trustworthy subset to expand the support set.
-This process is repeated until all the unlabeled data are included in the support set.</p>
-    </section>
+</section>
 
-    <section id="methodology" class="two">
-      <div class="container" align="left">
-        <h2>Methodology</h2>
-        <h3>Linear regression case</h3>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework</h2>
+        <div class="content has-text-justified">
+          This figure illustrate the inference process of our proposed framework.
+We extract features of each labeled and unlabeled instance,
+train a linear classifier with the support set,
+provide pseudo-label for the unlabeled instances,
+and use ICI to select the most trustworthy subset to expand the support set.
+This process is repeated until all the unlabeled data are included in the support set.
+            <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <center><img src="framework.png" width="600"></center>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methodology</h2>
+        <div class="content has-text-justified">
+          <h3>Linear regression case</h3>
         <p style="text-align:justify; text-justify:inter-ideograph;">
         The linear regression model with incidental parameter is expressed as
         \[y_i=x_i^{\top}\beta+\gamma_i+\varepsilon_i\]
@@ -141,27 +194,23 @@ This process is repeated until all the unlabeled data are included in the suppor
         <p style="text-align:justify; text-justify:inter-ideograph;">
         The logistic regression model with incidental parameters can be formed as
         \[y_{i,c} = \dfrac{\exp(x_{i,\cdot} \beta_{\cdot,c}+\gamma_{i,c})}{\sum_{l=1}^C\exp(x_{i,\cdot}\beta_{\cdot,l}+\gamma_{i,l})} + \varepsilon_{i,c}\]
-        We can reformulate it into a standard logistic regression model by setting 
+        We can reformulate it into a standard logistic regression model by setting
         \[\bar{X}=(X,I),\bar{\beta}=(\beta,\gamma)^\top\]
         Our optimization problem is as follows
         \[\underset{\bar{\beta}=(\beta,\gamma)^\top}{\mathrm{argmin}} - \frac{1}{n} \sum_{i=1}^N (\sum_{l=1}^C Y_{i,l}(\bar{X}_{i,\cdot}\bar{\beta}_{\cdot,l})-\log(\sum_{l=1}^C\exp(\bar{X}_{i,\cdot}\bar{\beta}_{\cdot,l})))
         + \lambda_1 R(\beta) + \lambda_2 R(\gamma).\]</p>
         <h3>Regularization path</h3>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-        We regard \(\hat{\gamma}\) as a function of \(\lambda\). 
+        We regard \(\hat{\gamma}\) as a function of \(\lambda\).
         When \(\lambda\) changes from \(0\) to \(\infty\), the sparsity of \(\hat{\gamma}\) is increased until all of its elements are forced to vanish.
-        Further, we use the penalty \(R(\gamma)\) to encourage \(\gamma\) vanishes row by row, <i>i.e.</i>, instance by instance. 
+        Further, we use the penalty \(R(\gamma)\) to encourage \(\gamma\) vanishes row by row, <i>i.e.</i>, instance by instance.
         For example, \(R(\gamma)=\sum_{i=1}^n\sum_{j=1}^c|\gamma_{i,j}|\) or \(R(\gamma)=\sum_{i=1}^n\Vert\gamma_{i}\Vert_2\).
         Moreover, the penalty tends to vanish the subset of \(\tilde{X}\) with the lowest deviations, indicating less discrepancy between the prediction and the ground truth.
         Hence we could rank the pseudo-labeled data by the smallest \(\lambda\) value when the corresponding \(\hat{\gamma}_i\) vanishes. </p>
-      </div>
-    </section>
-
-    <section id="identifiability" class="two">
-      <div class="container" align="left">
-        <h2>Identifiability of ICI</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-        We provide a theory for identifiability of ICI with linear regression model based on the model selection consistency for a linear regression model with \(\ell_1\) sparsity regularization.
+        </div>
+        <h2 class="title is-3">Identifiability of ICI</h2>
+        <div class="content has-text-justified">
+          We provide a theory for identifiability of ICI with linear regression model based on the model selection consistency for a linear regression model with \(\ell_1\) sparsity regularization.
         Assume \(\varepsilon\) is zero-mean sub-Gaussian noise. We give three assumptions:
         <ul>
           <li>(C1: Restricted eigenvalue)
@@ -174,8 +223,8 @@ This process is repeated until all the unlabeled data are included in the suppor
           \[\min _{i \in S}|\vec{\gamma}_{i}^{*}|>  h(\lambda, \eta, \tilde{U}, \vec{\gamma}^{*})\]
           </li>
         </ul>
-        Based on these conditions, we could provide the following theorem:
-        <b>Theorem</b>(Identifiability of ICI). Let 
+        Based on these conditions, we could provide the following theorem:<br>
+        <b>Theorem</b>(Identifiability of ICI). Let
         \[\lambda \geq \frac{2 \sigma \sqrt{\mu_{\tilde{U}}}}{\eta } \sqrt{ \log cn}\]
         Then with probability greater than
         \[1-2 cn \exp \left\{-\frac{\lambda^{2} \eta^{2}}{2  \sigma^{2} \mu_{\tilde{U}}}\right\} \geq 1-2 \left(cn\right)^{-1},
@@ -192,27 +241,49 @@ This process is repeated until all the unlabeled data are included in the suppor
           </li>
         </ul>
 
-        </p>
+        </div>
       </div>
-    </section>
-
-    <section id="experiment" class="two">
-      <div class="container" align="left">
-        <h2>Experiments</h2>
-        <p style="text-align:justify; text-justify:inter-ideograph;">
-          We conducted experiments on four few-shot learning datasets, and the results are as follows:
-          <center><img src="exp.png" width="600"></center>
-          Please refer to our papers(<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>) for more details.
-        </p>
-      </div>
-    </section>
-
+    </div>
+    <!--/ Abstract. -->
   </div>
-  <script src="javascripts/scale.fix.js"></script>
-  <script xml:space="preserve" language="JavaScript">
-    hideallbibs();
-    hideallabs();
-  </script>
-</body>
+</section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          We conducted experiments on four few-shot learning datasets, and the results are as follows:
+            <!-- Paper video. -->
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <!-- <h2 class="title is-3">Video</h2> -->
+                <center><img src="exp.png" width="600"></center>
+              </div>
+            </div>
+            Please refer to our papers(<a href="https://arxiv.org/pdf/2003.11853.pdf">CVPR20</a>,<a href="https://arxiv.org/pdf/2007.08461.pdf">TPAMI extension</a>) for more details.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center; color: darkgray;"><small>
+            Theme modified from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>
