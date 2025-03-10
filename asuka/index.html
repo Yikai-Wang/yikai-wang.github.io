@@ -58,15 +58,15 @@ rel="stylesheet">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Towards Context-Stable and Visual-Consistent Image Inpainting</h1>
+            <h1 class="title is-1 publication-title">Towards Image Inpainting<br> Without Unwanted Object Insertion and With Color Consistency</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                Yikai Wang*, Chenjie Cao*, Ke Fan, Xiangyang Xue, Yanwei Fu†.
+                Yikai Wang*, Chenjie Cao*, Junqiu Yu*, Ke Fan, Xiangyang Xue, Yanwei Fu†.
               </span>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Fudan University</span>
+              <span class="author-block">Fudan University<br><b>CVPR 2025</b></span>
             </div>
 
             <div class="column has-text-centered">
@@ -143,11 +143,19 @@ rel="stylesheet">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">Abstract</h2>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <!-- <h2 class="title is-3">Video</h2> -->
+              <center><img src="teaser.jpeg" width="800"></center>
+            </div>
+          </div>
           <div class="content has-text-justified">
-            MAE offers stable masked region estimates, yet <b>falls short in texture detail</b>. <br>
-        GAN-based inpainting struggles with low fidelity, such as <b>omitted white horizontal lines</b>. <br>
-        SD is powerful but unstable, often <b>introducing random elements</b> and suffers from <b>mask-unmask color inconsistency</b>. <br>
-        <b>ASUKA</b> ensures consistency of masked-unmasked areas during diffusion and decoding processes, achieving context-stable and visual-consistent inpainting.
+            ASUKA solves two issues existed in current diffusion and rectified flow inpainting models:
+            <ul>
+              <li><b>Unwanted object insertion</b>, where randomly elements that are not aligned with the unmasked region are generated;</li>
+              <li><b>Color-inconsistency</b>, the color shift of the generated masked region, causing smear-like traces.</li>
+            </ul>
+            ASUKA proposes a post-training procedure for these models, significantly mitigates object hallucination and improves color consistency of inpainted results.
         <p>
           </div>
         </div>
@@ -155,12 +163,7 @@ rel="stylesheet">
       <!--/ Abstract. -->
 
       <!-- Paper video. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <!-- <h2 class="title is-3">Video</h2> -->
-          <center><img src="teaser.png" width="800"></center>
-        </div>
-      </div>
+
       <!--/ Paper video. -->
     </div>
   </section>
@@ -171,16 +174,15 @@ rel="stylesheet">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
             <h2 class="title is-3">Introduction</h2>
-            <div class="content has-text-justified">
-              <ul>
-                  <li style="margin-left:-20px; padding: 0;"> We <b>emphasize stability</b> in inpainting tasks as the generative models suffers from the instability problem;</li>
-                  <li style="margin-left:-20px; padding: 0;"> We <b>balance fidelity and stability</b> through aligning reconstruction-based and generation-based inpainting models; </li>
-                  <li style="margin-left:-20px; padding: 0;"> We ensure <b>mask-unmask consistency</b> in the decoding process of SD.</li>
-          </ul>
-          <p></p>
+            <p></p>
           <center><img src="asuka.png" width="800"></center>
           <p></p>
-          ASUKA adopts the reconstruction-based Masked Auto-Encoder (MAE) to provide a low-resolution stable prior for frozen Stable Diffusion Inpainting Model (SD) to maintain the generation capacity while increasing context-stability. A better decoder is utilized to achieve mask-unmask visual consistency when decoding SD results from latent to image for better fidelity.
+            <div class="content has-text-justified">
+              ASUKA enhances image inpainting with color-consistency and mitigate object hallucination while leveraging the generation capacity of the frozen inpainting model. It achieves this through two main components:
+              <ul>
+                <li><b>Context-Stable Alignment</b>: ASUKA aligns the stable MAE prior with generative models to provide a context-stable estimation of masked regions, replacing the text-condition with MAE prior.</li>
+                <li><b>Color-Consistent Alignment</b>: ASUKA re-formulates the decoding from latent to image as a local harmonization task, trains an inpainting-specialized decoder to align masked and unmasked regions during decoding and thus mitigates color inconsistencies.</li>
+              </ul>
         </div>
           </div>
         </div>
@@ -199,7 +201,17 @@ rel="stylesheet">
               <p></p>
         <center><img src="results.jpeg" width="800"></center>
         <p></p>
+        <div class="content has-text-justified">
+        <ul>
+          <li>MAE offers stable masked region estimates, yet falls short in texture detail.</li>
+          <li>GAN-based inpainting struggles with low fidelity.</li>
+          <li>SD is powerful but unstable, often <b>introducing random elements</b> and suffers from <b>mask-unmask color inconsistency</b>.</li>
+          <li><b>ASUKA</b> ensures consistency of masked-unmasked areas during diffusion and decoding processes, mitigating object hallucination and improving color-consistency.</li>
+        </ul>
+      </div>
         <p style="text-align:justify; text-justify:inter-ideograph;">
+         <!-- <br> -->
+         <!-- <br> -->
         Please refer to our paper(<a href="https://arxiv.org/abs/2312.04831">preprint</a>) for more details.
         </p>
             </div>
