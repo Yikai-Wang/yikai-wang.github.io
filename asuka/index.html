@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ASUKA: Towards Stable and Faithful Inpainting</title>
+  <title>ASUKA: Towards Image Inpainting Without Unwanted Object Insertion and With Color Consistency</title>
   <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -48,6 +48,12 @@ rel="stylesheet">
   .inverted {
     filter: invert(100%);
 }
+/* body {
+  background-image: url('asuka-misato.jpg');
+  background-repeat: no-repeat;
+  background-size:  10%;
+  background-attachment: fixed;
+} */
 </style>
 </head>
 
@@ -209,11 +215,16 @@ rel="stylesheet">
           <li><b>ASUKA</b> ensures consistency of masked-unmasked areas during diffusion and decoding processes, mitigating object hallucination and improving color-consistency.</li>
         </ul>
       </div>
+      <h3 class="title is-4">MISATO dataset</h3>
+      <center><img src="../figures/misato.jpeg" width="800"></center>
         <p style="text-align:justify; text-justify:inter-ideograph;">
-         <!-- <br> -->
-         <!-- <br> -->
+          To validate across different domains and mask styles, we construct a evaluation dataset, dubbed as MISATO, from <u>M</u>atterport3D, Fl<u>i</u>ckr-Land<u>s</u>cape,Meg<u>a</u>Dep<u>t</u>h, and C<u>O</u>CO 2014 to handle indoor, outdoor, building and background inpainting, respectively. We select 500 representative examples of size 512x512  and 1024x1024 from each dataset, forming a total of 2,000 testing examples.
+         <br>
+         <br>
         Please refer to our paper(<a href="https://arxiv.org/abs/2312.04831">preprint</a>) for more details.
         </p>
+        <center><img src="asuka-misato.jpg" width="300"></center>
+        <p style="text-align: center; color: darkgray;"><small>ASUKA and MISATO :)</p>
             </div>
 
           </div>
