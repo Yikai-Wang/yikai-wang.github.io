@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Next Visual Granularity Generation</title>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/bulma.min.css">
+<link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="../static/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="../static/js/fontawesome.all.min.js"></script>
+<script src="../static/js/bulma-carousel.min.js"></script>
+<script src="../static/js/bulma-slider.min.js"></script>
+<script src="../static/js/index.js"></script>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-29643011-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+<style>
+  .inverted {
+    filter: invert(100%);
+}
+/* body {
+  background-image: url('asuka-misato.jpg');
+  background-repeat: no-repeat;
+  background-size:  10%;
+  background-attachment: fixed;
+} */
+</style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Next Visual Granularity Generation</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Yikai Wang<sup>1</sup>, Zhouxia Wang<sup>1</sup>, Zhonghua Wu<sup>2</sup>, Qingyi Tao<sup>2</sup>, Kang Liao<sup>1</sup>, Chen Change Loy<sup>1</sup>
+              </span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>: S-Lab, Nanyang Technological University; <sup>2</sup>: SenseTime Research</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2312.04831"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=q8WwvEtqiJ4"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Youtube Video</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://www.bilibili.com/video/BV1v34y1w7dv/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <img src="../static/images/bilibili-brands-solid.svg" class="inverted">
+                    </span>
+                    <span>BiliBili Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/Yikai-Wang/nvg"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming in several weeks)</span>
+                    </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-mobile is-centered">
+            <div class="column has-text-centered">
+              <img src="0.png.gif" alt="GIF 0" style="width:100%;">
+            </div>
+            <div class="column has-text-centered">
+              <img src="1.png.gif" alt="GIF 1" style="width:100%;">
+            </div>
+            <div class="column has-text-centered">
+              <img src="2.png.gif" alt="GIF 2" style="width:100%;">
+            </div>
+            <div class="column has-text-centered">
+              <img src="3.png.gif" alt="GIF 3" style="width:100%;">
+            </div>
+          </div>
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="columns is-centered has-text-centered">
+            <center><img src="teaser-0.png" width="100%"></center>
+          </div>
+           <div class="content has-text-justified">
+            Construction of the visual granularity sequence on 256x256 image and the next visual granularity generation in the 16x16 latent space. Top-to-bottom: Number of unique tokens, structure map, generated image.
+           </div>
+          <div class="columns is-centered has-text-centered">
+            <center><img src="teaser-1.png" width="100%"></center>
+          </div>
+          <div class="content has-text-justified">
+Our model can generate diverse and high-fidelity images.
+          </div>
+          <div class="columns is-centered has-text-centered">
+            <center><img src="teaser-2.png" width="100%"></center>
+          </div>
+          <div class="content has-text-justified">
+The generated images align well with the generated binary structure map.
+          </div>
+          <div class="columns is-centered has-text-centered">
+            <center><img src="teaser-3.png" width="100%"></center>
+          </div>
+          <div class="content has-text-justified">
+We can reuse structures from <span style="color:rgb(255,94,75)">reference</span> images (wallaby, flamingo) to <span style="color:rgb(82, 185, 179)">generate</span> new ones (rabbits, heron).
+          </div>
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <ul>
+              <li>We propose a novel approach to image generation by decomposing an image into a structured sequence, where each element in the sequence shares the same spatial resolution but differs in the number of unique tokens used, capturing different level of visual granularity.</li>
+              <li>Image generation is carried out through our newly introduced Next Visual Granularity (NVG) generation framework, which generates a visual granularity sequence beginning from an empty image and progressively refines it, from global layout to fine details, in a structured manner. This iterative process encodes a hierarchical, layered representation that offers fine-grained control over the generation process across multiple granularity levels.</li>
+              <li>We train a series of NVG models for class-conditional image generation on the ImageNet dataset and observe clear scaling behavior. Compared to the VAR series, NVG consistently outperforms it in terms of FID scores (3.30 → 3.03, 2.57 → 2.44, 2.09 → 2.06). We also conduct extensive analysis to showcase the capability and potential of the NVG framework. Our code and models will be released.</li>
+            </ul>
+        <p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video. -->
+
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h2 class="title is-3">Results</h2>
+            <p></p>
+          <center><img src="results.png" width="800"></center>
+          <p></p>
+            <div class="content has-text-justified">
+              Generated 256×256 samples of our NVG-d24 trained on ImageNet. <br>
+<b>Top</b>: We show several representative examples to illustrate the iterative generation process.<br>
+<b>Middle</b>: The generated binary structure maps align well with the final images.<br>
+<b>Bottom</b>: Our NVG-d24 model can generate diverse and high-quality images.<br>
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <!--/ Visual Effects. -->
+
+        <!-- Matting. -->
+        <section class="section">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+          <h2 class="title is-3">Method</h2>
+          <div class="columns is-centered">
+            <div class="column content">
+              <h3 class="title is-4">Structure and Content Decomposition</h3>
+      <center><img src="vgs.png" width="100%"></center>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          We quantize the latent in a visual granularity sequence. We use the content (unique tokens) and structure pairs (arrangement of each token in the latent space) to represent every stage.
+         <br>
+         <br>
+        </p>
+        <h3 class="title is-4">Structure Embedding</h3>
+      <center><img src="se.png" width="100%"></center>
+        <p style="text-align:justify; text-justify:inter-ideograph;">
+          We propose a compact, hierarchical representation to encode the overall structure.
+         <br>
+         <br>
+        </p>
+         <h3 class="title is-4">Generation Pipeline</h3>
+              <p></p>
+        <center><img src="nvg.png" width="100%"></center>
+        <p></p>
+        <div class="content has-text-justified">
+        Illustration of our generation pipeline. At each stage, we first generate the structure, then generate the content based on that structure. Both the structure and content generation are guided by the input text, the current canvas, and the current hierarchical structure. "-" is the minus operator.
+      </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--/ Matting. -->
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p style="text-align: center; color: darkgray;"><small>
+              Theme modified from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </body>
+  </html>
