@@ -30,7 +30,7 @@
       }
       .subject-block {
         width: 100%;
-        height: 200px;
+        height: 100px;
         overflow-y: auto;
         word-wrap: break-word;
         word-break: break-all;
@@ -97,17 +97,12 @@
                 <p style="text-align:justify; text-justify:inter-ideograph; ">
                   Yikai Wang is a research fellow at <a href="https://www.mmlab-ntu.com">MMLab@NTU</a>, Nanyang Technological University, working with <a href="https://www.mmlab-ntu.com/person/ccloy/index.html">Prof. Chen Change Loy</a>.
                   He obtained B.S. in Mathematics and Ph.D. in Statistics at Fudan University, advised by <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>.
-                  His research interest spans statistical machine learning, computer vision, and foundation models, with a focus on content creation, multi-modality and subset selection.<br>
+                  His research interest spans computer vision, foundation models, and statistical machine learning, with a focus on content creation, multi-modality and subset selection.<br>
                   <br>
                   <b>Links</b>:
                   [<a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ">Google Scholar</a>]
-                  [<a href="https://orcid.org/0000-0001-6107-5063">ORCID</a>]
-                  [<a href="https://dblp.org/pid/85/9555-2.html">DBLP</a>]
                   [<a href="https://github.com/Yikai-Wang">Github</a>]
                   [<a href="https://huggingface.co/yikaiwang">Huggingface</a>]
-                  [<a href="https://openreview.net/profile?id=~Yikai_Wang1">Openreview</a>]
-                  [<a href="https://x.com/yikai97">Twitter</a>]
-                  [<a href="https://www.zhihu.com/people/ustinian">Zhihu</a>]
                 </p>
                 <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;">Always available with <a class="author-social" target="_blank">yi-kai.wang@outlook.com</a>, please let me know who you are. </p>
             </td>
@@ -124,6 +119,9 @@
         <hr />
       <div class="subject-block">
         <ul>
+          <li style="margin-left:-20px; padding: 0; ">
+            [2025.08] Our work on <a href="https://yikai-wang.github.io/nvg">next visual granularity generation</a> is available on arxiv!
+          </li>
           <li style="margin-left:-20px; padding: 0; ">
             [2025.06] Our work on <a href="https://zhenyangliu.github.io/DP4/">spatial-temporal aware diffusion policy learning</a> has been accepted by ICCV 2025. Congrats to Zhenyang!
           </li>
@@ -179,6 +177,10 @@
           <b>Content Creation</b>: <br>
           <ul>
             <li style="margin-left:-20px;">
+              <b>Image generation</b>:
+              next visual granularity generation [<a href="https://yikai-wang.github.io/nvg/">NVG</a>, <a href="https://arxiv.org/abs/2508.12811">Preprint</a>];
+              </li>
+              <li style="margin-left:-20px;">
               <b>Image inpainting</b>:
               context-stability and color-consistency [<a href="https://yikai-wang.github.io/asuka/">ASUKA</a>, <a href="https://arxiv.org/abs/2312.04831">CVPR2025<font color="#ed7748">(Highlight)</font></a>],
               ref-guided inpainting [<a href="https://ewrfcas.github.io/LeftRefill/">LeftRefill</a>, <a href="https://arxiv.org/abs/2305.11577">CVPR2024</a>],
@@ -241,7 +243,22 @@
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
-          <!-- <img src='figures/dp4.jpg' style="aspect-ratio: 21/9; width: 100%;"> -->
+          <img src='nvg/3.png.gif' style="aspect-ratio: 21/9; width: 100%;">
+    </td>
+    <td style="padding:5px;width:75%;vertical-align:middle">
+        <p><b>Next Visual Granularity Generation.</b><br>
+          [<a href="https://arxiv.org/abs/2508.12811">arxiv</a>]
+          [paper]
+          [<a href="https://github.com/Yikai-Wang/nvg">code</a>]
+          [<a href="https://yikai-wang.github.io/nvg/">intro</a>]
+           <br>
+           <b>Yikai Wang</b>, Zhouxia Wang, Zhonghua Wu, Qingyi Tao, Kang Liao, Chen Change Loy<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
+           Preprint, 2025.<br></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding:5px;width:25%;vertical-align:middle">
            <video id="dp4-video" autoplay muted loop playsinline style="aspect-ratio: 21/9; width: 100%; object-fit: fill;">
               <source src="figures/dp4.mp4" type="video/mp4" />
               Your browser does not support the video tag.
@@ -287,7 +304,7 @@
         <p><b>ReasonGrounder: LVLM-Guided Hierarchical Feature Splatting for Open-Vocabulary 3D Visual Grounding and Reasoning.</b><br>
           [<a href="https://arxiv.org/abs/2503.23297">arxiv</a>]
           [<a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Liu_ReasonGrounder_LVLM-Guided_Hierarchical_Feature_Splatting_for_Open-Vocabulary_3D_Visual_Grounding_CVPR_2025_paper.pdf">paper</a>]
-          [code & dataset]
+          [<a href="https://github.com/ZhenyangLiu/ReasonGrounder">code & dataset</a>]
           [<a href="https://zhenyangliu.github.io/ReasonGrounder/">intro</a>]
            <br>
            Zhenyang Liu, <b>Yikai Wang</b>, Sixiao Zheng, Tongying Pan, Longfei Liang, Yanwei Fu<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Xiangyang Xue<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
@@ -647,8 +664,9 @@
     ICCV 2023, 2025;
     ECCV 2024;
     ICLR 2024, 2025;
-    TMLR 2023, 2024, 2025;
-    TIP 2024;
+    TPAMI from 2023;
+    TMLR from 2023;
+    TIP from 2024;
     ICML 2023, 2024.
      </li>
   <li style="margin-left:-20px;padding: 0;"><b>Co-organizer</b>:
