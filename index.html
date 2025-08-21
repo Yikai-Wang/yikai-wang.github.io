@@ -67,6 +67,12 @@
       .ref_anchor {
         scroll-margin-top: 80px;
       }
+      /* Optional: style the number prefix without touching your <p> */
+      .row-num {
+        font-weight: 600;
+        margin-right: 0.4rem;
+        white-space: nowrap;
+      }
     </style>
   </head>
   <body>
@@ -239,7 +245,7 @@
       <h1><div id="Publications"  class="ref_anchor">Papers</div></h1>
       <hr />
 
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;" id="papers">
 
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
@@ -723,6 +729,36 @@ function topFunction() {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
   </script>
+<script>
+(function () {
+  const table = document.getElementById('papers');
+  const rows = table.tBodies.length
+    ? Array.from(table.tBodies[0].rows)
+    : Array.from(table.rows);
+
+  const dataRows = rows.filter(r => r.cells && r.cells.length >= 2);
+  const total = dataRows.length;
+
+  dataRows.forEach((row, idx) => {
+    const n = total - idx;          // descending
+    const cell = row.cells[1];      // second <td>
+    const para = cell.querySelector('p'); // assume your text is inside <p>
+
+    if (para) {
+      // remove old prefix if re-run
+      const existing = para.querySelector('.row-num');
+      if (existing) {
+        existing.textContent = n + '. ';
+      } else {
+        const span = document.createElement('span');
+        span.className = 'row-num';
+        span.textContent = n + '. ';
+        para.insertBefore(span, para.firstChild);
+      }
+    }
+  });
+})();
+</script>
     <script src="javascripts/scale.fix.js"></script>
     <script xml:space="preserve" language="JavaScript">
       hideallbibs();
