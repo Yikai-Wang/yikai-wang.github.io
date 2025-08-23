@@ -73,7 +73,74 @@
         margin-right: 0.4rem;
         white-space: nowrap;
       }
-    </style>
+    /* Container: set the icon color once here */
+    .social-icons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      /* Default color for light backgrounds */
+      color: #111;
+    }
+
+    /* Auto-adjust for dark mode */
+    @media (prefers-color-scheme: dark) {
+      .social-icons { color: #fff; }
+    }
+
+    /* Accessibility: boost contrast if requested */
+    @media (prefers-contrast: more) {
+      .social-icons { color: #000; }
+      @media (prefers-color-scheme: dark) {
+        .social-icons { color: #fff; }
+      }
+    }
+    /* Icon button base */
+    .icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: currentColor;           /* the visible monochrome */
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+              mask-repeat: no-repeat;
+              mask-position: center;
+              mask-size: contain;
+      opacity: 1.0;
+      transition: opacity 0.2s ease;
+    }
+    .icon:hover { opacity: 1; }
+
+    /* Individual masks (vector silhouettes) */
+    .icon.google-scholar {
+      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg");
+              mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg");
+    }
+    .icon.github {
+      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg");
+              mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg");
+    }
+    .icon.x { /* Twitter/X */
+      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg");
+              mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg");
+    }
+    .icon.zhihu {
+      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zhihu.svg");
+              mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zhihu.svg");
+    }
+  .icon.huggingface{
+    -webkit-mask-image: url("https://cdn.simpleicons.org/huggingface");
+            mask-image: url("https://cdn.simpleicons.org/huggingface");
+  }
+  .icon.xiaohongshu{
+    -webkit-mask-image: url("https://cdn.simpleicons.org/xiaohongshu");
+            mask-image: url("https://cdn.simpleicons.org/xiaohongshu");
+  }
+  </style>
+
+
+
   </head>
   <body>
     <div class="wrapper">
@@ -102,21 +169,31 @@
             <td style="padding-left: 0px; padding-right:50px;width:85%;vertical-align:left">
                 <p style="text-align:justify; text-justify:inter-ideograph; ">
                   Yikai Wang is a research fellow at <a href="https://www.mmlab-ntu.com">MMLab@NTU</a>, Nanyang Technological University, working with <a href="https://www.mmlab-ntu.com/person/ccloy/index.html">Prof. Chen Change Loy</a>.
-                  He obtained B.S. in Mathematics and Ph.D. in Statistics at Fudan University, advised by <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>.
+                  He earned his Ph.D. in Statistics and B.Sc. in Mathematics from Fudan University, advised by <a href="https://yanweifu.github.io/">Prof. Yanwei Fu</a>.
                   His research interest spans computer vision, foundation models, and statistical machine learning, with a focus on content creation, multi-modality and subset selection.<br>
                   <br>
-                  <b>Links</b>:
-                  [<a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ">Google Scholar</a>]
-                  [<a href="https://github.com/Yikai-Wang">Github</a>]
-                  [<a href="https://huggingface.co/yikaiwang">Huggingface</a>]
                 </p>
                 <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;">Always available with <a class="author-social" target="_blank">yi-kai.wang@outlook.com</a>, please let me know who you are. </p>
             </td>
             <td style="padding:5px;width:15%;vertical-align:top">
               <img src="photo.png">
-
-
-
+              <div class="social-icons">
+                    <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ" class="google-scholar" target="_blank" aria-label="Google Scholar">
+                      <span class="icon google-scholar"></span>
+                    </a>
+                    <a href="https://github.com/Yikai-Wang" class="github" target="_blank" aria-label="GitHub">
+                      <span class="icon github"></span>
+                    </a>
+                    <a href="https://x.com/yikai97" class="x" target="_blank" aria-label="X (Twitter)">
+                      <span class="icon x"></span>
+                    </a>
+                    <a href="https://www.zhihu.com/people/yikaiwang" class="zhihu" target="_blank" aria-label="Zhihu">
+                      <span class="icon zhihu"></span>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/user/profile/670cb549000000001d0331a4" class="xiaohongshu" target="_blank" aria-label="Xiaohongshu">
+                      <span class="icon xiaohongshu"></span>
+                    </a>
+                  </div>
         </td>
           </tr>
         </table>
@@ -257,6 +334,7 @@
           [paper]
           [<a href="https://github.com/Yikai-Wang/nvg">code</a>]
           [<a href="https://yikai-wang.github.io/nvg/">intro</a>]
+          [<a href="https://zhuanlan.zhihu.com/p/1942234698916017002">简介</a>]
            <br>
            <b>Yikai Wang</b>, Zhouxia Wang, Zhonghua Wu, Qingyi Tao, Kang Liao, Chen Change Loy<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
            Preprint, 2025.<br></p>
@@ -495,6 +573,7 @@
           [<a href="https://ieeexplore.ieee.org/document/10337771">paper</a>]
           [<a href="https://github.com/Yikai-Wang/Knockoffs-SPR">code</a>]
           [<a href="https://yikai-wang.github.io/spr">intro</a>]
+          [<a href="https://zhuanlan.zhihu.com/p/597524285">简介</a>]
           <br>
           <b>Yikai Wang</b>*,
           Yanwei Fu*,
@@ -514,6 +593,7 @@
           [<a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Scalable_Penalized_Regression_for_Noise_Detection_in_Learning_With_Noisy_CVPR_2022_paper.pdf">paper</a>]
           [<a href="https://github.com/Yikai-Wang/SPR-LNL">code</a>]
           [<a href="https://yikai-wang.github.io/spr">intro</a>]
+          [<a href="https://zhuanlan.zhihu.com/p/597524285">简介</a>]
            <br>
           <b>Yikai Wang</b>, Xinwei Sun, Yanwei Fu<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
             <b>CVPR</b>, 2022.
@@ -532,6 +612,7 @@
           [<a href="https://ieeexplore.ieee.org/document/9446583/">paper</a>]
           [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
           [<a href="https://yikai-wang.github.io/ici">intro</a>]
+          [<a href="https://zhuanlan.zhihu.com/p/120354934">简介</a>]
           <br>
           <b>Yikai Wang</b>, Li Zhang, Yuan Yao<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Yanwei Fu<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
             <b>TPAMI</b>, 2021.
@@ -549,6 +630,7 @@
           [<a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Instance_Credibility_Inference_for_Few-Shot_Learning_CVPR_2020_paper.pdf">paper</a>]
           [<a href="https://github.com/Yikai-Wang/ICI-FSL">code</a>]
           [<a href="https://yikai-wang.github.io/ici">intro</a>]
+          [<a href="https://zhuanlan.zhihu.com/p/120354934">简介</a>]
            <br>
           <b>Yikai Wang</b>, Chengming Xu, Chen Liu, Li Zhang, Yanwei Fu<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
             <b>CVPR</b>, 2020.</p>
