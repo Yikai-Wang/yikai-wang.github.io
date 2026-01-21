@@ -327,6 +327,11 @@ td{
 
 .nav .menu {
     float: right;
+    display: inline-flex;
+    align-items: center; /* 水平对齐文本和图片 */
+    right: 0;
+    left: 0;
+    top: 0;
 }
 
 .nav a.title {
@@ -346,7 +351,7 @@ td{
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .nav a:not(:first-child) {display: none;}
   .nav a.icon {
     float: right;
