@@ -222,6 +222,19 @@
         margin: 20px auto;
       }
 
+      /* Force paper images to be 100% width */
+      #papers img {
+        width: 100% !important;      /* Sets width to 100% */
+        max-width: 100% !important;  /* Overrides the global 50% limit */
+        margin: 10px 0 !important;   /* Removes the large auto margins */
+      }
+      /* Force paper images to be 100% width */
+      #talks img {
+        width: 100% !important;      /* Sets width to 100% */
+        max-width: 100% !important;  /* Overrides the global 50% limit */
+        margin: 10px 0 !important;   /* Removes the large auto margins */
+      }
+
       /* Ensure text fits on tiny screens */
       p, a { word-wrap: break-word; }
     }
@@ -805,7 +818,7 @@
 
       <h1><div id="Talks"  class="ref_anchor">Talks</div></h1>
       <hr />
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;"  id="talks">
   <tr>
     <td style="padding:5px;width:25%;vertical-align:middle">
           <img src='figures/arci.png'  style="aspect-ratio: 21/9; width: 100%;">
