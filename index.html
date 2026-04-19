@@ -173,18 +173,8 @@
 
     /* --- Mobile & Navigation Styles (Updated) --- */
 
-    /* Default (Desktop): Hide hamburger, show links naturally */
-    .nav-toggle {
-      display: none;
-    }
-
     /* Mobile Layout */
     @media screen and (max-width: 768px) {
-
-      /* HIDE RIGHT NAV LINKS ON SMALL SCREENS */
-      #topmenu {
-        display: none !important;
-      }
 
       /* 1. Reset Table Layout to Stack Vertical */
       table,
@@ -200,65 +190,7 @@
         /* vital for dropdowns */
       }
 
-      /* 2. Mobile Top Bar (Name + Button) */
-      .mobile-top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 10px;
-        position: relative;
-        /* Anchor for the dropdown */
-        z-index: 20;
-      }
-
-      .mobile-top-bar p {
-        margin: 0;
-        font-weight: bold;
-      }
-
-      /* 3. The Hamburger Button */
-      .nav-toggle {
-        display: block !important;
-        font-size: 24px;
-        cursor: pointer;
-        padding: 5px;
-        line-height: 1;
-        user-select: none;
-        /* Prevents blue highlight box on tap */
-      }
-
-      /* 4. The Dropdown Menu (Fixed "About" & "Black Box" issue) */
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #ffffff;
-        /* Solid white background */
-
-        /* Positioning: Overlays content instead of pushing it */
-        position: relative;
-        z-index: 100;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 10px;
-      }
-
-      /* Show links when active */
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-links a {
-        display: block;
-        padding: 15px 0;
-        /* Larger touch target */
-        text-align: right;
-        border-bottom: 1px solid #eee;
-        color: #333;
-        /* Ensure text is visible */
-        text-decoration: none;
-      }
-
-      /* 5. General Cleanup for small screens */
+      /* 2. General Cleanup for small screens */
       td {
         padding: 10px 5% !important;
       }
@@ -308,6 +240,9 @@
       <div class="nav" id="navbar">
         <a class="active title" onclick="topFunction()">&nbsp;&nbsp;&nbsp;&nbsp;Yikai Wang &nbsp;&nbsp;
           <img src='figures/name.png'>
+        </a>
+        <a href="javascript:void(0);" class="hamburger-icon" onclick="clickMenu()" aria-label="Toggle Navigation">
+          <i class="fa fa-bars"></i>
         </a>
         <div class="menu" id="topmenu">
 
@@ -1176,7 +1111,7 @@
     function clickMenu() {
       var nav = document.getElementById("navbar");
       if (nav.classList.contains("responsive")) {
-        // Close the menu
+        nav.classList.remove("responsive"); // Close the menu
       } else {
         nav.classList.add("responsive");  // Open the menu
       }
