@@ -376,3 +376,31 @@ td{
     display: flex; /* Show menu below */
   }
 }
+
+/* Pub List Layout (Papers & Talks) */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.pub-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.pub-image {
+  flex: 0 0 25%;
+}
+.pub-content {
+  flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .pub-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pub-image {
+    width: 100%;
+  }
+}
