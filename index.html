@@ -1,11 +1,21 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Yikai Wang</title>
+  <title>Yikai Wang — Generative &amp; Video Generation · Meta London</title>
+  <meta name="author" content="Yikai Wang">
+  <meta name="description" content="Yikai Wang is a postdoctoral researcher at Meta London working on structured and video generative models. Previously a research fellow at MMLab@NTU; Ph.D. in Statistics from Fudan University.">
+  <link rel="canonical" href="https://yikai-wang.github.io/">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Yikai Wang">
+  <meta property="og:description" content="Postdoctoral researcher at Meta London working on structured and video generative models.">
+  <meta property="og:url" content="https://yikai-wang.github.io/">
+  <meta property="og:image" content="https://yikai-wang.github.io/wyk.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Yikai Wang">
+  <meta name="twitter:description" content="Postdoctoral researcher at Meta London working on structured and video generative models.">
+  <meta name="twitter:image" content="https://yikai-wang.github.io/wyk.png">
   <link rel="icon" type="image/x-icon" href="index.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="index.ico" />
   <link rel="stylesheet" href="stylesheets/styles1.css">
@@ -18,200 +28,21 @@
 
     gtag('config', 'G-0PYEQD3RGN');
   </script>
-  <link rel="stylesheet" href="assets/css/academicons.min.css" />
-  <link rel="stylesheet" href="assets/css/academicons.css" />
 
-  <style>
-    .float-right {
-      float: right;
-      width: 150px;
-      margin-top: 0px;
-      margin-left: 20px;
-    }
-
-    .subject-block {
-      width: 100%;
-      height: 100px;
-      overflow-y: auto;
-      word-wrap: break-word;
-      word-break: break-all;
-      white-space: normal;
-
-      div {
-        width: 100%;
-        height: 30px;
-        overflow-y: auto;
-        line-height: 30px;
-        text-align: center;
-        font-size: 15px;
-        color: #9f9fa0;
-        border-bottom: 0.5px solid #ddd;
-      }
-
-      div:last-child {
-        border-bottom: 0;
-      }
-    }
-
-    .clearfix::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-
-    .image-text-container {
-      display: flex;
-      align-items: center;
-      margin: 0;
-    }
-
-    .invisible-font {
-      visibility: hidden;
-    }
-
-    .ref_anchor {
-      scroll-margin-top: 80px;
-    }
-
-    .row-num {
-      font-weight: 600;
-      margin-right: 0.4rem;
-      white-space: nowrap;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      color: #111;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .social-icons {
-        color: #fff;
-      }
-    }
-
-    @media (prefers-contrast: more) {
-      .social-icons {
-        color: #000;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .social-icons {
-          color: #fff;
-        }
-      }
-    }
-
-    .icon {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-color: currentColor;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      -webkit-mask-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-      opacity: 1.0;
-      transition: opacity 0.2s ease;
-    }
-
-    .icon:hover {
-      opacity: 1;
-    }
-
-    .icon.google-scholar {
-      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg");
-      mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg");
-    }
-
-    .icon.github {
-      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg");
-      mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg");
-    }
-
-    .icon.x {
-      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg");
-      mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg");
-    }
-
-    .icon.linkedin {
-      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg");
-      mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg");
-    }
-
-    .icon.zhihu {
-      -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zhihu.svg");
-      mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zhihu.svg");
-    }
-
-    .icon.huggingface {
-      -webkit-mask-image: url("https://cdn.simpleicons.org/huggingface");
-      mask-image: url("https://cdn.simpleicons.org/huggingface");
-    }
-
-    .icon.xiaohongshu {
-      -webkit-mask-image: url("https://cdn.simpleicons.org/xiaohongshu");
-      mask-image: url("https://cdn.simpleicons.org/xiaohongshu");
-    }
-
-    @media screen and (max-width: 768px) {
-      table,
-      tbody,
-      tr,
-      td {
-        display: block;
-        width: 100% !important;
-        height: auto !important;
-        box-sizing: border-box;
-        overflow: visible !important;
-      }
-
-      td {
-        padding: 10px 5% !important;
-      }
-
-      img {
-        max-width: 50%;
-        height: auto;
-        display: block;
-        margin: 20px auto;
-      }
-
-      #papers img {
-        width: 75% !important;
-        max-width: 100% !important;
-        margin: 10px auto !important;
-      }
-
-      #talks img {
-        width: 75% !important;
-        max-width: 100% !important;
-        margin: 10px auto !important;
-      }
-
-      p,
-      a {
-        word-wrap: break-word;
-      }
-    }
-  </style>
 </head>
 
 <body>
 <div class="wrapper">
   <div class="header" id="header">
     <div class="nav" id="navbar">
-      <a class="active title" onclick="topFunction()">&nbsp;&nbsp;&nbsp;&nbsp;Yikai Wang &nbsp;&nbsp;
-        <img src='figures/name.png'>
+      <a class="title" onclick="topFunction()">Yikai Wang
+        <img src='figures/name.webp' alt="">
       </a>
-      <a href="javascript:void(0);" class="hamburger-icon" onclick="clickMenu()" aria-label="Toggle Navigation">
+      <span class="nav-current" id="nav-current" aria-hidden="true"></span>
+      <button type="button" class="hamburger-icon" onclick="clickMenu()" aria-label="Toggle navigation"
+        aria-controls="topmenu" aria-expanded="false">
         <i class="fa fa-bars"></i>
-      </a>
+      </button>
       <div class="menu" id="topmenu">
         <a href="#About" class="menu-item" onclick="closeMenu()">About</a>
         <a href="#Research" class="menu-item" onclick="closeMenu()">Research</a>
@@ -242,13 +73,17 @@
             At Meta, he works on training video generative models.
           </p>
           <p style="text-align: justify; text-justify:inter-ideograph; color: darkgray;">
-            Reach out via <a class="author-social" target="_blank">yi-kai.wang@outlook.com</a>.
+            Reach out via <span class="copy-email" role="button" tabindex="0" title="Click to copy" data-email="yi-kai.wang@outlook.com">yi-kai.wang@outlook.com</span><span class="copy-flash" aria-live="polite">copied ✓</span>.
             Please let me know who you are. <br>
             My previous institutional emails from NTU and Fudan are no longer active.
           </p>
         </td>
         <td style="padding:5px;width:15%;vertical-align:top">
-          <img src="wyk.png">
+          <img id="hero-photo" src="hero/hero-reveal.webp" alt="Yikai Wang">
+          <script>/* reduced-motion: show the static photo instead of the coarse-to-fine animation */
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              var _hp = document.getElementById('hero-photo'); if (_hp) _hp.src = 'wyk.webp';
+            }</script>
           <div class="social-icons">
             <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ" class="google-scholar" target="_blank"
               aria-label="Google Scholar">
@@ -280,100 +115,99 @@
     <hr />
     <div class="subject-block">
       <ul>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2026.06] Our work on <a href="https://ieeexplore.ieee.org/document/11592338">Cross-subject fMRI-to-Image Pre-training</a> has been accepted by IEEE JBHI. Congrats to Xuelin and Yun!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2026.05] Our work on <a href="https://yikai-wang.github.io/seele/">subject repositioning</a> has been allocated a poster slot at ICML 2026.
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2026.04] Our works on <a href="https://gong1130.github.io/DIRECT/">3D-Aware Object Insertion</a> and <a href="https://ggc29.github.io/CReL/">Conformal Evaluation</a> have been accepted by ICML 2026. Congrats to Jingbo and Yachen!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2026.01] Our work on <a href="https://zhenyangliu.github.io/ActiveVLA/">ActiveVLA</a> has been accepted by
           CVPR 2026. Congrats to Zhenyang!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2026.01] Our works on <a href="https://arxiv.org/abs/2508.12811">next visual granularity generation</a> and
           <a href="https://arxiv.org/abs/2510.08673">camera-centric generation</a> have been accepted by ICLR 2026!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.10] Our work on <a href="https://yikai-wang.github.io/seele/">subject repositioning</a> has been
-          awarded a <a style="color:#ed7748;">J2C Certification</a> (10% of accepted papers) by TMLR!
+          awarded a <span class="accent">J2C Certification</span> (10% of accepted papers) by TMLR!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.08] Our work on <a href="https://yikai-wang.github.io/nvg">next visual granularity generation</a> is
           available on arxiv!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.06] Our work on <a href="https://zhenyangliu.github.io/DP4/">spatial-temporal aware diffusion policy
             learning</a> has been accepted by ICCV 2025. Congrats to Zhenyang!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.05] Glad to be recognized as an <a
             href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer"
-            style="color:#ed7748;">outstanding reviewer</a> for CVPR 2025!
+            class="accent">outstanding reviewer</a> for CVPR 2025!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.05] We are organizing <a href="https://mipi-challenge.org/MIPI2025/">Mobile Intelligent Photography
             and Imaging</a> workshop at ICCV 2025!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.04] I am glad to be invited to serve as an area chair for NeurIPS 2025.
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.04] Our work on <a href="https://yikai-wang.github.io/asuka/">image inpainting</a> has been selected
-          as a <font color="#ed7748">highlight</font> paper by CVPR 2025!
+          as a <span class="accent">highlight</span> paper by CVPR 2025!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.03] Received a grant from NVIDIA to support my ongoing research!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.02] Our works on <a href="https://yikai-wang.github.io/asuka/">image inpainting</a> and <a
             href="https://zhenyangliu.github.io/ReasonGrounder/">visual grounding</a> have been accepted by CVPR 2025.
           Congrats to Zhenyang, and a big thank you to my co-authors!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2025.01] Our works on <a href="https://streetunveiler.github.io">long-trajectory empty street
             reconstruction</a> and <a href="https://arxiv.org/abs/2501.03289">transformer pruning</a> have been
           accepted by ICLR 2025. Congrats to Jingwei and Yizhuo!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2024.12] Attending NeurIPS 2024 at Vancouver, Canada.
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2024.11] Our work on <a href="https://arxiv.org/abs/2303.14730">fMRI-vision latent alignment</a> has been
           accepted by TMLR. Congrats to Prof. Qian!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2024.10] Our work on <a href="https://yikai-wang.github.io/seele/">subject repositioning</a> has been
           accepted by TMLR!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2024.09] Our works on <a href="https://clementine24.github.io/LexVLA/">lexical visual-language
             alignment</a> and <a href="https://arxiv.org/abs/2405.15279">visual in-context prompt selection</a> have
           been accepted by NeurIPS 2024. Congrats to Yifan, Chengming and Chen!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2024.07] I have joined the MMLab@NTU as a postdoc! Looking forward to this new journey!
         </li>
-        <li style="margin-left:-20px; padding: 0; ">
+        <li>
           [2024.07] Our work on <a href="https://jingyanghuo.github.io/neuropictor/">consistent fMRI decoding</a> has
           been accepted by ECCV 2024. Congrats to Jingyang!
         </li>
-        <li style="margin-left:-20px; padding: 0;">
+        <li>
           [2024.05] I have successfully defended my Ph.D. thesis!
         </li>
       </ul>
     </div>
-    <br>
     <h1 id="Research" class="ref_anchor">Research</h1>
     <hr />
     <ul>
-      <li style="margin-left:-20px;padding: 0;">
+      <li>
         <b>Generative Vision</b>: <br>
         <ul>
-          <li style="margin-left:-20px;">
+          <li>
             <b>Generation</b>:
             next visual granularity generation [<a href="https://yikai-wang.github.io/nvg/">NVG</a>, <a
               href="https://arxiv.org/abs/2508.12811">ICLR2026</a>],
@@ -382,15 +216,15 @@
             amodal completion [<a href="https://jianxgao.github.io/C2F-Seg/">C2F-Seg</a>, <a
               href="https://openaccess.thecvf.com/content/ICCV2023/papers/Gao_Coarse-to-Fine_Amodal_Segmentation_with_Shape_Prior_ICCV_2023_paper.pdf">ICCV2023</a>];
           </li>
-          <li style="margin-left:-20px;">
+          <li>
             <b>Inpainting</b>:
             3D-aware object insertion [<a href="https://gong1130.github.io/DIRECT/">DIRECT</a>, <a
               href="https://arxiv.org/abs/2606.06601">ICML2026</a>],
             context-stability & color-consistency [<a href="https://yikai-wang.github.io/asuka/">ASUKA</a>, <a
-              href="https://arxiv.org/abs/2312.04831">CVPR2025<font color="#ed7748">(Highlight)</font></a>, <a
+              href="https://arxiv.org/abs/2312.04831">CVPR2025<span class="accent">(Highlight)</span></a>, <a
               href="https://arxiv.org/abs/2601.15368">extension</a>],
             subject repositioning [<a href="https://yikai-wang.github.io/seele/">SEELE</a>, <a
-              href="https://arxiv.org/abs/2401.16861">TMLR2024<a style="color:#ed7748;">(Invited presentation at ICML 2026)</a></a>],
+              href="https://arxiv.org/abs/2401.16861">TMLR2024</a><span class="accent">(Invited presentation at ICML 2026)</span>],
             ref-guided inpainting [<a href="https://ewrfcas.github.io/LeftRefill/">LeftRefill</a>, <a
               href="https://arxiv.org/abs/2305.11577">CVPR2024</a>],
             empty street reconstruction [<a href="https://streetunveiler.github.io">StreetUnveiler</a>, <a
@@ -398,23 +232,23 @@
           </li>
         </ul>
       </li>
-      <li style="margin-left:-20px;padding: 0;">
+      <li>
         <b>Multimodal Intelligence</b>: <br>
         <ul>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             <b>Vision-action</b>: active perception [<a href="https://zhenyangliu.github.io/ActiveVLA/">ActiveVLA</a>,
             <a href="https://arxiv.org/abs/2601.08325">CVPR2026</a>]. spatial-temporal aware policy learning [<a
               href="https://zhenyangliu.github.io/DP4/">DP4</a>, <a
               href="https://arxiv.org/abs/2507.06710">ICCV2025</a>];
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             <b>Vision-language</b>: visual grounding and reasoning [<a
               href="https://zhenyangliu.github.io/ReasonGrounder/">ReasonGrounder</a>, <a
               href="https://arxiv.org/abs/2503.23297">CVPR2025</a>], lexical alignment [<a
               href="https://clementine24.github.io/LexVLA/">LexVLA</a>, <a
               href="https://arxiv.org/abs/2407.17827">NeurIPS2024</a>];
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             <b>Vision-fMRI</b>:
             zero-shot decoding [<a href="https://arxiv.org/abs/2601.15071">preprint</a>],
             dynamic face decoding [<a href="https://arxiv.org/abs/2607.22302">preprint</a>],
@@ -425,17 +259,17 @@
           </li>
         </ul>
       </li>
-      <li style="margin-left:-20px;padding: 0;">
+      <li>
         <b>Statistical Machine Learning</b>: <br>
         <ul>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             <b>Subset selection analysis</b>:
             false-selection-rate control [<a href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a
               href="https://ieeexplore.ieee.org/document/10337771">TPAMI2023</a>],
             noisy set recovery [<a href="https://yikai-wang.github.io/ici">ICI</a>, <a
               href="https://ieeexplore.ieee.org/document/9446583/">TPAMI2021</a>];
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             <b>Application (sparse incidental parameters)</b>:
             out-of-distribution detection [<a
               href="https://openaccess.thecvf.com/content/CVPR2024/papers/Fan_Test-Time_Linear_Out-of-Distribution_Detection_CVPR_2024_paper.pdf">CVPR2024</a>],
@@ -444,7 +278,7 @@
             few-shot learning [<a href="https://yikai-wang.github.io/ici">ICI</a>, <a
               href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Instance_Credibility_Inference_for_Few-Shot_Learning_CVPR_2020_paper.pdf">CVPR2020</a>];
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             <b>Application (other statistical models)</b>:
             conformal evaluation [<a href="https://ggc29.github.io/CReL/">CReL</a>, <a href="https://arxiv.org/abs/2605.30807">ICML2026</a>],
             network pruning [<a href="https://arxiv.org/abs/2501.03289">ICLR2025</a>],
@@ -455,7 +289,6 @@
 
 
     </ul>
-    </p>
 
     <h1 id="Publications" class="ref_anchor">Papers</h1>
     <hr />
@@ -464,7 +297,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/asuka-2.jpg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/asuka-2.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Aligned Stable Inpainting: Mitigating Unwanted Object Insertion and Preserving Color
@@ -480,7 +313,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/fmri2face.jpeg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/fmri2face.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>fMRI2Face: Geometry-Guided Neural Decoding Framework and a Full-HD fMRI-Video Dataset for Controllable Digital Human Faces.</b><br>
@@ -494,7 +327,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/pictorial.jpeg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/pictorial.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>The Pictorial Cortex: Zero-Shot Cross-Subject fMRI-to-Image Reconstruction via Compositional Latent
@@ -509,7 +342,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/xmind.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/xmind.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Cross-subject fMRI-to-Image with Visual-cortex 2D Representation and Pre-Training.</b><br>
@@ -517,14 +350,14 @@
             <br>
             Xuelin Qian*, Yun Wang*, <b>Yikai Wang</b>, Shijie Zhao, Jianfeng Feng, and Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>JBHI</b>, 2026.<br>
+            <b class="venue">JBHI</b>, 2026.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/direct.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/direct.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Direct 3D-Aware Object Insertion via Decomposed Visual Proxies.</b><br>
@@ -536,14 +369,14 @@
             Jingbo Gong, <b>Yikai Wang</b><sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>, Yushi Lan, Yuhao Wan, Ziheng Ouyang, Rui Zhao, Ming-Ming Cheng<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>, Qibin Hou, Chen Change Loy.<br>
-            <b>ICML</b>, 2026.<br>
+            <b class="venue">ICML</b>, 2026.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/crel.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/crel.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Conformal Reliability: A New Evaluation Metric for Conditional Generation.</b><br>
@@ -555,14 +388,14 @@
             Yachen Gao, Xinwei Sun<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>, <b>Yikai Wang</b>, Ye Shi, Jingya Wang, Jianfeng Feng, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>ICML</b>, 2026.<br>
+            <b class="venue">ICML</b>, 2026.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/activevla.jpg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/activevla.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>ActiveVLA: Injecting Active Perception into Vision-Language-Action Models for Precise 3D Robotic
@@ -576,14 +409,14 @@
             Zhenyang Liu, Yongchong Gu, <b>Yikai Wang</b>, Xiangyang Xue<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>CVPR</b>, 2026.<br>
+            <b class="venue">CVPR</b>, 2026.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='nvg/3.gif' style="aspect-ratio: 21/9; width: 100%;">
+          <video autoplay muted loop playsinline preload="metadata" poster="nvg/3-poster.webp"><source src="nvg/3.mp4" type="video/mp4"></video>
         </div>
         <div class="pub-content">
           <p><b>Next Visual Granularity Generation.</b><br>
@@ -595,14 +428,14 @@
             <br>
             <b>Yikai Wang</b>, Zhouxia Wang, Zhonghua Wu, Qingyi Tao, Kang Liao, Chen Change Loy<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
-            <b>ICLR</b>, 2026.<br>
+            <b class="venue">ICLR</b>, 2026.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/puffin1.jpg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/puffin1.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Thinking with Camera: A Unified Multimodal Model for Camera-Centric Understanding and
@@ -615,15 +448,14 @@
             <br>
             Kang Liao, Size Wu, Zhonghua Wu, Linyi Jin, Chao Wang, <b>Yikai Wang</b>, Fei Wang, Wei Li, Chen Change
             Loy<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
-            <b>ICLR</b>, 2026.<br>
+            <b class="venue">ICLR</b>, 2026.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <video id="dp4-video" autoplay muted loop playsinline
-            style="aspect-ratio: 21/9; width: 100%; object-fit: fill;">
+          <video id="dp4-video" autoplay muted loop playsinline preload="metadata" poster="figures/dp4-poster.webp">
             <source src="figures/dp4.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -633,20 +465,19 @@
             [<a href="https://arxiv.org/abs/2507.06710">arxiv</a>]
             [<a
               href="https://openaccess.thecvf.com/content/ICCV2025/papers/Liu_Spatial-Temporal_Aware_Visuomotor_Diffusion_Policy_Learning_ICCV_2025_paper.pdf">paper</a>]
-            [code]
             [<a href="https://zhenyangliu.github.io/DP4/">intro</a>]
             <br>
             Zhenyang Liu, <b>Yikai Wang</b>, Kuanning Wang, Longfei Liang, Xiangyang Xue<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>. <br>
-            <b>ICCV</b>, 2025. <br>
+            <b class="venue">ICCV</b>, 2025. <br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/inpainting.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/inpainting.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Towards Enhanced Image Inpainting: Mitigating Unwanted Object Insertion and Preserving Color
@@ -662,14 +493,14 @@
             <br>
             <b>Yikai Wang</b>*, Chenjie Cao*, Junqiu Yu*, Ke Fan, Xiangyang Xue, Yanwei Fu<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>. <br>
-            <b>CVPR</b>, 2025. <font color="#ed7748">(Highlight, 13.5% of accepted papers)</font><br>
+            <b class="venue">CVPR</b>, 2025. <span class="accent">(Highlight, 13.5% of accepted papers)</span><br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/reasongrounder.jpg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/reasongrounder.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>ReasonGrounder: LVLM-Guided Hierarchical Feature Splatting for Open-Vocabulary 3D Visual Grounding and
@@ -683,14 +514,14 @@
             Zhenyang Liu, <b>Yikai Wang</b>, Sixiao Zheng, Tongying Pan, Longfei Liang, Yanwei Fu<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Xiangyang Xue<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>CVPR</b>, 2025.<br>
+            <b class="venue">CVPR</b>, 2025.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/spp.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/spp.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p> <b>Adaptive Pruning of Pretrained Transformer via Differential Inclusions.</b><br>
@@ -700,14 +531,14 @@
             <br>
             Yizhuo Ding, Ke Fan, <b>Yikai Wang</b><sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>,
             Xinwei Sun<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Yanwei Fu.<br>
-            <b>ICLR</b>, 2025.
+            <b class="venue">ICLR</b>, 2025.
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/StreetUnveiler.gif' style="aspect-ratio: 21/9; width: 100%;">
+          <video autoplay muted loop playsinline preload="metadata" poster="figures/StreetUnveiler-poster.webp"><source src="figures/StreetUnveiler.mp4" type="video/mp4"></video>
         </div>
         <div class="pub-content">
           <p><b>3D StreetUnveiler with Semantic-aware 2DGS - a simple baseline.</b><br>
@@ -718,14 +549,14 @@
             <br>
             Jingwei Xu, <b>Yikai Wang</b>, Yiqun Zhao, Yanwei Fu, Shenghua Gao<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>ICLR</b>, 2025.<br>
+            <b class="venue">ICLR</b>, 2025.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/moving.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/moving.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Repositioning the Subject within Image.</b><br>
@@ -739,14 +570,14 @@
             <br>
             <b>Yikai Wang</b>, Chenjie Cao, Ke Fan, Qiaole Dong, Yifan Li, Xiangyang Xue, Yanwei Fu<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>. <br>
-            <b>TMLR</b>, 2024. <font color="#ed7748">(Invited presentation at ICML 2026, 10% of accepted papers)</font><br>
+            <b class="venue">TMLR</b>, 2024. <span class="accent">(Invited presentation at ICML 2026, 10% of accepted papers)</span><br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/lea.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/lea.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>LEA: Learning Latent Embedding Alignment Model for fMRI Decoding and Encoding.</b><br>
@@ -756,14 +587,14 @@
             <br>
             Xuelin Qian*, <b>Yikai Wang</b>*, Xinwei Sun, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>, Xiangyang Xue, Jianfeng Feng.<br>
-            <b>TMLR</b>, 2024.<br>
+            <b class="venue">TMLR</b>, 2024.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/LexVLA1.jpg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/LexVLA1.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Unified Lexical Representation for Interpretable Visual-Language Alignment.</b><br>
@@ -774,14 +605,14 @@
             <br>
             Yifan Li, <b>Yikai Wang<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup></b>, Yanwei Fu,
             Dongyu Ru, Zheng Zhang, Tong He<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
-            <b>NeurIPS</b>, 2024.<br>
+            <b class="venue">NeurIPS</b>, 2024.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/partial2global1.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/partial2global1.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p> <b>Towards Global Optimal Visual In-Context Learning Prompt Selection.</b><br>
@@ -792,14 +623,14 @@
             <br>
             Chengming Xu*, Chen Liu*, <b>Yikai Wang</b><sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>,
             Yuan Yao, Yanwei Fu.<br>
-            <b>NeurIPS</b>, 2024.
+            <b class="venue">NeurIPS</b>, 2024.
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/NeuroPictor.jpeg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/NeuroPictor.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>NeuroPictor: Refining fMRI-to-Image Reconstruction via Multi-individual Pretraining and Multi-level
@@ -811,14 +642,14 @@
             <br>
             Jingyang Huo*, <b>Yikai Wang</b>*, Yun Wang*, Xuelin Qian, Chong Li, Yanwei Fu<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Jianfeng Feng.<br>
-            <b>ECCV</b>, 2024.<br>
+            <b class="venue">ECCV</b>, 2024.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/arci.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/arci.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion
@@ -831,14 +662,14 @@
             <br>
             Chenjie Cao, Yunuo Cai, Qiaole Dong, <b>Yikai Wang</b>, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>CVPR</b>, 2024.<br>
+            <b class="venue">CVPR</b>, 2024.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/rtl.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/rtl.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p> <b>Test-Time Linear Out-of-Distribution Detection.</b><br>
@@ -850,14 +681,14 @@
             Ke Fan*, Tong Liu*, Xingyu Qiu, <b>Yikai Wang</b>, Lian Huai<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>, Zeyu Shangguan, Shuang Gou, Fengjian Liu, Yuqian Fu, Yanwei Fu, Xingqun
             Jiang.<br>
-            <b>CVPR</b>, 2024.
+            <b class="venue">CVPR</b>, 2024.
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/c2f-seg.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/c2f-seg.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Coarse-to-Fine Amodal Segmentation with Shape Prior.</b><br>
@@ -870,14 +701,14 @@
             Jianxiong Gao, Xuelin Qian<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>, <b>Yikai
               Wang</b>, Tianjun Xiao<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Tong He, Zheng
             Zhang, Yanwei Fu.<br>
-            <b>ICCV</b>, 2023.<br>
+            <b class="venue">ICCV</b>, 2023.<br>
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='spr/knockoffs.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='spr/knockoffs.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Knockoffs-SPR: Clean Sample Selection in Learning with Noisy Labels.</b><br>
@@ -890,14 +721,14 @@
             <b>Yikai Wang</b>*,
             Yanwei Fu*,
             Xinwei Sun<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
-            <b>TPAMI</b>, 2023.
+            <b class="venue">TPAMI</b>, 2023.
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/spr.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/spr.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p><b>Scalable Penalized Regression for Noise Detection in Learning with Noisy Labels.</b><br>
@@ -910,14 +741,14 @@
             <br>
             <b>Yikai Wang</b>, Xinwei Sun, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>CVPR</b>, 2022.
+            <b class="venue">CVPR</b>, 2022.
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/ici.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/ici.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p>
@@ -930,14 +761,14 @@
             <br>
             <b>Yikai Wang</b>, Li Zhang, Yuan Yao<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>,
             Yanwei Fu<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
-            <b>TPAMI</b>, 2021.
+            <b class="venue">TPAMI</b>, 2021.
           </p>
         </div>
       </div>
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='ici/framework.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='ici/framework.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
           <p> <b>Instance Credibility Inference for Few-Shot Learning.</b><br>
@@ -950,7 +781,7 @@
             <br>
             <b>Yikai Wang</b>, Chengming Xu, Chen Liu, Li Zhang, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
-            <b>CVPR</b>, 2020.
+            <b class="venue">CVPR</b>, 2020.
           </p>
         </div>
       </div>
@@ -964,10 +795,10 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='nvg/3.gif' style="aspect-ratio: 21/9; width: 100%;">
+          <video autoplay muted loop playsinline preload="metadata" poster="nvg/3-poster.webp"><source src="nvg/3.mp4" type="video/mp4"></video>
         </div>
         <div class="pub-content">
-          <div class="paper" id="sparse-learning-talk">
+          <div class="paper">
             <p><b>Structured Generative Vision: From Context-Stable Inpainting to Next Visual Granularity Generation.</b><br>
               [<a href="files/StructuredGen-YikaiWang.pdf">slides</a>]
               <br>
@@ -981,10 +812,10 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/arci.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/arci.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
-          <div class="paper" id="sparse-learning-talk">
+          <div class="paper">
             <p><b>Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion
                 Model.</b><br>
               [<a href="files/LeftRefill-YikaiWang.pdf">slides</a>]
@@ -1000,10 +831,10 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/inpainting-talk.jpeg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/inpainting-talk.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
-          <div class="paper" id="inpainting-talk">
+          <div class="paper">
             <p><b>Advancing Image Inpainting: From Versatility to Consistency.</b><br>
               [<a href="files/ImageInpainting-YikaiWang.pdf">slides</a>]<br>
               Nanyang Technological University, 2024.04.<br>
@@ -1014,10 +845,10 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/sample-selection-talk1.jpeg' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/sample-selection-talk1.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
-          <div class="paper" id="sparse-learning-talk">
+          <div class="paper">
             <p><b>Clean Sample Selection Algorithms with Statistical Sparsity Analysis.</b><br>
               [<a href="files/SampleSelection-YikaiWang.pdf">slides</a>]<br>
               Technical University of Munich, 2024.03;<br>
@@ -1029,10 +860,10 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/fsl-stats.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/fsl-stats.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
-          <div class="paper" id="sparse-learning-talk">
+          <div class="paper">
             <p><b>Few-shot Learning by Statistical Methods.</b><br>
               [<a href="https://fsl-fudan.github.io/pdf/fsl-by-stats.pdf">slides</a>]<br>
               CVPR 2023 tutorial, 2023.06:<br>
@@ -1045,10 +876,10 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <img src='figures/sparse-learning.png' style="aspect-ratio: 21/9; width: 100%;">
+          <img src='figures/sparse-learning.webp' loading="lazy" decoding="async" alt="">
         </div>
         <div class="pub-content">
-          <div class="paper" id="sparse-learning-talk">
+          <div class="paper">
             <p><b>Sparse Learning for Noisy Data Detection.</b><br>
               [<a
                 href="https://www.youtube.com/watch?v=FB1tLdI3JV4&list=PL4lAyMKLeT7QmXvX-aMDFXby6gUqZBLAn&index=2">Youtube</a>][<a
@@ -1068,66 +899,66 @@
     <h1 id="Miscellaneous" class="ref_anchor">Grants and Awards</h1>
     <hr />
     <ul>
-      <li style="margin-left:-20px;padding: 0;">Academic Grant, NVIDIA, 2025.</li>
-      <li style="margin-left:-20px;padding: 0;">Outstanding Reviewer: <a
+      <li>Academic Grant, NVIDIA, 2025.</li>
+      <li>Outstanding Reviewer: <a
           href="https://nips.cc/Conferences/2022/ProgramCommittee">NeurIPS 2022</a>, <a
           href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">CVPR 2025</a>.
       </li>
-      <li style="margin-left:-20px;padding: 0;">Outstanding Graduates, Shanghai, 2024.</li>
-      <li style="margin-left:-20px;padding: 0;">Outstanding Freshmen, Fudan University, 2015.</li>
+      <li>Outstanding Graduates, Shanghai, 2024.</li>
+      <li>Outstanding Freshmen, Fudan University, 2015.</li>
     </ul>
 
 
     <h1 id="Education">Timeline</h1>
     <hr />
     <ul>
-      <li style="margin-left:-20px;padding: 0;">Postdoctoral Researcher, 2025 - present, Meta, London.</li>
-      <li style="margin-left:-20px;padding: 0;">Research Fellow, 2024 - 2025, Nanyang Technological University, Singapore.</li>
-      <li style="margin-left:-20px;padding: 0;">Ph.D. in Statistics, 2019 - 2024, Fudan University, Shanghai.</li>
-      <li style="margin-left:-20px;padding: 0;">B.S. in Mathematics, 2015 - 2019, Fudan University, Shanghai.</li>
+      <li>Postdoctoral Researcher, 2025–present, Meta, London.</li>
+      <li>Research Fellow, 2024–2025, Nanyang Technological University, Singapore.</li>
+      <li>Ph.D. in Statistics, 2019–2024, Fudan University, Shanghai.</li>
+      <li>B.S. in Mathematics, 2015–2019, Fudan University, Shanghai.</li>
     </ul>
 
     <h1>Service</h1>
     <hr />
     <ul>
-      <li style="margin-left:-20px; padding: 0;">
+      <li>
         <b>Area chair</b>:
         <ul>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
         NeurIPS 2025, 2026.
         </li>
         </ul>
       </li>
-      <li style="margin-left:-20px; padding: 0;">
+      <li>
         <b>Reviewer</b>:
         <ul>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             NeurIPS 2022, 2023, 2024; ICLR 2024, 2025, 2026; ICML 2023, 2024;
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             CVPR 2023, 2024, 2025, 2026; ICCV 2023, 2025; ECCV 2024;
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             SIGGRAPH 2026; SIGGRAPH Asia 2026;
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             TPAMI 2025; TIP 2024; TMLR 2023, 2024;
           </li>
         </ul>
       </li>
-      <li style="margin-left:-20px;padding: 0;"><b>Community Service</b>:
+      <li><b>Community Service</b>:
         <ul>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             Reviewer, NeurIPS 2026 workshop proposals.
           </li>
-          <li style="margin-left:-20px; padding: 0;">
+          <li>
             Co-organizer, ICCV 2025 workshop: <a href="https://mipi-challenge.org/MIPI2025/">Mobile Intelligent Photography and
               Imaging</a>;
           </li>
-          <li style="margin-left:-20px; padding: 0;">Co-organizer, CVPR 2023 tutorial: <a
+          <li>Co-organizer, CVPR 2023 tutorial: <a
               href="https://fsl-fudan.github.io">Few-shot Learning from Meta-Learning, Statistical Understanding to
               Applications</a>;</li>
-          <li style="margin-left:-20px; padding: 0;">Co-organizer, CVPR 2022 tutorial: <a
+          <li>Co-organizer, CVPR 2022 tutorial: <a
               href="https://sparse-learning.github.io">Sparse Learning in Neural Networks and Robust Statistical
               Analysis</a>.</li>
         </ul>
@@ -1137,16 +968,14 @@
     <h1 id="Teaching">Teaching</h1>
     <hr />
     <ul>
-      <li style="margin-left:-20px;padding: 0;">Neural Network and Deep Learning, TA, 2019-2022 Springs, Fudan
+      <li>Neural Network and Deep Learning, TA, 2019–2022 Springs, Fudan
         University.</li>
     </ul>
     </section>
     
     <section>
       <p style="text-align: center; color: darkgray;"><small>
-        You are the <a href="https://www.easycounter.com/"><img
-            src="https://www.easycounter.com/counter.php?yikaiwang" border="0" alt="Counters"
-            style="height: 10px;"></a>-th visitor :)<br>
+        <span id="visit-line" style="display:none;">You are visitor №&nbsp;<span id="visit-count"></span> :)<br></span>
         Hosted on GitHub Pages.
         Theme modified from <a href="https://github.com/orderedlist/minimal">minimal</a> and <a
           href="https://github.com/jonbarron/website">Jonbarron</a>.</small>
@@ -1154,20 +983,21 @@
     </section>
 
 </div>
+<button id="to-top" type="button" aria-label="Back to top" title="Back to top">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</button>
 <script>
   function clickMenu() {
     var nav = document.getElementById("navbar");
-    if (nav.classList.contains("responsive")) {
-      nav.classList.remove("responsive"); // Close the menu
-    } else {
-      nav.classList.add("responsive");  // Open the menu
-    }
+    var btn = document.querySelector(".hamburger-icon");
+    var open = nav.classList.toggle("responsive");
+    if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
   }
   function closeMenu() {
     var nav = document.getElementById("navbar");
-    if (nav.classList.contains("responsive")) {
-      nav.classList.remove("responsive");  // Close the menu when item is clicked
-    }
+    var btn = document.querySelector(".hamburger-icon");
+    nav.classList.remove("responsive");
+    if (btn) btn.setAttribute("aria-expanded", "false");
   }
   function topFunction() {
     document.body.scrollTop = 0; // For Safari
@@ -1200,6 +1030,210 @@
   });
 })();
 </script> -->
+<script>
+  // Collapse long lists (News / Papers / Talks) behind a "Show more" toggle.
+  // Progressive enhancement: without JS, every item stays visible.
+  (function () {
+    function addToggle(container, itemSelector, visibleCount) {
+      if (!container) return;
+      var items = Array.prototype.slice.call(
+        container.querySelectorAll(':scope > ' + itemSelector));
+      if (items.length <= visibleCount) return;
+      var hidden = items.slice(visibleCount);
+
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'show-more-toggle';
+      var open = false;
+      function render() {
+        for (var i = 0; i < hidden.length; i++) {
+          hidden[i].style.display = open ? '' : 'none';
+          if (open) hidden[i].classList.add('just-shown');
+          else hidden[i].classList.remove('just-shown');
+        }
+        toggle.textContent = open ? 'Show less ▴' : 'Show more ▾';
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      toggle.addEventListener('click', function () {
+        var before = toggle.getBoundingClientRect().top;
+        open = !open;
+        render();
+        if (!open) {   // collapsing: keep the toggle where it was on screen
+          window.scrollBy(0, toggle.getBoundingClientRect().top - before);
+        }
+      });
+      render();
+      container.parentNode.insertBefore(toggle, container.nextSibling);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      addToggle(document.querySelector('.subject-block ul'), 'li', 4);
+      addToggle(document.getElementById('papers'), '.pub-item', 5);
+      addToggle(document.getElementById('talks'), '.pub-item', 2);
+    });
+  })();
+</script>
+<script>
+  // Scroll-spy: highlight the nav link of the section currently in view.
+  (function () {
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('.nav .menu a[href^="#"]'));
+    var targets = links
+      .map(function (a) {
+        return { link: a, el: document.getElementById(a.getAttribute('href').slice(1)) };
+      })
+      .filter(function (t) { return t.el; });
+    if (!targets.length) return;
+
+    function update() {
+      var nb = document.getElementById('navbar');
+      var line = window.pageYOffset + (nb ? nb.getBoundingClientRect().height : 56) + 14;   // just below the fixed bar
+      var active = null;
+      for (var i = 0; i < targets.length; i++) {
+        var top = targets[i].el.getBoundingClientRect().top + window.pageYOffset;
+        if (top <= line) active = targets[i].link;
+      }
+      links.forEach(function (a) { a.classList.remove('active'); });
+      if (active) active.classList.add('active');
+      var cur = document.getElementById('nav-current');
+      if (cur) cur.textContent = active ? active.textContent.trim() : '';
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+<script>
+  // In-page nav: close the mobile menu first, then scroll to the section using
+  // the sticky bar's CURRENT height as the offset, so the heading always lands
+  // just below the header (never hidden behind it).
+  (function () {
+    var nav = document.getElementById('navbar');
+    var reduce = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('.nav .menu a[href^="#"]'));
+
+    links.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.getElementById(a.getAttribute('href').slice(1));
+        if (!target) return;                 // unknown target: let the browser handle it
+        e.preventDefault();
+
+        // collapse the mobile dropdown so the bar is at its short height
+        if (nav) nav.classList.remove('responsive');
+        var btn = document.querySelector('.hamburger-icon');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+
+        // measure the now-collapsed bar, then scroll with a small gap
+        requestAnimationFrame(function () {
+          var barH = nav ? nav.getBoundingClientRect().height : 0;
+          var y = target.getBoundingClientRect().top + window.pageYOffset - barH - 14;
+          window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+          if (history.replaceState) {
+            history.replaceState(null, '', '#' + a.getAttribute('href').slice(1));
+          }
+        });
+      });
+    });
+  })();
+</script>
+<script>
+  // Subtle enhancements: scroll-reveal, back-to-top, image fade-in.
+  // All progressive: reduced-motion aware, and nothing is hidden without JS.
+  (function () {
+    var reduce = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1) Scroll-reveal — fade + rise for below-the-fold cards and section titles.
+    if (!reduce && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var targets = document.querySelectorAll('.pub-item, section h1');
+      Array.prototype.forEach.call(targets, function (el) {
+        // only animate what starts below the fold, so nothing flashes on load
+        if (el.getBoundingClientRect().top > vh * 0.9) {
+          el.classList.add('reveal');
+          io.observe(el);
+        }
+      });
+    }
+
+    // 2) Back-to-top button.
+    var toTop = document.getElementById('to-top');
+    if (toTop) {
+      var onScroll = function () {
+        if (window.pageYOffset > 400) toTop.classList.add('show');
+        else toTop.classList.remove('show');
+      };
+      toTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // 3) Fade thumbnails in as they finish loading (skip already-loaded ones).
+    if (!reduce) {
+      var imgs = document.querySelectorAll('.pub-image img');
+      Array.prototype.forEach.call(imgs, function (img) {
+        if (img.complete) return;
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease';
+        var done = function () { img.style.opacity = '1'; };
+        img.addEventListener('load', done);
+        img.addEventListener('error', done);
+      });
+    }
+  })();
+</script>
+<script>
+  // Click / Enter to copy the email address (text unchanged, no mailto).
+  (function () {
+    var el = document.querySelector('.copy-email');
+    if (!el) return;
+    function copy() {
+      var email = el.getAttribute('data-email') || el.textContent.trim();
+      if (navigator.clipboard) { navigator.clipboard.writeText(email).catch(function () {}); }
+      var f = document.querySelector('.copy-flash');
+      if (f) { f.classList.add('show'); setTimeout(function () { f.classList.remove('show'); }, 1500); }
+    }
+    el.addEventListener('click', copy);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(); }
+    });
+  })();
+</script>
+<script>
+  // Visitor counter — self-hosted on a Cloudflare Worker + KV (see counter/README.md).
+  // Paste your deployed Worker URL below; until then the counter line stays hidden.
+  (function () {
+    var API = 'https://counter.yi-kai-wang.workers.dev';
+    if (API.indexOf('REPLACE-ME') !== -1) return;         // not configured yet
+    var out = document.getElementById('visit-count');
+    var line = document.getElementById('visit-line');
+    if (!out) return;
+    var first = !sessionStorage.getItem('counted');       // count once per session
+    fetch(API + (first ? '?hit=1' : ''))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && typeof d.count === 'number') {
+          out.textContent = d.count.toLocaleString();
+          if (line) line.style.display = '';
+          sessionStorage.setItem('counted', '1');
+        }
+      })
+      .catch(function () { /* leave the line hidden on any error */ });
+  })();
+</script>
 <script src="javascripts/scale.fix.js"></script>
 </body>
 </html>
