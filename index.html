@@ -79,11 +79,31 @@
           </p>
         </td>
         <td style="padding:5px;width:15%;vertical-align:top">
-          <figure style="margin: 0 0 18px 0;">
-            <img id="hero-photo" src="hero/hero-reveal.webp" alt="Yikai Wang">
-            <figcaption style="font-size: 12px; color: #888; margin: 2px; text-align: center;">
-              Pixel-<a href="https://yikai-wang.github.io/nvg/">NVG</a> Reconstruction
+          <figure class="hero-figure">
+            <div class="hero-showcase" id="hero-showcase">
+              <div class="hero-slide is-active" id="hero-panel-nvg" role="tabpanel"
+                aria-labelledby="hero-tab-nvg" aria-hidden="false">
+                <img id="hero-photo" src="hero/hero-reveal.webp" data-animated-src="hero/hero-reveal.webp"
+                  data-static-src="wyk.webp" alt="Yikai Wang reconstructed from coarse to fine with Pixel-NVG">
+              </div>
+              <div class="hero-slide" id="hero-panel-lexvla" role="tabpanel"
+                aria-labelledby="hero-tab-lexvla" aria-hidden="true">
+                <img src="hero/lexvla-portrait.webp"
+                  alt="LexVLA-style word cloud portrait of Yikai Wang">
+              </div>
+            </div>
+            <figcaption class="hero-caption" aria-live="polite">
+              <span class="hero-caption-item is-active" aria-hidden="false">Pixel-<a href="https://yikai-wang.github.io/nvg/">NVG</a> Reconstruction</span>
+              <span class="hero-caption-item" aria-hidden="true"><a href="https://clementine24.github.io/LexVLA/">LexVLA</a>-style Word Cloud</span>
             </figcaption>
+            <div class="hero-dots" role="tablist" aria-label="Portrait visualization">
+              <button type="button" class="hero-dot is-active" id="hero-tab-nvg" role="tab"
+                aria-controls="hero-panel-nvg" aria-selected="true" tabindex="0"
+                aria-label="Show Pixel-NVG reconstruction"></button>
+              <button type="button" class="hero-dot" id="hero-tab-lexvla" role="tab"
+                aria-controls="hero-panel-lexvla" aria-selected="false" tabindex="-1"
+                aria-label="Show LexVLA-style word cloud"></button>
+            </div>
           </figure>
           <script>/* reduced-motion: show the static photo instead of the coarse-to-fine animation */
             if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -1236,6 +1256,7 @@
       .catch(function () { /* leave the line hidden on any error */ });
   })();
 </script>
+<script src="javascripts/hero-showcase.js"></script>
 <script src="javascripts/scale.fix.js"></script>
 </body>
 </html>
