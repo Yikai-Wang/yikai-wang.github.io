@@ -279,6 +279,101 @@ td { border:0px; }
 }
 
 /* Social icon row (About sidebar) */
+.hero-figure {
+  width: 100%;
+  margin: 0 0 18px;
+}
+
+.hero-showcase {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 300 / 376;
+  overflow: hidden;
+  background: #f5f4f1;
+  isolation: isolate;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 220ms ease, visibility 0s linear 220ms;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.hero-slide img,
+.hero-slide canvas {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+
+.hero-caption {
+  display: grid;
+  min-height: 18px;
+  margin: 4px 0 1px;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.hero-caption-item {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease;
+}
+
+.hero-caption-item.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #c8c8c8;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.hero-dot:hover {
+  background: #888;
+  transform: scale(1.18);
+}
+
+.hero-dot.is-active {
+  background: var(--link);
+}
+
+.hero-dot:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
 .social-icons {
   display: flex;
   gap: 10px;
@@ -299,6 +394,22 @@ td { border:0px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .social-icons a:hover { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-caption-item,
+  .hero-dot {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-figure {
+    width: min(300px, 72vw);
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 .icon {
