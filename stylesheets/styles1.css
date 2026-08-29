@@ -219,6 +219,8 @@ td { border:0px; }
 .fa-envelope-o { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIuNSA1LjVoMTl2MTNoLTE5eiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNiIvPjxwYXRoIGQ9Ik0zIDZsOSA2LjVMMjEgNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNiIvPjwvc3ZnPgo="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIuNSA1LjVoMTl2MTNoLTE5eiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNiIvPjxwYXRoIGQ9Ik0zIDZsOSA2LjVMMjEgNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNiIvPjwvc3ZnPgo="); }
 .fa-bars       { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeT0iNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjIuNiIvPjxyZWN0IHk9IjEwLjciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyLjYiLz48cmVjdCB5PSIxNy40IiB3aWR0aD0iMjQiIGhlaWdodD0iMi42Ii8+PC9zdmc+Cg==");     mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeT0iNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjIuNiIvPjxyZWN0IHk9IjEwLjciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyLjYiLz48cmVjdCB5PSIxNy40IiB3aWR0aD0iMjQiIGhlaWdodD0iMi42Ii8+PC9zdmc+Cg=="); }
 .fa-arrow-up   { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDNsOCA4aC01djEwSDlWMTFINHoiLz48L3N2Zz4K"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDNsOCA4aC01djEwSDlWMTFINHoiLz48L3N2Zz4K"); }
+.fa-chevron-left  { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1LjQgMy42TDE3LjIgNS40IDEwLjYgMTJsNi42IDYuNi0xLjggMS44TDcgMTJ6Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1LjQgMy42TDE3LjIgNS40IDEwLjYgMTJsNi42IDYuNi0xLjggMS44TDcgMTJ6Ii8+PC9zdmc+"); }
+.fa-chevron-right { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTguNiAzLjZMNi44IDUuNCAxMy40IDEybC02LjYgNi42IDEuOCAxLjhMMTcgMTJ6Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTguNiAzLjZMNi44IDUuNCAxMy40IDEybC02LjYgNi42IDEuOCAxLjhMMTcgMTJ6Ii8+PC9zdmc+"); }
 
 /* Orange accent for highlights / awards (replaces deprecated <font color>). */
 .accent { color: var(--accent); }
@@ -319,6 +321,42 @@ td { border:0px; }
   object-fit: cover;
 }
 
+/* Prev/next arrows sit below the portrait, flanking the dots: ◄ • • ►.
+   Keeps the image at full column width (the About sidebar is only ~180px). */
+.hero-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 20px;
+}
+
+.hero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #c8c8c8;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.hero-nav:hover {
+  color: var(--link);
+  transform: scale(1.18);
+}
+
+.hero-nav:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
 .hero-caption {
   display: grid;
   min-height: 18px;
@@ -399,7 +437,8 @@ td { border:0px; }
 @media (prefers-reduced-motion: reduce) {
   .hero-slide,
   .hero-caption-item,
-  .hero-dot {
+  .hero-dot,
+  .hero-nav {
     transition: none;
   }
 }
