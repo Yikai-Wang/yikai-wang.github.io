@@ -8,6 +8,8 @@
   var dots = Array.prototype.slice.call(document.querySelectorAll('.hero-dot'));
   var captions = Array.prototype.slice.call(document.querySelectorAll('.hero-caption-item'));
   var photo = document.getElementById('hero-photo');
+  var prevButton = document.getElementById('hero-prev');
+  var nextButton = document.getElementById('hero-next');
   var reduceMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var current = 0;
@@ -45,6 +47,13 @@
     if (index === 0 && current !== 0) restartNvg();
     current = index;
     if (focusDot && dots[index]) dots[index].focus();
+  }
+
+  if (prevButton) {
+    prevButton.addEventListener('click', function () { show(current - 1, false); });
+  }
+  if (nextButton) {
+    nextButton.addEventListener('click', function () { show(current + 1, false); });
   }
 
   dots.forEach(function (dot, index) {
