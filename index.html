@@ -96,13 +96,23 @@
               <span class="hero-caption-item is-active" aria-hidden="false">Pixel-<a href="https://yikai-wang.github.io/nvg/">NVG</a> Reconstruction</span>
               <span class="hero-caption-item" aria-hidden="true"><a href="https://clementine24.github.io/LexVLA/">LexVLA</a>-style Word Cloud</span>
             </figcaption>
-            <div class="hero-dots" role="tablist" aria-label="Portrait visualization">
-              <button type="button" class="hero-dot is-active" id="hero-tab-nvg" role="tab"
-                aria-controls="hero-panel-nvg" aria-selected="true" tabindex="0"
-                aria-label="Show Pixel-NVG reconstruction"></button>
-              <button type="button" class="hero-dot" id="hero-tab-lexvla" role="tab"
-                aria-controls="hero-panel-lexvla" aria-selected="false" tabindex="-1"
-                aria-label="Show LexVLA-style word cloud"></button>
+            <div class="hero-controls">
+              <button type="button" class="hero-nav" id="hero-prev"
+                aria-label="Previous portrait visualization">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              </button>
+              <div class="hero-dots" role="tablist" aria-label="Portrait visualization">
+                <button type="button" class="hero-dot is-active" id="hero-tab-nvg" role="tab"
+                  aria-controls="hero-panel-nvg" aria-selected="true" tabindex="0"
+                  aria-label="Show Pixel-NVG reconstruction"></button>
+                <button type="button" class="hero-dot" id="hero-tab-lexvla" role="tab"
+                  aria-controls="hero-panel-lexvla" aria-selected="false" tabindex="-1"
+                  aria-label="Show LexVLA-style word cloud"></button>
+              </div>
+              <button type="button" class="hero-nav" id="hero-next"
+                aria-label="Next portrait visualization">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </button>
             </div>
           </figure>
           <script>/* reduced-motion: show the static photo instead of the coarse-to-fine animation */
