@@ -1,0 +1,1237 @@
+/* Self-contained: system fonts only, no external requests. */
+:root {
+  --bg: #fff;
+  --paper: #fff;
+  --surface: #f8f8f8;
+  --ink: #222;
+  --muted: #595959;
+  --line: #d6d6d6;
+  --line-soft: #e5e5e5;
+  --accent: #39c;
+  --accent-soft: #f2f5f8;
+  --accent-mid: #9cc7e6;
+  --band: #f4f5f7;
+  --video-ar: 1.7333;
+  --stage-h: min(56vh, 540px);
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 135%; }
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+body.has-zoom { overflow: hidden; }
+
+button, input, select { font: inherit; color: inherit; }
+
+[hidden] { display: none !important; }
+
+.page {
+  width: min(94vw, 1760px);
+  margin: 0 auto;
+  padding: clamp(20px, 3.2vw, 44px) 0 48px;
+}
+
+/* ---------- Header ---------- */
+
+.page-head {
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* The paper title heads the page; each section below carries its own h2. */
+.page-head h1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: clamp(1.45rem, 2.9vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -.015em;
+  line-height: 1.2;
+}
+
+.lede {
+  max-width: 900px;
+  margin: 0;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+.lede b { color: var(--ink); font-weight: 600; }
+.lede b.is-ours { color: var(--accent); }
+
+/* ---------- Tabs + navigation bar ---------- */
+
+.viewer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.length-tabs {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.length-tabs button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 7px 18px 6px;
+  border: 0;
+  border-left: 1px solid var(--line-soft);
+  background: transparent;
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+
+.length-tabs button:first-child { border-left: 0; }
+
+.length-tabs button:hover,
+.length-tabs button:focus-visible {
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--paper));
+  color: var(--accent);
+}
+
+.length-tabs button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* ---------- Method picker ---------- */
+
+.methods {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 10px 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.methods-label {
+  color: var(--muted);
+  font-size: .54rem;
+  font-weight: 700;
+  letter-spacing: .045em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.methods-options {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.method-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.method-chip input {
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.method-chip:hover { border-color: var(--line-soft); }
+
+/* .is-on is kept in step with the checkbox by the script, so the chip does not depend on :has(). */
+.method-chip.is-on {
+  border-color: var(--accent-mid);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.method-chip.is-on.is-ours { color: var(--accent); }
+
+.method-chip input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.nav-status {
+  min-width: 64px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.nav-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--accent);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+
+.nav-button:hover,
+.nav-button:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ---------- Sample card ---------- */
+
+.sample {
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 92%, var(--surface));
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .04);
+}
+
+.sample-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 18px;
+  padding: 1px 2px 11px;
+}
+
+.sample-heading {
+  min-width: 0;
+  flex: 1 1 420px;
+}
+
+.sample-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.sample-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.chip {
+  padding: 2px 8px 1px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: .54rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.chip:empty { display: none; }
+
+.prompt-wrap { margin-top: 6px; }
+
+/* The prompts run to several hundred characters, so the card shows the opening lines. */
+.sample-prompt {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: .9rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.prompt-wrap.is-open .sample-prompt {
+  display: block;
+  overflow: visible;
+}
+
+.sample-prompt::before { content: "\201C"; }
+.sample-prompt::after { content: "\201D"; }
+
+.prompt-toggle {
+  margin-top: 2px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-size: .62rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.prompt-toggle:hover { text-decoration: underline; }
+
+.sample-actions,
+.zoom-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.pill {
+  min-width: 64px;
+  padding: 6px 11px 5px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pill:hover,
+.pill:focus-visible {
+  border-color: var(--accent-mid);
+  color: var(--accent);
+}
+
+.pill.is-paused {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ---------- Transport (time, seek, speed) ---------- */
+
+.transport {
+  display: grid;
+  grid-template-columns: auto minmax(140px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin: 0 2px 11px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-soft);
+  background: color-mix(in srgb, var(--paper) 72%, var(--surface));
+}
+
+.time {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+.time-input {
+  box-sizing: content-box;
+  width: 6.2ch;
+  padding: 2px 5px 1px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.time-input:hover { border-color: var(--accent-mid); }
+
+.time-input:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent-mid);
+}
+
+.time-input.is-invalid {
+  border-color: #a33e2d;
+  outline-color: #f3ddd5;
+}
+
+.seek {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: .54rem;
+  font-weight: 700;
+  letter-spacing: .045em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.segmented-options {
+  display: inline-flex;
+  height: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.segmented-options button {
+  min-width: 0;
+  height: 22px;
+  padding: 3px 8px 2px;
+  border: 0;
+  border-left: 1px solid var(--line-soft);
+  background: transparent;
+  color: var(--muted);
+  font-size: .56rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.segmented-options button:first-child { border-left: 0; }
+
+.segmented-options button:hover,
+.segmented-options button:focus-visible {
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--paper));
+  color: var(--accent);
+}
+
+.segmented-options button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.magnify [data-magnify-value] { min-width: 4.6ch; }
+
+/* ---------- Video ---------- */
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--tiles, 3), minmax(0, 1fr));
+  gap: 8px;
+}
+
+.tile {
+  min-width: 0;
+  margin: 0;
+}
+
+.tile figcaption {
+  padding: 0 2px 4px;
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tile.is-ours figcaption { color: var(--accent); }
+
+/* A single tile would otherwise grow as tall as the window is wide. */
+.video-frame {
+  max-width: calc(var(--stage-h) * var(--video-ar));
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background: #111;
+  aspect-ratio: var(--video-ar);
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.loading-bar {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, var(--accent-mid), transparent) 0 0 / 40% 100% no-repeat;
+  pointer-events: none;
+}
+
+.video-frame.is-loading .loading-bar {
+  animation: loading-slide 1.1s linear infinite;
+  opacity: 1;
+  transition: opacity .2s ease .25s;
+}
+
+@keyframes loading-slide {
+  from { background-position: -40% 0; }
+  to { background-position: 140% 0; }
+}
+
+.video-error {
+  margin: 8px 2px 0;
+  color: #a33e2d;
+  font-size: .72rem;
+}
+
+.sample-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
+  padding: 11px 2px 0;
+}
+
+.jump {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: .56rem;
+  font-weight: 700;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+/* Without min-width the option text (a whole prompt) sets a floor that max-width cannot lower, and
+   without overflow the text that the box cuts off still widens the page's scrollable area. */
+.jump select {
+  min-width: 0;
+  max-width: min(460px, 70vw);
+  overflow: hidden;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .68rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.shortcuts {
+  margin: 0;
+  color: var(--muted);
+  font-size: .62rem;
+}
+
+.shortcut-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.shortcut-toggle input {
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.shortcuts.is-off .shortcut-list { opacity: .45; }
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  margin: 0 1px;
+  padding: 0 4px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: .56rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ---------- Zoom dialog ---------- */
+
+/* Browsers without <dialog> would otherwise render the zoom view inline under the card. */
+dialog:not([open]) { display: none; }
+
+.zoom {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.zoom::backdrop { background: rgba(17, 17, 17, .78); }
+
+.zoom-shell {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  padding: 6px clamp(8px, .9vw, 14px) 8px;
+}
+
+.zoom-shell:focus { outline: none; }
+
+.zoom-toolbar {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 14px;
+  padding-bottom: 6px;
+}
+
+.zoom-toolbar .transport {
+  margin: 0;
+  padding: 5px 8px;
+}
+
+.zoom-grid {
+  display: grid;
+  flex: 1 1 auto;
+  min-height: 0;
+  align-content: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.zoom-grid { grid-template-columns: repeat(var(--cols, 2), var(--panel-w, 40vw)); }
+
+.zoom-grid .zoom-prompt { max-height: var(--prompt-h, 110px); }
+
+/* Either the prompt takes a spare cell of the panel grid, or a band across the bottom. */
+.zoom-grid[data-prompt="band"] .zoom-prompt { grid-column: 1 / -1; }
+
+.panel {
+  min-width: 0;
+  margin: 0;
+  padding: 3px 4px 4px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.panel.is-ours { border-color: color-mix(in srgb, var(--accent) 42%, var(--line)); }
+
+.panel figcaption {
+  height: 20px;
+  padding: 0 2px;
+  font-size: .66rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.panel.is-ours figcaption { color: var(--accent); }
+
+.panel-stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--panel-ar, 1.7333);
+  background: #111;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.zoom-grid.is-magnified .panel-stage { cursor: grab; }
+.zoom-grid.is-dragging .panel-stage { cursor: grabbing; }
+
+.panel-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.zoom-prompt {
+  min-width: 0;
+  min-height: 0;
+  padding: 8px 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 82%, var(--surface));
+}
+
+.zoom-prompt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.zoom-prompt-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.zoom-prompt-head span {
+  color: var(--accent);
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.zoom-prompt-head small {
+  color: var(--muted);
+  font-size: .54rem;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+.zoom-prompt-text {
+  margin: 6px 0 0;
+  font-size: .92rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.zoom-hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: .62rem;
+  line-height: 1.45;
+}
+
+/* Read by screen readers only. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Keyboard focus ---------- */
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* The rounded button groups clip anything drawn outside them, so ring these from the inside. */
+.length-tabs button:focus-visible,
+.segmented-options button:focus-visible {
+  outline-offset: -3px;
+}
+
+.length-tabs button[aria-pressed="true"]:focus-visible,
+.segmented-options button[aria-pressed="true"]:focus-visible {
+  outline-color: var(--paper);
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 1100px) {
+  .zoom-toolbar { grid-template-columns: auto minmax(0, 1fr); }
+  .zoom-toolbar .transport { grid-column: 1 / -1; grid-row: 2; }
+}
+
+@media (max-width: 860px) {
+  /* Three tiles side by side stop being readable long before the page gets this narrow. */
+  .video-grid { grid-template-columns: minmax(0, 1fr); }
+  .viewer-bar { gap: 8px 12px; }
+}
+
+@media (max-width: 720px) {
+  .transport { grid-template-columns: auto minmax(0, 1fr); }
+  .transport .segmented { grid-column: 1 / -1; justify-content: flex-start; }
+  .tile figcaption { font-size: .62rem; }
+  .length-tabs button { padding: 7px 12px 6px; }
+  /* The zoom toolbar keeps time, seek and speed on one row so the panels keep their height. */
+  .zoom-toolbar .transport { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .zoom-toolbar .transport .segmented { grid-column: auto; }
+}
+
+@media (max-width: 520px) {
+  .zoom-toolbar { grid-template-columns: 1fr; }
+  .zoom-toolbar .transport { grid-row: auto; grid-template-columns: auto minmax(0, 1fr); }
+  .zoom-toolbar .transport .segmented { grid-column: 1 / -1; }
+  .zoom-actions { justify-content: flex-start; }
+}
+
+@media (max-height: 520px) {
+  .zoom-shell { padding-top: 4px; padding-bottom: 4px; }
+  .zoom-toolbar { gap: 4px 10px; padding-bottom: 4px; }
+  .zoom-toolbar .transport { padding: 3px 6px; }
+}
+
+@media (forced-colors: active) {
+  [aria-pressed="true"],
+  .pill.is-paused {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .length-tabs button[aria-pressed="true"]:focus-visible,
+  .segmented-options button[aria-pressed="true"]:focus-visible { outline-color: HighlightText; }
+  .pill.is-paused:focus-visible { outline-color: CanvasText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-frame.is-loading .loading-bar { animation: none; }
+}
+
+/* ---------- Mechanism section ---------- */
+
+.mechanism {
+  margin-top: 8px;
+  padding: clamp(22px, 3vw, 40px) 0 clamp(26px, 3.4vw, 46px);
+  border-top: 1px solid var(--line);
+  background: var(--band);
+}
+
+.mechanism-inner {
+  width: min(94vw, 1760px);
+  margin: 0 auto;
+}
+
+.mechanism-head { margin-bottom: 16px; }
+
+.mechanism-head h2 {
+  margin: 0 0 6px;
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+
+.mech-stage {
+  max-width: 1120px;
+  margin: 0 auto;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+/* The training parts each scroll on their own, so their shared stage must not clip. */
+[data-training] .mech-stage { overflow-x: visible; }
+
+/* The panel is laid out for print at 9 cm wide; below this the 4.8 pt labels stop being legible,
+   so the diagram keeps its size and the stage scrolls instead of shrinking it further. */
+.mech-svg {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+}
+
+.mech-bar {
+  display: flex;
+  max-width: 1120px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin: 10px auto 0;
+}
+
+.mech-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.mech-step {
+  min-width: 48px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-align: center;
+}
+
+.mech-caption {
+  flex: 1 1 320px;
+  min-height: 2.4em;
+  margin: 0;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.4;
+}
+
+/* ---------- Mechanism diagram ---------- */
+
+/* Everything the animation reveals starts hidden and fades in; the step function only ever
+   adds or removes .on, so stepping backwards plays the same transitions in reverse. */
+.mech-svg text { font-family: var(--sans); }
+.mech-svg .mini { font-size: 15.5px; }
+.mech-svg .tny { font-size: 20.3px; }
+.mech-svg .lbl { font-size: 22px; }
+.mech-svg .rowlbl { font-size: 23.8px; font-weight: 700; }
+.mech-svg .bold { font-weight: 700; }
+
+.mech-svg .fade {
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+
+.mech-svg .fade.on { opacity: 1; }
+
+.mech-svg .cell rect { transition: stroke .35s ease, stroke-width .35s ease; }
+.mech-svg .cell .clean { opacity: 0; transition: opacity .45s ease; }
+.mech-svg .cell .clean.on { opacity: 1; }
+
+.mech-svg .anchor-stack .card { transition-delay: calc(var(--i) * .18s); }
+
+.mech-svg .ribbon {
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.mech-svg .ribbon.on { opacity: 1; }
+
+/* The line extends, then the head lands on the end of it. */
+.mech-svg .draw .line {
+  stroke-dashoffset: 1;
+  stroke-dasharray: 1;
+  transition: stroke-dashoffset .4s ease;
+}
+
+.mech-svg .draw.on .line { stroke-dashoffset: 0; }
+.mech-svg .draw .line.is-dashed { stroke-dashoffset: 0; opacity: 0; transition: opacity .4s ease; }
+.mech-svg .draw.on .line.is-dashed { opacity: 1; }
+
+.mech-svg .draw .head {
+  opacity: 0;
+  transition: opacity .2s ease .32s;
+}
+
+.mech-svg .draw.on .head { opacity: 1; }
+
+@media (max-width: 720px) {
+  .mech-caption { font-size: .72rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mech-svg .fade,
+  .mech-svg .ribbon,
+  .mech-svg .cell rect,
+  .mech-svg .cell .clean,
+  .mech-svg .draw .line,
+  .mech-svg .draw .head { transition: none; }
+}
+
+/* ---------- Training section ---------- */
+
+.mechanism.is-plain {
+  background: var(--bg);
+}
+
+.train-svg {
+  display: block;
+  width: 100%;
+  min-width: 720px;
+  height: auto;
+}
+
+.train-svg text { font-family: var(--sans); }
+.train-svg .tny { font-size: 18px; }
+.train-svg .lab { font-size: 19.8px; }
+.train-svg .sm { font-size: 16.5px; }
+.train-svg .h { font-size: 21.6px; font-weight: 700; }
+
+.train-svg .fade { opacity: 0; transition: opacity .45s ease; }
+.train-svg .fade.on { opacity: 1; }
+
+.train-svg .frame-edge {
+  stroke: #94a3b8;
+  stroke-width: 1.3;
+  transition: stroke .35s ease;
+}
+
+.train-svg .block.is-anchor .frame-edge { stroke: #B45309; stroke-width: 1.8; }
+.train-svg .block.is-dense .frame-edge { stroke: #2563B8; stroke-width: 1.8; }
+
+/* A frame that time rebasing drops fades most of the way out and stays as a ghost. */
+.train-svg .frame { opacity: 1; transition: opacity .45s ease; }
+.train-svg .frame.is-dropped { opacity: .14; }
+
+.train-svg .chip-body {
+  fill: #FEF3C7;
+  stroke: #B45309;
+  stroke-width: 1.8;
+  transition: fill .4s ease, stroke .4s ease;
+}
+
+.train-svg .chip[data-role="dense"] .chip-body { fill: #E0F2FE; stroke: #2563B8; }
+
+.train-svg .chip-noise {
+  opacity: 0;
+  stroke: none;
+  transition: opacity .4s ease;
+}
+
+.train-svg .chip.is-noisy .chip-noise { opacity: 1; }
+
+.train-svg .draw .line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset .4s ease;
+}
+
+.train-svg .draw.on .line { stroke-dashoffset: 0; }
+.train-svg .draw .line.is-dashed { stroke-dashoffset: 0; opacity: 0; transition: opacity .4s ease; }
+.train-svg .draw.on .line.is-dashed { opacity: 1; }
+.train-svg .draw .head { opacity: 0; transition: opacity .2s ease .32s; }
+.train-svg .draw.on .head { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .train-svg .fade,
+  .train-svg .frame,
+  .train-svg .chip-body,
+  .train-svg .chip-noise,
+  .train-svg .draw .line,
+  .train-svg .draw .head { transition: none; }
+}
+
+/* The three parts stay stacked and visible; the walkthrough fills them in as it runs. */
+.train-part + .train-part { margin-top: clamp(20px, 2.4vw, 34px); }
+
+.train-part-title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.train-part-stage {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.train-svg .mask-cell { transition: fill .3s ease; }
+.train-svg .mask-cell.is-on { fill: #FBDF93; }
+.train-svg .mask-cell.is-on.is-dense { fill: #A8CFF0; }
+/* An attended cell is speckled when the key it reads is a noised latent. */
+.train-svg .mask-cell.is-on.is-noisy { fill: url(#tr-mask-anchor-noisy); }
+.train-svg .mask-cell.is-on.is-dense.is-noisy { fill: url(#tr-mask-dense-noisy); }
+.train-svg .bold { font-weight: 700; }
+
+/* Each training part carries its own controls, right under its own diagram. */
+.train-bar { max-width: none; margin-top: 8px; }
+
+/* ---------- Latency explorer ---------- */
+
+.lat-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-bottom: 18px;
+}
+
+.lat-controls .segmented-options button:disabled {
+  color: var(--line);
+  cursor: not-allowed;
+}
+
+.lat-chart {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 470px));
+  justify-content: center;
+  gap: 22px 40px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .lat-chart { grid-template-columns: minmax(0, 470px); }
+}
+
+.lat-block-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: .66rem;
+}
+
+.lat-block-head strong { color: var(--ink); font-size: .78rem; font-weight: 600; }
+
+.lat-row {
+  display: grid;
+  grid-template-columns: 8.4em minmax(0, 1fr) 5.6em 3.4em;
+  align-items: center;
+  gap: 8px;
+  padding: 1.5px 0;
+  font-size: .64rem;
+}
+
+.lat-name { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lat-row.is-main .lat-name { color: var(--accent); font-weight: 700; }
+
+.lat-track {
+  height: 13px;
+  background: color-mix(in srgb, var(--surface) 70%, var(--paper));
+}
+
+.lat-bar {
+  display: block;
+  height: 100%;
+  background: #b9c2cc;
+  transition: width .35s ease;
+}
+
+.lat-row.is-ours .lat-bar { background: var(--accent-mid); }
+.lat-row.is-main .lat-bar { background: var(--accent); }
+
+.lat-value {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.lat-value small { color: var(--muted); font-size: .84em; }
+
+.lat-ratio {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.lat-row.is-main .lat-ratio { color: var(--accent); font-weight: 700; }
+
+.lat-speed {
+  margin: 5px 0 0;
+  color: var(--accent);
+  font-size: .62rem;
+  font-weight: 700;
+}
+
+.lat-note {
+  max-width: 980px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: .66rem;
+  line-height: 1.5;
+}
+
+/* ---------- Anchor frame markers ---------- */
+
+.seek-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+/* The thumb centre travels inset by half its width, so the ticks are inset to match. */
+.anchor-ticks {
+  position: absolute;
+  inset: auto 7px -1px;
+  height: 5px;
+  pointer-events: none;
+}
+
+.anchor-ticks i {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 5px;
+  margin-left: -1px;
+  background: var(--accent);
+  opacity: .75;
+}
+
+.tile figcaption::after {
+  content: "";
+  transition: none;
+}
+
+/* The chip rides in the caption row, never over the frame itself. */
+body.show-anchors .video-grid.is-anchor .tile.is-ours figcaption::after {
+  content: "anchor latent";
+  margin-left: 7px;
+  padding: 1px 6px;
+  border: 1px solid var(--accent-mid);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
+/* The second encoding sits after a divider in the same picker. */
+.methods-sep {
+  width: 1px;
+  height: 17px;
+  margin: 0 3px;
+  background: var(--line);
+}
+
+.method-chip.is-alt span { font-weight: 600; }
+.method-chip.is-alt.is-on { border-style: dashed; }
+
+.caveat {
+  max-width: 900px;
+  margin: 8px 0 0;
+  padding-left: 9px;
+  border-left: 2px solid var(--accent-mid);
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.45;
+}
