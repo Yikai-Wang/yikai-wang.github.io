@@ -1235,3 +1235,37 @@ body.show-anchors .video-grid.is-anchor .tile.is-ours figcaption::after {
   font-size: .72rem;
   line-height: 1.45;
 }
+
+/* ---------- Issues section ---------- */
+
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 18px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.issue { min-width: 0; margin: 0; }
+
+.issue h3 {
+  margin: 0 0 6px;
+  font-size: .74rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.issue .video-frame { max-width: none; }
+
+.issue figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.issue-bar { max-width: 1120px; margin: 14px auto 0; }
+
+@media (max-width: 860px) {
+  .issue-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}

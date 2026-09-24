@@ -553,7 +553,7 @@
   const S3W = 900;
   const S3H = 530;
   const s3 = newScene(S3W, S3H, 'Phase 2: the planner and renderer roll out the video themselves, '
-    + 'the rollout is cut at re-encoded image heads, and DMD2 scores each piece.',
+    + 'the rollout is cut at re-encoded image heads, and distribution matching scores each piece.',
   '3 · Phase 2: self-rollout distillation');
 
   const ROLE_X = 40;
@@ -748,16 +748,18 @@
 
   const dmdG = add(s3, 'g', { class: 'fade' });
   add(dmdG, 'rect', {
-    x: 392, y: 448, width: 122, height: 30, rx: 3.5,
+    x: 339, y: 448, width: 228, height: 30, rx: 3.5,
     fill: C.lossBg, stroke: C.loss, 'stroke-width': 0.65 * PT,
   });
-  text(dmdG, 'DMD2', { x: 453, y: 468, class: 'lab bold', fill: C.loss, 'text-anchor': 'middle' });
+  text(dmdG, 'distribution matching', {
+    x: 453, y: 468, class: 'lab bold', fill: C.loss, 'text-anchor': 'middle',
+  });
   const realToDmd = arrow(s3, realChip.cx, 410, 428, 444, { width: 0.45 * PT });
   const fakeToDmd = arrow(s3, fakeChip.cx, 410, 478, 444, { width: 0.45 * PT });
 
   // ----- gradients, up the free channel on the left -----
 
-  const gradRenderer = elbow(s3, [[388, 458], [184, 458], [184, REND_Y + 13], [ROLL_X - 6, REND_Y + 13]],
+  const gradRenderer = elbow(s3, [[335, 458], [184, 458], [184, REND_Y + 13], [ROLL_X - 6, REND_Y + 13]],
     { stroke: C.loss, width: 0.6 * PT, dash: '5 3.5' });
   const gradPlanner = planGroups.map((g, i) => arrow(s3,
     ROLL_X + (i * PER_GROUP + PER_GROUP / 2) * CHUNK_PITCH + 12, REND_Y - 5,
@@ -809,7 +811,7 @@
     { caption: 'The first twelve latents are decoded; the frames at the two split points are re-encoded on their own into image heads.' },
     { caption: 'The rollout splits into three pieces, the second and third starting from an image head.' },
     { caption: 'Every piece is scored by the real model and by the fake model.' },
-    { caption: 'DMD2 turns the gap between the two scores into the distillation gradient.' },
+    { caption: 'Distribution matching turns the gap between the two scores into the distillation gradient.' },
     { caption: 'It flows back into the renderer…' },
     { caption: '…and from the renderer into the planner — and no further: the // stops it at each interval boundary.' },
   ];

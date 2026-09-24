@@ -135,6 +135,49 @@
     </div>
   </section>
 
+  <section class="mechanism is-plain" aria-labelledby="issues-title" data-issues>
+    <div class="mechanism-inner">
+      <header class="mechanism-head">
+        <h2 id="issues-title">Issues we observed and solved in our framework</h2>
+        <p class="lede">Three cheaper designs we tried first. Each one fails in a way the final design removes; the clips at the top of this page are what we ship instead. All three are the four-step model.</p>
+      </header>
+
+      <div class="issue-grid">
+        <figure class="issue">
+          <h3>Stage-matched history only</h3>
+          <div class="video-frame">
+            <video src="videos-issues/same-stage-history-only.mp4" muted loop playsinline preload="none" aria-label="Renderer conditioned only on stage-matched history"></video>
+          </div>
+          <figcaption>The renderer reads only its own same-stage KV, with no clean anchors. Nothing holds neighbouring chunks to a shared structure, so appearance and motion drift across chunk boundaries.</figcaption>
+        </figure>
+
+        <figure class="issue">
+          <h3>Spliced anchors, planner KV</h3>
+          <div class="video-frame">
+            <video src="videos-issues/splice-planner-kv.mp4" muted loop playsinline preload="none" aria-label="Planner anchors kept as output, planner KV reused"></video>
+          </div>
+          <figcaption>Keeping the planner's anchor latents in the output is cheaper, but those frames came out of a different pass: a seam appears at every anchor position.</figcaption>
+        </figure>
+
+        <figure class="issue">
+          <h3>Spliced anchors, renderer KV</h3>
+          <div class="video-frame">
+            <video src="videos-issues/splice-renderer-kv.mp4" muted loop playsinline preload="none" aria-label="Planner anchors kept as output, renderer-side KV rebuilt"></video>
+          </div>
+          <figcaption>Re-encoding the anchors through the renderer first shrinks the seam, but visible luminance jumps remain at the anchor boundaries.</figcaption>
+        </figure>
+      </div>
+
+      <div class="mech-bar issue-bar">
+        <div class="mech-actions">
+          <button type="button" class="pill" data-issue="restart">Restart</button>
+          <button type="button" class="pill" data-issue="play">Play</button>
+        </div>
+        <p class="mech-caption">We therefore use the planner's anchors only as conditioning and let the renderer generate every output latent, which removes both the drift and the seam.</p>
+      </div>
+    </div>
+  </section>
+
   <dialog class="zoom" aria-label="Enlarged comparison" data-zoom>
     <div class="zoom-shell" tabindex="-1">
       <div class="zoom-toolbar">
@@ -176,5 +219,6 @@
   <script src="assets/mechanism.js"></script>
   <script src="assets/training.js"></script>
   <script src="assets/latency.js"></script>
+  <script src="assets/issues.js"></script>
 </body>
 </html>
