@@ -1110,7 +1110,7 @@ button:focus-visible {
 
 .lat-row {
   display: grid;
-  grid-template-columns: 8.4em minmax(0, 1fr) 5.6em 3.4em;
+  grid-template-columns: 9.8em minmax(0, 1fr) 5.6em 3.4em;
   align-items: center;
   gap: 8px;
   padding: 1.5px 0;

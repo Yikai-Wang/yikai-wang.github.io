@@ -17,6 +17,17 @@
   const DEFAULT_AR = 832 / 480;
   const MIN_PANEL = 48; // smallest zoom panel width, for windows too short to fit a real layout
   const JUMP_PROMPT = 72; // characters of the prompt shown in the jump list
+  // The clips are 10-bit AV1, which Safari only decodes on recent hardware. Rather than leave a
+  // reader staring at three black rectangles, say what is wrong and what to open the page in.
+  const AV1_HINT = 'These clips are encoded as AV1 — please open this page in a browser with AV1 '
+    + 'support, such as Chrome.';
+  const canPlayAV1 = (() => {
+    try {
+      return document.createElement('video').canPlayType('video/mp4; codecs="av01.0.05M.10"') !== '';
+    } catch (_) {
+      return true; // no answer is not an answer; only complain when a video actually fails
+    }
+  })();
   // The VAE gives the first frame its own latent and packs every later four into one, so latent k
   // covers frames 4k-3..4k. Anchors sit on every tenth latent, starting at the image latent.
   const ANCHOR_STRIDE = 10;
@@ -418,10 +429,10 @@
 
   function updateError() {
     const broken = shown().filter((p) => loaded(p) && p.video.error);
-    errorNote.hidden = !broken.length;
+    errorNote.hidden = !broken.length && canPlayAV1;
     errorNote.textContent = broken.length
-      ? `These videos could not be loaded: ${broken.map((p) => p.method.label).join(', ')}.`
-      : '';
+      ? `These videos could not be loaded: ${broken.map((p) => p.method.label).join(', ')}. ${AV1_HINT}`
+      : (canPlayAV1 ? '' : AV1_HINT);
     // The note sits behind the zoom dialog, so the caption has to carry the reason for a black panel.
     players.forEach((p) => {
       const text = broken.includes(p) ? `${p.method.label} — not available` : p.method.label;

@@ -16,7 +16,11 @@
   ];
 
   const OURS = 'Ours';
+  const OURS_CP = 'Ours (CP planner)';
   const REFERENCE = 'Bidirectional'; // not drawn; every bar is reported relative to it
+  // Replicating the planner wins at 480p; context-parallel planning wins at 720p, so each
+  // resolution quotes its speedup against the variant that is actually the one to deploy there.
+  const mainVariant = () => (state.res === '720p' ? OURS_CP : OURS);
   const SCHEDULES = ['Self-Forcing', 'HiAR', OURS, 'Ours (CP planner)', 'Ours (streaming)'];
 
   const DATA = {
@@ -111,13 +115,14 @@
       block.appendChild(head);
 
       // Each length is scaled on its own, so a 65 s bar never flattens the 5 s comparison.
+      const main = mainVariant();
       const max = Math.max(...names.map((name) => rows[name][li][0]));
       const reference = rows[REFERENCE] ? rows[REFERENCE][li][0] : 0;
       names.forEach((name) => {
         const [mean, sd] = rows[name][li];
         const row = document.createElement('div');
         const ours = name.startsWith('Ours');
-        row.className = `lat-row${ours ? ' is-ours' : ''}${name === OURS ? ' is-main' : ''}`;
+        row.className = `lat-row${ours ? ' is-ours' : ''}${name === main ? ' is-main' : ''}`;
         const barW = (mean / max) * 100;
         const ratio = reference ? `${(reference / mean).toFixed(2)}×` : '';
         row.innerHTML = `
@@ -130,13 +135,13 @@
 
       const speed = [];
       ['HiAR', 'Self-Forcing'].forEach((base) => {
-        if (!rows[base] || !rows[OURS]) return;
-        speed.push(`${(rows[base][li][0] / rows[OURS][li][0]).toFixed(2)}× vs ${base}`);
+        if (!rows[base] || !rows[main]) return;
+        speed.push(`${(rows[base][li][0] / rows[main][li][0]).toFixed(2)}× vs ${base}`);
       });
       if (speed.length) {
         const foot = document.createElement('p');
         foot.className = 'lat-speed';
-        foot.textContent = `Ours: ${speed.join(' · ')}`;
+        foot.textContent = `${main}: ${speed.join(' · ')}`;
         block.appendChild(foot);
       }
       chart.appendChild(block);
