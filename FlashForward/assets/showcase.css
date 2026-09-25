@@ -1236,6 +1236,8 @@ body.show-anchors .video-grid.is-anchor .tile.is-ours figcaption::after {
   line-height: 1.45;
 }
 
+.caveat b { color: var(--ink); font-weight: 600; }
+
 /* ---------- Issues section ---------- */
 
 .issue-grid {

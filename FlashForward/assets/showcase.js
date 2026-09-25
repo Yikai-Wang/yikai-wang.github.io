@@ -222,11 +222,18 @@
   // flight, later requests collapse into a single pending target instead of queueing up.
   let pendingSeek = null;
   let seekTarget = null; // target of the seek in flight
-  const anySeeking = () => shown().some((p) => p.video.seeking);
+  let seekIssued = 0;    // when that seek was started, to notice one that never reports back
+  // WebKit sometimes drops the last 'seeked' of a group: the element sits at the target with a
+  // decoded frame and readyState 4, but its 'seeking' flag stays set. That one flag would block
+  // every later seek forever, so a seek that has not finished by now stops counting as in flight.
+  const SEEK_TIMEOUT = 2500;
+  const anySeeking = () => performance.now() - seekIssued < SEEK_TIMEOUT
+    && shown().some((p) => p.video.seeking);
 
   function seekTo(target) {
     pendingSeek = null;
     seekTarget = target;
+    seekIssued = performance.now();
     shown().forEach((p) => {
       if (loaded(p)) p.video.currentTime = target;
     });
@@ -1223,6 +1230,9 @@
   // ---------- Frame loop ----------
 
   function tick() {
+    // 'seeked' is the usual trigger for the queued target, but it is not guaranteed to arrive, so
+    // the queue is also drained here rather than leaving the transport stuck on a stale position.
+    if (pendingSeek !== null && !anySeeking()) seekTo(pendingSeek);
     syncPlayback();
     correctDrift();
     updateTransports();
