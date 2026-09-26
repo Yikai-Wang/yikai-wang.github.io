@@ -18,7 +18,7 @@
   const OURS = 'Ours';
   const OURS_CP = 'Ours (CP planner)';
   const REFERENCE = 'Bidirectional'; // not drawn; every bar is reported relative to it
-  // Replicating the planner wins at 480p; context-parallel planning wins at 720p, so each
+  // A single-device planner generally wins at 480p and context-parallel planning at 720p, so each
   // resolution quotes its speedup against the variant that is actually the one to deploy there.
   const mainVariant = () => (state.res === '720p' ? OURS_CP : OURS);
   const SCHEDULES = ['Self-Forcing', 'HiAR', OURS, 'Ours (CP planner)', 'Ours (streaming)'];
@@ -149,10 +149,11 @@
 
     const hasStreaming = Boolean(rows['Ours (streaming)']);
     note.textContent = `${state.model} generator on ${HARDWARE[state.model]}, ${state.res}, four GPUs. `
-      + 'Seconds per video, lower is better; ± is the standard deviation over runs. Bars are scaled '
+      + 'Seconds per video, lower is better; ± is the standard deviation over videos. Bars are scaled '
       + 'within each length, and the right-hand column is the speedup over a bidirectional '
       + 'full-sequence sampler at the same setting.'
-      + (hasStreaming ? ' The streaming row dedicates a fifth GPU to the planner, so it is not an equal-device comparison.' : '');
+      + (hasStreaming ? ' The streaming row dedicates a fifth GPU to the planner, so it is not an equal-device comparison.' : '')
+      + (state.model === '14B' ? ' The 14B numbers are systems-only timing with the 14B backbone.' : '');
   }
 
   host.addEventListener('click', (event) => {

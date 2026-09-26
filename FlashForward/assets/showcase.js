@@ -77,6 +77,22 @@
     return;
   }
 
+  // Where the reader is: `visible` while any part of the comparison is on screen, `focused` while
+  // it crosses the middle of the viewport, which is when the keyboard shortcuts belong to it.
+  const viewer = { visible: true, focused: true };
+  if ('IntersectionObserver' in window) {
+    const host = $('.viewer');
+    // A comparison tucked under the sticky section bar is out of sight, so the bar is not counted.
+    const bar = document.querySelector('nav.toc');
+    const barH = bar ? Math.round(bar.getBoundingClientRect().height) : 0;
+    new IntersectionObserver((entries) => {
+      viewer.visible = entries[entries.length - 1].isIntersecting;
+    }, { rootMargin: `-${barH}px 0px 0px 0px` }).observe(host);
+    new IntersectionObserver((entries) => {
+      viewer.focused = entries[entries.length - 1].isIntersecting;
+    }, { rootMargin: '-20% 0px -20% 0px' }).observe(host);
+  }
+
   const state = {
     setting: SETTINGS[0],
     index: Object.fromEntries(SETTINGS.map((s) => [s, 0])),
@@ -268,7 +284,10 @@
 
   // The methods only stay in step if they start together, so playback waits for the slowest one:
   // while any of them is seeking or short of buffered data, all of them stay paused.
-  const wantPlay = () => !state.userPaused && !state.scrubbing && !document.hidden;
+  // The comparison also rests while it is scrolled out of view, so three decoders never run behind
+  // the rest of the page; the zoom view covers the page and counts as in view.
+  const wantPlay = () => !state.userPaused && !state.scrubbing && !document.hidden
+    && (viewer.visible || zoomDialog.open);
   // A video that has ended is counted as ready and never restarted: play() on an ended element
   // rewinds it to the start, which would flash frame 0 in the tiles that end a frame early.
   const groupReady = () => {
@@ -1179,6 +1198,8 @@
   document.addEventListener('keydown', (event) => {
     if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
     if (!shortcutToggle.checked) return;
+    // Elsewhere on the page the arrow keys and Space scroll as usual.
+    if (!zoomDialog.open && !viewer.focused) return;
     const el = event.target;
     const tag = el && el.tagName;
     const onRange = tag === 'INPUT' && el.type === 'range';
@@ -1252,7 +1273,8 @@
 
   setRate(1);
   const initial = fromHash() || [state.setting, 0];
-  show(initial[0], initial[1]);
+  // The address keeps whatever the reader arrived with (a section link, say) until they pick a sample.
+  show(initial[0], initial[1], { updateHash: false });
   applyMethods();
   window.addEventListener('resize', measurePrompt);
   requestAnimationFrame(tick);

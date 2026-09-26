@@ -7,7 +7,7 @@
   --muted: #595959;
   --line: #d6d6d6;
   --line-soft: #e5e5e5;
-  --accent: #39c;
+  --accent: #1f74a3; /* #39c before; darkened to reach 4.5:1 against white for text */
   --accent-soft: #f2f5f8;
   --accent-mid: #9cc7e6;
   --band: #f4f5f7;

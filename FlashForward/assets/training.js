@@ -89,6 +89,7 @@
   const scenes = [];
   const parts = [];
 
+  let defsBuilt = false;
   function newScene(w, h, label, title) {
     // plain HTML, not add(): add() builds SVG-namespaced nodes, and an SVG <div> renders as nothing
     const part = document.createElement('div');
@@ -105,7 +106,16 @@
     const svg = el('svg', {
       viewBox: `0 0 ${w} ${h}`, class: 'train-svg', role: 'img', 'aria-label': label,
     });
-    const defs = add(svg, 'defs');
+    // The patterns and frame symbols are shared by every scene, so only the first one defines
+    // them; ids must stay unique across the document.
+    if (!defsBuilt) buildDefs(add(svg, 'defs'));
+    holder.appendChild(svg);
+    scenes.push(svg);
+    return svg;
+  }
+
+  function buildDefs(defs) {
+    defsBuilt = true;
     // Speckle that marks a latent as noised.
     const speckle = (id, background) => {
       const pat = add(defs, 'pattern', {
@@ -126,9 +136,6 @@
         href: FRAMES, x: 0, y: 0, width: FRAME_W, height: FRAME_H * FRAME_N, preserveAspectRatio: 'none',
       });
     }
-    holder.appendChild(svg);
-    scenes.push(svg);
-    return svg;
   }
 
   const frame = (parent, index, x, y, w, h, cls = '') => {
@@ -527,7 +534,7 @@
   const windowNote = text(s2, 'sliding window — chunks 1–4: anchors 1, 4', {
     x: GX + P2_N * CELL / 2, y: GY + P2_N * CELL + 22, class: 'tny fade', fill: C.slate, 'text-anchor': 'middle',
   });
-  const histNote = text(s2, 'chunks 5–7: anchors 4, 7, plus three chunks of own history', {
+  const histNote = text(s2, 'chunks 5–7: anchors 4, 7, plus 3-chunk history (5 in model)', {
     x: GX + P2_N * CELL / 2, y: GY + P2_N * CELL + 44, class: 'tny fade', fill: C.slate, 'text-anchor': 'middle',
   });
 
@@ -764,7 +771,7 @@
   const gradPlanner = planGroups.map((g, i) => arrow(s3,
     ROLL_X + (i * PER_GROUP + PER_GROUP / 2) * CHUNK_PITCH + 12, REND_Y - 5,
     g.cx + 12, PLAN_Y + 28, { stroke: C.loss, width: 0.55 * PT, dash: '5 3.5' }));
-  const gradNote = text(s3, 'the rollout is detached between intervals, so no gradient runs back through it', {
+  const gradNote = text(s3, 'the planner chain is detached between blocks; within the renderer, gradients still flow from later to earlier chunks', {
     x: S3W / 2, y: 512, class: 'tny fade', fill: C.slate, 'text-anchor': 'middle',
   });
   // ======================================================================
@@ -800,16 +807,16 @@
     { caption: 'A noisy anchor attends to the clean anchors before it — never to its own clean copy.' },
     { caption: 'Renderer chunks 1–4 read the clean anchors that bracket them: anchors 1 and 4.' },
     { caption: 'Chunks 5–7 read the next window: anchors 4 and 7. That is the sliding window.' },
-    { caption: 'Each renderer chunk also reads its own three-chunk noisy history, and itself.' },
+    { caption: 'Each renderer chunk also reads its recent same-stage noisy history (three chunks here; up to five in the model), and itself.' },
     { caption: 'The rebased sample is packed alongside but never attends across to the first one.' },
     { caption: 'Both roles are supervised by one flow matching loss, in one backward pass.' },
     { caption: 'Phase 2: both roles keep running, but there is no real video left to read.' },
     { caption: 'The planner samples its first three anchors.' },
-    { caption: 'It plans the next interval, and the renderer fills the first one behind it.' },
-    { caption: 'The same again: plan ahead, render the interval the previous anchors bracket.' },
-    { caption: 'The last interval renders: a long video the student produced entirely by itself.' },
-    { caption: 'The first twelve latents are decoded; the frames at the two split points are re-encoded on their own into image heads.' },
-    { caption: 'The rollout splits into three pieces, the second and third starting from an image head.' },
+    { caption: 'It plans the next anchors, reading the clean KV of the blocks before it.' },
+    { caption: 'The planner finishes the whole anchor rollout before any chunk is rendered.' },
+    { caption: 'The renderer then denoises every chunk in one block-causal forward per stage: a long video the student produced entirely by itself.' },
+    { caption: 'The first twelve latents are decoded; the frames at the split points are re-encoded on their own into image heads.' },
+    { caption: 'The rollout splits into score-window pieces (three here; four tiles in the model), each later piece starting from an image head.' },
     { caption: 'Every piece is scored by the real model and by the fake model.' },
     { caption: 'Distribution matching turns the gap between the two scores into the distillation gradient.' },
     { caption: 'It flows back into the renderer…' },
@@ -948,9 +955,9 @@
     show(tagRenderer, step >= 28);
     planGroups.forEach((g, i) => show(g.node, step >= 29 + i));
     arArrows.forEach((a, i) => show(a, step >= 30 + i));
-    // each interval is planned one step before it is rendered
-    fwdArrows.forEach((a, i) => show(a, step >= 30 + i));
-    chunks.forEach((c, i) => show(c.g, step >= 30 + Math.floor(i / PER_GROUP)));
+    // The planner rolls out every anchor first; the renderer only starts once they all exist.
+    showAll(fwdArrows, step >= 32);
+    showAll(chunks.map((c) => c.g), step >= 32);
     show(detour, step >= 33);
     showAll(pieces.map((p) => p.node), step >= 34);
     showAll(headToPiece, step >= 34);
@@ -983,7 +990,7 @@
     bar.innerHTML = `
       <div class="mech-actions">
         <button type="button" class="pill" data-act="restart">Restart</button>
-        <button type="button" class="pill" data-act="prev" aria-label="Previous step">Back</button>
+        <button type="button" class="pill" data-act="prev" aria-label="Back one step">Back</button>
         <button type="button" class="pill" data-act="play">Play</button>
         <button type="button" class="pill" data-act="next" aria-label="Next step">Next</button>
         <output class="mech-step" aria-label="Step">0 / ${last}</output>

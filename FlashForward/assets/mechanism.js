@@ -300,7 +300,7 @@
   text(closing, 'Every renderer denoising forward advances generation and publishes', {
     x: 464.6, y: 424, class: 'tny bold', 'text-anchor': 'middle', fill: C.slate,
   });
-  text(closing, 'same-stage KV with no extra cache-update anywhere', {
+  text(closing, 'same-stage KV: no renderer forward is spent only on a cache update', {
     x: 464.6, y: 450, class: 'tny bold', 'text-anchor': 'middle', fill: C.slate,
   });
 
@@ -360,7 +360,7 @@
     { caption: 'The planner is already running ahead to the next anchor while the renderer streams.' },
     { caption: 'Round 8: the wavefront runs off the right edge and starts to drain.' },
     { caption: 'Round 9: the last chunks fall through the remaining stages.' },
-    { caption: 'Round 10: GPU 3 emits the final chunk. Nothing ever paid for a cache update.' },
+    { caption: 'Round 10: GPU 3 emits the final chunk. No renderer forward was spent only on a cache update.' },
   ];
   const LAST = STEPS.length - 1;
 

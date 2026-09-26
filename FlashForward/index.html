@@ -3,18 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Remove this line once the paper is public so search engines can index the page. -->
   <meta name="robots" content="noindex, nofollow">
-  <title>FlashForward</title>
-  <link rel="icon" href="data:,">
+  <title>FlashForward: In-Flight KV Cache with Clean Anchors for Faster Autoregressive Video Diffusion</title>
+  <meta name="description" content="FlashForward reuses the in-flight KV cache of every denoising forward and adds sparse, two-sided clean anchors, so the renderer needs no cache-update-only forwards and pipelines chunks across GPUs: 1.16–1.69× faster than HiAR and 1.42–2.92× faster than Self-Forcing, with higher VBench scores.">
+  <link rel="canonical" href="https://yikai-wang.github.io/FlashForward/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FlashForward: In-Flight KV Cache with Clean Anchors for Faster Autoregressive Video Diffusion">
+  <meta property="og:description" content="No renderer cache-update-only forwards, one GPU per denoising stage, sparse clean anchors for long-range coherence. 1.16–1.69× faster than HiAR and 1.42–2.92× faster than Self-Forcing.">
+  <meta property="og:url" content="https://yikai-wang.github.io/FlashForward/">
+  <meta property="og:image" content="https://yikai-wang.github.io/FlashForward/assets/figures/teaser-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="stylesheet" href="assets/showcase.css">
+  <link rel="stylesheet" href="assets/page.css">
 </head>
 <body>
-  <main class="page">
-    <header class="page-head">
+  <header class="page-top" id="top">
+    <div class="page-head">
+      <p class="page-name"><span aria-hidden="true">⚡️</span> FlashForward</p>
       <h1>In-Flight KV Cache with Clean Anchors for<br>Faster Autoregressive Video Diffusion</h1>
-    </header>
 
-    <section class="viewer" aria-labelledby="qual-title">
+      <ul class="authors" aria-label="Authors">
+        <li><a href="https://yikai-wang.github.io/">Yikai Wang</a><sup>1</sup></li>
+        <li><a href="https://brandonhan.uk/">Xiao Han</a><sup>1</sup></li>
+        <li><a href="https://xumengmeng.com/">Mengmeng Xu</a><sup>1</sup></li>
+        <li><a href="https://www.juancprzs.com/">Juan C. Pérez</a><sup>1</sup></li>
+        <li><a href="https://scholar.google.com/citations?user=bOld-YwAAAAJ">Yiannis Douratsos</a><sup>1</sup></li>
+        <li class="author-break" aria-hidden="true"></li>
+        <li><a href="https://senhe.github.io/">Sen He</a><sup>1</sup></li>
+        <li><a href="https://www.franciszzj.com/">Zijian Zhou</a><sup>1</sup></li>
+        <li><a href="https://sii-ferenas.github.io/">Fei Zhang</a><sup>1</sup></li>
+        <li><a href="https://zhaochongan.github.io/">Zhaochong An</a><sup>1</sup></li>
+        <li><a href="https://scholar.google.com/citations?user=Vbvimu4AAAAJ">Juan-Manuel Pérez-Rúa</a><sup>1</sup></li>
+        <li class="author-break" aria-hidden="true"></li>
+        <li><a href="https://www.mmlab-ntu.com/person/ccloy/">Chen Change Loy</a><sup>2</sup></li>
+        <li><a href="https://www.surrey.ac.uk/people/tao-xiang">Tao Xiang</a><sup>1</sup></li>
+      </ul>
+      <p class="affiliations"><span><sup>1</sup>Meta</span><span><sup>2</sup>S-Lab, Nanyang Technological University</span></p>
+
+      <!-- Swap the "is-soon" span for an <a class="link-btn" href="..."> once the arXiv link exists. -->
+      <div class="head-links">
+        <span class="link-btn is-soon">arXiv <small>coming soon</small></span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <div class="toc-inner">
+      <a class="toc-home" href="#top"><span aria-hidden="true">⚡️</span> FlashForward</a>
+      <ol data-toc>
+        <li><a href="#tldr">TL;DR</a></li>
+        <li><a href="#comparison">Comparisons</a></li>
+        <li><a href="#latency">Speed</a></li>
+        <li><a href="#generation">Generation</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#issues">Solved issues</a></li>
+        <li><a href="#bibtex">BibTeX</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="tldr" id="tldr" aria-labelledby="tldr-title">
+      <header class="mechanism-head">
+        <h2 id="tldr-title">TL;DR</h2>
+      </header>
+      <ul class="tldr-points">
+        <li>
+          <h3>Hidden cache-only forwards</h3>
+          <p>Autoregressive video diffusion generates chunk by chunk. To remember past chunks, prior methods run extra forwards that rebuild a clean or less-noisy KV cache but never advance the video.</p>
+        </li>
+        <li>
+          <h3>In-flight KV reuse</h3>
+          <p>Every denoising forward already computes its chunk's KV. FlashForward hands it straight to the next chunk, removing context re-encoding, so with one GPU per denoising stage, different chunks run concurrently.</p>
+        </li>
+        <li>
+          <h3>Sparse clean anchors</h3>
+          <p>Reused history is noisy, so appearance and motion drift. A planner generates sparse clean anchors ahead of time, giving every chunk clean guidance from both the past and the future.</p>
+        </li>
+        <li>
+          <h3>Faster, higher quality</h3>
+          <p>With up to four GPUs on videos of 20 s or longer: <b>1.16–1.69×</b> faster than HiAR and <b>1.42–2.92×</b> faster than Self-Forcing, with higher VBench scores that stay stable up to 65 s.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="viewer" id="comparison" aria-labelledby="qual-title">
       <header class="mechanism-head">
         <h2 id="qual-title">Qualitative comparisons</h2>
         <p class="lede">Each sample shows one prompt generated by <b>Self-Forcing</b>, <b>HiAR</b> and <b class="is-ours">Ours</b>, played in sync. Choose a length, tick the methods you want to watch, switch samples with the arrows, and zoom in to inspect details.</p>
@@ -27,7 +105,7 @@
           <span class="methods-label">Methods</span>
           <div class="methods-options"></div>
         </div>
-        <div class="nav" aria-label="Sample navigation">
+        <div class="nav" role="group" aria-label="Sample navigation">
           <button type="button" class="nav-button" data-action="prev" aria-label="Previous sample" title="Previous sample (←)">←</button>
           <output class="nav-status" data-counter aria-live="polite">01 / 01</output>
           <button type="button" class="nav-button" data-action="next" aria-label="Next sample" title="Next sample (→)">→</button>
@@ -73,7 +151,7 @@
     </section>
   </main>
 
-  <section class="mechanism" aria-labelledby="lat-title" data-latency>
+  <section class="mechanism" id="latency" aria-labelledby="lat-title" data-latency>
     <div class="mechanism-inner">
       <header class="mechanism-head">
         <h2 id="lat-title">How fast it runs</h2>
@@ -102,7 +180,7 @@
     </div>
   </section>
 
-  <section class="mechanism is-plain" aria-labelledby="mech-title" data-mechanism>
+  <section class="mechanism is-plain" id="generation" aria-labelledby="mech-title" data-mechanism>
     <div class="mechanism-inner">
       <header class="mechanism-head">
         <h2 id="mech-title">How the video is generated</h2>
@@ -114,7 +192,7 @@
       <div class="mech-bar">
         <div class="mech-actions">
           <button type="button" class="pill" data-mech="restart">Restart</button>
-          <button type="button" class="pill" data-mech="prev" aria-label="Previous step">Back</button>
+          <button type="button" class="pill" data-mech="prev" aria-label="Back one step">Back</button>
           <button type="button" class="pill" data-mech="play">Pause</button>
           <button type="button" class="pill" data-mech="next" aria-label="Next step">Next</button>
           <output class="mech-step" data-mech-step aria-label="Step">0 / 19</output>
@@ -124,7 +202,7 @@
     </div>
   </section>
 
-  <section class="mechanism" aria-labelledby="train-title" data-training>
+  <section class="mechanism" id="training" aria-labelledby="train-title" data-training>
     <div class="mechanism-inner">
       <header class="mechanism-head">
         <h2 id="train-title">How the model is trained</h2>
@@ -135,11 +213,11 @@
     </div>
   </section>
 
-  <section class="mechanism is-plain" aria-labelledby="issues-title" data-issues>
+  <section class="mechanism is-plain" id="issues" aria-labelledby="issues-title" data-issues>
     <div class="mechanism-inner">
       <header class="mechanism-head">
         <h2 id="issues-title">Issues we observed and solved in our framework</h2>
-        <p class="lede">Three cheaper designs we tried first. Each one fails in a way the final design removes; the clips at the top of this page are what we ship instead. All three are the four-step model.</p>
+        <p class="lede">Three cheaper designs we tried first. Each one fails in a way the final design avoids or greatly reduces; the clips at the top of this page are what we ship instead. All three are the four-step model.</p>
       </header>
 
       <div class="issue-grid">
@@ -173,7 +251,24 @@
           <button type="button" class="pill" data-issue="restart">Restart</button>
           <button type="button" class="pill" data-issue="play">Play</button>
         </div>
-        <p class="mech-caption">We therefore use the planner's anchors only as conditioning and let the renderer generate every output latent, which removes both the drift and the seam.</p>
+        <p class="mech-caption">We therefore use the planner's anchors only as conditioning and let the renderer generate every output latent, which stabilizes the drift and greatly reduces the seam.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mechanism" id="bibtex" aria-labelledby="bibtex-title">
+    <div class="mechanism-inner">
+      <header class="mechanism-head">
+        <h2 id="bibtex-title">BibTeX</h2>
+      </header>
+      <div class="bibtex">
+        <pre><code data-bibtex>@article{wang2026flashforward,
+  title   = {In-Flight {KV} Cache with Clean Anchors for Faster Autoregressive Video Diffusion},
+  author  = {Wang, Yikai and Han, Xiao and Xu, Mengmeng and P{\'e}rez, Juan C. and Douratsos, Yiannis and He, Sen and Zhou, Zijian and Zhang, Fei and An, Zhaochong and P{\'e}rez-R{\'u}a, Juan-Manuel and Loy, Chen Change and Xiang, Tao},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+        <button type="button" class="pill" data-copy-bibtex hidden>Copy</button>
       </div>
     </div>
   </section>
@@ -181,7 +276,7 @@
   <dialog class="zoom" aria-label="Enlarged comparison" data-zoom>
     <div class="zoom-shell" tabindex="-1">
       <div class="zoom-toolbar">
-        <div class="nav zoom-nav" aria-label="Sample navigation">
+        <div class="nav zoom-nav" role="group" aria-label="Sample navigation">
           <button type="button" class="nav-button" data-action="prev" aria-label="Previous sample" title="Previous sample (←)">←</button>
           <output class="nav-status" data-counter>01 / 01</output>
           <button type="button" class="nav-button" data-action="next" aria-label="Next sample" title="Next sample (→)">→</button>
@@ -220,5 +315,6 @@
   <script src="assets/training.js"></script>
   <script src="assets/latency.js"></script>
   <script src="assets/issues.js"></script>
+  <script src="assets/page.js"></script>
 </body>
 </html>
