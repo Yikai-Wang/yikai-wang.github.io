@@ -1,0 +1,178 @@
+/* Section 05 · Results. Every selector is scoped to one of this section's slide ids. */
+
+/* ---------- Shared SVG vocabulary (chart style B, lane diagram A) ---------- */
+
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .r5-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) svg text {
+  fill: var(--ink);
+  font-size: 26px;
+}
+
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-lbl { fill: var(--ink-soft); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-mut { fill: var(--muted); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-b { font-weight: 700; }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-ours { fill: var(--ours); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-hiar { fill: var(--hiar-text); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-sf { fill: var(--sf-text); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-anchor { fill: var(--anchor-text); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-kv { fill: var(--kv); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-slate { fill: var(--slate); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .t-white { fill: #fff; }
+
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-ours { fill: var(--ours); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-ours-soft { fill: var(--ours-soft); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-hiar { fill: var(--hiar); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-sf { fill: var(--sf); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-other { fill: var(--line); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-anchor { fill: var(--anchor); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-anchor-bg { fill: var(--anchor-bg); stroke: var(--anchor); stroke-width: 2; }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-slate { fill: var(--slate); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-surface { fill: var(--surface); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-fill { fill: var(--fill); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .f-white { fill: #fff; }
+
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .grid { stroke: var(--line-soft); stroke-width: 2; }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .axis { stroke: var(--slate); stroke-width: 2; }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .fade-in { opacity: 0; transition: opacity .45s var(--ease); }
+:is(#s-training, #s-latency, #s-scaling, #s-streaming, #s-vbench, #s-vbench-long) .fade-in.on { opacity: 1; }
+
+/* ---------- s-training ---------- */
+
+#s-training .bd { justify-content: center; }
+#s-training .tr-card { fill: var(--surface); }
+#s-training .tr-disc { fill: var(--slate); }
+#s-training .tr-film { fill: #1b1e24; }
+#s-training .tr-hole { fill: #f5f6f7; opacity: .85; }
+#s-training .tr-seq { fill: none; stroke: var(--slate); stroke-width: 2; stroke-dasharray: 8 6; }
+#s-training .tr-link { fill: none; stroke: var(--slate); stroke-width: 3; }
+#s-training .tr-head { fill: var(--slate); }
+#s-training .tr-grad { fill: none; stroke: var(--slate); stroke-width: 3.5; stroke-dasharray: 10 7; }
+#s-training .tr-grad-solid { stroke-dasharray: none; stroke-width: 3; }
+#s-training .tr-grad-head { fill: var(--slate); }
+#s-training .tr-badge-p { fill: var(--anchor-bg); stroke: var(--anchor); stroke-width: 2.5; }
+#s-training .tr-badge-r { fill: var(--ours-soft); stroke: var(--ours); stroke-width: 2.5; }
+#s-training .tr-layer { fill: #fff; opacity: .12; }
+#s-training .tr-judge { fill: #fff; stroke: var(--slate); stroke-width: 2.5; }
+#s-training .tr-chip { fill: var(--ours); }
+#s-training .tr-thumb-frame { fill: none; stroke: var(--ours); stroke-width: 3; }
+#s-training .tr-ruler { stroke: var(--slate); stroke-width: 3; fill: none; }
+#s-training .tr-ruler-shift { stroke: var(--anchor); stroke-width: 3; fill: none; }
+
+#s-training .tr-base { transition: transform .7s var(--ease); }
+#s-training .tr-base.tr-solo { transform: translateX(635px); }
+#s-training .tr-p1.is-shown { transition-delay: .3s; }
+
+/* ---------- s-latency ---------- */
+
+#s-latency .lat-note { margin: -8px 0 14px; }
+#s-latency .lat-note b { color: var(--ink-soft); }
+#s-latency .lat-callout { margin-top: auto; margin-bottom: 26px; padding: 22px 36px; font-size: 34px; }
+#s-latency .lat-chip { fill: var(--ours-soft); }
+#s-latency .lat-cp { fill: none; stroke: var(--ours); stroke-width: 2; }
+#s-latency .lat-tag { fill: none; stroke: var(--muted); stroke-width: 2; }
+
+/* ---------- s-scaling ---------- */
+
+#s-scaling .sc-line { fill: none; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+#s-scaling .sc-dash { stroke-dasharray: 14 9; stroke-linecap: butt; }
+#s-scaling .sc-c14 { stroke: color-mix(in srgb, var(--ours) 58%, var(--ink)); }
+#s-scaling .sc-c13 { stroke: var(--ours-done); }
+#s-scaling .sc-m14 { fill: color-mix(in srgb, var(--ours) 58%, var(--ink)); }
+#s-scaling .sc-m13 { fill: var(--ours-done); }
+#s-scaling .sc-t14 { fill: color-mix(in srgb, var(--ours) 58%, var(--ink)); }
+#s-scaling .sc-t13 { fill: color-mix(in srgb, var(--ours) 80%, var(--bg)); }
+#s-scaling .sc-hollow { fill: #fff; stroke-width: 4; }
+#s-scaling .sc-even { stroke: var(--slate); stroke-width: 2.5; }
+#s-scaling .sc-limit { stroke: var(--slate); stroke-width: 3; stroke-dasharray: 12 8; }
+#s-scaling .sc-lim-t { paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+#s-scaling .sc-band { fill: var(--kv-soft); opacity: .7; }
+#s-scaling .sc-ring { fill: none; stroke: var(--kv); stroke-width: 4; }
+
+/* ---------- s-streaming ---------- */
+
+#s-streaming .st-grid { display: grid; grid-template-columns: 1260px 1fr; gap: 48px; align-items: center; height: 100%; }
+#s-streaming .st-left { display: flex; flex-direction: column; gap: 10px; }
+#s-streaming .st-legend { justify-content: flex-end; }
+#s-streaming .st-legend i { border-radius: 5px; }
+#s-streaming .st-legend i.plankv { background: var(--anchor-bg); box-shadow: inset 0 0 0 2px var(--anchor); }
+#s-streaming .st-cap { padding-left: 232px; margin-top: -6px; }
+#s-streaming .st-right { display: flex; flex-direction: column; gap: 22px; }
+#s-streaming .st-big { font-size: 150px; }
+#s-streaming .st-big small { font-size: .42em; }
+#s-streaming .st-rt { font-size: 30px; line-height: 1.25; font-weight: 600; color: var(--done); }
+#s-streaming .st-points { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 18px; }
+#s-streaming .st-points li { position: relative; padding-left: 32px; font-size: 28px; line-height: 1.3; color: var(--ink-soft); }
+#s-streaming .st-points li + li { margin-top: 0; }
+#s-streaming .st-points li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .42em;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--slate);
+}
+#s-streaming .st-kv { fill: var(--anchor-bg); stroke: var(--anchor); stroke-width: 2; }
+#s-streaming .st-wait { fill: none; stroke: var(--muted); stroke-width: 2.5; }
+#s-streaming .st-finish { stroke: var(--slate); stroke-width: 3; stroke-dasharray: 9 7; }
+#s-streaming .st-ghost { stroke: var(--muted); stroke-width: 3; stroke-dasharray: 9 7; }
+#s-streaming .st-now { stroke: var(--kv); stroke-width: 3; opacity: 0; }
+#s-streaming .st-dep { fill: none; stroke: var(--anchor); stroke-width: 2.5; }
+#s-streaming .st-axis { stroke: var(--muted); stroke-width: 2; }
+#s-streaming .st-axis-head { fill: var(--muted); }
+
+/* ---------- s-vbench ---------- */
+
+#s-vbench .vb-grid { display: grid; grid-template-columns: 1180px 1fr; gap: 60px; height: 100%; }
+#s-vbench .vb-chart { display: flex; flex-direction: column; gap: 10px; }
+#s-vbench .vb-title { font-size: 30px; font-weight: 700; color: var(--ink); }
+#s-vbench .vb-side { display: flex; flex-direction: column; padding-top: 46px; padding-bottom: 60px; }
+#s-vbench .vb-cards { display: flex; flex-direction: column; gap: 24px; }
+#s-vbench .vb-card { padding: 22px 30px; border-radius: 18px; background: var(--ours-soft); }
+#s-vbench .vb-card-k { font-size: 26px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ours); }
+#s-vbench .vb-card-v { font-size: 72px; font-weight: 800; line-height: 1.05; letter-spacing: -.02em; color: var(--ours); }
+#s-vbench .vb-card-s { font-size: 26px; line-height: 1.3; color: var(--ink-soft); }
+#s-vbench .vb-foot { margin-top: auto; }
+#s-vbench .vb-tag {
+  display: inline-block;
+  padding: 0 10px;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--muted);
+}
+#s-vbench .vb-band { fill: var(--ours-soft); }
+#s-vbench .vb-tagbox { fill: none; stroke: var(--muted); stroke-width: 2; }
+
+/* ---------- s-vbench-long ---------- */
+
+#s-vbench-long .vl-line { fill: none; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+#s-vbench-long .vl-ours { stroke: var(--ours); stroke-width: 8; }
+#s-vbench-long .vl-hiar { stroke: var(--hiar); }
+#s-vbench-long .vl-sf { stroke: var(--sf); }
+#s-vbench-long .vl-cf { stroke: var(--muted); stroke-dasharray: 12 9; stroke-linecap: butt; }
+#s-vbench-long .vl-m-ours { fill: var(--ours); }
+#s-vbench-long .vl-m-hiar { fill: var(--hiar); }
+#s-vbench-long .vl-m-sf { fill: var(--sf); }
+#s-vbench-long .vl-m-cf { fill: #fff; stroke: var(--muted); stroke-width: 3.5; }
+#s-vbench-long .vl-ref { stroke: var(--sf); stroke-width: 2.5; stroke-dasharray: 6 7; }
+#s-vbench-long .vl-drop { stroke: var(--kv); stroke-width: 3; fill: none; }
+#s-vbench-long .vl-drop-head { fill: var(--kv); }
+#s-vbench-long .vl-badge-ours { fill: var(--ours-soft); }
+#s-vbench-long .vl-badge-sf { fill: var(--kv-soft); }
+#s-vbench-long .vl-dim { transition: opacity .5s ease; }
+#s-vbench-long .vl-focus .vl-dim { opacity: .3; }
+#s-vbench-long .vl-focus .fade-in.vl-dim.on { opacity: .3; }
+/* Build 1: the Self-Forcing line under discussion gains contrast while HiAR and Causal Forcing recede. */
+#s-vbench-long .vl-sf, #s-vbench-long .vl-m-sf { transition: stroke .5s ease, fill .5s ease; }
+#s-vbench-long .vl-focus .vl-sf { stroke: var(--sf-text); }
+#s-vbench-long .vl-focus .vl-m-sf { fill: var(--sf-text); }

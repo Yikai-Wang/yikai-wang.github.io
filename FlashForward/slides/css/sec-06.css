@@ -1,0 +1,262 @@
+/* Section 06 · Wrap-up. Every selector is scoped to one of this section's slide ids. */
+
+/* ---------------------------------------------------------------- demo slides (S24, S25) */
+
+#s-demo-35, #s-demo-65 { --pad-x: 56px; }
+#s-demo-35 .hd, #s-demo-65 .hd { padding: 0 54px; margin-bottom: 30px; }
+
+#s-demo-35 .d-bd, #s-demo-65 .d-bd { justify-content: center; }
+
+#s-demo-35 .d-top, #s-demo-65 .d-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  height: 52px;
+  margin-bottom: 28px;
+  padding: 0 54px; /* prompt starts at the title's left edge */
+}
+
+#s-demo-35 .prompt, #s-demo-65 .prompt { font-size: 32px; color: var(--ink-soft); }
+#s-demo-65 .d-rate { flex: none; font-size: 24px; background: var(--fill); color: var(--ink-soft); }
+
+#s-demo-35 .d-row, #s-demo-65 .d-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+/* Labels sit under each video (pill style of .vid-label), so the frames stay unobstructed. */
+#s-demo-35 .vid, #s-demo-65 .vid { overflow: visible; border-radius: 16px; }
+#s-demo-35 .vid video, #s-demo-65 .vid video { border-radius: 16px; }
+#s-demo-35 .vid-label, #s-demo-65 .vid-label {
+  top: calc(100% + 22px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 22px;
+  font-size: 30px;
+  white-space: nowrap;
+  backdrop-filter: none;
+}
+#s-demo-35 .vid.sf .vid-label, #s-demo-65 .vid.sf .vid-label { background: var(--fill); color: var(--sf-text); }
+#s-demo-35 .vid.hiar .vid-label, #s-demo-65 .vid.hiar .vid-label { background: var(--fill); color: var(--hiar-text); }
+#s-demo-35 .vid.ours .vid-label, #s-demo-65 .vid.ours .vid-label { background: var(--ours); color: #06101d; }
+
+/* Measured generation time under each label: the speed claim of the notes, on screen. */
+#s-demo-35 .d-gen, #s-demo-65 .d-gen {
+  position: absolute;
+  top: calc(100% + 86px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+#s-demo-35 .vid.ours .d-gen, #s-demo-65 .vid.ours .d-gen { color: var(--ours); font-weight: 700; }
+
+#s-demo-35 .vid.hiar { box-shadow: 0 0 0 5px var(--ink-soft); } /* the tile the cue points at */
+
+#s-demo-35 .d-cue-row, #s-demo-65 .d-cue-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  height: 74px;
+  margin-top: 128px;
+}
+
+#s-demo-35 .d-cue {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Playback timeline: time runs left to right, like every schedule in the talk. */
+#s-demo-35 .d-tl, #s-demo-65 .d-tl {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 40px;
+  padding: 0 4px;
+  font-size: 24px;
+  color: var(--muted);
+}
+#s-demo-35 .d-tl-track, #s-demo-65 .d-tl-track {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--fill);
+}
+#s-demo-35 .d-tl-fill, #s-demo-65 .d-tl-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: 3px;
+  background: var(--muted);
+}
+#s-demo-35 .d-tl-dot, #s-demo-65 .d-tl-dot {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+#s-demo-35 .d-tl-now, #s-demo-65 .d-tl-now {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+#s-demo-35 .src, #s-demo-65 .src { left: 110px; }
+
+/* ---------------------------------------------------------------- ablation (S26) */
+
+#s-ablation .ab-bd { justify-content: center; padding-bottom: 40px; }
+#s-ablation .ab-table { table-layout: fixed; border-collapse: separate; border-spacing: 0; }
+#s-ablation .ab-c1 { width: 55%; }
+#s-ablation .ab-c2 { width: 17%; }
+#s-ablation .ab-c3 { width: 28%; }
+#s-ablation .ab-table th { font-size: 28px; padding: 16px 20px; }
+#s-ablation .ab-table td { padding: 30px 20px; font-size: 42px; vertical-align: middle; }
+#s-ablation .ab-table th:nth-child(3), #s-ablation .ab-table td:nth-child(3) { padding-left: 48px; }
+#s-ablation .ab-table tr[data-step] { transform: none; }
+
+#s-ablation .ab-mem { display: flex; align-items: center; gap: 28px; }
+#s-ablation .ab-icons { display: flex; align-items: center; gap: 8px; width: 200px; flex: none; }
+#s-ablation .ab-ico { width: 96px; height: 72px; flex: none; }
+#s-ablation .ab-name { font-weight: 600; color: var(--ink); }
+#s-ablation tr.ours .ab-name { color: var(--ours); font-weight: 700; }
+#s-ablation .ab-ours-tag { font-weight: 600; }
+
+#s-ablation .ab-val { font-size: 60px; font-weight: 700; letter-spacing: -.01em; }
+#s-ablation tr.ours .ab-val { font-weight: 800; }
+#s-ablation .ab-fail { font-size: 48px; font-weight: 800; color: var(--kv); }
+#s-ablation .ab-why { display: block; font-size: 28px; font-weight: 500; color: var(--kv); opacity: .85; }
+
+#s-ablation .ab-speed { font-size: 34px; padding: 10px 28px; gap: 12px; }
+#s-ablation .ab-chip-slow { background: var(--fill); color: var(--slate); }
+#s-ablation .ab-slow { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+#s-ablation .ab-extra { display: inline-flex; align-items: center; gap: 12px; font-size: 26px; color: var(--muted); line-height: 1.2; }
+#s-ablation .ab-extra svg { flex: none; }
+
+#s-ablation .ab-note { align-self: flex-start; margin-top: 44px; font-size: 38px; }
+
+/* ---------------------------------------------------------------- limits (S27) */
+
+#s-limits .lim-bd { justify-content: center; padding-bottom: 30px; }
+#s-limits .lim-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 38px; }
+#s-limits .lim-list li { display: flex; align-items: center; gap: 36px; margin: 0; }
+#s-limits .lim-ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  border-radius: 26px;
+  background: var(--surface);
+  color: var(--slate);
+}
+#s-limits .lim-ico svg { width: 70px; height: 70px; }
+#s-limits .lim-list p { font-size: 44px; line-height: 1.3; color: var(--ink-soft); }
+#s-limits .lim-list b { color: var(--ink); }
+#s-limits .lim-sub { display: block; margin-top: 6px; font-size: 32px; color: var(--muted); }
+#s-limits .lim-next { align-self: flex-start; margin-top: 60px; font-size: 40px; }
+#s-limits .lim-dot { margin: 0 .35em; color: var(--ours); font-weight: 800; }
+
+/* ---------------------------------------------------------------- takeaways (S28) */
+
+#s-takeaways .hd { display: flex; align-items: baseline; justify-content: space-between; gap: 48px; }
+#s-takeaways .tk-url { font-size: 30px; font-weight: 600; color: var(--ours); }
+#s-takeaways .tk-bd { justify-content: center; padding-bottom: 20px; }
+#s-takeaways .tk-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 30px; }
+#s-takeaways .tk-row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 380px;
+  align-items: center;
+  gap: 48px;
+  margin: 0;
+  padding: 26px 40px 26px 32px;
+  border-radius: 24px;
+  background: var(--surface);
+}
+#s-takeaways .tk-num {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--slate);
+  color: #fff;
+  font-size: 50px;
+  font-weight: 800;
+}
+#s-takeaways .tk-2 .tk-num { background: var(--ours); }
+#s-takeaways .tk-3 .tk-num { background: var(--anchor); }
+#s-takeaways .tk-text { font-size: 42px; line-height: 1.28; color: var(--ink-soft); }
+/* Evidence line: the number a photo of this slide should carry. */
+#s-takeaways .tk-ev { display: block; margin-top: 12px; font-size: 30px; font-weight: 700; line-height: 1.25; }
+#s-takeaways .tk-2 .tk-ev { color: var(--ours); }
+#s-takeaways .tk-3 .tk-ev { color: var(--anchor-text); }
+#s-takeaways .tk-text b { color: var(--ink); }
+#s-takeaways .tk-text b.t-ours { color: var(--ours); }
+#s-takeaways .tk-text b.t-anchor { color: var(--anchor-text); }
+#s-takeaways .tk-fig { width: 380px; height: 170px; overflow: visible; }
+
+#s-takeaways .tk-lab { font-size: 26px; font-weight: 600; fill: var(--ink-soft); }
+#s-takeaways .tk-lab-a { fill: var(--anchor-text); font-weight: 700; }
+
+/* mini wavefront */
+#s-takeaways .tk-lane { fill: #fff; stroke: var(--line); stroke-width: 1.5; }
+#s-takeaways .tk-box rect { fill: var(--ours); }
+#s-takeaways .tk-box text { font-size: 24px; font-weight: 700; fill: #fff; text-anchor: middle; }
+#s-takeaways .tk-kv { fill: none; stroke: var(--kv); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+#s-takeaways .tk-box, #s-takeaways .tk-kv {
+  opacity: 0;
+  transition: opacity .3s ease;
+  transition-delay: calc(var(--d) * 110ms + 250ms);
+}
+#s-takeaways .tk-2.is-shown .tk-box, #s-takeaways .tk-2.is-shown .tk-kv { opacity: 1; }
+
+/* mini anchor timeline */
+#s-takeaways .tk-cell { fill: #fff; stroke: var(--line); stroke-width: 1.5; }
+#s-takeaways .tk-chunk { fill: var(--ours); }
+#s-takeaways .tk-anchor { fill: var(--anchor); }
+#s-takeaways .tk-arcs { opacity: 0; transition: opacity .35s ease .4s; }
+#s-takeaways .tk-arcs path { stroke-dasharray: 340; stroke-dashoffset: 340; transition: stroke-dashoffset .8s var(--ease) .4s; }
+#s-takeaways .tk-3.is-shown .tk-arcs { opacity: 1; }
+#s-takeaways .tk-3.is-shown .tk-arcs path { stroke-dashoffset: 0; }
+
+/* ---------------------------------------------------------------- thanks (S29) */
+
+#s-thanks { padding: 0; }
+#s-thanks .th-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1030px;
+  align-items: center;
+  gap: 56px;
+  height: 100%;
+  padding: 0 60px 0 120px;
+}
+#s-thanks .th-title { white-space: nowrap; font-size: 138px; font-weight: 800; line-height: 1; letter-spacing: -.045em; color: var(--ink); }
+#s-thanks .th-q { margin-top: 26px; font-size: 64px; font-weight: 600; line-height: 1.1; color: var(--muted); }
+#s-thanks .th-rule { width: 120px; height: 6px; margin: 72px 0 40px; border-radius: 3px; background: var(--ours); }
+#s-thanks .th-brand { font-size: 44px; font-weight: 800; letter-spacing: -.01em; color: var(--ink); }
+#s-thanks .th-url { margin-top: 10px; font-size: 32px; font-weight: 600; color: var(--ours); }
+
+#s-thanks .th-mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+#s-thanks .th-len { position: absolute; left: 14px; bottom: 14px; font-size: 24px; padding: 4px 16px; }

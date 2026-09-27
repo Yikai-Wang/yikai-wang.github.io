@@ -1,0 +1,56 @@
+/* Section 04a · Clean anchors (s-anchors). Same visual vocabulary as the section 03 lane diagrams. */
+
+#s-anchors .bd { gap: 10px; }
+#s-anchors .fig { flex: 1; min-height: 0; width: 100%; overflow: visible; }
+
+/* ---------- timeline cells ---------- */
+#s-anchors .cell { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+#s-anchors .cell-a { fill: var(--anchor); }
+#s-anchors .cell-o { fill: var(--ours); }
+#s-anchors .ring-o { fill: none; stroke: var(--ours); stroke-width: 3; }
+#s-anchors .slot-a { fill: none; stroke: var(--anchor); stroke-width: 3; stroke-dasharray: 6 5; }
+#s-anchors .t-hint { font-size: 30px; font-weight: 600; fill: var(--anchor-text); }
+
+/* ---------- labels ---------- */
+#s-anchors .t-row { font-size: 26px; fill: var(--muted); }
+#s-anchors .t-row-a { fill: var(--anchor-text); font-weight: 700; font-size: 30px; }
+#s-anchors .t-axis { font-size: 26px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-anchors .t-axis-slot { fill: var(--anchor-text); }
+#s-anchors .t-axis-a { fill: var(--anchor-text); font-weight: 700; }
+#s-anchors .tick { stroke: var(--line); stroke-width: 2; }
+#s-anchors .t-axis-name { font-style: italic; }
+#s-anchors .t-unit { font-size: 26px; fill: var(--muted); }
+
+/* ---------- planner blocks ---------- */
+#s-anchors .t-blk { font-size: 30px; font-weight: 700; fill: var(--anchor-text); }
+#s-anchors .t-blk-sub { font-size: 24px; fill: var(--muted); }
+#s-anchors .mini-d { fill: var(--anchor); }
+#s-anchors .mini-c { fill: var(--anchor-bg); stroke: var(--anchor); stroke-width: 2; }
+#s-anchors .brk { fill: none; stroke: var(--anchor); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- reads (build 2) ---------- */
+#s-anchors .mk-anchor path { fill: var(--anchor); }
+#s-anchors .arc { fill: none; stroke: var(--anchor); stroke-width: 4; stroke-linecap: round; }
+#s-anchors .t-read { font-size: 32px; font-weight: 600; fill: var(--ink-soft); }
+#s-anchors .t-read .o { fill: var(--ours); font-weight: 700; }
+#s-anchors .t-read .a { fill: var(--anchor-text); font-weight: 700; }
+
+/* ---------- windows (build 3) ---------- */
+#s-anchors .win { fill: none; stroke: var(--anchor); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-anchors .t-win { font-size: 28px; font-weight: 700; fill: var(--anchor-text); font-variant-numeric: tabular-nums; }
+#s-anchors .t-shared { font-size: 24px; font-style: italic; fill: var(--muted); }
+#s-anchors .dtick { stroke: var(--anchor); stroke-width: 3; stroke-linecap: round; }
+
+/* ---------- footer line (build 3) ---------- */
+#s-anchors .foot {
+  align-self: center;
+  display: flex;
+  gap: 14px;
+  padding: 12px 34px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 32px;
+  color: var(--ink-soft);
+}
+#s-anchors .foot-a b { color: var(--anchor-text); }
+#s-anchors .foot-o b { color: var(--ours); }

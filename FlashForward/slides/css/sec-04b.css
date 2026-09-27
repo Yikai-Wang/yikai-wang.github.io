@@ -1,0 +1,139 @@
+/* Section 04b · s-two-scales (storyboard S15): two memory cards + the 21-latent context strip.
+   Vocabulary: in-flight history = renderer blue (--ours / --ours-done); clean anchors = amber; KV memory = rose. */
+
+#s-two-scales .bd { justify-content: space-between; gap: 36px; }
+#s-two-scales .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- Cards ---------- */
+
+#s-two-scales .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+#s-two-scales .mem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 34px 44px 34px 48px;
+  overflow: hidden;
+}
+#s-two-scales .mem::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 10px;
+}
+#s-two-scales .hist { background: var(--ours-soft); }
+#s-two-scales .hist::before { background: var(--ours); }
+#s-two-scales .anch::before { background: var(--anchor); }
+
+#s-two-scales .mem-hd { display: flex; align-items: center; gap: 28px; }
+#s-two-scales .mem h3 { margin: 0; font-size: 46px; letter-spacing: -.01em; }
+#s-two-scales .hist h3 { color: var(--ours); }
+#s-two-scales .anch h3 { color: var(--anchor-text); }
+
+#s-two-scales .icon { flex: none; width: 132px; height: 99px; overflow: visible; }
+#s-two-scales .ic-ln {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#s-two-scales .ic-ln.thin { stroke-width: 3; }
+#s-two-scales .ic-ln.dash { stroke-dasharray: 6 7; }
+#s-two-scales .hist .ic-ln { stroke: var(--kv); }
+#s-two-scales .anch .ic-ln { stroke: var(--anchor); }
+#s-two-scales .anch .ic-dot { fill: var(--anchor); }
+
+#s-two-scales .mem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#s-two-scales .mem-list li {
+  position: relative;
+  padding-left: 40px;
+  font-size: 34px;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+#s-two-scales .mem-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px; top: .42em;
+  width: 18px; height: 18px;
+  border-radius: 5px;
+}
+#s-two-scales .hist li::before { background: var(--ours-done); }
+#s-two-scales .anch li::before { background: var(--anchor); }
+#s-two-scales .mem-list b { color: var(--ink); font-weight: 700; }
+
+#s-two-scales .mem-role {
+  margin-top: 6px;
+  padding-top: 18px;
+  border-top: 2px solid rgba(0, 0, 0, .08);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+#s-two-scales .hist .mem-role { color: var(--ours); }
+#s-two-scales .anch .mem-role { color: var(--anchor-text); }
+
+/* ---------- 21-latent context strip ---------- */
+
+#s-two-scales .strip { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+#s-two-scales .strip-lbl {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+#s-two-scales .strip-lbl b { font-weight: 800; }
+#s-two-scales .strip-lbl .t-a { color: var(--anchor-text); font-weight: 700; }
+#s-two-scales .strip-lbl .t-h { color: var(--ours); font-weight: 700; }
+#s-two-scales .strip-lbl .t-c { color: var(--ours); font-weight: 700; }
+
+#s-two-scales .strip-fig { width: 100%; height: auto; overflow: visible; }
+
+#s-two-scales .c-anch { fill: var(--anchor); }
+#s-two-scales .c-hist { fill: url(#s04b-noise); }
+#s-two-scales .c-cur { fill: var(--bg); stroke: var(--ours); stroke-width: 4; }
+#s-two-scales .nz-bg { fill: var(--ours-done); }
+#s-two-scales .nz-l { fill: #fff; opacity: .38; }
+#s-two-scales .nz-d { fill: var(--ours); opacity: .32; }
+
+#s-two-scales .brace { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-two-scales .br-anch { stroke: var(--anchor); }
+#s-two-scales .br-hist { stroke: var(--ours-done); }
+#s-two-scales .br-cur { stroke: var(--ours); }
+
+#s-two-scales .t-grp { font-size: 30px; font-weight: 700; text-anchor: middle; }
+#s-two-scales .t-grp.t-anch { fill: var(--anchor-text); }
+#s-two-scales .t-grp.t-hist { fill: var(--ours); }
+#s-two-scales .t-grp.t-cur { fill: var(--ours); }
+
+/* Mini time axis inside each card: same scale (10 px per latent) in both cards */
+#s-two-scales .mem-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+#s-two-scales .mini { width: 300px; height: 102px; overflow: visible; }
+#s-two-scales .mn-axis,
+#s-two-scales .mn-arrow { fill: none; stroke: var(--slate); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-two-scales .mn-hist { fill: url(#s04b-noise); }
+#s-two-scales .mn-anch { fill: var(--anchor); }
+#s-two-scales .mn-cur { fill: var(--bg); stroke: var(--ours); stroke-width: 2.5; }
+#s-two-scales .mn-now { font-size: 27px; font-weight: 700; fill: var(--ours); text-anchor: middle; }
+
+/* Scripted pop-ins scale each cell around its own centre */
+#s-two-scales .mini rect,
+#s-two-scales .strip-fig rect { transform-box: fill-box; transform-origin: 50% 100%; }

@@ -1,0 +1,128 @@
+/* Section 04c · s-walkthrough (storyboard S16) and s-race (S12). Lane-diagram look matches s-wavefront (sec-03). */
+
+#s-walkthrough .bd { gap: 14px; padding-bottom: 40px; }
+#s-walkthrough .topbar { display: flex; justify-content: space-between; align-items: center; }
+#s-walkthrough .fig { flex: 1; min-height: 0; width: 100%; overflow: visible; }
+
+/* Legend swatches (same look as s-race) */
+#s-walkthrough .legend i.den { background: var(--ours); }
+#s-walkthrough .legend i.plan { background: var(--anchor); }
+#s-walkthrough .legend i.plankv { background: var(--anchor-bg); box-shadow: inset 0 0 0 2px var(--anchor); }
+
+/* Summary chips (build 3) */
+#s-walkthrough .sum { display: flex; justify-content: center; gap: 20px; flex: none; }
+#s-walkthrough .sum .chip { font-size: 28px; padding: 8px 22px; font-weight: 600; }
+#s-walkthrough .sum .chip b { font-size: 32px; font-weight: 800; }
+#s-walkthrough .sum .chip.slate { background: var(--slate); color: #fff; }
+
+/* Diagram text */
+#s-walkthrough .t-row { font-size: 26px; fill: var(--muted); }
+#s-walkthrough .t-plan { fill: var(--anchor-text); font-weight: 700; }
+#s-walkthrough .t-axis { font-size: 26px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-walkthrough .t-axis-name { font-style: italic; }
+#s-walkthrough .t-film { font-size: 24px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-walkthrough .t-blk { font-size: 24px; font-weight: 600; fill: var(--anchor-text); }
+#s-walkthrough .flag-bg { fill: var(--done); }
+#s-walkthrough .t-flag { font-size: 26px; font-weight: 700; fill: #fff; }
+
+/* Structure */
+#s-walkthrough .lane { fill: var(--surface); }
+#s-walkthrough .axis { stroke: var(--line); stroke-width: 2; }
+#s-walkthrough .brk { fill: none; stroke: var(--anchor); stroke-width: 2.5; stroke-linejoin: round; opacity: .55; }
+#s-walkthrough .finish { stroke: var(--slate); stroke-width: 4; stroke-dasharray: 9 7; }
+
+/* Anchor cells: empty dashed slot, then solid amber once the planner block is done */
+#s-walkthrough .cell rect { fill: var(--bg); stroke: var(--line); stroke-width: 2.5; stroke-dasharray: 8 6; }
+#s-walkthrough .cell text { font-size: 26px; font-weight: 700; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-walkthrough .cell.lit rect { fill: var(--anchor); stroke: var(--anchor); stroke-dasharray: none; }
+#s-walkthrough .cell.lit text { fill: #fff; }
+
+/* Forwards */
+#s-walkthrough .bx-ours { fill: var(--ours); }
+#s-walkthrough .bx-plan { fill: var(--anchor); }
+#s-walkthrough .bx-plankv { fill: var(--anchor-bg); stroke: var(--anchor); stroke-width: 2; }
+
+/* Filmstrip */
+#s-walkthrough .frame { fill: var(--surface); stroke: var(--line); stroke-width: 2; }
+
+/* Anchor window of the chunk on GPU 1 (renderer phase) */
+#s-walkthrough .win-rect { fill: var(--ours-soft); stroke: var(--ours); stroke-width: 4; }
+#s-walkthrough .win-link { fill: none; stroke: var(--ours); stroke-width: 4; stroke-linecap: round; }
+
+/* "now" line and round tag */
+#s-walkthrough .now line { stroke: var(--ink); stroke-width: 3; opacity: .55; }
+#s-walkthrough .now .tag { fill: var(--ink); }
+#s-walkthrough .t-tag { font-size: 24px; font-weight: 700; fill: #fff; font-variant-numeric: tabular-nums; }
+
+#s-walkthrough .off { opacity: 0; }
+#s-walkthrough .bx,
+#s-walkthrough .cell,
+#s-walkthrough .thumb { transform-box: fill-box; transform-origin: 50% 50%; }
+#s-walkthrough .t-sub { font-size: 24px; fill: var(--anchor-text); opacity: .8; }
+#s-walkthrough .plan-link { fill: none; stroke: var(--anchor); stroke-width: 3; stroke-dasharray: 2 7; stroke-linecap: round; }
+#s-walkthrough .t-win { font-size: 24px; font-weight: 700; fill: var(--ours); font-variant-numeric: tabular-nums; }
+#s-walkthrough .film-done { fill: none; stroke: var(--done); stroke-width: 4; }
+/* Planner band (context parallel: every planner forward spans all four GPU lanes) */
+#s-walkthrough .t-call { font-size: 28px; font-weight: 700; fill: var(--anchor-text); }
+#s-walkthrough .t-call-sub { font-size: 24px; fill: var(--muted); }
+
+/* ---------- s-race (moved here from css/sec-03.css; the slide lives in 04c-walkthrough.html) ----------
+   Vocabulary as in s-walkthrough: denoising forward = solid method colour; memory-only forward = white + rose hatch;
+   planner forward = solid amber (clean-KV = amber-bg + amber outline). A forward split across 4 GPUs is one box
+   spanning its lanes (FlashForward's planner) or one box in a single "4 GPUs" lane (Self-Forcing). */
+
+#s-race .bd { gap: 18px; padding-bottom: 34px; }
+#s-race .topbar { display: flex; justify-content: space-between; align-items: center; }
+#s-race .fig { flex: 1; min-height: 0; width: 100%; overflow: visible; }
+#s-race .legend i.den-all { background: linear-gradient(90deg, var(--sf) 0 33%, var(--hiar) 33% 66%, var(--ours) 66%); }
+#s-race .legend i.mem {
+  background: repeating-linear-gradient(45deg, var(--kv) 0 2px, var(--bg) 2px 6px);
+  box-shadow: inset 0 0 0 2px var(--kv);
+}
+#s-race .legend i.plan { background: var(--anchor); }
+#s-race .legend i.plankv { background: var(--anchor-bg); box-shadow: inset 0 0 0 2px var(--anchor); }
+
+#s-race .hatch-bg { fill: var(--bg); }
+#s-race .hatch-ln { stroke: var(--kv); stroke-width: 1.7; }
+#s-race .lane { fill: var(--surface); }
+#s-race .axis { stroke: var(--line); stroke-width: 2; }
+#s-race .t-row { font-size: 26px; fill: var(--muted); }
+#s-race .t-axis { font-size: 26px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-race .t-axis-name { font-style: italic; }
+#s-race .t-track { font-size: 32px; font-weight: 700; }
+#s-race .t-track-sf { fill: var(--sf-text); }
+#s-race .t-track-hiar { fill: var(--hiar-text); }
+#s-race .t-track-ours { fill: var(--ours); }
+#s-race .finish { stroke: var(--slate); stroke-width: 4; stroke-dasharray: 9 7; }
+#s-race .now { stroke: var(--ink); stroke-width: 3; opacity: 0; }
+#s-race .bx-sf { fill: var(--sf); }
+#s-race .bx-hiar { fill: var(--hiar); }
+#s-race .bx-ours { fill: var(--ours); }
+#s-race .bx-plan { fill: var(--anchor); }
+#s-race .bx-plankv { fill: var(--anchor-bg); stroke: var(--anchor); stroke-width: 1.6; }
+#s-race .bx-mem { fill: url(#s03r-hatch); stroke: var(--kv); stroke-width: 1.4; }
+#s-race .flag-bg { fill: var(--done); }
+#s-race .t-flag { font-size: 26px; font-weight: 700; fill: #fff; }
+#s-race .t-res { font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#s-race .t-res-sf { fill: var(--sf-text); }
+#s-race .t-res-hiar { fill: var(--hiar-text); }
+#s-race .t-res-ours { fill: var(--ours); font-weight: 700; }
+#s-race .is-pending { opacity: 0; }
+#s-race .flag { transform-box: fill-box; transform-origin: 50% 50%; }
+
+/* Measured speed-up panel (build 2) */
+#s-race .pn-card { fill: var(--bg); stroke: var(--line); stroke-width: 2; }
+#s-race .pn-hero { fill: var(--ours-soft); }
+#s-race .t-pn-title { font-size: 28px; font-weight: 700; fill: var(--ink); }
+#s-race .t-pn-sub { font-size: 24px; fill: var(--muted); }
+#s-race .t-pn-set { font-size: 26px; font-weight: 600; fill: var(--ink-soft); }
+#s-race .t-pn-sec { font-size: 28px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-race .t-pn-x { font-size: 34px; font-weight: 700; fill: var(--ours); font-variant-numeric: tabular-nums; }
+#s-race .t-pn-x-hero { font-size: 42px; font-weight: 800; }
+#s-race .pn-bar { fill: var(--ours-done); }
+#s-race .pn-bar-hero { fill: var(--ours); }
+#s-race .pn-base { stroke: var(--slate); stroke-width: 2.5; }
+#s-race .pn-lim { stroke: var(--slate); stroke-width: 3; stroke-dasharray: 8 6; }
+#s-race .t-pn-lim { font-size: 24px; font-weight: 600; fill: var(--slate); }
+#s-race .t-pn-lim-x { font-size: 28px; font-weight: 800; fill: var(--slate); font-variant-numeric: tabular-nums; }
+#s-race .t-pn-base { font-size: 24px; fill: var(--muted); }
