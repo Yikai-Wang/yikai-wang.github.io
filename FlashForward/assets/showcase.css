@@ -2,23 +2,75 @@
 :root {
   --bg: #fff;
   --paper: #fff;
-  --surface: #f8f8f8;
-  --ink: #222;
-  --muted: #595959;
-  --line: #d6d6d6;
-  --line-soft: #e5e5e5;
-  --accent: #1f74a3; /* #39c before; darkened to reach 4.5:1 against white for text */
-  --accent-soft: #f2f5f8;
-  --accent-mid: #9cc7e6;
-  --band: #f4f5f7;
+  --surface: #f5f6f7;     /* quiet plates: code, prompt, zoom panels */
+  --fill: #eef0f2;        /* resting fill of buttons and segmented tracks */
+  --fill-hover: #e3e6ea;
+  --ink: #1d1d1f;
+  --ink-soft: #3a3a3f;    /* long secondary text that still has to read as content, e.g. prompts */
+  --muted: #5d6167;       /* 6.2:1 on white, 5.4:1 on --fill, 5.0:1 on --fill-hover */
+  --line: #d9dce1;
+  --line-soft: #e9ebee;
+  /* #39c before. #1f74a3 reached 4.5:1 on white but only just 4.5:1 on --fill, so the accent is one
+     step darker again: 5.9:1 on white, 5.3:1 on --accent-soft, 5.2:1 on --fill, 4.7:1 on hover. */
+  --accent: #1b6a96;
+  --accent-strong: #185e85; /* hover on filled accent buttons */
+  --accent-soft: #edf4f9;
+  --accent-mid: #9cc7e6;    /* decoration only: bars, ticks, hover hairlines */
+  --accent-ring: #548fb0;   /* the lightest accent that still reaches 3:1 on white and on the tint */
   --video-ar: 1.7333;
   --stage-h: min(56vh, 540px);
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* One content column for every section. It widens with the window so large monitors keep
+     big videos, but stops well short of the edges so a laptop still gets real margins. The gutter
+     grows steeply from a phone's 20px, so a tablet from 766px up still has the 720px column the
+     training drawings need at their smallest (a flat 5vw clipped their right edge below 800px).
+     From a laptop up the column's maximum width binds first, so the layout there is unchanged. */
+  --gutter: clamp(20px, 7.8vw - 37px, 80px);
+  --col-max: clamp(1120px, 72vw + 172px, 1760px);
+  --col: min(100% - 2 * var(--gutter), var(--col-max));
+  --measure: 42em;        /* ~78 characters at any text size: the longest line a lede or note should run */
+  /* The diagrams' drawn size before, up to a 1920 monitor; wider only inflates their labels. Past
+     1920 the column keeps growing to 1760px, and a 1120px drawing on its left edge left a third of
+     it empty, so the cap then rises gently to 1320px at 2560. The height cap still binds first on
+     a short window, so the drawing always fits the screen. */
+  --figure-max: clamp(1120px, 31.25vw + 520px, 1320px);
+  /* The hairline between sections does the separating, so the air on either side of it only has
+     to let the eye reset: about 43px at 1280 and 47px at 1440. It stops growing at 48px, because
+     on a big monitor more air only pushes each diagram further from its heading. */
+  --space-section: clamp(32px, 2.4vw + 12px, 48px);
+  /* The gap between blocks inside a section (heading to content, content to its note). */
+  --space-block: clamp(18px, 1.5vw + 2px, 26px);
+
+  /* The type scale is in rem, so it follows the fluid root size set on html below. */
+  --fs-display: clamp(2rem, 1rem + 2.2vw, 3.25rem);
+  --fs-h2: clamp(1.5rem, 1rem + 1.1vw, 2.125rem);
+  --fs-h3: 1.0625rem;
+  --fs-lede: 1.0625rem;
+  --fs-body: 1rem;
+  --fs-small: .9375rem;
+  --fs-ui: .875rem;
+  --fs-micro: .8125rem;
+  /* The smallest size still carries content (shortcut names, chips), so it never drops below 12px
+     even where the fluid root would take it to 11.3px. */
+  --fs-tiny: max(12px, .75rem);
+
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --control-h: 34px;
+  --shadow-raised: 0 1px 2px rgba(16, 24, 40, .12), 0 0 0 .5px rgba(16, 24, 40, .06);
+  --shadow-media: 0 1px 2px rgba(16, 24, 40, .06), 0 12px 28px -14px rgba(16, 24, 40, .35);
 }
 
 * { box-sizing: border-box; }
 
-html { font-size: 135%; }
+/* The page used to sit at a flat 135%, which is right on a 27-inch monitor and feels zoomed on a
+   laptop. The root now grows with the window instead: about 15.5px at 1280, 16px at 1440 and
+   17.6px at 1920, so a laptop gets laptop density while a big monitor keeps today's. The terms are
+   in rem, not px, so a reader who set a larger default text size in the browser still gets it. */
+html { font-size: clamp(.9375rem, .7rem + .333vw, 1.1875rem); }
 
 body {
   min-height: 100vh;
@@ -29,6 +81,9 @@ body {
   font-variant-numeric: tabular-nums;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  counter-reset: section;
 }
 
 body.has-zoom { overflow: hidden; }
@@ -38,9 +93,16 @@ button, input, select { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
 
 .page {
-  width: min(94vw, 1760px);
+  width: var(--col);
   margin: 0 auto;
-  padding: clamp(20px, 3.2vw, 44px) 0 48px;
+  padding: var(--space-section) 0 0;
+}
+
+/* The comparison opens like every later section: a hairline across the column, then air. */
+.viewer {
+  margin-top: var(--space-section);
+  padding-top: var(--space-section);
+  border-top: 1px solid var(--line);
 }
 
 /* ---------- Header ---------- */
@@ -51,23 +113,26 @@ button, input, select { font: inherit; color: inherit; }
   border-bottom: 1px solid var(--line);
 }
 
-/* The paper title heads the page; each section below carries its own h2. */
+/* The paper title heads the page; each section below carries its own h2. A heavy weight with
+   tight tracking reads as a display face, which the system font becomes at this size. */
 .page-head h1 {
-  max-width: 1200px;
+  max-width: 24em;
   margin: 0 auto;
   text-align: center;
-  font-size: clamp(1.45rem, 2.9vw, 2.25rem);
-  font-weight: 500;
-  letter-spacing: -.015em;
-  line-height: 1.2;
+  font-size: var(--fs-display);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.06;
+  text-wrap: balance;
 }
 
 .lede {
-  max-width: 900px;
+  max-width: var(--measure);
   margin: 0;
   color: var(--muted);
-  font-size: .8rem;
-  line-height: 1.5;
+  font-size: var(--fs-lede);
+  line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .lede b { color: var(--ink); font-weight: 600; }
@@ -75,49 +140,59 @@ button, input, select { font: inherit; color: inherit; }
 
 /* ---------- Tabs + navigation bar ---------- */
 
+/* The two filters (length, methods) sit together on the left and the sample arrows are pinned to
+   the right. Spreading all three evenly left the method chips floating in the middle of a wide
+   bar, lined up with nothing. */
 .viewer-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  justify-content: flex-start;
+  gap: 12px 28px;
+  margin-bottom: var(--space-block);
 }
 
+.viewer-bar .nav { margin-left: auto; }
+
+/* Length tabs and every segmented control share one look: a quiet track with the chosen option
+   lifted onto a white thumb. The chosen label turns accent, so the brand colour marks the state
+   without a slab of it. White on the pale track is only 1.1:1, so the thumb also carries a
+   hairline in --accent-ring (3.5:1 on the thumb, 3.1:1 on the track), the same ring the section
+   bar gives its current link: the selection never rests on the shadow alone. */
 .length-tabs {
   display: inline-flex;
-  overflow: hidden;
-  border: 1px solid var(--line);
+  gap: 2px;
+  padding: 3px;
   border-radius: 999px;
-  background: var(--paper);
+  background: var(--fill);
 }
 
 .length-tabs button {
   display: inline-flex;
-  align-items: baseline;
+  height: calc(var(--control-h) - 6px);
+  align-items: center;
   gap: 7px;
-  padding: 7px 18px 6px;
+  padding: 0 16px;
   border: 0;
-  border-left: 1px solid var(--line-soft);
+  border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .04em;
+  font-size: var(--fs-ui);
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
 }
-
-.length-tabs button:first-child { border-left: 0; }
 
 .length-tabs button:hover,
 .length-tabs button:focus-visible {
-  background: color-mix(in srgb, var(--accent-soft) 55%, var(--paper));
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .length-tabs button[aria-pressed="true"] {
-  background: var(--accent);
-  color: var(--paper);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent-ring), var(--shadow-raised);
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ---------- Method picker ---------- */
@@ -125,42 +200,40 @@ button, input, select { font: inherit; color: inherit; }
 .methods {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 4px 10px 4px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--paper);
+  gap: 10px;
 }
 
 .methods-label {
   color: var(--muted);
-  font-size: .54rem;
-  font-weight: 700;
-  letter-spacing: .045em;
+  font-size: var(--fs-micro);
+  font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
 }
 
 .methods-options {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
+/* A hairline outline while off, a soft fill while on: the checkbox stays for clarity, the fill
+   carries the state at a glance. */
 .method-chip {
   display: inline-flex;
+  height: var(--control-h);
   align-items: center;
-  gap: 5px;
-  padding: 3px 9px 3px 7px;
-  border: 1px solid transparent;
+  gap: 7px;
+  padding: 0 13px 0 11px;
+  border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
-  font-size: .62rem;
-  font-weight: 700;
+  font-size: var(--fs-ui);
+  font-weight: 500;
   line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
 
 .method-chip input {
@@ -169,16 +242,19 @@ button, input, select { font: inherit; color: inherit; }
   cursor: pointer;
 }
 
-.method-chip:hover { border-color: var(--line-soft); }
+.method-chip:hover { border-color: var(--accent-mid); color: var(--ink); }
 
 /* .is-on is kept in step with the checkbox by the script, so the chip does not depend on :has(). */
 .method-chip.is-on {
-  border-color: var(--accent-mid);
-  background: var(--accent-soft);
+  border-color: transparent;
+  background: var(--fill);
   color: var(--ink);
 }
 
-.method-chip.is-on.is-ours { color: var(--accent); }
+.method-chip.is-on.is-ours {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
 
 .method-chip input:focus-visible {
   outline: 2px solid var(--accent);
@@ -188,49 +264,49 @@ button, input, select { font: inherit; color: inherit; }
 .nav {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
 }
 
 .nav-status {
   min-width: 64px;
   color: var(--muted);
-  font-size: .62rem;
+  font-size: var(--fs-micro);
   font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  letter-spacing: .04em;
+  font-weight: 500;
   text-align: center;
   white-space: nowrap;
 }
 
 .nav-button {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: var(--control-h);
+  height: var(--control-h);
   padding: 0;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 50%;
-  background: var(--paper);
-  color: var(--accent);
-  font-size: 1rem;
+  background: var(--fill);
+  color: var(--ink);
+  font-size: var(--fs-body);
   line-height: 1;
   cursor: pointer;
-  transition: border-color .18s ease, background .18s ease;
+  transition: background-color .15s ease, color .15s ease;
 }
 
 .nav-button:hover,
 .nav-button:focus-visible {
-  border-color: var(--accent);
   background: var(--accent-soft);
+  color: var(--accent);
 }
 
 /* ---------- Sample card ---------- */
 
+/* No frame of its own: the section already groups it, and a box here would nest a third level of
+   borders around the videos. */
 .sample {
-  padding: 12px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--paper) 92%, var(--surface));
-  box-shadow: 0 12px 34px rgba(0, 0, 0, .04);
+  padding: 0;
+  border: 0;
+  background: none;
 }
 
 .sample-head {
@@ -238,8 +314,8 @@ button, input, select { font: inherit; color: inherit; }
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px 18px;
-  padding: 1px 2px 11px;
+  gap: 12px 24px;
+  padding: 0 0 18px;
 }
 
 .sample-heading {
@@ -251,31 +327,34 @@ button, input, select { font: inherit; color: inherit; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .sample-title {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 650;
+  letter-spacing: -.01em;
   line-height: 1.2;
 }
 
 .chip {
-  padding: 2px 8px 1px;
-  border: 1px solid var(--line-soft);
+  padding: 3px 9px;
   border-radius: 999px;
-  background: var(--paper);
+  background: var(--fill);
   color: var(--muted);
-  font-size: .54rem;
-  font-weight: 700;
-  letter-spacing: .05em;
-  line-height: 1.5;
-  text-transform: uppercase;
+  font-size: var(--fs-tiny);
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .chip:empty { display: none; }
 
-.prompt-wrap { margin-top: 6px; }
+/* The prompt keeps to the page's measure like the lede above it; at the old 54em its two lines ran
+   past 100 characters on a laptop, the only text on the page that broke the measure. */
+.prompt-wrap {
+  max-width: var(--measure);
+  margin-top: 8px;
+}
 
 /* The prompts run to several hundred characters, so the card shows the opening lines. */
 .sample-prompt {
@@ -284,9 +363,10 @@ button, input, select { font: inherit; color: inherit; }
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  font-size: .9rem;
+  color: var(--ink-soft);
+  font-size: var(--fs-body);
   font-style: italic;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
 .prompt-wrap.is-open .sample-prompt {
@@ -298,13 +378,14 @@ button, input, select { font: inherit; color: inherit; }
 .sample-prompt::after { content: "\201D"; }
 
 .prompt-toggle {
-  margin-top: 2px;
+  min-height: 24px;
+  margin-top: 4px;
   padding: 0;
   border: 0;
   background: none;
   color: var(--accent);
-  font-size: .62rem;
-  font-weight: 700;
+  font-size: var(--fs-micro);
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -316,78 +397,98 @@ button, input, select { font: inherit; color: inherit; }
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 8px;
 }
 
+/* Every action button on the page: sentence case on a soft fill, the same height as the
+   segmented controls beside it. The minimum width keeps Pause and Play from nudging the row. */
 .pill {
-  min-width: 64px;
-  padding: 6px 11px 5px;
-  border: 1px solid var(--line);
+  display: inline-flex;
+  min-width: 4.6rem;
+  height: var(--control-h);
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border: 0;
   border-radius: 999px;
-  background: var(--paper);
-  color: var(--muted);
-  font-size: .58rem;
-  font-weight: 700;
-  letter-spacing: .04em;
-  line-height: 1.1;
-  text-transform: uppercase;
+  background: var(--fill);
+  color: var(--ink);
+  font-size: var(--fs-ui);
+  font-weight: 500;
+  line-height: 1;
   white-space: nowrap;
   cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
 }
 
 .pill:hover,
 .pill:focus-visible {
-  border-color: var(--accent-mid);
-  color: var(--accent);
+  background: var(--fill-hover);
 }
 
+/* A stopped player's Play is the one thing to press next, so it is the only filled accent button:
+   white on the accent is 5.9:1, and nothing else on the page looks like it. */
 .pill.is-paused {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--accent);
+  color: #fff;
 }
+
+.pill.is-paused:hover,
+.pill.is-paused:focus-visible { background: var(--accent-strong); }
+
+/* Zooming in is what the comparison card is for, so it leads the row in accent. An outline rather
+   than a fill keeps it a step below Play, which fills in when the videos are paused. */
+.sample-actions [data-action="zoom"] {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sample-actions [data-action="zoom"]:hover,
+.sample-actions [data-action="zoom"]:focus-visible { background: var(--accent-soft); }
 
 /* ---------- Transport (time, seek, speed) ---------- */
 
+/* An open row rather than a box: the seek bar is the frame the eye needs. */
 .transport {
   display: grid;
   grid-template-columns: auto minmax(140px, 1fr) auto;
   align-items: center;
-  gap: 12px;
-  margin: 0 2px 11px;
-  padding: 8px 10px;
-  border: 1px solid var(--line-soft);
-  background: color-mix(in srgb, var(--paper) 72%, var(--surface));
+  gap: 16px;
+  margin: 0 0 18px;
+  padding: 0;
 }
 
 .time {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   color: var(--muted);
-  font-size: .62rem;
+  font-size: var(--fs-micro);
   font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  letter-spacing: .02em;
+  font-weight: 500;
   white-space: nowrap;
 }
 
 .time-input {
   box-sizing: content-box;
   width: 6.2ch;
-  padding: 2px 5px 1px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: var(--paper);
+  height: calc(var(--control-h) - 8px);
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  background: var(--fill);
   color: var(--ink);
   font: inherit;
   text-align: right;
 }
 
-.time-input:hover { border-color: var(--accent-mid); }
+.time-input:hover { border-color: var(--line); }
 
 .time-input:focus {
   border-color: var(--accent);
+  background: var(--paper);
   outline: 2px solid var(--accent-mid);
 }
 
@@ -396,8 +497,12 @@ button, input, select { font: inherit; color: inherit; }
   outline-color: #f3ddd5;
 }
 
+/* A 24px-tall box with the track centred in it: the slider looks the same, but a finger or a
+   shaky pointer gets a full-size target instead of the 16px strip the browser draws. */
 .seek {
+  display: block;
   width: 100%;
+  height: 24px;
   margin: 0;
   accent-color: var(--accent);
   cursor: pointer;
@@ -406,50 +511,48 @@ button, input, select { font: inherit; color: inherit; }
 .segmented {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
   color: var(--muted);
-  font-size: .54rem;
-  font-weight: 700;
-  letter-spacing: .045em;
+  font-size: var(--fs-micro);
+  font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .segmented-options {
   display: inline-flex;
-  height: 24px;
-  overflow: hidden;
-  border: 1px solid var(--line);
+  height: var(--control-h);
+  gap: 2px;
+  padding: 3px;
   border-radius: 999px;
-  background: var(--paper);
+  background: var(--fill);
 }
 
 .segmented-options button {
   min-width: 0;
-  height: 22px;
-  padding: 3px 8px 2px;
+  height: 100%;
+  padding: 0 11px;
   border: 0;
-  border-left: 1px solid var(--line-soft);
+  border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: .56rem;
-  font-weight: 700;
+  font-size: var(--fs-micro);
+  font-weight: 500;
   line-height: 1;
   cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
 }
-
-.segmented-options button:first-child { border-left: 0; }
 
 .segmented-options button:hover,
 .segmented-options button:focus-visible {
-  background: color-mix(in srgb, var(--accent-soft) 55%, var(--paper));
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .segmented-options button[aria-pressed="true"] {
-  background: var(--accent);
-  color: var(--paper);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent-ring), var(--shadow-raised);
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .magnify [data-magnify-value] { min-width: 4.6ch; }
@@ -459,7 +562,7 @@ button, input, select { font: inherit; color: inherit; }
 .video-grid {
   display: grid;
   grid-template-columns: repeat(var(--tiles, 3), minmax(0, 1fr));
-  gap: 8px;
+  gap: clamp(12px, 1.2vw, 20px);
 }
 
 .tile {
@@ -468,22 +571,24 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 .tile figcaption {
-  padding: 0 2px 4px;
-  font-size: .7rem;
-  font-weight: 700;
+  padding: 0 1px 8px;
+  font-size: var(--fs-ui);
+  font-weight: 600;
   line-height: 1.2;
 }
 
 .tile.is-ours figcaption { color: var(--accent); }
 
-/* A single tile would otherwise grow as tall as the window is wide. */
+/* A single tile would otherwise grow as tall as the window is wide. Rounded corners and a soft
+   shadow set the picture off the page without a drawn border. */
 .video-frame {
   max-width: calc(var(--stage-h) * var(--video-ar));
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-m);
   background: #111;
+  box-shadow: var(--shadow-media);
   aspect-ratio: var(--video-ar);
 }
 
@@ -516,9 +621,9 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 .video-error {
-  margin: 8px 2px 0;
+  margin: 10px 0 0;
   color: #a33e2d;
-  font-size: .72rem;
+  font-size: var(--fs-small);
 }
 
 .sample-foot {
@@ -526,49 +631,68 @@ button, input, select { font: inherit; color: inherit; }
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px 18px;
-  padding: 11px 2px 0;
+  gap: 10px 24px;
+  margin-top: var(--space-block);
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
 }
 
 .jump {
   display: inline-flex;
   min-width: 0;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--muted);
-  font-size: .56rem;
-  font-weight: 700;
-  letter-spacing: .045em;
-  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  font-weight: 500;
 }
 
 /* Without min-width the option text (a whole prompt) sets a floor that max-width cannot lower, and
-   without overflow the text that the box cuts off still widens the page's scrollable area. */
+   without overflow the text that the box cuts off still widens the page's scrollable area. The
+   native chrome is swapped for the soft fill, with the chevron drawn back in. */
 .jump select {
   min-width: 0;
   max-width: min(460px, 70vw);
+  height: var(--control-h);
   overflow: hidden;
-  padding: 3px 6px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--paper);
+  padding: 0 32px 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235d6167' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 13px center;
   color: var(--ink);
-  font-size: .68rem;
-  letter-spacing: 0;
-  text-transform: none;
+  font-size: var(--fs-micro);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
 }
 
+.jump select:hover { background-color: var(--fill-hover); }
+
+.jump select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Reference, not content: one small muted line under the videos. The two switches keep their
+   weight because they change what the videos show. */
 .shortcuts {
   margin: 0;
   color: var(--muted);
-  font-size: .62rem;
+  font-size: var(--fs-tiny);
+  line-height: 1.6;
 }
 
+/* The line stays small, but each switch is a 24px-tall target, so a finger can hit it. */
 .shortcut-toggle {
   display: inline-flex;
+  min-height: 24px;
   align-items: center;
-  gap: 5px;
-  margin-right: 6px;
+  gap: 6px;
+  margin-right: 14px;
+  color: var(--ink-soft);
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -578,21 +702,17 @@ button, input, select { font: inherit; color: inherit; }
   cursor: pointer;
 }
 
-.shortcuts.is-off .shortcut-list { opacity: .45; }
+/* Switched-off shortcuts dim, but only to 4.7:1 on white, so the list still reads as text if
+   someone wants it: it is information about the keys, not an inactive control. */
+.shortcuts.is-off .shortcut-list { opacity: .88; }
 
+/* A key name is set apart by weight alone: a row of drawn keycaps shouts louder than the videos. */
 kbd {
-  display: inline-block;
-  min-width: 1.6em;
-  margin: 0 1px;
-  padding: 0 4px;
-  border: 1px solid var(--line);
-  border-bottom-width: 2px;
-  border-radius: 4px;
-  background: var(--paper);
+  padding: 0 .15em;
+  color: var(--ink-soft);
   font-family: inherit;
-  font-size: .56rem;
-  line-height: 1.5;
-  text-align: center;
+  font-size: inherit;
+  font-weight: 600;
 }
 
 /* ---------- Zoom dialog ---------- */
@@ -621,7 +741,7 @@ dialog:not([open]) { display: none; }
   width: 100%;
   height: 100%;
   flex-direction: column;
-  padding: 6px clamp(8px, .9vw, 14px) 8px;
+  padding: 10px clamp(10px, 1vw, 16px) 10px;
 }
 
 .zoom-shell:focus { outline: none; }
@@ -631,13 +751,13 @@ dialog:not([open]) { display: none; }
   flex: 0 0 auto;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px 14px;
-  padding-bottom: 6px;
+  gap: 8px 20px;
+  padding-bottom: 10px;
 }
 
 .zoom-toolbar .transport {
   margin: 0;
-  padding: 5px 8px;
+  padding: 0;
 }
 
 .zoom-grid {
@@ -657,21 +777,27 @@ dialog:not([open]) { display: none; }
 /* Either the prompt takes a spare cell of the panel grid, or a band across the bottom. */
 .zoom-grid[data-prompt="band"] .zoom-prompt { grid-column: 1 / -1; }
 
+/* The layout script budgets 10px across and 29px down for padding, border and caption, so the
+   border stays in the box model and only its colour goes quiet. */
 .panel {
   min-width: 0;
   margin: 0;
   padding: 3px 4px 4px;
-  border: 1px solid var(--line);
-  background: var(--paper);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--surface);
 }
 
-.panel.is-ours { border-color: color-mix(in srgb, var(--accent) 42%, var(--line)); }
+.panel.is-ours {
+  border-color: var(--accent-mid);
+  background: var(--accent-soft);
+}
 
 .panel figcaption {
   height: 20px;
-  padding: 0 2px;
-  font-size: .66rem;
-  font-weight: 700;
+  padding: 0 4px;
+  font-size: var(--fs-micro);
+  font-weight: 600;
   line-height: 20px;
 }
 
@@ -680,6 +806,7 @@ dialog:not([open]) { display: none; }
 .panel-stage {
   position: relative;
   overflow: hidden;
+  border-radius: 7px;
   aspect-ratio: var(--panel-ar, 1.7333);
   background: #111;
   cursor: pointer;
@@ -698,11 +825,12 @@ dialog:not([open]) { display: none; }
 .zoom-prompt {
   min-width: 0;
   min-height: 0;
-  padding: 8px 12px;
+  padding: 14px 18px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--paper) 82%, var(--surface));
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface);
 }
 
 .zoom-prompt:focus-visible {
@@ -719,31 +847,29 @@ dialog:not([open]) { display: none; }
 
 .zoom-prompt-head span {
   color: var(--accent);
-  font-size: .58rem;
-  font-weight: 800;
-  letter-spacing: .09em;
-  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  font-weight: 600;
 }
 
 .zoom-prompt-head small {
   color: var(--muted);
-  font-size: .54rem;
-  letter-spacing: .03em;
+  font-size: var(--fs-tiny);
   white-space: nowrap;
 }
 
 .zoom-prompt-text {
-  margin: 6px 0 0;
-  font-size: .92rem;
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
   font-style: italic;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 .zoom-hint {
-  margin: 10px 0 0;
+  margin: 12px 0 0;
   color: var(--muted);
-  font-size: .62rem;
-  line-height: 1.45;
+  font-size: var(--fs-micro);
+  line-height: 1.5;
 }
 
 /* Read by screen readers only. */
@@ -766,15 +892,19 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* The rounded button groups clip anything drawn outside them, so ring these from the inside. */
+/* The focus ring sits just outside the option, in the track's padding, so it never looks like
+   the selection's hairline drawn heavier. A focused option that is not chosen also takes the hover
+   fill and ink text rather than the white thumb and accent, so a keyboard user can always tell
+   the value they are on from the value that is set. */
 .length-tabs button:focus-visible,
 .segmented-options button:focus-visible {
-  outline-offset: -3px;
+  outline-offset: 1px;
 }
 
-.length-tabs button[aria-pressed="true"]:focus-visible,
-.segmented-options button[aria-pressed="true"]:focus-visible {
-  outline-color: var(--paper);
+.length-tabs button:not([aria-pressed="true"]):focus-visible,
+.segmented-options button:not([aria-pressed="true"]):focus-visible {
+  background: var(--fill-hover);
+  color: var(--ink);
 }
 
 /* ---------- Narrow screens ---------- */
@@ -787,76 +917,143 @@ button:focus-visible {
 @media (max-width: 860px) {
   /* Three tiles side by side stop being readable long before the page gets this narrow. */
   .video-grid { grid-template-columns: minmax(0, 1fr); }
-  .viewer-bar { gap: 8px 12px; }
+  .viewer-bar { gap: 10px 12px; }
 }
 
 @media (max-width: 720px) {
-  .transport { grid-template-columns: auto minmax(0, 1fr); }
+  .transport { grid-template-columns: auto minmax(0, 1fr); gap: 10px 14px; }
   .transport .segmented { grid-column: 1 / -1; justify-content: flex-start; }
-  .tile figcaption { font-size: .62rem; }
-  .length-tabs button { padding: 7px 12px 6px; }
+  .length-tabs button { padding: 0 13px; }
+  .sample-actions { justify-content: flex-start; }
   /* The zoom toolbar keeps time, seek and speed on one row so the panels keep their height. */
   .zoom-toolbar .transport { grid-template-columns: auto minmax(0, 1fr) auto; }
   .zoom-toolbar .transport .segmented { grid-column: auto; }
 }
 
+/* On a phone the toolbar stacks into five rows, and every pixel it takes comes out of the panels
+   below it, because the layout script gives the grid whatever height is left. The controls step
+   down to 30px (still well above the 24px minimum target) and the rows sit closer, so the toolbar
+   ends up shorter than base's and each panel keeps its width. */
 @media (max-width: 520px) {
-  .zoom-toolbar { grid-template-columns: 1fr; }
-  .zoom-toolbar .transport { grid-row: auto; grid-template-columns: auto minmax(0, 1fr); }
+  .zoom-toolbar { --control-h: 30px; grid-template-columns: 1fr; gap: 6px 12px; padding-bottom: 6px; }
+  .zoom-toolbar .transport { grid-row: auto; grid-template-columns: auto minmax(0, 1fr); row-gap: 6px; }
   .zoom-toolbar .transport .segmented { grid-column: 1 / -1; }
-  .zoom-actions { justify-content: flex-start; }
+  .zoom-actions { justify-content: flex-start; row-gap: 6px; }
 }
 
 @media (max-height: 520px) {
   .zoom-shell { padding-top: 4px; padding-bottom: 4px; }
   .zoom-toolbar { gap: 4px 10px; padding-bottom: 4px; }
-  .zoom-toolbar .transport { padding: 3px 6px; }
 }
 
 @media (forced-colors: active) {
+  /* The pressed and paused rules above outrank this plain one on specificity, and with the
+     system's repaint switched off they would paint the thumb white or the Play pill dark accent
+     behind HighlightText. Each state is therefore restated here at the same specificity. */
   [aria-pressed="true"],
-  .pill.is-paused {
+  .pill.is-paused,
+  .pill.is-paused:hover,
+  .pill.is-paused:focus-visible,
+  .length-tabs button[aria-pressed="true"],
+  .segmented-options button[aria-pressed="true"] {
     forced-color-adjust: none;
     background: Highlight;
     color: HighlightText;
+    box-shadow: none;
   }
 
+  /* The soft fills that mark buttons vanish in forced colours, so give them their outlines back. */
+  .pill,
+  .nav-button,
+  .length-tabs,
+  .segmented-options,
+  .method-chip,
+  .jump select,
+  .time-input { border: 1px solid ButtonText; }
+
+  /* Outside the thumb, the focus ring of a chosen option would land on the track, which the system
+     paints Canvas, and HighlightText on Canvas is close to 1:1 in several contrast themes. The
+     ring therefore moves back inside the Highlight thumb, where HighlightText is always legible. */
   .length-tabs button[aria-pressed="true"]:focus-visible,
-  .segmented-options button[aria-pressed="true"]:focus-visible { outline-color: HighlightText; }
+  .segmented-options button[aria-pressed="true"]:focus-visible {
+    outline-color: HighlightText;
+    outline-offset: -3px;
+  }
+
   .pill.is-paused:focus-visible { outline-color: CanvasText; }
+
+  /* The drawn chevron is a fixed grey picture the system cannot recolour, so the select gets its
+     native arrow back. */
+  .jump select {
+    appearance: auto;
+    -webkit-appearance: auto;
+    padding-right: 12px;
+    background-image: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .video-frame.is-loading .loading-bar { animation: none; }
 }
 
-/* ---------- Mechanism section ---------- */
+/* ---------- Sections ---------- */
 
+/* Every section is white and sits in the same column; a hairline across the column, not a grey
+   band across the window, marks where one ends and the next begins. */
 .mechanism {
-  margin-top: 8px;
-  padding: clamp(22px, 3vw, 40px) 0 clamp(26px, 3.4vw, 46px);
-  border-top: 1px solid var(--line);
-  background: var(--band);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
 }
 
 .mechanism-inner {
-  width: min(94vw, 1760px);
-  margin: 0 auto;
+  width: var(--col);
+  margin: var(--space-section) auto 0;
+  padding-top: var(--space-section);
+  border-top: 1px solid var(--line);
 }
 
-.mechanism-head { margin-bottom: 16px; }
+/* page.css closes the page with a hairline above this padding. A section and a half of air under
+   the rule lets it read as the page's end rather than as a cut: with only a sliver below it, the
+   last screen looked as if the document had been truncated. */
+.mechanism:last-of-type .mechanism-inner { padding-bottom: calc(var(--space-section) * 1.5); }
+
+.mechanism-head { margin-bottom: var(--space-block); }
 
 .mechanism-head h2 {
-  margin: 0 0 6px;
-  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: -.01em;
-  line-height: 1.2;
+  margin: 0;
+  font-size: var(--fs-h2);
+  font-weight: 650;
+  letter-spacing: -.022em;
+  line-height: 1.12;
+  text-wrap: balance;
 }
 
+.mechanism-head .lede { margin-top: 12px; }
+
+/* The five content sections are numbered, so the long page reads as a sequence. The number is
+   decoration, so the alternative text after the slash keeps it out of the heading's name. */
+.viewer,
+.mechanism:not(#bibtex) { counter-increment: section; }
+
+.viewer > .mechanism-head::before,
+.mechanism:not(#bibtex) .mechanism-head::before {
+  content: counter(section, decimal-leading-zero);
+  content: counter(section, decimal-leading-zero) / "";
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+/* The diagrams fill the column like every other block, so they share its left edge. */
 .mech-stage {
-  max-width: 1120px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
 }
@@ -873,39 +1070,84 @@ button:focus-visible {
   height: auto;
 }
 
+/* The drawings stop at their old size on the column's left edge, in line with the heading above
+   and the control bar below (centred, they drifted away from both on a wide column). They never
+   grow taller than the window minus the section bar and the control rail under them, so a laptop
+   sees a whole step with its buttons and caption. The rail budget covers the bar's top margin, a
+   two-line caption, a training part's title above its drawing and some air, so the whole part
+   fits one screen. A capped height letterboxes the drawing inside its box instead of distorting it.
+   The cap has a 480px floor: on a landscape phone, a short window or a laptop at 200% zoom, fitting
+   the screen would shrink the labels to 5-8px, and scrolling past a legible diagram is better
+   than squinting at a whole one. 480px keeps them near the size a portrait phone shows. */
+.mech-svg,
+.train-svg {
+  --rail-h: 140px;
+  --svg-cap: max(480px, calc(100vh - var(--toc-h, 52px) - var(--rail-h)));
+  max-width: min(var(--figure-max), var(--svg-cap) * var(--svg-ar, 99));
+  max-height: var(--svg-cap);
+  margin-inline: 0 auto;
+}
+
+/* A height cap alone letterboxes the drawing in the middle of a full-width box, so a tall part
+   started up to 107px right of the title and buttons it belongs to. Each drawing's width is
+   therefore capped at its capped height times its own proportions (the viewBox, rounded down so
+   the height cap never letterboxes it by a sliver), and the box shrinks to the drawing from the
+   left edge. A drawing not listed here keeps the letterbox, which still fits the screen. */
+.mech-svg[viewBox="0 0 900 470"] { --svg-ar: 1.914; }
+.train-svg[viewBox="0 0 900 432"] { --svg-ar: 2.083; }
+.train-svg[viewBox="0 0 900 604"] { --svg-ar: 1.49; }
+.train-svg[viewBox="0 0 900 530"] { --svg-ar: 1.698; }
+
 .mech-bar {
   display: flex;
-  max-width: 1120px;
+  max-width: none;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 16px;
-  margin: 10px auto 0;
+  align-items: center;
+  gap: 10px 22px;
+  margin: 16px 0 0;
 }
 
 .mech-actions {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .mech-step {
-  min-width: 48px;
+  min-width: 52px;
   color: var(--muted);
-  font-size: .62rem;
+  font-size: var(--fs-micro);
   font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  letter-spacing: .04em;
+  font-weight: 500;
   text-align: center;
 }
 
 .mech-caption {
+  /* The scripts write plain text here, so a flex box can centre one line against the buttons
+     while the reserved height keeps a two-line step from shifting the page. The measure keeps a
+     long takeaway from running the full width of the column beside the buttons. */
   flex: 1 1 320px;
-  min-height: 2.4em;
+  max-width: var(--measure);
+  min-height: 2.9em;
+  display: flex;
+  align-items: center;
   margin: 0;
   color: var(--muted);
-  font-size: .78rem;
-  line-height: 1.4;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+
+/* On a phone the four buttons fill the first row, so the step counter used to drop onto a row of
+   its own, centred in its box. The buttons' wrapper steps aside here so the counter and the
+   caption share the second row, starting at the left edge. The caption keeps its reserved height
+   even while it is empty: it is a live region, and hiding it would drop the first step's
+   announcement and jump the page by a line when the first caption arrives. */
+@media (max-width: 720px) {
+  .mech-bar { gap: 8px; }
+  .mech-actions { display: contents; }
+  .mech-step { min-width: 0; margin-right: 6px; text-align: left; }
+  .mech-caption { flex-basis: 200px; }
 }
 
 /* ---------- Mechanism diagram ---------- */
@@ -957,10 +1199,6 @@ button:focus-visible {
 
 .mech-svg .draw.on .head { opacity: 1; }
 
-@media (max-width: 720px) {
-  .mech-caption { font-size: .72rem; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .mech-svg .fade,
   .mech-svg .ribbon,
@@ -971,10 +1209,6 @@ button:focus-visible {
 }
 
 /* ---------- Training section ---------- */
-
-.mechanism.is-plain {
-  background: var(--bg);
-}
 
 .train-svg {
   display: block;
@@ -1043,22 +1277,36 @@ button:focus-visible {
   .train-svg .draw .head { transition: none; }
 }
 
-/* The three parts stay stacked and visible; the walkthrough fills them in as it runs. */
-.train-part + .train-part { margin-top: clamp(20px, 2.4vw, 34px); }
+/* The three parts stay stacked and visible; the walkthrough fills them in as it runs. The rule
+   between them is a shade lighter than the section rule and has less air around it, so the parts
+   read as steps of one section rather than three more sections. */
+.train-part + .train-part {
+  margin-top: calc(var(--space-section) * .75);
+  padding-top: var(--space-block);
+  border-top: 1px solid var(--line-soft);
+}
 
 .train-part-title {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: -.005em;
 }
 
 .train-part-stage {
   overflow-x: auto;
   overscroll-behavior-x: contain;
 }
+
+/* Two drawings carry a wide empty band in their own frame: part 2 below its loss box (40 of 604
+   units) and part 3 above its planner row (39 of 530). Neither band is ever drawn into, so the
+   neighbour moves over it and the title, drawing and buttons keep the rhythm of the other parts.
+   The overlap is on the stage, not the drawing, so the scroller never gains a vertical overflow.
+   The drawings never render below 0.8 scale (720px wide), where each band is still 31px, so the
+   trims stay clear of the content at every size. Without :has() the gaps simply stay. */
+.train-part-stage:has(> .train-svg[viewBox="0 0 900 604"]) { margin-bottom: -24px; }
+.train-part-stage:has(> .train-svg[viewBox="0 0 900 530"]) { margin-top: -28px; }
 
 .train-svg .mask-cell { transition: fill .3s ease; }
 .train-svg .mask-cell.is-on { fill: #FBDF93; }
@@ -1069,66 +1317,110 @@ button:focus-visible {
 .train-svg .bold { font-weight: 700; }
 
 /* Each training part carries its own controls, right under its own diagram. */
-.train-bar { max-width: none; margin-top: 8px; }
+.train-bar { max-width: none; margin-top: 12px; }
+
+/* On a phone every drawing is wider than the column and scrolls sideways, which nothing showed:
+   half the diagram was simply off the edge. The stage now fades out on its right edge, and each
+   drawing carries the fade's width as end padding (its minimum width grows to match, so the
+   drawing itself keeps its legible size), so scrolled to the end it comes fully clear of the fade.
+   The training parts' shared wrapper is left alone, because it also holds their buttons. */
+@media (max-width: 760px) {
+  [data-mech-stage],
+  .train-part-stage {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  }
+
+  .mech-svg { min-width: 704px; padding-inline-end: 24px; }
+  .train-svg { min-width: 744px; padding-inline-end: 24px; }
+}
+
+/* With reduced motion the parts open on their last step and never autoplay, but the script never
+   marks their Play as paused either, so it stayed a plain grey pill while every other stopped
+   player's Play is filled. Here nothing plays unless the reader asks, so the button takes the
+   filled look for good (it then reads Pause in the same fill while a requested replay runs). */
+@media (prefers-reduced-motion: reduce) {
+  .train-bar [data-act="play"] { background: var(--accent); color: #fff; }
+  .train-bar [data-act="play"]:hover,
+  .train-bar [data-act="play"]:focus-visible { background: var(--accent-strong); }
+}
 
 /* ---------- Latency explorer ---------- */
 
 .lat-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 22px;
-  margin-bottom: 18px;
+  gap: 12px 28px;
+  margin-bottom: var(--space-block);
 }
 
 .lat-controls .segmented-options button:disabled {
-  color: var(--line);
+  color: #aeb3ba;
   cursor: not-allowed;
 }
 
+/* The two columns span the whole content column, so the chart lines up with the heading. */
 .lat-chart {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 470px));
-  justify-content: center;
-  gap: 22px 40px;
-  margin: 0 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-block) clamp(40px, 5vw, 88px);
+  margin: 0;
 }
 
 @media (max-width: 900px) {
-  .lat-chart { grid-template-columns: minmax(0, 470px); }
+  .lat-chart { grid-template-columns: minmax(0, 1fr); }
 }
 
 .lat-block-head {
   display: flex;
   align-items: baseline;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-soft);
   color: var(--muted);
-  font-size: .66rem;
+  font-size: var(--fs-micro);
 }
 
-.lat-block-head strong { color: var(--ink); font-size: .78rem; font-weight: 600; }
+.lat-block-head strong {
+  color: var(--ink);
+  font-size: var(--fs-h3);
+  font-weight: 650;
+  letter-spacing: -.01em;
+}
 
 .lat-row {
   display: grid;
-  grid-template-columns: 9.8em minmax(0, 1fr) 5.6em 3.4em;
+  grid-template-columns: 9.4em minmax(0, 1fr) 6.6em 3.6em;
   align-items: center;
-  gap: 8px;
-  padding: 1.5px 0;
-  font-size: .64rem;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: var(--fs-micro);
 }
 
-.lat-name { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lat-row.is-main .lat-name { color: var(--accent); font-weight: 700; }
+/* The names are the rows' labels, so they wrap rather than being cut to an ellipsis: at normal
+   spacing they fit the column on one line, and a reader who widens letter or word spacing gets a
+   second line instead of "Ours (CP pla…". The column keeps its fixed width, so the bars still line
+   up from row to row, and the row's centring keeps the bar level with a two-line name. */
+.lat-name {
+  color: var(--muted);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.lat-row.is-main .lat-name { color: var(--accent); font-weight: 600; }
 
 .lat-track {
-  height: 13px;
-  background: color-mix(in srgb, var(--surface) 70%, var(--paper));
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface);
 }
 
 .lat-bar {
   display: block;
   height: 100%;
-  background: #b9c2cc;
+  border-radius: 999px;
+  background: #bfc6ce;
   transition: width .35s ease;
 }
 
@@ -1142,7 +1434,9 @@ button:focus-visible {
   white-space: nowrap;
 }
 
-.lat-value small { color: var(--muted); font-size: .84em; }
+/* The spread is part of the result, so it keeps the page's 12px floor rather than shrinking with
+   the row to 10.5px; the value column above is widened to hold it. */
+.lat-value small { color: var(--muted); font-size: max(12px, .84em); }
 
 .lat-ratio {
   color: var(--muted);
@@ -1151,21 +1445,53 @@ button:focus-visible {
   white-space: nowrap;
 }
 
-.lat-row.is-main .lat-ratio { color: var(--accent); font-weight: 700; }
+.lat-row.is-main .lat-ratio { color: var(--accent); font-weight: 600; }
 
+/* On a phone the name and the two figures leave the bar a sliver between them (5px at 320), too
+   short to compare against the rows above and below. The bar drops to a full-width line of its
+   own under its row instead, so every bar is measured against the same, whole column. */
+@media (max-width: 420px) {
+  .lat-row { grid-template-columns: minmax(0, 1fr) 6.6em 3.6em; row-gap: 3px; padding: 3px 0 5px; }
+  .lat-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* The speed-up under each block is the answer the chart exists for, so it sits on a tinted pill
+   of its own rather than trailing as another line of text. */
 .lat-speed {
-  margin: 5px 0 0;
+  display: inline-block;
+  margin: 10px 0 0;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--accent-soft);
   color: var(--accent);
-  font-size: .62rem;
-  font-weight: 700;
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .lat-note {
-  max-width: 980px;
-  margin: 16px 0 0;
+  max-width: var(--measure);
+  margin: var(--space-block) 0 0;
   color: var(--muted);
-  font-size: .66rem;
-  line-height: 1.5;
+  font-size: var(--fs-micro);
+  line-height: 1.6;
+  /* A capped measure makes a lone last word likelier, and a one-word line reads as a mistake. */
+  text-wrap: pretty;
+}
+
+/* These follow the bar rules above so they win on source order. Forced colours would flatten the
+   bars' background to the page colour and leave a chart of bare numbers, and a reader who asked
+   for less motion should not watch them slide on every switch. */
+@media (forced-colors: active) {
+  .lat-bar,
+  .lat-row.is-ours .lat-bar { forced-color-adjust: none; background: CanvasText; }
+  .lat-row.is-main .lat-bar { background: Highlight; }
+  /* The tint that makes the speed-up a pill is dropped, so an outline keeps it one grouped figure. */
+  .lat-speed { border: 1px solid CanvasText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lat-bar { transition: none; }
 }
 
 /* ---------- Anchor frame markers ---------- */
@@ -1190,8 +1516,19 @@ button:focus-visible {
   width: 2px;
   height: 5px;
   margin-left: -1px;
+  border-radius: 1px;
   background: var(--accent);
   opacity: .75;
+}
+
+/* The ticks are drawn only as a background, which forced colours would flatten to Canvas, and the
+   anchor frames would vanish from the track. */
+@media (forced-colors: active) {
+  .anchor-ticks i {
+    forced-color-adjust: none;
+    background: CanvasText;
+    opacity: 1;
+  }
 }
 
 .tile figcaption::after {
@@ -1202,72 +1539,78 @@ button:focus-visible {
 /* The chip rides in the caption row, never over the frame itself. */
 body.show-anchors .video-grid.is-anchor .tile.is-ours figcaption::after {
   content: "anchor latent";
-  margin-left: 7px;
-  padding: 1px 6px;
-  border: 1px solid var(--accent-mid);
+  margin-left: 8px;
+  padding: 2px 8px;
   border-radius: 999px;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: .52rem;
-  font-weight: 700;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  vertical-align: 2px;
+  font-size: var(--fs-tiny);
+  font-weight: 500;
+  vertical-align: 1px;
 }
 
 /* The second encoding sits after a divider in the same picker. */
 .methods-sep {
   width: 1px;
-  height: 17px;
-  margin: 0 3px;
+  height: 18px;
+  margin: 0 4px;
   background: var(--line);
 }
 
-.method-chip.is-alt span { font-weight: 600; }
-.method-chip.is-alt.is-on { border-style: dashed; }
+.method-chip.is-alt span { font-weight: 500; }
+.method-chip.is-alt.is-on { border-color: var(--accent-mid); border-style: dashed; }
 
+/* The measure is in em, so at this smaller size it would end well short of the lede above; the
+   extra tenth brings the two right edges back together and keeps the note to two lines. The
+   instruction in bold stays on one line wherever it fits, so it never reads as two fragments. */
 .caveat {
-  max-width: 900px;
-  margin: 8px 0 0;
-  padding-left: 9px;
-  border-left: 2px solid var(--accent-mid);
+  max-width: calc(var(--measure) * 1.1);
+  text-wrap: pretty;
+  margin: 14px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--line);
   color: var(--muted);
-  font-size: .72rem;
-  line-height: 1.45;
+  font-size: var(--fs-micro);
+  line-height: 1.55;
 }
 
 .caveat b { color: var(--ink); font-weight: 600; }
+
+@media (min-width: 480px) {
+  .caveat b { white-space: nowrap; }
+}
 
 /* ---------- Issues section ---------- */
 
 .issue-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px 18px;
-  max-width: 1120px;
-  margin: 0 auto;
+  gap: 28px clamp(16px, 1.8vw, 28px);
+  max-width: none;
+  margin: 0;
 }
 
 .issue { min-width: 0; margin: 0; }
 
 .issue h3 {
-  margin: 0 0 6px;
-  font-size: .74rem;
-  font-weight: 700;
-  line-height: 1.25;
+  margin: 0 0 10px;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  letter-spacing: -.005em;
+  line-height: 1.3;
 }
 
 .issue .video-frame { max-width: none; }
 
 .issue figcaption {
-  margin-top: 8px;
+  margin-top: 14px;
   color: var(--muted);
-  font-size: .68rem;
-  line-height: 1.45;
+  font-size: var(--fs-small);
+  line-height: 1.55;
 }
 
-.issue-bar { max-width: 1120px; margin: 14px auto 0; }
+.issue-bar { max-width: none; margin: var(--space-block) 0 0; }
 
 @media (max-width: 860px) {
-  .issue-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .issue-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 }
