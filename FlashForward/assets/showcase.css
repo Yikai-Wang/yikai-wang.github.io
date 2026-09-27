@@ -58,7 +58,6 @@
 
   --radius-s: 8px;
   --radius-m: 12px;
-  --radius-l: 16px;
   --control-h: 34px;
   --shadow-raised: 0 1px 2px rgba(16, 24, 40, .12), 0 0 0 .5px rgba(16, 24, 40, .06);
   --shadow-media: 0 1px 2px rgba(16, 24, 40, .06), 0 12px 28px -14px rgba(16, 24, 40, .35);
@@ -286,8 +285,6 @@ button, input, select { font: inherit; color: inherit; }
   border: 0;
   border-radius: 50%;
   background: var(--fill);
-  color: var(--ink);
-  font-size: var(--fs-body);
   line-height: 1;
   cursor: pointer;
   transition: background-color .15s ease, color .15s ease;
@@ -300,14 +297,6 @@ button, input, select { font: inherit; color: inherit; }
 }
 
 /* ---------- Sample card ---------- */
-
-/* No frame of its own: the section already groups it, and a box here would nest a third level of
-   borders around the videos. */
-.sample {
-  padding: 0;
-  border: 0;
-  background: none;
-}
 
 .sample-head {
   display: flex;
@@ -364,7 +353,6 @@ button, input, select { font: inherit; color: inherit; }
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   color: var(--ink-soft);
-  font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.55;
 }
@@ -412,7 +400,6 @@ button, input, select { font: inherit; color: inherit; }
   border: 0;
   border-radius: 999px;
   background: var(--fill);
-  color: var(--ink);
   font-size: var(--fs-ui);
   font-weight: 500;
   line-height: 1;
@@ -457,7 +444,6 @@ button, input, select { font: inherit; color: inherit; }
   align-items: center;
   gap: 16px;
   margin: 0 0 18px;
-  padding: 0;
 }
 
 .time {
@@ -536,8 +522,6 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: var(--fs-micro);
-  font-weight: 500;
   line-height: 1;
   cursor: pointer;
   transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
@@ -660,7 +644,6 @@ button, input, select { font: inherit; color: inherit; }
   border-radius: 999px;
   background: var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235d6167' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 13px center;
   color: var(--ink);
-  font-size: var(--fs-micro);
   text-overflow: ellipsis;
   white-space: nowrap;
   appearance: none;
@@ -681,7 +664,6 @@ button, input, select { font: inherit; color: inherit; }
   margin: 0;
   color: var(--muted);
   font-size: var(--fs-tiny);
-  line-height: 1.6;
 }
 
 /* The line stays small, but each switch is a 24px-tall target, so a finger can hit it. */
@@ -711,7 +693,6 @@ kbd {
   padding: 0 .15em;
   color: var(--ink-soft);
   font-family: inherit;
-  font-size: inherit;
   font-weight: 600;
 }
 
@@ -757,7 +738,6 @@ dialog:not([open]) { display: none; }
 
 .zoom-toolbar .transport {
   margin: 0;
-  padding: 0;
 }
 
 .zoom-grid {
@@ -828,7 +808,6 @@ dialog:not([open]) { display: none; }
   padding: 14px 18px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  border: 0;
   border-radius: 10px;
   background: var(--surface);
 }
@@ -998,15 +977,6 @@ button:focus-visible {
 
 /* ---------- Sections ---------- */
 
-/* Every section is white and sits in the same column; a hairline across the column, not a grey
-   band across the window, marks where one ends and the next begins. */
-.mechanism {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-}
-
 .mechanism-inner {
   width: var(--col);
   margin: var(--space-section) auto 0;
@@ -1045,15 +1015,11 @@ button:focus-visible {
   margin-bottom: 8px;
   color: var(--accent);
   font-size: var(--fs-micro);
-  font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: .04em;
 }
 
-/* The diagrams fill the column like every other block, so they share its left edge. */
 .mech-stage {
-  max-width: none;
-  margin: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
 }
@@ -1100,7 +1066,6 @@ button:focus-visible {
 
 .mech-bar {
   display: flex;
-  max-width: none;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 22px;
@@ -1288,7 +1253,6 @@ button:focus-visible {
 
 .train-part-title {
   margin: 0 0 12px;
-  color: var(--ink);
   font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -.005em;
@@ -1317,7 +1281,7 @@ button:focus-visible {
 .train-svg .bold { font-weight: 700; }
 
 /* Each training part carries its own controls, right under its own diagram. */
-.train-bar { max-width: none; margin-top: 12px; }
+.train-bar { margin-top: 12px; }
 
 /* On a phone every drawing is wider than the column and scrolls sideways, which nothing showed:
    half the diagram was simply off the edge. The stage now fades out on its right edge, and each
@@ -1364,7 +1328,6 @@ button:focus-visible {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-block) clamp(40px, 5vw, 88px);
-  margin: 0;
 }
 
 @media (max-width: 900px) {
@@ -1474,7 +1437,6 @@ button:focus-visible {
   margin: var(--space-block) 0 0;
   color: var(--muted);
   font-size: var(--fs-micro);
-  line-height: 1.6;
   /* A capped measure makes a lone last word likelier, and a one-word line reads as a mistake. */
   text-wrap: pretty;
 }
@@ -1586,8 +1548,6 @@ body.show-anchors .video-grid.is-anchor .tile.is-ours figcaption::after {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px clamp(16px, 1.8vw, 28px);
-  max-width: none;
-  margin: 0;
 }
 
 .issue { min-width: 0; margin: 0; }
@@ -1609,7 +1569,7 @@ body.show-anchors .video-grid.is-anchor .tile.is-ours figcaption::after {
   line-height: 1.55;
 }
 
-.issue-bar { max-width: none; margin: var(--space-block) 0 0; }
+.issue-bar { margin: var(--space-block) 0 0; }
 
 @media (max-width: 860px) {
   .issue-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }

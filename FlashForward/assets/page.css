@@ -42,8 +42,6 @@ a:focus-visible {
    sees the title block, the bar and the start of the TL;DR before it scrolls, and grows only
    gently beyond that so a big monitor does not open on a band of empty wash. */
 .page-top {
-  width: 100%;
-  margin: 0;
   padding: clamp(28px, 1.1vw + 27px, 64px) var(--gutter) clamp(24px, 1vw + 23px, 56px);
   background:
     radial-gradient(70% 90% at 50% 0%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%);
@@ -80,7 +78,6 @@ a:focus-visible {
   padding: 0;
   list-style: none;
   font-size: var(--fs-small);
-  line-height: 1.6;
 }
 
 /* Starts a new row of names wherever the author list should break. */
@@ -310,12 +307,6 @@ a:focus-visible {
 
 /* ---------- TL;DR ---------- */
 
-.tldr {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
 /* Four open columns under a hairline each, instead of four grey boxes. A short accent stroke
    leads each hairline and the point's heading takes the accent, so the four claims read as the
    page's headline before any of the detail. */
@@ -358,7 +349,6 @@ a:focus-visible {
   margin: 0;
   color: var(--muted);
   font-size: var(--fs-small);
-  line-height: 1.6;
   text-wrap: pretty;
 }
 
@@ -415,8 +405,6 @@ h2:hover .permalink,
 
 .bibtex {
   position: relative;
-  max-width: none;
-  margin: 0;
 }
 
 .bibtex pre {
@@ -424,7 +412,6 @@ h2:hover .permalink,
   padding: 22px 26px;
   padding-right: 96px;
   overflow-x: auto;
-  border: 0;
   border-radius: var(--radius-m);
   background: var(--surface);
   color: var(--ink-soft);
