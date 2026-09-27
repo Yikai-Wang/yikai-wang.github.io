@@ -178,7 +178,7 @@
       { duration: 340, easing: 'cubic-bezier(.3,.9,.3,1.15)' }));
 
     // anchor window of the chunk currently on GPU 1 (rounds 10-36)
-    const c = live ? Math.floor(t) - G.planRounds : hold;
+    const c = live ? Math.min(Math.floor(t) - G.planRounds, G.chunks - 1) : hold;   // stays on the last chunk until the end state
     const showWin = c >= 0 && c < G.chunks;
     refs.win.classList.toggle('off', !showWin);
     if (showWin) {
@@ -295,6 +295,9 @@
       const startOf = rects.map((el) => +el.dataset.s);
       let ptr = 0;
       const shown = new Set();
+      // Back to round 0 during the start delay (a previous run left the line at the finish).
+      now.setAttribute('x1', R.x0);
+      now.setAttribute('x2', R.x0);
       now.style.opacity = '.55';
       FF.tween({
         from: 0,

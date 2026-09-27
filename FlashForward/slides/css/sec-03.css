@@ -120,8 +120,9 @@
 
 /* ---------- s-drift (dark) ---------- */
 
-#s-drift .drift { display: flex; gap: 64px; align-items: flex-start; }
-#s-drift .drift-vid { position: relative; flex: none; width: 1120px; }
+#s-drift .bd { justify-content: center; padding-bottom: 24px; }
+#s-drift .drift { display: flex; gap: 88px; align-items: flex-start; }
+#s-drift .drift-vid { position: relative; flex: none; width: 832px; }   /* native size of the 832x480 clip */
 #s-drift .vid-caption { font-size: 28px; }
 #s-drift .drift-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 44px; align-self: center; }
 #s-drift .mirror { width: 300px; height: 150px; }

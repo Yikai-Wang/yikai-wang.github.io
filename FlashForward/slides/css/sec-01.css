@@ -141,15 +141,52 @@
   color: var(--ink);
 }
 
+/* Author grid: 3 columns x 4 rows (paper order), round headshot + two-line name. */
 #s-title .authors {
-  margin-top: 48px;
-  font-size: 27px;
-  line-height: 1.55;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 18px;
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 23px;
+  line-height: 1.15;
   color: var(--ink-soft);
 }
 
+#s-title .authors li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  margin: 0;                /* cancels deck.css `.slide li + li` spacing, which would offset all but the first cell */
+}
+
+#s-title .authors img,
+#s-title .authors .t1-ini {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .14);
+}
+
+/* Fallback when no photo is available: initials in the same circle. */
+#s-title .authors .t1-ini {
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--muted);
+}
+
+#s-title .authors span:not(.t1-ini) { white-space: nowrap; }
+
 #s-title .affil {
-  margin-top: 12px;
+  margin-top: 22px;
   font-size: 26px;
   color: var(--muted);
   opacity: 1;
