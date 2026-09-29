@@ -44,21 +44,22 @@
         <i class="fa fa-bars"></i>
       </button>
       <div class="menu" id="topmenu">
-        <a href="#About" class="menu-item" onclick="closeMenu()">About</a>
-        <a href="#Research" class="menu-item" onclick="closeMenu()">Research</a>
-        <a href="#Publications" class="menu-item" onclick="closeMenu()">Papers</a>
-        <a href="#Talks" class="menu-item" onclick="closeMenu()">Talks</a>
-        <a href="#Miscellaneous" class="menu-item" onclick="closeMenu()">Misc</a>
+        <a href="#About" class="menu-item">About</a>
+        <a href="#Research" class="menu-item">Research</a>
+        <a href="#Publications" class="menu-item">Papers</a>
+        <a href="#Talks" class="menu-item">Talks</a>
+        <a href="#Miscellaneous" class="menu-item">Misc</a>
       </div>
     </div>
   </div>
 
   <section id="Biography" class="two">
-    <h1 id="About" class="ref_anchor">About</h1>
+    <h1 class="sr-only">Yikai Wang</h1>
+    <h2 id="About" class="ref_anchor">About</h2>
     <hr />
     <table style="width:100%;border:0px;border-spacing:0px;border-collapse:collapse;margin-right:auto;margin-left:auto;">
       <tr>
-        <td style="padding-left: 0px; padding-right:50px;width:85%;vertical-align:left">
+        <td style="padding-left: 0px; padding-right:50px;width:85%;vertical-align:top">
           <p style="text-align:justify; text-justify:inter-ideograph;">
             Yikai Wang is a postdoctoral researcher at Meta, London, working with <a href="https://www.linkedin.com/in/tao-xiang-6a67416/">Prof. Tao Xiang</a>.
             Prior to this, he was a research fellow at <a href="https://www.mmlab-ntu.com">MMLab@NTU</a>, Nanyang Technological University, Singapore, working with <a href="https://www.mmlab-ntu.com/person/ccloy/index.html">Prof. Chen Change Loy</a>.
@@ -83,8 +84,12 @@
             <div class="hero-showcase" id="hero-showcase">
               <div class="hero-slide is-active" id="hero-panel-nvg" role="tabpanel"
                 aria-labelledby="hero-tab-nvg" aria-hidden="false">
-                <img id="hero-photo" src="hero/hero-reveal.webp" data-animated-src="hero/hero-reveal.webp"
-                  data-static-src="wyk.webp" alt="Yikai Wang reconstructed from coarse to fine with Pixel-NVG">
+                <picture>
+                  <!-- reduced-motion: show the static photo instead of the coarse-to-fine animation -->
+                  <source media="(prefers-reduced-motion: reduce)" srcset="wyk.webp">
+                  <img id="hero-photo" src="hero/hero-reveal.webp" data-animated-src="hero/hero-reveal.webp"
+                    data-static-src="wyk.webp" alt="Yikai Wang reconstructed from coarse to fine with Pixel-NVG">
+                </picture>
               </div>
               <div class="hero-slide" id="hero-panel-lexvla" role="tabpanel"
                 aria-labelledby="hero-tab-lexvla" aria-hidden="true">
@@ -94,8 +99,7 @@
             </div>
             <figcaption class="hero-caption" aria-live="polite">
               <span class="hero-caption-item is-active" aria-hidden="false">Pixel-<a href="https://yikai-wang.github.io/nvg/">NVG</a> Reconstruction</span>
-              <span class="hero-caption-item" aria-hidden="true"><a href="https://clementine24.github.io/LexVLA/">LexVLA</a>-style Word Cloud</span>
-            </figcaption>
+              <span class="hero-caption-item" aria-hidden="true"><a href="https://clementine24.github.io/LexVLA/">LexVLA</a>-style Word Cloud</span>            </figcaption>
             <div class="hero-controls">
               <button type="button" class="hero-nav" id="hero-prev"
                 aria-label="Previous portrait visualization">
@@ -107,18 +111,13 @@
                   aria-label="Show Pixel-NVG reconstruction"></button>
                 <button type="button" class="hero-dot" id="hero-tab-lexvla" role="tab"
                   aria-controls="hero-panel-lexvla" aria-selected="false" tabindex="-1"
-                  aria-label="Show LexVLA-style word cloud"></button>
-              </div>
+                  aria-label="Show LexVLA-style word cloud"></button>              </div>
               <button type="button" class="hero-nav" id="hero-next"
                 aria-label="Next portrait visualization">
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
               </button>
             </div>
           </figure>
-          <script>/* reduced-motion: show the static photo instead of the coarse-to-fine animation */
-            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-              var _hp = document.getElementById('hero-photo'); if (_hp) _hp.src = 'wyk.webp';
-            }</script>
           <div class="social-icons">
             <a href="https://scholar.google.com/citations?user=x8HOE_cAAAAJ" class="google-scholar" target="_blank"
               aria-label="Google Scholar">
@@ -143,10 +142,13 @@
       </tr>
     </table>
 
-    <h1 id="News">News</h1>
+    <h2 id="News">News</h2>
     <hr />
     <div class="subject-block">
       <ul>
+        <li>
+          [2026.09] Our work on <a href="https://yikai-wang.github.io/FlashForward/">faster autoregressive video diffusion</a> has been released!
+        </li>
         <li>
           [2026.06] Our work on <a href="https://ieeexplore.ieee.org/document/11592338">Cross-subject fMRI-to-Image Pre-training</a> has been accepted by IEEE JBHI. Congrats to Xuelin and Yun!
         </li>
@@ -233,63 +235,69 @@
         </li>
       </ul>
     </div>
-    <h1 id="Research" class="ref_anchor">Research</h1>
+    <h2 id="Research" class="ref_anchor">Research</h2>
     <hr />
     <ul>
       <li>
-        <b>Generative Vision</b>: <br>
+        <b>Visual Generation</b>: <br>
         <ul>
           <li>
-            <b>Generation</b>:
+            <b>Video Generation</b>:
+            faster autoregressive video diffusion [<a href="https://yikai-wang.github.io/FlashForward/">FlashForward</a>, <a
+              href="https://arxiv.org/abs/2609.32540">preprint</a>];
+          </li>
+          <li>
+            <b>Image Generation</b>:
+            diffusion-friendly tokenizer [<a href="https://michaelyu781.github.io/AffineTok-site/">AffineTok</a>, <a
+              href="https://arxiv.org/abs/2608.23864">preprint</a>],
             next visual granularity generation [<a href="https://yikai-wang.github.io/nvg/">NVG</a>, <a
               href="https://arxiv.org/abs/2508.12811">ICLR2026</a>],
-            diffusion-friendly visual tokenizer [<a href="https://michaelyu781.github.io/AffineTok-site/">AffineTok</a>, <a
-              href="https://arxiv.org/abs/2608.23864">preprint</a>],
             camera-centric generation [<a href="https://kangliao929.github.io/projects/puffin/">Puffin</a>, <a
               href="https://arxiv.org/abs/2510.08673">ICLR2026</a>];
           </li>
           <li>
-            <b>Inpainting</b>:
-            3D-aware object insertion [<a href="https://gong1130.github.io/DIRECT/">DIRECT</a>, <a
-              href="https://arxiv.org/abs/2606.06601">ICML2026</a>],
-            context-stability & color-consistency [<a href="https://yikai-wang.github.io/asuka/">ASUKA</a>, <a
+            <b>Inpainting & Editing</b>:
+            stable inpainting [<a href="https://yikai-wang.github.io/asuka/">ASUKA</a>, <a
               href="https://arxiv.org/abs/2312.04831">CVPR2025<span class="accent">(Highlight)</span></a>, <a
               href="https://arxiv.org/abs/2601.15368">extension</a>],
-            subject repositioning [<a href="https://yikai-wang.github.io/seele/">SEELE</a>, <a
-              href="https://arxiv.org/abs/2401.16861">TMLR2024</a><span class="accent">(Poster at ICML 2026)</span>],
-            ref-guided inpainting [<a href="https://ewrfcas.github.io/LeftRefill/">LeftRefill</a>, <a
-              href="https://arxiv.org/abs/2305.11577">CVPR2024</a>],
+            3D-aware object insertion [<a href="https://gong1130.github.io/DIRECT/">DIRECT</a>, <a
+              href="https://arxiv.org/abs/2606.06601">ICML2026</a>],
             empty street reconstruction [<a href="https://streetunveiler.github.io">StreetUnveiler</a>, <a
               href="https://arxiv.org/abs/2405.18416">ICLR2025</a>],
+            subject repositioning [<a href="https://yikai-wang.github.io/seele/">SEELE</a>, <a
+              href="https://arxiv.org/abs/2401.16861">TMLR2024</a><span class="accent">(J2C, Poster at ICML 2026)</span>],
+            reference-guided inpainting [<a href="https://ewrfcas.github.io/LeftRefill/">LeftRefill</a>, <a
+              href="https://arxiv.org/abs/2305.11577">CVPR2024</a>],
             amodal completion [<a href="https://jianxgao.github.io/C2F-Seg/">C2F-Seg</a>, <a
-              href="https://openaccess.thecvf.com/content/ICCV2023/papers/Gao_Coarse-to-Fine_Amodal_Segmentation_with_Shape_Prior_ICCV_2023_paper.pdf">ICCV2023</a>];
+              href="https://openaccess.thecvf.com/content/ICCV2023/papers/Gao_Coarse-to-Fine_Amodal_Segmentation_with_Shape_Prior_ICCV_2023_paper.pdf">ICCV2023</a>].
           </li>
         </ul>
       </li>
       <li>
-        <b>Multimodal Intelligence</b>: <br>
+        <b>Multimodal Learning</b>: <br>
         <ul>
           <li>
-            <b>Vision-action</b>: active perception [<a href="https://zhenyangliu.github.io/ActiveVLA/">ActiveVLA</a>,
-            <a href="https://arxiv.org/abs/2601.08325">CVPR2026</a>]. spatial-temporal aware policy learning [<a
-              href="https://zhenyangliu.github.io/DP4/">DP4</a>, <a
+            <b>Embodied AI</b>:
+            active perception [<a href="https://zhenyangliu.github.io/ActiveVLA/">ActiveVLA</a>, <a
+              href="https://arxiv.org/abs/2601.08325">CVPR2026</a>],
+            visuomotor policy [<a href="https://zhenyangliu.github.io/DP4/">DP4</a>, <a
               href="https://arxiv.org/abs/2507.06710">ICCV2025</a>];
           </li>
           <li>
-            <b>Vision-language</b>: visual grounding and reasoning [<a
-              href="https://zhenyangliu.github.io/ReasonGrounder/">ReasonGrounder</a>, <a
-              href="https://arxiv.org/abs/2503.23297">CVPR2025</a>], lexical alignment [<a
-              href="https://clementine24.github.io/LexVLA/">LexVLA</a>, <a
+            <b>Vision-Language</b>:
+            3D grounding & reasoning [<a href="https://zhenyangliu.github.io/ReasonGrounder/">ReasonGrounder</a>, <a
+              href="https://arxiv.org/abs/2503.23297">CVPR2025</a>],
+            lexical alignment [<a href="https://clementine24.github.io/LexVLA/">LexVLA</a>, <a
               href="https://arxiv.org/abs/2407.17827">NeurIPS2024</a>];
           </li>
           <li>
-            <b>Vision-fMRI</b>:
+            <b>Brain Decoding</b>:
+            face decoding [<a href="https://arxiv.org/abs/2607.22302">preprint</a>],
             zero-shot decoding [<a href="https://arxiv.org/abs/2601.15071">preprint</a>],
-            dynamic face decoding [<a href="https://arxiv.org/abs/2607.22302">preprint</a>],
             pre-training [<a href="https://ieeexplore.ieee.org/document/11592338">JBHI2026</a>],
+            latent alignment [<a href="https://arxiv.org/abs/2303.14730">TMLR2024</a>],
             consistent decoding [<a href="https://jingyanghuo.github.io/neuropictor/">NeuroPictor</a>, <a
-              href="https://arxiv.org/abs/2403.18211">ECCV2024</a>],
-            latent alignment [<a href="https://arxiv.org/abs/2303.14730">TMLR2024</a>].
+              href="https://arxiv.org/abs/2403.18211">ECCV2024</a>].
           </li>
         </ul>
       </li>
@@ -297,37 +305,47 @@
         <b>Statistical Machine Learning</b>: <br>
         <ul>
           <li>
-            <b>Subset selection analysis</b>:
-            false-selection-rate control [<a href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a
-              href="https://ieeexplore.ieee.org/document/10337771">TPAMI2023</a>],
-            noisy set recovery [<a href="https://yikai-wang.github.io/ici">ICI</a>, <a
-              href="https://ieeexplore.ieee.org/document/9446583/">TPAMI2021</a>];
-          </li>
-          <li>
-            <b>Application (sparse incidental parameters)</b>:
-            out-of-distribution detection [<a
+            <b>Trustworthy Learning</b>:
+            conformal evaluation [<a href="https://ggc29.github.io/CReL/">CReL</a>, <a
+              href="https://arxiv.org/abs/2605.30807">ICML2026</a>],
+            OOD detection [<a
               href="https://openaccess.thecvf.com/content/CVPR2024/papers/Fan_Test-Time_Linear_Out-of-Distribution_Detection_CVPR_2024_paper.pdf">CVPR2024</a>],
             learning with noisy labels [<a href="https://yikai-wang.github.io/spr">SPR</a>, <a
-              href="https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Scalable_Penalized_Regression_for_Noise_Detection_in_Learning_With_Noisy_CVPR_2022_paper.pdf">CVPR2022</a>],
-            few-shot learning [<a href="https://yikai-wang.github.io/ici">ICI</a>, <a
-              href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Instance_Credibility_Inference_for_Few-Shot_Learning_CVPR_2020_paper.pdf">CVPR2020</a>];
+              href="https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Scalable_Penalized_Regression_for_Noise_Detection_in_Learning_With_Noisy_CVPR_2022_paper.pdf">CVPR2022</a>; <a
+              href="https://yikai-wang.github.io/spr">Knockoffs-SPR</a>, <a
+              href="https://ieeexplore.ieee.org/document/10337771">TPAMI2023</a>];
           </li>
           <li>
-            <b>Application (other statistical models)</b>:
-            conformal evaluation [<a href="https://ggc29.github.io/CReL/">CReL</a>, <a href="https://arxiv.org/abs/2605.30807">ICML2026</a>],
+            <b>Efficient Learning</b>:
             network pruning [<a href="https://arxiv.org/abs/2501.03289">ICLR2025</a>],
-            in-context-learning [<a href="https://chmxu.github.io/research/incontext_nips2024/">Partial2Global</a>, <a
-              href="https://arxiv.org/abs/2405.15279">NeurIPS2024</a>].
+            in-context learning [<a href="https://chmxu.github.io/research/incontext_nips2024/">Partial2Global</a>, <a
+              href="https://arxiv.org/abs/2405.15279">NeurIPS2024</a>],
+            few-shot learning [<a href="https://yikai-wang.github.io/ici">ICI</a>, <a
+              href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Instance_Credibility_Inference_for_Few-Shot_Learning_CVPR_2020_paper.pdf">CVPR2020</a>, <a
+              href="https://ieeexplore.ieee.org/document/9446583/">TPAMI2021</a>].
+          </li>
         </ul>
       </li>
-
-
     </ul>
 
-    <h1 id="Publications" class="ref_anchor">Papers</h1>
+    <h2 id="Publications" class="ref_anchor">Papers</h2>
     <hr />
 
     <div class="pub-list" id="papers">
+
+      <div class="pub-item">
+        <div class="pub-image">
+          <img src='figures/flashforward.webp' loading="lazy" decoding="async" alt="">
+        </div>
+        <div class="pub-content">
+          <p><b>FlashForward: In-Flight KV Cache with Clean Anchors for Faster Autoregressive Video Diffusion.</b><br>
+            [<a href="https://yikai-wang.github.io/FlashForward/">intro</a>]
+            <br>
+            <b>Yikai Wang</b>, Xiao Han, Mengmeng Xu, Juan C. Pérez, Yiannis Douratsos, Sen He, Zijian Zhou, Fei Zhang, Zhaochong An, Juan-Manuel Pérez-Rúa, Chen Change Loy, Tao Xiang.<br>
+            Preprint, 2026.<br>
+          </p>
+        </div>
+      </div>
 
       <div class="pub-item">
         <div class="pub-image">
@@ -450,7 +468,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <video autoplay muted loop playsinline preload="metadata" poster="nvg/3-poster.webp"><source src="nvg/3.mp4" type="video/mp4"></video>
+          <video data-autoplay muted loop playsinline preload="none" poster="nvg/3-poster.webp"><source src="nvg/3.mp4" type="video/mp4"></video>
         </div>
         <div class="pub-content">
           <p><b>Next Visual Granularity Generation.</b><br>
@@ -495,7 +513,7 @@
           <p><b>Cross-subject fMRI-to-Image with Visual-cortex 2D Representation and Pre-Training.</b><br>
             [<a href="https://ieeexplore.ieee.org/document/11592338">paper</a>]
             <br>
-            Xuelin Qian*, Yun Wang*, <b>Yikai Wang</b>, Shijie Zhao, Jianfeng Feng, and Yanwei Fu<sup><i class="fa fa-envelope-o"
+            Xuelin Qian*, Yun Wang*, <b>Yikai Wang</b>, Shijie Zhao, Jianfeng Feng, Yanwei Fu<sup><i class="fa fa-envelope-o"
                 aria-hidden="true"></i></sup>.<br>
             <b class="venue">JBHI</b>, 2026.<br>
           </p>
@@ -504,7 +522,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <video id="dp4-video" autoplay muted loop playsinline preload="metadata" poster="figures/dp4-poster.webp">
+          <video id="dp4-video" data-autoplay muted loop playsinline preload="none" poster="figures/dp4-poster.webp">
             <source src="figures/dp4.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -587,7 +605,7 @@
 
       <div class="pub-item">
         <div class="pub-image">
-          <video autoplay muted loop playsinline preload="metadata" poster="figures/StreetUnveiler-poster.webp"><source src="figures/StreetUnveiler.mp4" type="video/mp4"></video>
+          <video data-autoplay muted loop playsinline preload="none" poster="figures/StreetUnveiler-poster.webp"><source src="figures/StreetUnveiler.mp4" type="video/mp4"></video>
         </div>
         <div class="pub-content">
           <p><b>3D StreetUnveiler with Semantic-aware 2DGS - a simple baseline.</b><br>
@@ -619,7 +637,7 @@
             <br>
             <b>Yikai Wang</b>, Chenjie Cao, Ke Fan, Qiaole Dong, Yifan Li, Xiangyang Xue, Yanwei Fu<sup><i
                 class="fa fa-envelope-o" aria-hidden="true"></i></sup>. <br>
-            <b class="venue">TMLR</b>, 2024. <span class="accent">(Poster at ICML 2026, 10% of accepted papers)</span><br>
+            <b class="venue">TMLR</b>, 2024. <span class="accent">(J2C Certification, 10% of accepted papers; Poster at ICML 2026)</span><br>
           </p>
         </div>
       </div>
@@ -652,7 +670,7 @@
             [<a href="https://github.com/Clementine24/LexVLA">code</a>]
             [<a href="https://clementine24.github.io/LexVLA/">intro</a>]
             <br>
-            Yifan Li, <b>Yikai Wang<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup></b>, Yanwei Fu,
+            Yifan Li, <b>Yikai Wang</b><sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>, Yanwei Fu,
             Dongyu Ru, Zheng Zhang, Tong He<sup><i class="fa fa-envelope-o" aria-hidden="true"></i></sup>.<br>
             <b class="venue">NeurIPS</b>, 2024.<br>
           </p>
@@ -838,13 +856,13 @@
 
     </div>
 
-    <h1 id="Talks" class="ref_anchor">Talks</h1>
+    <h2 id="Talks" class="ref_anchor">Talks</h2>
     <hr />
     <div class="pub-list" id="talks">
 
       <div class="pub-item">
         <div class="pub-image">
-          <video autoplay muted loop playsinline preload="metadata" poster="nvg/3-poster.webp"><source src="nvg/3.mp4" type="video/mp4"></video>
+          <video data-autoplay muted loop playsinline preload="none" poster="nvg/3-poster.webp"><source src="nvg/3.mp4" type="video/mp4"></video>
         </div>
         <div class="pub-content">
           <div class="paper">
@@ -853,7 +871,7 @@
               <br>
               Xi'an Jiaotong University, 2026.05;<br>
               Fudan University, 2026.05;<br>
-              Shanghai Innovation Insitute, 2026.05.<br>
+              Shanghai Innovation Institute, 2026.05.<br>
             </p>
           </div>
         </div>
@@ -945,7 +963,7 @@
 
     <br>
 
-    <h1 id="Miscellaneous" class="ref_anchor">Grants and Awards</h1>
+    <h2 id="Miscellaneous" class="ref_anchor">Grants and Awards</h2>
     <hr />
     <ul>
       <li>Academic Grant, NVIDIA, 2025.</li>
@@ -958,16 +976,16 @@
     </ul>
 
 
-    <h1 id="Education">Timeline</h1>
+    <h2 id="Education">Timeline</h2>
     <hr />
     <ul>
       <li>Postdoctoral Researcher, 2025–present, Meta, London.</li>
       <li>Research Fellow, 2024–2025, Nanyang Technological University, Singapore.</li>
       <li>Ph.D. in Statistics, 2019–2024, Fudan University, Shanghai.</li>
-      <li>B.S. in Mathematics, 2015–2019, Fudan University, Shanghai.</li>
+      <li>B.Sc. in Mathematics, 2015–2019, Fudan University, Shanghai.</li>
     </ul>
 
-    <h1>Service</h1>
+    <h2>Service</h2>
     <hr />
     <ul>
       <li>
@@ -1014,7 +1032,7 @@
       </li>
     </ul>
 
-    <h1 id="Teaching">Teaching</h1>
+    <h2 id="Teaching">Teaching</h2>
     <hr />
     <ul>
       <li>Neural Network and Deep Learning, TA, 2019–2022 Springs, Fudan
@@ -1024,10 +1042,7 @@
 
     <section>
       <p style="text-align: center; color: darkgray;"><small>
-        <span id="visit-line" style="display:none;">You are visitor №&nbsp;<span id="visit-count"></span> :)<br></span>
-        Hosted on GitHub Pages.
-        Theme modified from <a href="https://github.com/orderedlist/minimal">minimal</a> and <a
-          href="https://github.com/jonbarron/website">Jonbarron</a>.</small>
+        <span id="visit-line" style="display:none;">You are visitor №&nbsp;<span id="visit-count"></span> :)</span></small>
       </p>
     </section>
 
@@ -1041,12 +1056,6 @@
     var btn = document.querySelector(".hamburger-icon");
     var open = nav.classList.toggle("responsive");
     if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
-  }
-  function closeMenu() {
-    var nav = document.getElementById("navbar");
-    var btn = document.querySelector(".hamburger-icon");
-    nav.classList.remove("responsive");
-    if (btn) btn.setAttribute("aria-expanded", "false");
   }
   function topFunction() {
     document.body.scrollTop = 0; // For Safari
@@ -1189,7 +1198,7 @@
   })();
 </script>
 <script>
-  // Subtle enhancements: scroll-reveal, back-to-top, image fade-in.
+  // Subtle enhancements: scroll-reveal, lazy video playback, back-to-top, image fade-in.
   // All progressive: reduced-motion aware, and nothing is hidden without JS.
   (function () {
     var reduce = window.matchMedia &&
@@ -1206,7 +1215,7 @@
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
       var vh = window.innerHeight || document.documentElement.clientHeight;
-      var targets = document.querySelectorAll('.pub-item, section h1');
+      var targets = document.querySelectorAll('.pub-item, section h2');
       Array.prototype.forEach.call(targets, function (el) {
         // only animate what starts below the fold, so nothing flashes on load
         if (el.getBoundingClientRect().top > vh * 0.9) {
@@ -1216,7 +1225,21 @@
       });
     }
 
-    // 2) Back-to-top button.
+    // 2) Looping thumbnail videos: play only while on screen, and never under
+    //    reduced motion (the poster frame is shown instead, with controls).
+    var vids = document.querySelectorAll('video[data-autoplay]');
+    Array.prototype.forEach.call(vids, function (v) {
+      if (reduce) { v.controls = true; return; }
+      if (!('IntersectionObserver' in window)) { v.play().catch(function () {}); return; }
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) v.play().catch(function () {});
+          else v.pause();
+        });
+      }, { rootMargin: '200px 0px' }).observe(v);
+    });
+
+    // 3) Back-to-top button.
     var toTop = document.getElementById('to-top');
     if (toTop) {
       var onScroll = function () {
@@ -1230,7 +1253,7 @@
       onScroll();
     }
 
-    // 3) Fade thumbnails in as they finish loading (skip already-loaded ones).
+    // 4) Fade thumbnails in as they finish loading (skip already-loaded ones).
     if (!reduce) {
       var imgs = document.querySelectorAll('.pub-image img');
       Array.prototype.forEach.call(imgs, function (img) {
@@ -1249,11 +1272,30 @@
   (function () {
     var el = document.querySelector('.copy-email');
     if (!el) return;
-    function copy() {
-      var email = el.getAttribute('data-email') || el.textContent.trim();
-      if (navigator.clipboard) { navigator.clipboard.writeText(email).catch(function () {}); }
+    function flash() {
       var f = document.querySelector('.copy-flash');
       if (f) { f.classList.add('show'); setTimeout(function () { f.classList.remove('show'); }, 1500); }
+    }
+    // Fallback for browsers without the async Clipboard API (or when it is denied):
+    // select the address and try execCommand; if that fails too, leave it selected
+    // so the visitor can copy it manually. Only confirm when a copy really happened.
+    function fallback() {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      if (ok) { sel.removeAllRanges(); flash(); }
+    }
+    function copy() {
+      var email = el.getAttribute('data-email') || el.textContent.trim();
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(flash, fallback);
+      } else {
+        fallback();
+      }
     }
     el.addEventListener('click', copy);
     el.addEventListener('keydown', function (e) {
@@ -1263,10 +1305,8 @@
 </script>
 <script>
   // Visitor counter — self-hosted on a Cloudflare Worker + KV (see counter/README.md).
-  // Paste your deployed Worker URL below; until then the counter line stays hidden.
   (function () {
     var API = 'https://counter.yi-kai-wang.workers.dev';
-    if (API.indexOf('REPLACE-ME') !== -1) return;         // not configured yet
     var out = document.getElementById('visit-count');
     var line = document.getElementById('visit-line');
     if (!out) return;

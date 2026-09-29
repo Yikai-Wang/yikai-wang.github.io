@@ -42,7 +42,8 @@ h1, h2, h3 {
   line-height:1.1;
 }
 
-h1 {
+h2 {
+  color:#222;
   font-size:28px;
   font-weight: 500;
   letter-spacing: -0.01em;                               /* tighter display headings */
@@ -50,11 +51,6 @@ h1 {
   scroll-margin-top: calc(var(--header-height) + 16px);  /* clear the fixed nav on jumps */
 }
 #About { margin-top: 0; }   /* the first section heading hugs the top */
-
-h2 {
-  color:#393939;
-  font-weight: 500;
-}
 
 h3, h4, h5, h6 {
   color:#494949;
@@ -238,6 +234,19 @@ td { border:0px; }
 }
 .copy-flash.show { display: inline; }
 
+/* Visually hidden but available to screen readers and search engines. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Misc utility classes carried over from the old inline stylesheet. */
 .float-right {
   float: right;
@@ -309,6 +318,11 @@ td { border:0px; }
   visibility: visible;
   pointer-events: auto;
   transition-delay: 0s;
+}
+
+.hero-slide picture {
+  display: block;
+  height: 100%;
 }
 
 .hero-slide img,
