@@ -153,6 +153,12 @@ a:focus-visible {
   font-weight: 500;
 }
 
+/* On a live (dark) button --muted is unreadable; soften the button's own text colour instead. */
+.link-btn:not(.is-soon) small {
+  color: inherit;
+  opacity: .75;
+}
+
 /* ---------- Section bar ---------- */
 
 /* Solid rather than frosted: a translucent bar lets headings and diagram labels scrolling under it
