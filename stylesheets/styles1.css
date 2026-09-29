@@ -320,9 +320,11 @@ td { border:0px; }
   transition-delay: 0s;
 }
 
+/* The <picture> (reduced-motion source swap) generates no box, so its img sizes against the slide
+   like the LexVLA img. As a block, Safari resolved the img's height: 100% to the image's natural
+   376px inside the About table cell, and object-fit: cover showed only a zoomed-in crop. */
 .hero-slide picture {
-  display: block;
-  height: 100%;
+  display: contents;
 }
 
 .hero-slide img,
