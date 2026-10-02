@@ -36,7 +36,7 @@
      s-training: shared backbone + two phases
      ===================================================================== */
 
-  const FRAMES = '../assets/training/frames.png'; // 25 frames, 180 x 104 each, stacked vertically
+  const FRAMES = '../../FlashForward/assets/training/frames.png'; // 25 frames, 180 x 104 each, stacked vertically
   const STRIP = (i) => `media/strip/bear-c${String(i).padStart(2, '0')}.jpg`;
 
   const sprite = (p, x, y, w, h, idx) => {

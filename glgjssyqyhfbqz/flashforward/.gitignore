@@ -1,0 +1,7 @@
+# editable sources stay local; only the built deck is published
+src/
+build.py
+preview-*.html
+
+# narrated video render (large, local only)
+render/
