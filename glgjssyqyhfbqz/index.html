@@ -21,15 +21,22 @@
     li { display: flex; gap: 16px; padding: 12px 0; border-top: 1px solid #e5e5e5; }
     .date { flex: none; width: 64px; color: #999; }
     .note { color: #999; }
+    .keys { display: block; margin-top: 6px; font-size: 13px; line-height: 1.9; color: #999; }
+    .keys > span { white-space: nowrap; }
+    kbd { font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: #595959; background: #f7f7f7; border: 1px solid #ddd; border-bottom-width: 2px; border-radius: 4px; padding: 2px 5px; }
     a { color: #39c; text-decoration: none; }
     a:hover { color: #069; }
   </style>
 </head>
 <body>
   <h1>Slides</h1>
-  <!-- Newest first. A deck gets its own folder here (e.g. flashforward/); a single PDF sits next to this file. -->
+  <!-- Newest first. A deck gets its own folder here (e.g. flashforward/); a single PDF sits next to this file.
+       .keys mirrors the deck's own help overlay (? or H); the two decks use different keys. -->
   <ul>
-    <li><span class="date">2026.09</span><span><a href="flashforward/">FlashForward</a> <span class="note">· faster autoregressive video diffusion</span></span></li>
+    <li><span class="date">2026.10</span><span><a href="diffusion/slides/">Diffusion Models</a> <span class="note">· image &amp; video milestones, 2015 → 2026</span>
+      <span class="keys"><span><kbd>→</kbd> <kbd>Space</kbd> next</span> · <span><kbd>←</kbd> previous</span> · <span><kbd>Home</kbd> <kbd>End</kbd> first / last</span> · <span><kbd>12</kbd> <kbd>Enter</kbd> slide 12</span> · <span><kbd>V</kbd> 45 ⇄ 90 min</span> · <span><kbd>P</kbd> presenter</span> · <span><kbd>N</kbd> notes</span> · <span><kbd>O</kbd> overview</span> · <span><kbd>F</kbd> full screen</span> · <span><kbd>B</kbd> black</span> · <span><kbd>T</kbd> light / dark</span> · <span><kbd>?</kbd> help</span></span></span></li>
+    <li><span class="date">2026.09</span><span><a href="flashforward/">FlashForward</a> <span class="note">· faster autoregressive video diffusion</span>
+      <span class="keys"><span><kbd>→</kbd> <kbd>Space</kbd> next</span> · <span><kbd>←</kbd> previous</span> · <span><kbd>⇧</kbd> <kbd>→</kbd> <kbd>←</kbd> skip builds</span> · <span><kbd>Home</kbd> <kbd>End</kbd> first / last</span> · <span><kbd>12</kbd> <kbd>Enter</kbd> slide 12</span> · <span><kbd>S</kbd> presenter</span> · <span><kbd>O</kbd> overview</span> · <span><kbd>F</kbd> full screen</span> · <span><kbd>B</kbd> <kbd>W</kbd> black / white</span> · <span><kbd>K</kbd> <kbd>R</kbd> pause / restart videos</span> · <span><kbd>H</kbd> help</span></span></span></li>
   </ul>
 </body>
 </html>
