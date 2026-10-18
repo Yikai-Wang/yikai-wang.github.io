@@ -1,0 +1,105 @@
+/* 03a · Space: persist (s-asuka, s-c2fseg, s-street). Every selector is scoped by a slide id. */
+
+/* ---------- s-asuka ---------- */
+#s-asuka .stage { flex: 1; display: flex; align-items: center; justify-content: center; }
+
+#s-asuka .cars { display: flex; gap: 40px; align-items: flex-start; transition: gap .7s var(--ease); }
+#s-asuka .tile { width: 540px; transition: width .7s var(--ease); }
+#s-asuka .slot { display: grid; }
+#s-asuka .slot > * { grid-area: 1 / 1; }
+#s-asuka .ph {
+  width: 540px; aspect-ratio: 1 / 1; box-sizing: border-box; border: 4px dashed var(--line); border-radius: 18px;
+  display: grid; place-items: center; font-size: 150px; font-weight: 800; color: var(--line);
+  transition: width .7s var(--ease);
+}
+#s-asuka .slot .tile { position: relative; z-index: 1; }
+#s-asuka .pic { position: relative; border-radius: 18px; overflow: hidden; }
+#s-asuka .pic img { width: 100%; height: auto; }
+#s-asuka .tile figcaption {
+  margin-top: 18px; text-align: center;
+  font-size: 32px; font-weight: 700; color: var(--muted);
+}
+#s-asuka .tile.bad figcaption { color: var(--kv); }
+#s-asuka .tile.good figcaption { color: var(--space); }
+#s-asuka .tile.good .pic { box-shadow: 0 0 0 6px var(--space); }
+
+#s-asuka .ring { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#s-asuka .ring ellipse { fill: none; stroke: var(--kv); stroke-width: 11; }
+#s-asuka .flux .ring ellipse { stroke-width: 12; }
+#s-asuka .flag {
+  position: absolute; left: 50.8%; top: 84%; transform: translateX(-50%);
+  padding: 4px 18px; border-radius: 999px; background: var(--kv); color: #fff;
+  font-size: 28px; font-weight: 700; line-height: 1.3;
+}
+
+/* the FLUX grid takes no room until step 2, then the row makes space for it */
+#s-asuka .flux { flex: none; width: 0; margin-left: 0; overflow: hidden; transition: opacity .55s var(--ease), width .7s var(--ease), margin .7s var(--ease); }
+#s-asuka .grid { width: 560px; }
+#s-asuka .grid .cols { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 10px; }
+#s-asuka .grid .cols span { text-align: center; font-size: 24px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+#s-asuka .grid .cols span:nth-child(2) { color: var(--kv); }
+#s-asuka .grid .cols span.t-space { color: var(--space); }
+#s-asuka .grid .pic { border-radius: 14px; }
+
+#s-asuka[data-current-step="2"] .cars { gap: 28px; }
+#s-asuka[data-current-step="2"] .tile,
+#s-asuka[data-current-step="2"] .ph { width: 330px; }
+#s-asuka[data-current-step="2"] .flux { width: 560px; margin-left: 64px; }
+
+/* ---------- s-c2fseg ---------- */
+#s-c2fseg .flip { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 56px; padding-bottom: 30px; }
+#s-c2fseg .frames { display: grid; grid-template-columns: repeat(4, 320px); gap: 40px 28px; }
+#s-c2fseg .fr { position: relative; display: flex; flex-direction: column; gap: 10px; }
+#s-c2fseg .fr .t { font-size: 26px; font-weight: 700; color: var(--muted); }
+#s-c2fseg .fr.hid .t { color: var(--space); }
+/* 1.25x of a 256x128 frame; sprite strip 2069x128 -> 2586.25x160, pitch 259 -> 323.75 */
+#s-c2fseg .px {
+  width: 320px; height: 160px; border-radius: 10px;
+  background-image: url("../media/c2fseg/video-amodal-toy-ours.jpg");
+  background-size: 2586.25px 160px; background-repeat: no-repeat;
+  box-shadow: 0 0 0 0 var(--space);
+  transition: box-shadow .2s ease;
+}
+#s-c2fseg .fr[data-t="1"] .px { background-position: 0 0; }
+#s-c2fseg .fr[data-t="2"] .px { background-position: -323.75px 0; }
+#s-c2fseg .fr[data-t="3"] .px { background-position: -647.5px 0; }
+#s-c2fseg .fr[data-t="4"] .px { background-position: -971.25px 0; }
+#s-c2fseg .fr[data-t="5"] .px { background-position: -1295px 0; }
+#s-c2fseg .fr[data-t="6"] .px { background-position: -1618.75px 0; }
+#s-c2fseg .fr[data-t="7"] .px { background-position: -1942.5px 0; }
+#s-c2fseg .fr[data-t="8"] .px { background-position: -2266.25px 0; }
+#s-c2fseg .badge {
+  position: absolute; right: 10px; top: 52px;
+  padding: 2px 14px; border-radius: 999px; background: var(--space); color: #fff;
+  font-size: 22px; font-weight: 700; line-height: 1.35;
+}
+/* flipbook playhead: js moves .now across the frames once (no dimming of the others) */
+#s-c2fseg .fr.now .px { box-shadow: 0 0 0 6px var(--space); }
+#s-c2fseg .key { justify-content: center; gap: 14px 56px; font-size: 28px; }
+#s-c2fseg .key i.ring { background: none; border: 3px dashed #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--ink-soft); }
+#s-c2fseg .key i.outl { background: rgba(250, 204, 21, .35); border: 3px solid #eab308; }
+#s-c2fseg .px { position: relative; }
+#s-c2fseg .toy {
+  position: absolute; left: 13%; top: 37%; width: 58px; height: 46px;
+  border: 3px dashed #fff; border-radius: 50%; box-shadow: 0 0 0 2px rgba(20, 22, 26, .55);
+}
+
+/* ---------- s-street ---------- */
+#s-street .duo { flex: 1; position: relative; display: flex; align-items: center; justify-content: space-between; }
+#s-street .hero {
+  width: 740px; aspect-ratio: 1 / 1; flex: none;
+  transform: translateX(480px);
+  transition: transform .8s var(--ease);
+}
+#s-street[data-current-step="1"] .hero,
+#s-street[data-current-step="2"] .hero { transform: none; }
+#s-street .hero .vid-label { top: auto; bottom: 16px; font-size: 26px; }
+#s-street .hero .vid-label.l { left: 16px; }
+#s-street .hero .vid-label.r { left: calc(50% + 16px); background: var(--space); }
+#s-street .plan { width: 900px; flex: none; }
+#s-street .map { width: 900px; height: 700px; overflow: visible; }
+#s-street .map text { font-size: 26px; font-weight: 600; fill: var(--ink-soft); }
+#s-street .map text.lbl { font-size: 24px; font-weight: 700; letter-spacing: .08em; fill: var(--muted); }
+#s-street .map text.t-obs { fill: #15803d; font-weight: 700; }
+#s-street .map text.t-un { fill: var(--time); font-weight: 700; }
+#s-street .map text.t-fill { fill: var(--time); font-weight: 700; }

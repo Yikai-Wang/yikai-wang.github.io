@@ -1,0 +1,41 @@
+/* Section 07 · Backup (s-bk-ledger, s-bk-field). Every selector is scoped to one of this section's slide ids. */
+
+/* ---------------------------------------------------------------- s-bk-ledger */
+
+#s-bk-ledger .bd { gap: 26px; }
+#s-bk-ledger .lg-axis { display: flex; align-items: center; gap: 22px; }
+#s-bk-ledger .lg-arrow { flex: 1; height: 24px; }
+#s-bk-ledger .lg-end { font-size: 26px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+#s-bk-ledger .lg-end-lang { color: var(--lang); }
+#s-bk-ledger .lg-cols { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+#s-bk-ledger .lg-col { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; border-radius: 18px; background: var(--surface); }
+#s-bk-ledger .lg-col:nth-child(5),
+#s-bk-ledger .lg-col:nth-child(6) { background: var(--lang-soft); }
+#s-bk-ledger .lg-h { min-height: 66px; font-size: 26px; font-weight: 700; line-height: 1.25; color: var(--ink-soft); }
+#s-bk-ledger .lg-w { display: flex; flex-direction: column; gap: 6px; padding: 13px 16px 14px; border-left: 8px solid var(--slate); border-radius: 10px; background: #fff; }
+#s-bk-ledger .lg-w b { font-size: 30px; line-height: 1.15; color: var(--ink); }
+#s-bk-ledger .lg-w span { font-size: 23px; line-height: 1.3; color: var(--muted); }
+#s-bk-ledger .lg-w.space { border-left-color: var(--space); }
+#s-bk-ledger .lg-w.time { border-left-color: var(--time); }
+#s-bk-ledger .lg-w.act { border-left-color: var(--act); }
+#s-bk-ledger .lg-w.lang { border-left-color: var(--lang); }
+#s-bk-ledger .lg-legend { position: absolute; top: 96px; right: 110px; justify-content: flex-end; }
+#s-bk-ledger .lg-i.space { background: var(--space); }
+#s-bk-ledger .lg-i.time { background: var(--time); }
+#s-bk-ledger .lg-i.act { background: var(--act); }
+#s-bk-ledger .lg-i.lang { background: var(--lang); }
+
+/* ---------------------------------------------------------------- s-bk-field */
+
+#s-bk-field .bd { justify-content: center; padding-bottom: 40px; }
+#s-bk-field .fd-rows { display: flex; flex-direction: column; }
+#s-bk-field .fd-row { display: grid; grid-template-columns: 240px 1fr 330px; gap: 36px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+#s-bk-field .fd-row:first-child { border-top: 2px solid var(--ink); }
+#s-bk-field .fd-key { font-size: 64px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+#s-bk-field .fd-key-sm { font-size: 48px; letter-spacing: -.02em; }
+#s-bk-field .fd-txt { min-width: 0; }
+#s-bk-field .fd-who { margin: 0; font-size: 30px; line-height: 1.25; color: var(--muted); }
+#s-bk-field .fd-who b { color: var(--ink); }
+#s-bk-field .fd-what { margin: 6px 0 0; font-size: 26px; line-height: 1.3; color: var(--ink-soft); }
+#s-bk-field .fd-sub { margin-top: 4px; font-weight: 600; color: var(--muted); }
+#s-bk-field .fd-tags { display: flex; flex-wrap: nowrap; gap: 10px; justify-content: flex-end; }

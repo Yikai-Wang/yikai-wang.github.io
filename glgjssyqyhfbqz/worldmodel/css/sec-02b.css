@@ -1,0 +1,143 @@
+/* 02b · Map. The same grid is duplicated in sec-06.css (#s-summary); keep the two in sync. The map alone adds a
+   grey topic · venue line under each name, so its thumbnails are 80 px (not 96) and its padding 20 px to make room. */
+
+#s-map .wm-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+#s-map .wm-col,
+#s-map .wm-band {
+  position: relative;
+  border-radius: 22px;
+  padding: 18px 20px;
+}
+
+#s-map .wm-col.persist,
+#s-map .wm-col.consistent { background: var(--space-soft); }
+#s-map .wm-col.evolve { background: var(--time-soft); }
+#s-map .wm-col.act { background: var(--act-soft); }
+
+#s-map .wm-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#s-map .wm-col .wm-head { margin-bottom: 16px; }
+
+#s-map .wm-head .req { background: #fff; }
+
+#s-map .wm-part {
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--ink-soft);
+}
+
+#s-map .wm-papers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#s-map .wm-papers li { margin: 0; }
+
+#s-map .wm-papers li,
+#s-map .wm-paper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+#s-map .wm-papers img,
+#s-map .wm-paper img {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(20, 22, 26, .18);
+}
+
+#s-map .wm-papers span,
+#s-map .wm-paper span {
+  font-size: 30px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+#s-map .wm-papers span small,
+#s-map .wm-paper span small {
+  display: block;
+  margin-top: 2px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+/* The interface band: same column rhythm as the grid above (content edges line up). */
+#s-map .wm-band {
+  margin-top: 16px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 64px;
+  align-items: center;
+  background: var(--lang-soft);
+}
+
+/* Authorship marks: a small ink dot (first author) or ring (corresponding author)
+   pinned to the thumbnail's top-right corner, with a white halo so it reads on any photo. */
+#s-map .wm-lead::after,
+#s-map .wm-corr::after,
+#s-map .wm-key::before {
+  content: "";
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+#s-map .wm-lead::after,
+#s-map .wm-corr::after { position: absolute; left: 68px; top: -4px; }
+
+#s-map .wm-lead::after,
+#s-map .wm-key.k-first::before { background: var(--ink); }
+
+#s-map .wm-corr::after,
+#s-map .wm-key.k-corr::before { background: #fff; border: 3.5px solid var(--ink); }
+
+/* Foot: one muted line, then the authorship legend. */
+#s-map .wm-foot { margin-top: 20px; }
+
+#s-map .wm-slot { display: grid; }
+#s-map .wm-slot > * { grid-area: 1 / 1; }
+
+#s-map .wm-line {
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--muted);
+}
+
+#s-map .wm-legend {
+  margin-top: 8px;
+  display: flex;
+  gap: 40px;
+  font-size: 23px;
+  line-height: 1.2;
+  color: var(--muted);
+}
+
+#s-map .wm-key { display: inline-flex; align-items: center; gap: 12px; }

@@ -1,0 +1,472 @@
+/* Section 04 · Time: the FlashForward deep dive.
+   s-ff-race (port of s-hook) · s-ff-long (new) · s-ff-inflight (port of s-inflight) · s-ff-drift (port of s-drift) ·
+   s-ff-anchors (s-anchors + s-two-scales) · s-ff-notyet (new). Ported diagrams keep the FF vocabulary:
+   renderer = --ours, clean anchors = --anchor, KV memory = --kv, baselines = --sf / --hiar. */
+
+/* Titles use the full width: the .reqs tag sits in the top margin above them. */
+
+/* ================================================================================================
+   s-ff-race (dark): step 0 = the real-time race, dropped to the optical centre; step 1 = the block rises
+   and the speed-up grid (14B · 720p first) slides in below, takeaway on the right.
+   ================================================================================================ */
+
+#s-ff-race { --drop: 130px; }
+#s-ff-race .hd { margin-bottom: 8px; }
+#s-ff-race .bd { justify-content: flex-start; }
+
+#s-ff-race .h2-main {
+  transform: translateY(var(--drop));
+  transition: transform .75s var(--ease);
+}
+#s-ff-race:not([data-current-step="0"]) .h2-main { transform: none; }
+#s-ff-race.no-trans .h2-main { transition: none; }
+
+#s-ff-race .h2-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+#s-ff-race .h2-chip { padding: 8px 24px; font-size: 26px; }
+#s-ff-race .h2-key { display: inline-flex; align-items: center; gap: 14px; }
+#s-ff-race .h2-key i {
+  display: inline-block;
+  width: 56px;
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, var(--muted) 60%, rgba(255, 255, 255, .12) 60%);
+}
+
+/* 3 x 540 px tiles: below the 832 x 480 native size, never upscaled. */
+#s-ff-race .h2-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+#s-ff-race .h2-col .vid { box-shadow: 0 0 0 2px var(--line); }
+#s-ff-race .h2-col .vid.ours { box-shadow: 0 0 0 6px var(--ours); }
+
+#s-ff-race .h2-race { display: flex; align-items: center; gap: 22px; margin-top: 14px; }
+#s-ff-race .h2-track {
+  flex: 1;
+  height: 22px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .1);
+  overflow: hidden;
+}
+#s-ff-race .h2-track i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 11px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+#s-ff-race [data-m="sf"] .h2-track i { background: var(--sf); }
+#s-ff-race [data-m="hiar"] .h2-track i { background: var(--hiar); }
+#s-ff-race [data-m="ours"] .h2-track i { background: var(--ours); }
+
+#s-ff-race .h2-time {
+  min-width: 228px;         /* fits "✓ 65.14 s", so the track keeps its length when a lane finishes */
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: right;
+  white-space: nowrap;
+}
+#s-ff-race [data-m="sf"] .h2-time { color: var(--sf-text); }
+#s-ff-race [data-m="hiar"] .h2-time { color: var(--hiar-text); }
+#s-ff-race [data-m="ours"] .h2-time { color: var(--ours); }
+#s-ff-race [data-m="ours"].is-done .h2-time { color: var(--done); }
+#s-ff-race [data-m="ours"].is-done .h2-track i { background: var(--done); }
+
+#s-ff-race .h2-cite { margin-top: 8px; }
+
+/* ----- lower band: speed-up grid (left), takeaway (right) ----- */
+#s-ff-race .h2-lower {
+  display: grid;
+  grid-template-columns: 1050px 1fr;
+  column-gap: 80px;
+  margin-top: 18px;
+}
+#s-ff-race .h2-scale { grid-column: 1; grid-row: 1; }
+#s-ff-race .h2-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 32px;
+  line-height: 1.2;
+}
+#s-ff-race .h2-head b { font-weight: 800; letter-spacing: -.01em; }
+#s-ff-race .h2-lg { font-size: 24px; font-weight: 600; }
+#s-ff-race .h2-sh { color: var(--sf-text); }
+#s-ff-race .h2-sf { color: var(--ours); }
+
+#s-ff-race .h2-mx {
+  display: grid;
+  grid-template-columns: 96px 1fr 1fr;
+  gap: 20px 14px;
+  align-items: center;
+}
+#s-ff-race .h2-ch {
+  margin-bottom: -10px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: .06em;
+  color: var(--muted);
+  text-align: center;
+}
+#s-ff-race .h2-rh { font-size: 32px; font-weight: 800; color: var(--ink-soft); }
+
+#s-ff-race .h2-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 64px;
+  padding: 0 22px;
+  border-radius: 14px;
+  background: rgba(91, 155, 234, var(--a, .1));
+  box-shadow: inset 0 0 0 2px rgba(91, 155, 234, calc(var(--a, .1) + .12));
+}
+/* Tint grows with the speed-up; the 1.3B · 480p cell (bottom-right, the race above) is the hero. */
+#s-ff-race .h2-cell[data-k="b720"] { --a: .06; }
+#s-ff-race .h2-cell[data-k="s720"] { --a: .1; }
+#s-ff-race .h2-cell[data-k="b480"] { --a: .22; }
+
+#s-ff-race .h2-x {
+  min-width: 128px;
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+#s-ff-race .h2-s { font-size: 28px; color: var(--muted); white-space: nowrap; }
+
+/* Badge on the top edge of the 1.3B · 480p cell: that is the race above. */
+#s-ff-race .h2-this {
+  position: absolute;
+  top: -15px;
+  right: 16px;
+  padding: 1px 12px;
+  border-radius: 8px;
+  background: #1c2533;
+  box-shadow: 0 0 0 2px rgba(91, 155, 234, .3);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+#s-ff-race .h2-cell[data-k="s480"] {
+  background: var(--ours);
+  box-shadow: 0 0 0 4px rgba(91, 155, 234, .3), 0 10px 36px rgba(91, 155, 234, .35);
+}
+#s-ff-race .h2-cell[data-k="s480"] .h2-x { font-size: 54px; color: #06101d; }
+#s-ff-race .h2-cell[data-k="s480"] .h2-s,
+#s-ff-race .h2-cell[data-k="s480"] .h2-sh,
+#s-ff-race .h2-cell[data-k="s480"] .h2-sf { color: #0b1f3a; }
+#s-ff-race .h2-cell[data-k="s480"] .h2-sf { font-weight: 800; }
+
+#s-ff-race .h2-say {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+}
+#s-ff-race .h2-say b { color: var(--ours); }
+
+/* ================================================================================================
+   s-ff-long (dark): knit65 triple; build 1 cross-fades each tile to its t = 62 s still + VBench-Long.
+   ================================================================================================ */
+
+#s-ff-long .bd { justify-content: center; }
+#s-ff-long .lg-top { margin-bottom: 22px; }
+#s-ff-long .lg-chip { padding: 8px 24px; font-size: 26px; }
+#s-ff-long .lg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));   /* 3 x 540 px, below native 832 */
+  gap: 40px;
+}
+#s-ff-long .lg-col .vid { box-shadow: 0 0 0 2px var(--line); }
+#s-ff-long .lg-col .vid.ours { box-shadow: 0 0 0 6px var(--ours); }
+#s-ff-long .lg-end {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#s-ff-long .vid-label { z-index: 2; }
+#s-ff-long .lg-t {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 2;
+  padding: 6px 16px;
+  border-radius: 10px;
+  background: rgba(10, 12, 16, .78);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+#s-ff-long .lg-score {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px;
+  margin-top: 30px;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.01em;
+}
+#s-ff-long .lg-score .a { color: var(--muted); font-weight: 600; }
+#s-ff-long .lg-score i { font-style: normal; color: var(--muted); font-weight: 500; }
+#s-ff-long .lg-score .b { color: var(--ink); }
+#s-ff-long [data-m="sf"] .lg-score .b { color: var(--kv); }
+#s-ff-long [data-m="ours"] .lg-score .b { color: var(--ours); }
+#s-ff-long .lg-cap { margin-top: 28px; text-align: center; color: var(--muted); }
+
+/* ================================================================================================
+   s-ff-inflight (light): anatomy of one denoising forward; 1 = the in-flight KV lights up, 2 = reused
+   by the next chunk at the same stage. Pure markup + CSS.
+   ================================================================================================ */
+
+#s-ff-inflight .bd { justify-content: center; }
+#s-ff-inflight .fig { width: 100%; height: 100%; overflow: visible; }
+#s-ff-inflight .mk-kv path { fill: var(--kv); }
+#s-ff-inflight .mk-slate path { fill: var(--slate); }
+#s-ff-inflight .hatch-bg { fill: var(--bg); }
+#s-ff-inflight .hatch-ln { stroke: var(--kv); stroke-width: 3; }
+#s-ff-inflight .ln-kv { fill: none; stroke: var(--kv); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-inflight .ln-slate { fill: none; stroke: var(--slate); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-inflight .t-lbl { font-size: 28px; fill: var(--ink-soft); }
+#s-ff-inflight .t-strong { font-weight: 700; fill: var(--ink); }
+#s-ff-inflight .t-sub { font-size: 26px; fill: var(--muted); }
+#s-ff-inflight .t-kvtext { fill: var(--kv); font-weight: 600; }
+#s-ff-inflight .kv-card { fill: var(--kv-soft); stroke: var(--kv); stroke-width: 2.5; }
+#s-ff-inflight .kv-tok { fill: var(--kv); opacity: .75; }
+#s-ff-inflight .thumb-frame { fill: none; stroke: var(--line); stroke-width: 2; }
+#s-ff-inflight .fwd { fill: var(--ours); }
+#s-ff-inflight .t-fwd { font-size: 36px; font-weight: 700; fill: #fff; letter-spacing: -.01em; }
+#s-ff-inflight .layer { fill: #fff; opacity: .24; }
+#s-ff-inflight .layer-cap { fill: var(--kv); }
+#s-ff-inflight .kv-out { fill: var(--kv-soft); stroke: var(--kv); stroke-width: 3; }
+#s-ff-inflight .t-kvcard { font-size: 30px; font-weight: 700; fill: var(--kv); }
+#s-ff-inflight .kv-muted { opacity: .32; }
+#s-ff-inflight .kv-lit .kv-out { fill: var(--kv); }
+#s-ff-inflight .kv-lit .t-kvcard { fill: #fff; }
+#s-ff-inflight[data-current-step="1"] .kv-glow { animation: s04-glow 1.6s ease-out .35s 1 both; }
+#s-ff-inflight .memonly { fill: url(#tffi-hatch); stroke: var(--kv); stroke-width: 2.5; }
+#s-ff-inflight .t-cap { font-size: 30px; fill: var(--ink-soft); }
+#s-ff-inflight .t-kvbold { font-weight: 700; fill: var(--kv); }
+#s-ff-inflight .t-oursbold { font-weight: 700; fill: var(--ours); font-size: 32px; }
+#s-ff-inflight .t-zero { fill: var(--ours); font-weight: 800; }
+#s-ff-inflight .ok-dot { fill: var(--ours); }
+#s-ff-inflight .ok-tick { fill: none; stroke: #fff; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-inflight .fwd-ghost { fill: var(--ours-soft); stroke: var(--ours); stroke-width: 3; stroke-dasharray: 12 8; }
+#s-ff-inflight .t-ghost { font-size: 30px; font-weight: 700; fill: var(--ours); }
+#s-ff-inflight .t-ghost-sm { font-size: 26px; fill: var(--ours); opacity: .8; }
+#s-ff-inflight .tag-kv { fill: var(--kv); }
+#s-ff-inflight .t-tag { font-size: 26px; font-weight: 700; fill: #fff; }
+#s-ff-inflight .ln-kv-big { stroke-width: 6; }
+#s-ff-inflight .draw { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .9s cubic-bezier(.4, 0, .2, 1) .15s; }
+#s-ff-inflight .next.is-shown .draw { stroke-dashoffset: 0; }
+/* Arrowhead is its own element so it appears only once the line has drawn in. */
+#s-ff-inflight .draw-head { fill: var(--kv); stroke: var(--kv); stroke-width: 2; stroke-linejoin: round; opacity: 0; transition: opacity .2s ease; }
+#s-ff-inflight .next.is-shown .draw-head { opacity: 1; transition-delay: .95s; }
+#s-ff-inflight.no-trans .draw,
+#s-ff-inflight.no-trans .draw-head { transition: none; }
+
+@keyframes s04-glow {
+  0% { filter: drop-shadow(0 0 0 var(--kv)); }
+  35% { filter: drop-shadow(0 0 22px var(--kv)); }
+  100% { filter: drop-shadow(0 0 0 transparent); }
+}
+
+/* ================================================================================================
+   s-ff-drift (dark): history-only ablation clip at native 832 px, stamp, then mirror + two reasons.
+   ================================================================================================ */
+
+#s-ff-drift .bd { justify-content: center; padding-bottom: 24px; }
+#s-ff-drift .drift { display: flex; gap: 88px; align-items: flex-start; }
+#s-ff-drift .drift-vid { position: relative; flex: none; width: 832px; }   /* native size of the 832 x 480 clip */
+#s-ff-drift .vid-caption { font-size: 28px; }
+#s-ff-drift .drift-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 44px; align-self: center; }
+#s-ff-drift .mirror { width: 360px; height: 180px; }
+#s-ff-drift .mi-body { fill: none; stroke: var(--kv); stroke-width: 6; }
+#s-ff-drift .mi-stem { stroke: var(--kv); stroke-width: 8; stroke-linecap: round; }
+#s-ff-drift .mi-road { fill: none; stroke: var(--muted); stroke-width: 4; stroke-linecap: round; }
+#s-ff-drift .mi-mid { fill: none; stroke: var(--muted); stroke-width: 3; stroke-linecap: round; }
+#s-ff-drift .mi-noise circle { fill: var(--kv); opacity: .7; }
+#s-ff-drift .why { display: flex; gap: 24px; align-items: flex-start; }
+#s-ff-drift .why-2 { transition-delay: .45s; }
+#s-ff-drift .why-ic { flex: none; width: 72px; height: 72px; }
+#s-ff-drift .ic-frame { fill: var(--kv-soft); }
+#s-ff-drift .ic-dots circle { fill: var(--kv); }
+#s-ff-drift .ic-arrow { fill: none; stroke: var(--kv); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-drift .why p { display: flex; flex-direction: column; font-size: 40px; line-height: 1.25; }
+#s-ff-drift .why p b { color: var(--ink); }
+#s-ff-drift .why p span { margin-top: 6px; font-size: 34px; color: var(--muted); }
+#s-ff-drift .stamp-wrap { position: absolute; top: 26px; right: -34px; z-index: 2; }
+#s-ff-drift .stamp {
+  transform: rotate(-4deg);
+  padding: 12px 26px;
+  border: 4px solid var(--kv);
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--kv);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+#s-ff-drift .stamp span { font-weight: 600; }
+
+/* ================================================================================================
+   s-ff-anchors (light): 81-latent timeline (anchors every 10 = 2.5 s; build 1: chunk 6-8 reads anchors
+   0 / 10 / 20 + its in-flight history) over two cards: anchors = long-range state, history = short-range motion.
+   ================================================================================================ */
+
+#s-ff-anchors .bd { justify-content: center; gap: 40px; }
+#s-ff-anchors .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+#s-ff-anchors .nz-bg { fill: var(--ours-done); }
+#s-ff-anchors .nz-l { fill: #fff; opacity: .38; }
+#s-ff-anchors .nz-d { fill: var(--ours); opacity: .32; }
+
+/* ----- timeline ----- */
+#s-ff-anchors .tl { display: block; width: 100%; height: auto; overflow: visible; }
+#s-ff-anchors .t-row { font-size: 26px; fill: var(--muted); }
+#s-ff-anchors .cell { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+#s-ff-anchors .c-anch { fill: var(--anchor); }
+#s-ff-anchors .c-hist { fill: url(#tffa-noise); }
+#s-ff-anchors .c-cur { fill: var(--ours); }
+#s-ff-anchors .ring { fill: none; stroke: var(--ours); stroke-width: 3; }
+#s-ff-anchors .t-anch { font-size: 30px; font-weight: 700; fill: var(--anchor-text); }
+#s-ff-anchors .scale { fill: none; stroke: var(--anchor); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-anchors .t-scale { font-size: 28px; font-weight: 700; fill: var(--anchor-text); font-variant-numeric: tabular-nums; }
+#s-ff-anchors .arc { fill: none; stroke: var(--anchor); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+#s-ff-anchors .arc-head { fill: var(--anchor); }
+#s-ff-anchors .t-read { font-size: 32px; font-weight: 600; fill: var(--ink-soft); }
+#s-ff-anchors .t-read .o { fill: var(--ours); font-weight: 700; }
+#s-ff-anchors .t-read .a { fill: var(--anchor-text); font-weight: 700; }
+#s-ff-anchors .br-hist { fill: none; stroke: var(--ours-done); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-anchors .t-hist { font-size: 30px; font-weight: 700; fill: var(--ours); }
+#s-ff-anchors .g-anch rect,
+#s-ff-anchors .g-now rect { transform-box: fill-box; transform-origin: 50% 100%; }
+
+/* ----- cards ----- */
+#s-ff-anchors .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+#s-ff-anchors .mem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 30px 44px 30px 48px;
+  overflow: hidden;
+}
+#s-ff-anchors .mem::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 10px; }
+#s-ff-anchors .anch { background: var(--anchor-bg); }
+#s-ff-anchors .anch::before { background: var(--anchor); }
+#s-ff-anchors .hist { background: var(--ours-soft); }
+#s-ff-anchors .hist::before { background: var(--ours); }
+#s-ff-anchors .mem-hd { display: flex; align-items: center; gap: 28px; }
+#s-ff-anchors .mem h3 { margin: 0; font-size: 46px; line-height: 1.1; letter-spacing: -.01em; }
+#s-ff-anchors .anch h3 { color: var(--anchor-text); }
+#s-ff-anchors .hist h3 { color: var(--ours); }
+#s-ff-anchors .mem-role { margin-top: 8px; font-size: 38px; font-weight: 700; line-height: 1.2; color: var(--ink); }
+#s-ff-anchors .icon { flex: none; width: 132px; height: 99px; overflow: visible; }
+#s-ff-anchors .ic-ln { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-anchors .ic-ln.thin { stroke-width: 3; }
+#s-ff-anchors .ic-ln.dash { stroke-dasharray: 6 7; }
+#s-ff-anchors .anch .ic-ln { stroke: var(--anchor); }
+#s-ff-anchors .anch .ic-dot { fill: var(--anchor); }
+#s-ff-anchors .hist .ic-ln { stroke: var(--kv); }
+#s-ff-anchors .mem-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(0, 0, 0, .08);
+}
+#s-ff-anchors .mem-tags { font-size: 32px; font-weight: 600; line-height: 1.3; color: var(--ink-soft); }
+#s-ff-anchors .mini { width: 300px; height: 102px; overflow: visible; }
+#s-ff-anchors .mn-axis,
+#s-ff-anchors .mn-arrow { fill: none; stroke: var(--slate); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-anchors .mn-hist { fill: url(#tffa-noise); }
+#s-ff-anchors .mn-anch { fill: var(--anchor); }
+#s-ff-anchors .mn-cur { fill: var(--ours); }
+#s-ff-anchors .mn-now { font-size: 27px; font-weight: 700; fill: var(--ours); text-anchor: middle; }
+
+/* ================================================================================================
+   s-ff-notyet (light): honest scorecard. Left: what FlashForward gives (green). Build 1: what a world
+   model still needs (dashed, crossed), and the hand-off to the action section.
+   ================================================================================================ */
+
+#s-ff-notyet .bd { justify-content: center; gap: 56px; }
+#s-ff-notyet .ny { display: grid; grid-template-columns: 640px 1fr; gap: 64px; align-items: stretch; }
+#s-ff-notyet .ny-yes { display: flex; flex-direction: column; gap: 28px; }
+#s-ff-notyet .ny-no { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 28px; }
+#s-ff-notyet .ny-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  min-height: 190px;
+  padding: 26px 34px;
+  border-radius: var(--radius);
+}
+#s-ff-notyet .ny-item.yes { flex: 1; background: var(--done-soft); }
+#s-ff-notyet .ny-item.no { background: var(--bg); border: 3px dashed var(--line); }
+#s-ff-notyet .ny-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--done);
+}
+#s-ff-notyet .ny-mark svg { width: 48px; height: 48px; }
+#s-ff-notyet .ny-mark path { fill: none; stroke: #fff; stroke-width: 5.5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-notyet .ny-txt { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+#s-ff-notyet .ny-txt b { font-size: 38px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: var(--ink); }
+#s-ff-notyet .ny-txt span { font-size: 26px; line-height: 1.3; color: var(--muted); }
+#s-ff-notyet .yes .ny-txt b { color: var(--done); }
+#s-ff-notyet .yes .ny-txt span { color: var(--ink-soft); }
+#s-ff-notyet .yes .ny-txt .ny-big { font-size: 34px; font-weight: 700; color: var(--ink); }
+#s-ff-notyet .ny-ic { flex: none; width: 64px; height: 64px; }
+#s-ff-notyet .ny-ic * { fill: none; stroke: var(--muted); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-notyet .ny-x {
+  position: absolute;
+  top: -23px;
+  right: 22px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--kv);
+}
+#s-ff-notyet .ny-x svg { width: 30px; height: 30px; }
+#s-ff-notyet .ny-x path { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; }
+#s-ff-notyet .ny-next {
+  align-self: flex-end;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+#s-ff-notyet .ny-next b { color: var(--act); }
+#s-ff-notyet .ny-arr { color: var(--act); }

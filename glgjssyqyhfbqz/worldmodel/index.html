@@ -1,0 +1,1845 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Towards Vision-Centric World Models · Yikai Wang</title>
+  <link rel="icon" href="../../apple-touch-icon.png">
+  <link rel="stylesheet" href="css/deck.css">
+  <link rel="stylesheet" href="css/sec-01.css">
+  <link rel="stylesheet" href="css/sec-02a.css">
+  <link rel="stylesheet" href="css/sec-02b.css">
+  <link rel="stylesheet" href="css/sec-03a.css">
+  <link rel="stylesheet" href="css/sec-03b.css">
+  <link rel="stylesheet" href="css/sec-04.css">
+  <link rel="stylesheet" href="css/sec-05a.css">
+  <link rel="stylesheet" href="css/sec-05b.css">
+  <link rel="stylesheet" href="css/sec-06.css">
+  <link rel="stylesheet" href="css/sec-07.css">
+</head>
+<body>
+  <!-- Present from Google Chrome (some FlashForward clips are AV1). Press H for keyboard shortcuts, S for the presenter view. -->
+  <div class="deck-viewport">
+    <div class="deck-stage" id="deck">
+<!-- ===== 01-intro.html ===== -->
+<!-- 01 · Intro: the personal introduction is the first page of the talk.
+     Facts: .ref/onepage/BRIEF.md + homepage Papers/Service sections. The works row lists only the papers
+     shown in this talk, placed in the column of the period they were started in (earliest of arXiv /
+     submission date), so it lines up with the timeline below; "+N more" counts the rest of the homepage list. -->
+<section class="slide" id="s-intro" data-title="Yikai Wang" data-section="Intro" data-time="75" data-chrome="none">
+  <p class="kicker in-kicker">Towards Vision-Centric World Models</p>
+
+  <div class="in-hero">
+    <figure class="in-portrait">
+      <!-- media/nvg/portrait-reveal.mp4 with the full photo held at the end; plays once, click to replay -->
+      <video data-autoplay data-replay muted playsinline preload="none"
+             poster="media/intro/portrait-reveal-hold-poster.jpg" src="media/intro/portrait-reveal-hold.mp4"></video>
+      <figcaption class="in-cap">Pixel-NVG reconstruction</figcaption>
+    </figure>
+
+    <div class="in-id">
+      <h1 class="in-name">Yikai Wang</h1>
+      <p class="in-role">Postdoctoral Researcher · <b>Meta</b>, London</p>
+    </div>
+
+    <ul class="in-works w-phd">
+      <li class="in-w">ASUKA</li>
+      <li class="in-w">C2F-Seg</li>
+      <li class="in-w">StreetUnveiler</li>
+      <li class="in-w">SEELE</li>
+      <li class="in-w">LeftRefill</li>
+      <li class="in-w">LexVLA</li>
+      <li class="in-more">+8 more</li>
+    </ul>
+    <ul class="in-works w-mmlab">
+      <li class="in-w">Puffin</li>
+      <li class="in-w">DIRECT</li>
+      <li class="in-w">NVG</li>
+      <li class="in-w">DP4</li>
+      <li class="in-w">ActiveVLA</li>
+      <li class="in-w">ReasonGrounder</li>
+      <li class="in-more">+2 more</li>
+    </ul>
+    <ul class="in-works w-meta">
+      <li class="in-w">FlashForward</li>
+      <li class="in-w">NAVA-WAM</li>
+      <li class="in-w">ProWAM</li>
+      <li class="in-more">+5 more</li>
+    </ul>
+  </div>
+
+  <ol class="in-tl">
+    <li class="in-node n-math">
+      <span class="in-arc">Mathematics</span>
+      <i class="in-dot"></i>
+      <b class="in-place">Fudan University</b>
+      <span class="in-what">B.Sc. Mathematics</span>
+      <span class="in-yr num">2015–2019</span>
+    </li>
+    <li class="in-node n-stat">
+      <span class="in-arc">Statistics</span>
+      <i class="in-dot"></i>
+      <b class="in-place">Fudan University</b>
+      <span class="in-what">Ph.D. Statistics</span>
+      <span class="in-yr num">2019–2024</span>
+      <span class="in-who">Prof. Yanwei Fu</span>
+      <!-- the turn to generative vision in the last years of the PhD: a tick on the rail, labelled in the arc row -->
+      <span class="in-turn"><span class="in-arc">Generative vision</span><i class="in-tick"></i></span>
+    </li>
+    <li class="in-node n-gen">
+      <span class="in-arc"></span>
+      <i class="in-dot"></i>
+      <b class="in-place">MMLab@NTU</b>
+      <span class="in-what">Research Fellow</span>
+      <span class="in-yr num">2024.07–2025.12</span>
+      <span class="in-who">Prof. Chen Change Loy</span>
+    </li>
+    <li class="in-node n-wm">
+      <span class="in-arc"><span class="in-arc2">Video generation</span>World models</span>
+      <i class="in-dot"></i>
+      <b class="in-place">Meta London</b>
+      <span class="in-what">Postdoc</span>
+      <span class="in-yr num">2025.12–now</span>
+      <span class="in-who">Prof. Tao Xiang</span>
+    </li>
+  </ol>
+
+  <ul class="in-honors">
+    <li><b>Area Chair</b> NeurIPS&rsquo;25 &amp; &rsquo;26</li>
+    <li><b>CVPR&rsquo;25</b> Highlight</li>
+    <li><b>TMLR</b> J2C</li>
+    <li><b>Co-organizer</b> CVPR&rsquo;22 &amp; &rsquo;23 tutorials · ICCV&rsquo;25 workshop</li>
+    <li><b>NVIDIA</b> Academic Grant 2025</li>
+  </ul>
+
+  <aside class="notes">
+    <p>Hi everyone, I'm <b>Yikai Wang</b>, a postdoc at Meta in London.</p>
+    <p>Let me briefly introduce myself. I started in mathematics at Fudan, then did my PhD in statistics there, with Yanwei Fu. In the last years of my PhD, I moved into generative vision, and I kept going as a research fellow at MMLab at NTU, with Chen Change Loy. Now at Meta, I work on video generation and world models.</p>
+    <p>Above each stage are the papers from that period that I'll cover today. Along the way, I've been an area chair for NeurIPS, and I've co-organized tutorials at CVPR and a workshop at ICCV.</p>
+    <p>Today, I'll do two things. First, I'll share what I think a world model should be. Then I'll show how my work builds toward that goal, piece by piece.</p>
+  </aside>
+</section>
+
+<!-- ===== 02a-thesis.html ===== -->
+<!-- 02a · Thesis (builder B). Slides: s-world, s-clock. The two what-is-a-world-model slides. -->
+
+<section class="slide" id="s-world" data-title="The world has no language" data-section="Thesis" data-time="100">
+  <header class="hd">
+    <p class="kicker">What is a world model?</p>
+    <h2 class="title">The world has no language</h2>
+  </header>
+  <div class="bd">
+    <div class="wstage">
+      <svg class="wsvg" viewBox="0 0 1700 730" width="1700" height="730" aria-hidden="true">
+        <defs>
+          <marker id="w-head-ink" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+            <path d="M1 1 L10 6 L1 11 Z" fill="#14161a"></path>
+          </marker>
+          <marker id="w-head-act" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+            <path d="M1 1 L10 6 L1 11 Z" fill="#ea580c"></path>
+          </marker>
+        </defs>
+        <!-- state: the whole world panel -->
+        <path class="brace" d="M2 54 V44 H918 V54"></path>
+        <rect class="panel" x="0" y="60" width="920" height="568" rx="36"></rect>
+        <!-- render: world -> observer -->
+        <line class="arw" x1="936" y1="290" x2="1150" y2="290" marker-end="url(#w-head-ink)"></line>
+        <!-- dynamics: a loop on the bottom edge of the world -->
+        <g class="dyn" transform="translate(110 628)">
+          <circle class="disc" r="40"></circle>
+          <path class="loop" d="M 12 -20.8 A 24 24 0 1 1 -12 -20.8"></path>
+          <path class="loop-head" d="M -1.6 -26.8 L -10.5 -10.1 L -20.5 -27.5 Z"></path>
+        </g>
+        <!-- build 1: the action returns into the world -->
+        <g class="act-arrow" data-step="1" data-anim="fade">
+          <line class="arw act" x1="1150" y1="390" x2="936" y2="390" marker-end="url(#w-head-act)"></line>
+        </g>
+      </svg>
+
+      <figure class="vid wvid">
+        <video data-autoplay loop muted playsinline preload="none" poster="media/flashforward/robot20-ours-poster.jpg" src="media/flashforward/robot20-ours.mp4"></video>
+      </figure>
+
+      <p class="lbl state"><b>state</b> <i>s</i><sub>t</sub><span class="gl">persists</span></p>
+      <p class="lbl render"><b>render</b><span class="f"><i>o</i><sub>t</sub> ~ <i>p</i>(<i>o</i> | <i>s</i><sub>t</sub>)</span></p>
+      <p class="lbl dynamics"><b>dynamics</b><span class="f"><i>s</i><sub>t+1</sub> ~ <i>p</i>(<i>s</i> | <i>s</i><sub>t</sub>, <i>a</i><sub>t</sub>)</span></p>
+
+      <!-- step 0: an observer at the end of the render arrow (becomes the actor's eyes) -->
+      <svg class="eye" data-step-hide="1" viewBox="0 0 160 90" width="160" height="90" aria-hidden="true">
+        <path d="M6 45 Q80 -18 154 45 Q80 108 6 45 Z" class="e-lid"></path>
+        <circle cx="80" cy="45" r="22" class="e-iris"></circle>
+        <circle cx="88" cy="38" r="6" class="e-glint"></circle>
+      </svg>
+
+      <!-- build 1: an actor outside the world; language lives on its side -->
+      <div class="actor" data-step="1" data-anim="left">
+        <div class="bubble"><span class="llm">LLM</span><span class="say">“wave to the crowd”</span></div>
+        <svg class="bot" viewBox="0 0 200 210" width="200" height="210" aria-hidden="true">
+          <line x1="100" y1="40" x2="100" y2="14" class="b-line"></line>
+          <circle cx="100" cy="12" r="10" class="b-fill"></circle>
+          <rect x="34" y="40" width="132" height="100" rx="30" class="b-head"></rect>
+          <circle cx="76" cy="90" r="13" class="b-eye"></circle>
+          <circle cx="124" cy="90" r="13" class="b-eye"></circle>
+          <rect x="18" y="74" width="16" height="34" rx="7" class="b-fill"></rect>
+          <rect x="166" y="74" width="16" height="34" rx="7" class="b-fill"></rect>
+          <path d="M44 210 V186 Q44 154 76 154 H124 Q156 154 156 186 V210 Z" class="b-head"></path>
+        </svg>
+        <p class="aside">Language drives the actor.<br>It does not hold the state.</p>
+      </div>
+      <p class="lbl act-lbl" data-step="1" data-anim="fade"><i>a</i><sub>t</sub></p>
+
+      <!-- build 2: physics is induced from video, not from text -->
+      <div class="phys" data-step="2">
+        <p class="ph-t">Intuitive physics, zero-shot <span>· IntPhys</span></p>
+        <div class="ph-row">
+          <p class="ph-l">V-JEPA <span>· video-only pre-training</span></p>
+          <div class="ph-bar"><span class="trk"><i class="v"></i></span><b class="num">98%</b></div>
+        </div>
+        <div class="ph-row">
+          <p class="ph-l">VideoMAEv2 <span>· video-only, pixel prediction</span></p>
+          <div class="ph-bar"><span class="trk"><i class="m"></i></span><b class="ch">≈ chance</b></div>
+        </div>
+        <div class="ph-row">
+          <p class="ph-l">Multimodal LLMs</p>
+          <div class="ph-bar"><span class="trk"><i class="m"></i></span><b class="ch">≈ chance</b></div>
+        </div>
+        <p class="ph-k">no text needed · what you predict matters</p>
+      </div>
+    </div>
+  </div>
+  <p class="src"><span>Clip: FlashForward (ours), text-to-video sample</span><span data-step="2" data-anim="fade"> · IntPhys: Garrido et al. · Meta FAIR 2025</span></p>
+  <aside class="notes">
+    <p>For me, a world model has three parts. First, a hidden <b>state</b>, s at time t, and it persists even when nobody's looking. Second, a renderer, which turns that state into your observation, o at time t. Third, dynamics, which move the state forward in response to an action, so the observation moves forward too.</p>
+    <p>This video comes from my recent work. It shows a dancing robot. Its arm swings past the crowd, and behind it, the people and the signs stay right where they were. No sentence was needed for that. There are no words inside the world.</p>
+    <p><em>[click]</em> Language lives with the actors, outside the world. An actor sees o at time t and sends back an action, a at time t. An LLM can be that actor's brain, taking an instruction like “wave to the crowd”. The LLM drives the actor. The world stays visual.</p>
+    <p><em>[click]</em> What about physics? A recent study tested several models on IntPhys, an intuitive-physics benchmark. V-JEPA, trained on video alone, tells possible from impossible events <b>98 percent</b> of the time. Multimodal LLMs barely beat an untrained model. So does VideoMAEv2, which also learns from video, but predicts raw pixels. So physics can be learned just by watching. What matters is what you predict.</p>
+    <p>Text can still set the scene: most video generative models are text-conditioned. But the state and its dynamics are visual. That's my core belief.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-clock" data-title="The clock test" data-section="Thesis" data-time="120" data-steps="4">
+  <header class="hd">
+    <p class="kicker">The clock test · a thought experiment</p>
+    <h2 class="title">Look away for five minutes. Look back.</h2>
+  </header>
+  <div class="bd">
+    <div class="cstage">
+      <!-- Steps 0-1: the room, the clock, the viewfinder -->
+      <div class="scene" data-step-hide="2">
+        <svg class="room" viewBox="0 -40 1700 700" width="1700" height="700" aria-hidden="true">
+          <defs>
+            <linearGradient id="clk-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#bcd7f2"></stop>
+              <stop offset="1" stop-color="#eaf3fb"></stop>
+            </linearGradient>
+            <clipPath id="clk-glass"><rect x="1024" y="94" width="372" height="332"></rect></clipPath>
+            <mask id="clk-mask" maskUnits="userSpaceOnUse" x="0" y="-40" width="1700" height="700">
+              <rect y="-40" width="1700" height="700" fill="#fff"></rect>
+              <rect class="hole" x="110" y="70" width="440" height="400" rx="26" fill="#000"></rect>
+            </mask>
+          </defs>
+          <!-- wall and floor -->
+          <rect class="wall" y="-40" width="1700" height="700" rx="28"></rect>
+          <path class="floor" d="M0 580 H1700 V632 Q1700 660 1672 660 H28 Q0 660 0 632 Z"></path>
+          <line class="skirt" x1="0" y1="580" x2="1700" y2="580"></line>
+          <!-- clock face (hands are drawn above the veil by js/sec-02a.js) -->
+          <g class="face-layer"></g>
+          <!-- window -->
+          <rect class="frame" x="1010" y="80" width="400" height="360" rx="6"></rect>
+          <g clip-path="url(#clk-glass)">
+            <rect x="1024" y="94" width="372" height="332" fill="url(#clk-sky)"></rect>
+            <circle cx="1320" cy="160" r="30" fill="#fde68a"></circle>
+            <ellipse cx="1110" cy="170" rx="56" ry="16" fill="#fff" opacity=".9"></ellipse>
+            <ellipse cx="1150" cy="158" rx="34" ry="14" fill="#fff" opacity=".9"></ellipse>
+            <path d="M1024 372 Q1110 320 1200 352 T1396 336 V426 H1024 Z" fill="#86b98f"></path>
+            <path d="M1024 398 Q1150 360 1260 392 T1396 386 V426 H1024 Z" fill="#5f9e6e"></path>
+          </g>
+          <line class="mullion" x1="1210" y1="94" x2="1210" y2="426"></line>
+          <line class="mullion" x1="1024" y1="260" x2="1396" y2="260"></line>
+          <rect class="sill" x="990" y="440" width="440" height="18" rx="4"></rect>
+          <!-- plant -->
+          <g class="plant" transform="translate(0 40)">
+            <path d="M1548 470 Q1520 400 1486 352" class="stem"></path>
+            <path d="M1552 470 Q1556 380 1572 318" class="stem"></path>
+            <path d="M1556 470 Q1590 410 1626 372" class="stem"></path>
+            <ellipse cx="1486" cy="352" rx="40" ry="17" transform="rotate(-35 1486 352)" class="leaf"></ellipse>
+            <ellipse cx="1572" cy="314" rx="40" ry="17" transform="rotate(-78 1572 314)" class="leaf l2"></ellipse>
+            <ellipse cx="1626" cy="370" rx="40" ry="17" transform="rotate(28 1626 370)" class="leaf"></ellipse>
+            <ellipse cx="1516" cy="414" rx="32" ry="14" transform="rotate(-20 1516 414)" class="leaf l2"></ellipse>
+            <ellipse cx="1598" cy="420" rx="32" ry="14" transform="rotate(24 1598 420)" class="leaf l2"></ellipse>
+            <path d="M1500 466 H1604 L1592 540 H1512 Z" class="pot"></path>
+            <rect x="1494" y="458" width="116" height="18" rx="5" class="pot-rim"></rect>
+          </g>
+          <!-- everything outside the view is dimmed -->
+          <rect class="veil" y="-40" width="1700" height="700" rx="28" mask="url(#clk-mask)"></rect>
+          <g class="ghost-ring-layer"><circle class="ghost-ring" cx="330" cy="270" r="166"></circle></g>
+          <g class="hand-layer"></g>
+          <text class="unseen" x="330" y="484">unseen</text>
+          <text class="counter num" x="780" y="300">+5 min</text>
+          <!-- the viewfinder (moved by js) -->
+          <g class="vf" transform="translate(110 70)">
+            <rect class="vf-box" width="440" height="400" rx="26"></rect>
+            <path class="vf-corner" d="M0 70 V26 Q0 0 26 0 H70 M370 0 H414 Q440 0 440 26 V70 M440 330 V374 Q440 400 414 400 H370 M70 400 H26 Q0 400 0 374 V330"></path>
+            <circle class="vf-rec" cx="32" cy="32" r="9"></circle>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Step 2: three possible answers -->
+      <div class="cards">
+        <figure class="card c-van" data-step="2">
+          <svg class="mini" viewBox="0 0 456 280" width="456" height="280" aria-hidden="true">
+            <rect class="m-wall" width="456" height="280" rx="16"></rect>
+            <circle class="m-gone" cx="228" cy="140" r="102"></circle>
+            <circle class="m-nail" cx="228" cy="62" r="7"></circle>
+            <path class="m-vf" d="M18 58 V30 Q18 18 30 18 H58 M398 18 H426 Q438 18 438 30 V58 M438 222 V250 Q438 262 426 262 H398 M58 262 H30 Q18 262 18 250 V222"></path>
+          </svg>
+          <figcaption><span class="mk no" aria-hidden="true">✗</span><b>Vanished</b><span class="gl">no permanence</span></figcaption>
+        </figure>
+        <figure class="card c-frz" data-step="2">
+          <svg class="mini" viewBox="0 0 456 280" width="456" height="280" aria-hidden="true">
+            <rect class="m-wall" width="456" height="280" rx="16"></rect>
+            <g class="m-clock" data-h="10" data-m="10"></g>
+            <path class="m-vf" d="M18 58 V30 Q18 18 30 18 H58 M398 18 H426 Q438 18 438 30 V58 M438 222 V250 Q438 262 426 262 H398 M58 262 H30 Q18 262 18 250 V222"></path>
+          </svg>
+          <figcaption><span class="mk no" aria-hidden="true">✗</span><b>Frozen at 10:10</b><span class="gl">static memory</span></figcaption>
+        </figure>
+        <figure class="card c-ok" data-step="2">
+          <svg class="mini" viewBox="0 0 456 280" width="456" height="280" aria-hidden="true">
+            <rect class="m-wall" width="456" height="280" rx="16"></rect>
+            <g class="m-clock" data-h="10" data-m="15"></g>
+            <path class="m-vf" d="M18 58 V30 Q18 18 30 18 H58 M398 18 H426 Q438 18 438 30 V58 M438 222 V250 Q438 262 426 262 H398 M58 262 H30 Q18 262 18 250 V222"></path>
+          </svg>
+          <figcaption><span class="mk yes" aria-hidden="true">✓</span><b>10:15</b><span class="gl">a world model</span></figcaption>
+        </figure>
+      </div>
+
+      <!-- Step 4: reality check -->
+      <p class="reality" data-step="4" data-anim="fade">on memory benchmarks, today’s models land here</p>
+
+      <!-- Step 3: four requirements rise out of the test -->
+      <div class="treqs">
+        <div class="tq" data-step="3"><span class="req persist">Persist</span><p>it exists while unseen</p></div>
+        <div class="tq" data-step="3"><span class="req consistent">Consistent</span><p>same clock, same place,<br>across views and edits</p></div>
+        <div class="tq" data-step="3"><span class="req evolve">Evolve</span><p>it keeps moving: time passes</p></div>
+        <div class="tq" data-step="3"><span class="req act">Act</span><p>an actor changes it,<br>and it stays changed</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="src" data-step="4" data-anim="fade">LiveWorld, HyDRA 2026: out-of-sight state “frozen” · WorldMemBench 2026: best static-memory model initiates only 31.7% of prescribed events · Genie 3: ~1 min visual memory</p>
+  <aside class="notes">
+    <p>How would we know that a model really holds a world? Here's the test I keep in mind. It's a thought experiment. You look at a clock on the wall. It says ten past ten.</p>
+    <p><em>[click]</em> Now you turn to the window for five minutes. The clock is out of view. But it doesn't wait for you. It keeps running.</p>
+    <p><em>[click]</em> Then you look back. What should a model show you? On the left, the clock has vanished: no object permanence. In the middle, it's frozen where you left it: the model kept a memory, but a static one. On the right, it shows <b>ten fifteen</b>. That's a world model. It keeps going like the real world, whether or not you're watching.</p>
+    <p><em>[click]</em> This one small test gives us four requirements. Persist: the clock still exists while you're not looking. Consistent: it's the same clock, in the same place, across views and edits. Evolve: it keeps moving, because time passes. And act: if someone changes it, it stays changed. The most exciting case combines persist and evolve: the clock keeps running while nobody looks.</p>
+    <p><em>[click]</em> So where's the field today? On memory benchmarks, current video world models land right here, on the <b>frozen</b> card. LiveWorld and HyDRA, both from this year, describe out-of-sight state as frozen. On WorldMemBench, from October, the best static-memory model triggers just 31.7 percent of the scripted events. And Genie 3 reports about one minute of visual memory.</p>
+    <p>That makes the target concrete, and the field wide open. Each requirement is something we can build and measure. In my past work, I've explored each requirement in a different task. Going forward, I want to combine them and push toward vision-centric world models.</p>
+  </aside>
+</section>
+
+<!-- ===== 02b-map.html ===== -->
+<!-- 02b · Map: the four clock-test requirements as columns, the interface as a band. 06-summary reuses this grid.
+     Authorship marks on the thumbnails: .wm-lead = first author (SEELE, ASUKA, NVG, FlashForward),
+     .wm-corr = (co-)corresponding author (DIRECT, LexVLA).
+     Grey line under each name: homepage research topic · venue ("Inpainting & Editing" split to fit one line). -->
+<section class="slide" id="s-map" data-title="How my work adds up" data-section="Thesis" data-time="40">
+  <header class="hd">
+    <h2 class="title">How my work adds up</h2>
+  </header>
+  <div class="bd">
+    <div class="wm-stage">
+    <div class="wm-grid">
+      <div class="wm-col persist">
+        <div class="wm-head"><span class="req persist">Persist</span><span class="wm-part">see the unseen</span></div>
+        <ul class="wm-papers">
+          <li class="wm-lead"><img src="media/map/asuka.jpg" alt="ASUKA" width="96" height="96"><span>ASUKA<small>Inpainting · CVPR’25</small></span></li>
+          <li><img src="media/map/c2fseg.jpg" alt="C2F-Seg" width="96" height="96"><span>C2F-Seg<small>Inpainting · ICCV’23</small></span></li>
+          <li><img src="media/map/streetunveiler.jpg" alt="StreetUnveiler" width="96" height="96"><span>StreetUnveiler<small>Inpainting · ICLR’25</small></span></li>
+        </ul>
+      </div>
+      <div class="wm-col consistent">
+        <div class="wm-head"><span class="req consistent">Consistent</span><span class="wm-part">across views &amp; edits</span></div>
+        <ul class="wm-papers">
+          <li class="wm-lead"><img src="media/map/seele.jpg" alt="SEELE" width="96" height="96"><span>SEELE<small>Editing · TMLR’24</small></span></li>
+          <li class="wm-corr"><img src="media/map/direct.jpg" alt="DIRECT" width="96" height="96"><span>DIRECT<small>Editing · ICML’26</small></span></li>
+          <li><img src="media/map/leftrefill.jpg" alt="LeftRefill" width="96" height="96"><span>LeftRefill<small>Inpainting · CVPR’24</small></span></li>
+          <li><img src="media/map/puffin.jpg" alt="Puffin" width="96" height="96"><span>Puffin<small>Image generation · ICLR’26</small></span></li>
+        </ul>
+      </div>
+      <div class="wm-col evolve">
+        <div class="wm-head"><span class="req evolve">Evolve</span><span class="wm-part">carry it forward in time</span></div>
+        <ul class="wm-papers">
+          <li class="wm-lead"><img src="media/map/nvg.jpg" alt="NVG" width="96" height="96"><span>NVG<small>Image generation · ICLR’26</small></span></li>
+          <li class="wm-lead"><img src="media/map/flashforward.jpg" alt="FlashForward" width="96" height="96"><span>FlashForward<small>Video generation · preprint</small></span></li>
+        </ul>
+      </div>
+      <div class="wm-col act">
+        <div class="wm-head"><span class="req act">Act</span><span class="wm-part">act in it</span></div>
+        <ul class="wm-papers">
+          <li><img src="media/map/navawam.jpg" alt="NAVA-WAM" width="96" height="96"><span>NAVA-WAM<small>Embodied AI · preprint</small></span></li>
+          <li><img src="media/map/prowam.jpg" alt="ProWAM" width="96" height="96"><span>ProWAM<small>Embodied AI · preprint</small></span></li>
+          <li><img src="media/map/dp4.jpg" alt="DP4" width="96" height="96"><span>DP4<small>Embodied AI · ICCV’25</small></span></li>
+          <li><img src="media/map/activevla.jpg" alt="ActiveVLA" width="96" height="96"><span>ActiveVLA<small>Embodied AI · CVPR’26</small></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wm-band">
+      <div class="wm-head"><span class="req interface">Interface</span><span class="wm-part">language asks, reads out</span></div>
+      <div class="wm-paper"><img src="media/map/reasongrounder.jpg" alt="ReasonGrounder" width="96" height="96"><span>ReasonGrounder<small>Vision-language · CVPR’25</small></span></div>
+      <div class="wm-paper wm-corr"><img src="media/map/lexvla.jpg" alt="LexVLA" width="96" height="96"><span>LexVLA<small>Vision-language · NeurIPS’24</small></span></div>
+    </div>
+    <div class="wm-foot">
+      <div class="wm-slot"><p class="wm-line">Each work targets mainly one requirement.</p></div>
+      <p class="wm-legend"><span class="wm-key k-first">first author</span><span class="wm-key k-corr">corresponding author</span></p>
+    </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Here's how my work maps onto those four requirements.</p>
+    <p><b>Persist</b>: these works infer what's hidden from the context. Consistent: these keep one world across edits and views. Evolve: NVG commits structure before detail, and FlashForward carries the same idea into time, giving fast autoregressive video diffusion that stays stable for over a minute. Act: these bring in the actor. And along the bottom, I explore how language can serve as the interface.</p>
+    <p>Next, I'll give a quick overview of these works, and go deeper into the recent ones. Let's begin with persistence.</p>
+  </aside>
+</section>
+
+<!-- ===== 03a-persist.html ===== -->
+<!-- 03a · Space: persist (builder D). Slides: s-asuka, s-c2fseg, s-street. -->
+
+<section class="slide" id="s-asuka" data-title="ASUKA: fill from context" data-section="Space" data-time="60">
+  <div class="reqs"><span class="req persist">Persist</span></div>
+  <header class="hd">
+    <h2 class="title">What’s behind the occluder must come from the context</h2>
+  </header>
+  <div class="bd">
+    <div class="stage">
+      <!-- Steps 0-1: the car build. Step 2: the ASUKA fill, and the cars row narrows to make room
+           for the FLUX grid on the right (width transition, so captions keep their font size). -->
+      <div class="cars">
+        <figure class="tile">
+          <div class="pic"><img src="media/asuka/car-input.jpg" alt="Person in front of a red car, masked"></div>
+          <figcaption>Masked input</figcaption>
+        </figure>
+        <div class="slot"><div class="ph" aria-hidden="true">?</div>
+        <figure class="tile bad" data-step="1">
+          <div class="pic">
+            <img src="media/asuka/car-sd.jpg" alt="Stable Diffusion fill invents a bracket on the bumper">
+            <svg class="ring" viewBox="0 0 1024 1024" aria-hidden="true">
+              <ellipse cx="520" cy="740" rx="140" ry="84"></ellipse>
+            </svg>
+            <span class="flag">invented</span>
+          </div>
+          <figcaption>Stable Diffusion</figcaption>
+        </figure></div>
+        <div class="slot"><div class="ph" aria-hidden="true">?</div>
+        <figure class="tile good" data-step="2">
+          <div class="pic"><img src="media/asuka/car-asuka.jpg" alt="ASUKA fill: clean car front"></div>
+          <figcaption>ASUKA</figcaption>
+        </figure></div>
+      </div>
+
+      <!-- Step 2: the same behaviour on a much stronger generator -->
+      <div class="flux" data-step="2" data-anim="fade">
+        <figure class="grid">
+          <div class="cols"><span>Masked</span><span>FLUX-Fill</span><span class="t-space">ASUKA-II-FLUX</span></div>
+          <div class="pic">
+            <img src="media/asuka/flux-hallucination-grid.jpg" alt="Masked inputs, FLUX-Fill fills with a flag, a flower and an animal; ASUKA-II-FLUX fills with background">
+            <svg class="ring" viewBox="0 0 1234 1234" aria-hidden="true">
+              <ellipse cx="578" cy="196" rx="132" ry="104"></ellipse>
+              <ellipse cx="602" cy="625" rx="104" ry="168"></ellipse>
+              <ellipse cx="460" cy="1078" rx="72" ry="78"></ellipse>
+            </svg>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <p class="src">ASUKA · CVPR 2025 Highlight · first author · right: extension on FLUX, preprint 2026</p>
+  <aside class="notes">
+    <p>First, space, and the simplest kind of persistence: what's behind an occluder. Here's a man standing in front of a red car. We mask him out. So what should be behind him?</p>
+    <p><em>[click]</em> A strong inpainting model fills the hole with whatever looks plausible. Look at the bumper. Stable Diffusion <b>invents</b> a bracket.</p>
+    <p><em>[click]</em> Our method, ASUKA, fills from the <b>context</b> instead. So we get the right car, with a clean bumper. On the right is our model built on FLUX. FLUX-Fill brings back the flag, grows a new flower and adds an animal. Ours fills each hole with background: the sky, the plants, the bed. That's persistence in its simplest form: show what the occluder was hiding, and add nothing else.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-c2fseg" data-title="C2F-Seg: hidden, not gone" data-section="Space" data-time="40">
+  <div class="reqs"><span class="req persist">Persist</span></div>
+  <header class="hd">
+    <h2 class="title">A hidden object should not disappear</h2>
+  </header>
+  <div class="bd">
+    <div class="flip">
+      <div class="frames">
+        <!-- 8 frames of 256x128 at pitch 259 px in a 2069x128 strip; shown at 1.25x (320x160) -->
+        <figure class="fr" data-t="1"><span class="t num">T = 1</span><div class="px"><i class="toy" aria-hidden="true"></i></div></figure>
+        <figure class="fr" data-t="2"><span class="t num">T = 2</span><div class="px"></div></figure>
+        <figure class="fr" data-t="3"><span class="t num">T = 3</span><div class="px"></div></figure>
+        <figure class="fr" data-t="4"><span class="t num">T = 4</span><div class="px"></div></figure>
+        <figure class="fr hid" data-t="5"><span class="t num">T = 5</span><div class="px"></div><span class="badge">hidden</span></figure>
+        <figure class="fr hid" data-t="6"><span class="t num">T = 6</span><div class="px"></div><span class="badge">hidden</span></figure>
+        <figure class="fr hid" data-t="7"><span class="t num">T = 7</span><div class="px"></div><span class="badge">hidden</span></figure>
+        <figure class="fr hid" data-t="8"><span class="t num">T = 8</span><div class="px"></div><span class="badge">hidden</span></figure>
+      </div>
+      <div class="legend key">
+        <span><i class="ring"></i>the toy</span>
+        <span><i class="outl"></i>its predicted full shape</span>
+        <span class="t-muted">camera moves →</span>
+      </div>
+    </div>
+  </div>
+  <p class="src">C2F-Seg · ICCV 2023 · co-author · predicted masks on a synthetic test video from MOViD-A, the paper’s video amodal dataset</p>
+  <aside class="notes">
+    <p>Persistence over time is harder. This video is a synthetic test scene, so we have ground truth, even for the hidden parts. The camera moves past a pile of objects. Watch the small orange toy on the left.</p>
+    <p>From frame five, it's completely hidden behind the white objects. But the yellow outline, the model's prediction of the toy's full shape, stays right where the toy is. The model carries evidence across frames. Hidden is <b>not gone</b>.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-street" data-title="StreetUnveiler: fill only the unseen" data-section="Space" data-time="55">
+  <div class="reqs"><span class="req persist">Persist</span></div>
+  <header class="hd">
+    <h2 class="title">Only fill what was never seen</h2>
+  </header>
+  <div class="bd">
+    <div class="duo">
+      <figure class="vid hero">
+        <video data-autoplay loop muted playsinline preload="none"
+               poster="media/streetunveiler/crowded-vs-empty-3scenes-poster.jpg"
+               src="media/streetunveiler/crowded-vs-empty-3scenes.mp4"></video>
+        <span class="vid-label l">Recorded</span>
+        <span class="vid-label r">Cars removed</span>
+      </figure>
+      <div class="plan" data-step="1" data-anim="fade">
+        <svg class="map" viewBox="0 0 900 700" role="img" aria-label="Top-down street: cells observed from the drive versus never observed behind parked cars">
+          <!-- built by js/sec-03a.js -->
+        </svg>
+      </div>
+    </div>
+  </div>
+  <p class="src">StreetUnveiler · ICLR 2025 · co-author</p>
+  <aside class="notes">
+    <p>We also take this to the scale of a whole street. We drive past parked cars and build one persistent 3D scene from the drive. Then we remove the cars. On the left is what the car recorded. On the right, the same street, empty.</p>
+    <p><em>[click]</em> So which parts do we fill? As we drive, the camera sees most of the ground behind each parked car in at least one frame. Those cells turn green: <b>observed</b>. Just a few small patches behind the cars, in blue, were never seen at all.</p>
+    <p><em>[click]</em> We inpaint just those blue cells, and we go <b>backwards</b> in time: the latest, closest frame first, which then guides the earlier ones. The fill is written back into the 3D scene, so every view agrees, and we can render the empty street from new viewpoints.</p>
+  </aside>
+</section>
+
+<!-- ===== 03b-consistent.html ===== -->
+<!-- 03b · Space: consistent (builder E). Slides: s-control, s-puffin, s-hinge, s-nvg. -->
+
+<section class="slide" id="s-control" data-title="Intervene without words" data-section="Space" data-time="85">
+  <div class="reqs"><span class="req consistent">Consistent</span></div>
+  <header class="hd">
+    <h2 class="title">Intervene without words; the scene must stay consistent</h2>
+  </header>
+  <div class="bd">
+    <div class="ctl-row">
+      <figure class="ctl ctl-seele">
+        <figcaption class="ctl-sig">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path class="ico-fill" d="M24 3l7 8h-5v11h11v-5l8 7-8 7v-5H26v11h5l-7 8-7-8h5V26H11v5l-8-7 8-7v5h11V11h-5z"/></svg>
+          <span>a drag</span>
+        </figcaption>
+        <div class="ctl-media">
+          <video data-autoplay loop muted playsinline preload="none"
+                 poster="media/seele/repositioning-loop-poster.jpg" src="media/seele/repositioning-loop.mp4"></video>
+          <span class="ctl-chip ctl-ba"><b class="ba-before">before</b><b class="ba-after">after</b></span>
+        </div>
+        <p class="ctl-name">SEELE</p>
+      </figure>
+      <figure class="ctl ctl-direct" data-step="1">
+        <figcaption class="ctl-sig">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <ellipse class="ico-ring" cx="24" cy="27" rx="17" ry="8"/>
+            <path class="ico-ax ax-y" d="M24 27V5"/><path class="ico-ax ax-x" d="M24 27l18 8"/><path class="ico-ax ax-z" d="M24 27L7 37"/>
+            <circle class="ico-fill" cx="24" cy="27" r="4"/>
+          </svg>
+          <span>a 3D pose</span>
+        </figcaption>
+        <div class="ctl-media">
+          <video data-autoplay data-play-step="1" loop muted playsinline preload="none"
+                 poster="media/03b/direct-gizmo-poster.jpg" src="media/03b/direct-gizmo.mp4"></video>
+          <span class="ctl-chip">3D handles</span>
+          <span class="ctl-chip at-right">output</span>
+          <svg class="ctl-arrow" viewBox="0 0 40 24" aria-hidden="true"><path d="M3 12h28M24 5l8 7-8 7"/></svg>
+        </div>
+        <p class="ctl-name">DIRECT <span class="ctl-speed">3.2× speed</span></p>
+      </figure>
+      <figure class="ctl ctl-left" data-step="2">
+        <figcaption class="ctl-sig">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect class="ico-line" x="4" y="9" width="25" height="19" rx="3"/>
+            <rect class="ico-fill" x="19" y="21" width="25" height="19" rx="3"/>
+          </svg>
+          <span>another view</span>
+        </figcaption>
+        <div class="ctl-media">
+          <video data-autoplay data-play-step="2" loop muted playsinline preload="none"
+                 poster="media/03b/leftrefill-swap-poster.jpg" src="media/03b/leftrefill-swap.mp4"></video>
+          <span class="ctl-chip">reference</span>
+          <span class="ctl-chip at-out">output</span>
+        </div>
+        <p class="ctl-name">LeftRefill</p>
+      </figure>
+    </div>
+    <p class="ctl-line" data-step="2">
+      <span class="ctl-prompt">type a prompt…</span>
+      <span>learned task embeddings, 3D handles and views</span>
+    </p>
+  </div>
+  <p class="src">SEELE · TMLR 2024 (J2C) · first author &nbsp;&nbsp;|&nbsp;&nbsp; DIRECT · ICML 2026 · co-corresponding author &nbsp;&nbsp;|&nbsp;&nbsp; LeftRefill · CVPR 2024 · co-author</p>
+  <aside class="notes">
+    <p>So far, the hidden world just had to persist. Now we step in and change it, and the scene has to answer consistently. On the left, we drag a subject to a new spot. The background behind it was never observed, so we fill it in. Its hidden parts get completed, and its shadow and scale fit the new spot. One frozen diffusion model does every generative step, steered by learned task embeddings instead of text prompts. In our user study, people preferred it most, both for quality and for how well it fits the surroundings.</p>
+    <p><em>[click]</em> With <b>DIRECT</b>, the change is a 3D pose. We lift the car to a 3D proxy, set its pose with 3D handles, and it lands on the road in that pose. And the rest of the scene responds, without being modelled explicitly.</p>
+    <p><em>[click]</em> With <b>LeftRefill</b>, the control is another view: reference on top, masked target below, result on the right. Change the reference, and the spire follows. It copies what was observed, with learned prompt embeddings in place of text.</p>
+    <p>A drag, a pose, another view. None of them is a sentence, and each time the rest of the scene needs to stay consistent.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-puffin" data-title="Move the camera" data-section="Space" data-time="45">
+  <div class="reqs"><span class="req consistent">Consistent</span></div>
+  <header class="hd">
+    <h2 class="title">Move the camera; it’s still the same scene</h2>
+  </header>
+  <div class="bd">
+    <div class="pf-stage">
+      <figure class="pf-vid">
+        <video data-autoplay data-start="4" data-end="14.9" muted playsinline preload="none"
+               poster="media/puffin/world-exploration-outdoor-poster.jpg" src="media/puffin/world-exploration-outdoor.mp4"></video>
+        <figcaption class="pf-cap"><i class="pf-red"></i>given view &nbsp;→&nbsp; generated views reconstruct into one 3D scene<span class="pf-rot">rotation about a fixed centre</span></figcaption>
+      </figure>
+      <div class="pf-gauge" data-step="1" data-anim="right">
+        <p class="pf-g-title">median gravity error</p>
+        <svg viewBox="0 0 420 646" aria-label="Gravity direction error: general generators about 26 to 28 degrees, PreciseCam (camera specialist) 15.34 degrees, Puffin 3.43 degrees">
+          <defs>
+            <clipPath id="pf-clip-a"><rect x="2" y="44" width="416" height="140" rx="18"/></clipPath>
+            <clipPath id="pf-clip-b"><rect x="2" y="252" width="416" height="140" rx="18"/></clipPath>
+            <clipPath id="pf-clip-c"><rect x="2" y="460" width="416" height="140" rx="18"/></clipPath>
+          </defs>
+
+          <text class="pf-g-who" x="4" y="30">GPT-4o · Qwen-Image · Nano Banana</text>
+          <g clip-path="url(#pf-clip-a)">
+            <rect x="2" y="44" width="416" height="140" class="pf-sky-a"/>
+            <g class="pf-tilt pf-tilt-a">
+              <rect x="-300" y="128" width="1020" height="500" class="pf-ground-a"/>
+              <line x1="-300" y1="128" x2="720" y2="128" class="pf-hz"/>
+            </g>
+            <line x1="2" y1="128" x2="418" y2="128" class="pf-req"/>
+          </g>
+          <rect x="2" y="44" width="416" height="140" rx="18" class="pf-frame"/>
+          <text class="pf-g-num" x="26" y="100">26–28°</text>
+
+          <text class="pf-g-who" x="4" y="238">PreciseCam (camera specialist)</text>
+          <g clip-path="url(#pf-clip-b)">
+            <rect x="2" y="252" width="416" height="140" class="pf-sky-a"/>
+            <g class="pf-tilt pf-tilt-b">
+              <rect x="-300" y="336" width="1020" height="500" class="pf-ground-a"/>
+              <line x1="-300" y1="336" x2="720" y2="336" class="pf-hz"/>
+            </g>
+            <line x1="2" y1="336" x2="418" y2="336" class="pf-req"/>
+          </g>
+          <rect x="2" y="252" width="416" height="140" rx="18" class="pf-frame"/>
+          <text class="pf-g-num" x="26" y="308">15.34°</text>
+
+          <text class="pf-g-who pf-g-ours" x="4" y="446">Puffin</text>
+          <g clip-path="url(#pf-clip-c)">
+            <rect x="2" y="460" width="416" height="140" class="pf-sky-b"/>
+            <g class="pf-tilt pf-tilt-c">
+              <rect x="-300" y="544" width="1020" height="500" class="pf-ground-b"/>
+              <line x1="-300" y1="544" x2="720" y2="544" class="pf-hz"/>
+            </g>
+            <line x1="2" y1="544" x2="418" y2="544" class="pf-req"/>
+          </g>
+          <rect x="2" y="460" width="416" height="140" rx="18" class="pf-frame"/>
+          <text class="pf-g-num pf-g-ours" x="26" y="516">3.43°</text>
+
+          <line x1="6" y1="620" x2="56" y2="620" class="pf-req pf-leg"/>
+          <text class="pf-g-leg" x="66" y="628">requested</text>
+          <line x1="212" y1="620" x2="262" y2="620" class="pf-hz pf-leg"/>
+          <text class="pf-g-leg" x="272" y="628">generated</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <p class="src">Puffin · ICLR 2026 · co-author</p>
+  <aside class="notes">
+    <p>Next, the camera itself. In <b>Puffin</b>, the camera is an explicit variable. Each example starts from one given view, framed in red. We command a rotation about a fixed centre, and the model renders the new views. Here's the test: put them together, and they reconstruct into one <b>3D scene</b>.</p>
+    <p><em>[click]</em> And it follows the requested camera closely. Puffin's median gravity error is just 3.43 degrees. The big general generators are off by 26 to 28 degrees, and Puffin clearly beats a dedicated camera model, too. The camera goes in as tokens and as a per-pixel camera map, so the geometry is grounded in the image.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-hinge" data-title="Roll forward without drifting" data-section="Space" data-time="35">
+  <div class="reqs"><span class="req consistent">Consistent</span></div>
+  <header class="hd">
+    <h2 class="title">Roll forward without drifting</h2>
+  </header>
+  <div class="bd">
+    <div class="hg-block">
+      <div class="hg-axis">
+        <span class="hg-in">input</span>
+        <span class="hg-seq">views generated one after another</span>
+      </div>
+      <div class="hg-row hg-zero">
+        <p class="hg-lab"><span><b>Zero123</b>, from its last view</span><span class="hg-flag">→ another object</span></p>
+        <div class="hg-strip">
+          <img src="media/03b/nvs-zero123-lastview.jpg" alt="Zero123 novel views, each conditioned on its last generated view: the kennel drifts into a black stand" width="1450" height="230">
+          <svg viewBox="0 0 1450 230" aria-hidden="true"><rect class="hg-bad" x="884" y="6" width="560" height="218" rx="18"/></svg>
+        </div>
+      </div>
+      <div class="hg-row hg-ours" data-step="1">
+        <p class="hg-lab"><span><b>LeftRefill</b>, autoregressive</span><span class="hg-flag">→ the same kennel</span></p>
+        <div class="hg-strip">
+          <img src="media/03b/nvs-leftrefill-ar.jpg" alt="LeftRefill autoregressive novel views: the same kennel in every view" width="1450" height="230">
+          <svg viewBox="0 0 1450 230" aria-hidden="true"><rect class="hg-good" x="300" y="6" width="1144" height="218" rx="18"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="hg-say" data-step="1">Every step forward is a chance to drift.</p>
+  </div>
+  <p class="src">LeftRefill · CVPR 2024 · co-author &nbsp;·&nbsp; novel views of an Objaverse object</p>
+  <aside class="notes">
+    <p>Now roll the views forward, each one generated from the views before it. Top row: Zero123, conditioned on its own last view. By the last two views, the kennel has <b>drifted</b> into a different object.</p>
+    <p><em>[click]</em> Bottom row: <b>LeftRefill</b>, generating autoregressively. Each new view looks back at the input and at every view so far, so it stays the same kennel all the way. Every step forward is a chance to drift. So what keeps a long rollout on track? One answer: commit the coarse structure first.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-nvg" data-title="Commit structure first" data-section="Time" data-time="45">
+  <div class="reqs"><span class="req evolve">Evolve · ingredient</span></div>
+  <header class="hd">
+    <h2 class="title">Commit structure first, then detail</h2>
+  </header>
+  <div class="bd">
+    <div class="nvg-stage">
+      <div class="nvg-a" data-step-hide="1">
+        <div class="nvg-labels">
+          <span>structure</span>
+          <span>image</span>
+          <span class="nvg-tok-lab">unique tokens</span>
+        </div>
+        <div class="nvg-strip">
+          <div class="nvg-img">
+            <img src="media/nvg/dog-stages-strip.jpg" alt="Nine generation stages: structure maps on top, the image below, from one flat colour to a puppy" width="1800" height="400">
+            <div class="nvg-covers" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="nvg-tok num"><span>1</span><span>2</span><span>4</span><span>8</span><span>16</span><span>32</span><span>64</span><span>128</span><span>256</span></div>
+        </div>
+      </div>
+      <div class="nvg-b" data-step="1" data-anim="fade">
+        <figure class="nvg-ref">
+          <img src="media/nvg/stage-variation-reference.jpg" alt="Reference: an apricot poodle on grass" width="256" height="256">
+          <figcaption>reference</figcaption>
+        </figure>
+        <svg class="nvg-arrow" viewBox="0 0 80 40" aria-hidden="true"><path d="M4 20h62M54 8l13 12-13 12"/></svg>
+        <div class="nvg-rows">
+          <div class="nvg-row"><span>generate 1–8</span><i class="seg s0"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>
+          <div class="nvg-row"><span>generate 3–8</span><i class="seg s2"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>
+          <div class="nvg-row"><span>generate 5–8</span><i class="seg s4"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>
+          <div class="nvg-row"><span>generate 7–8</span><i class="seg s6"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>
+          <div class="nvg-legend"><span><i class="k-fix"></i>from reference</span><span><i class="k-gen"></i>generated</span></div>
+        </div>
+        <img class="nvg-grid" src="media/nvg/stage-variation-poodle.jpg" alt="Four rows of four poodle samples; the more early stages are fixed, the less the samples vary" width="1024" height="1024">
+        <div class="nvg-var">
+          <span>pose, colour vary</span>
+          <svg viewBox="0 0 40 400" preserveAspectRatio="none" aria-hidden="true"><path d="M20 6v376M8 366l12 18 12-18"/></svg>
+          <span>only details vary</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="src">NVG · ICLR 2026 · first author</p>
+  <aside class="notes">
+    <p>That's the idea behind <b>NVG</b>, next visual granularity. NVG generates by structure, not by position. Each stage doubles the number of unique tokens, from one to 256. The structure map on top is committed first, and the content fills in under it.</p>
+    <p><em>[click]</em> And committed structure holds. Take the early stages from this reference poodle and generate the rest. Generate stages one to eight, and pose and colour vary. Fix the first six, and the dogs barely change: same pose, same colour, new fine details. So we can control the overall structure with just a few tokens. That's what an <b>anchor</b> does. Our next work carries this insight into time.</p>
+  </aside>
+</section>
+
+<!-- ===== 04-time.html ===== -->
+<!-- Section 04 · Time: the FlashForward deep dive (ported from ../flashforward, ids renamed s-ff-*).
+     s-ff-race · s-ff-long · s-ff-inflight · s-ff-drift · s-ff-anchors · s-ff-notyet.
+     All FlashForward quality numbers are 1.3B · 480p; 14B rows are timing-only (GB300). -->
+
+<!-- s-ff-race · port of s-hook ------------------------------------------------------------ -->
+<section class="slide dark" id="s-ff-race" data-title="Rolling forward, 3.06× faster than Self-Forcing" data-section="Time" data-time="70" data-steps="1">
+  <div class="reqs"><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <h2 class="title">Rolling a world forward, <span class="t-time">3.06×</span> faster than Self-Forcing</h2>
+  </header>
+  <div class="bd">
+    <div class="h2-main">
+      <div class="h2-top">
+        <span class="chip h2-chip">65 s of video · same prompt · 1.3B · 480p · 4 × H100</span>
+        <span class="h2-key caption"><i></i>bar = generation progress, wall-clock</span>
+      </div>
+      <div class="h2-grid" data-sync>
+        <div class="h2-col" data-m="sf">
+          <figure class="vid sf">
+            <video data-autoplay muted playsinline preload="none"
+                   poster="media/time/sketch65-self-forcing-poster.jpg" src="media/time/sketch65-self-forcing.mp4"></video>
+            <figcaption class="vid-label">Self-Forcing</figcaption>
+          </figure>
+          <div class="h2-race"><div class="h2-track"><i></i></div><span class="h2-time num">0.0 s</span></div>
+        </div>
+        <div class="h2-col" data-m="hiar">
+          <figure class="vid hiar">
+            <video data-autoplay muted playsinline preload="none"
+                   poster="media/time/sketch65-hiar-poster.jpg" src="media/time/sketch65-hiar.mp4"></video>
+            <figcaption class="vid-label">HiAR</figcaption>
+          </figure>
+          <div class="h2-race"><div class="h2-track"><i></i></div><span class="h2-time num">0.0 s</span></div>
+        </div>
+        <div class="h2-col" data-m="ours">
+          <figure class="vid ours">
+            <video data-autoplay muted playsinline preload="none"
+                   poster="media/time/sketch65-ours-poster.jpg" src="media/time/sketch65-ours.mp4"></video>
+            <figcaption class="vid-label">FlashForward</figcaption>
+          </figure>
+          <div class="h2-race"><div class="h2-track"><i></i></div><span class="h2-time num">0.0 s</span></div>
+        </div>
+      </div>
+      <p class="h2-cite cite">Denoising path only, mean of 20 videos. Self-Forcing at its fastest (1 GPU): 57.89 s.</p>
+    </div>
+    <div class="h2-lower">
+      <!-- Speed-up over Self-Forcing, 65 s video, 4 GPUs (arXiv 2609.32540 Table 4). The race setting, 1.3B · 480p, is the hero. -->
+      <div class="h2-scale" data-step="1" data-anim="up">
+        <div class="h2-head"><b>Speed-up over Self-Forcing</b>
+          <span class="h2-lg"><span class="h2-sh">Self-Forcing</span> → <span class="h2-sf">FlashForward</span></span></div>
+        <div class="h2-mx">
+          <span></span><span class="h2-ch">720p</span><span class="h2-ch">480p</span>
+          <span class="h2-rh">14B</span>
+          <div class="h2-cell" data-k="b720"><span class="h2-x num" data-x="1.49">1.49×</span><span class="h2-s num"><span class="h2-sh">269.41</span> → <span class="h2-sf">181.25</span> s</span></div>
+          <div class="h2-cell" data-k="b480"><span class="h2-x num" data-x="2.64">2.64×</span><span class="h2-s num"><span class="h2-sh">137.89</span> → <span class="h2-sf">52.18</span> s</span></div>
+          <span class="h2-rh">1.3B</span>
+          <div class="h2-cell" data-k="s720"><span class="h2-x num" data-x="1.66">1.66×</span><span class="h2-s num"><span class="h2-sh">97.68</span> → <span class="h2-sf">58.89</span> s</span></div>
+          <div class="h2-cell" data-k="s480"><span class="h2-x num" data-x="3.06">3.06×</span><span class="h2-s num"><span class="h2-sh">65.14</span> → <span class="h2-sf">21.29</span> s</span><span class="h2-this">this race</span></div>
+        </div>
+      </div>
+      <p class="h2-say" data-step="1" data-anim="fade">Both sizes,<br>both resolutions:<br><b>up to 3× faster.</b></p>
+    </div>
+  </div>
+  <p class="src">FlashForward · preprint 2026 · first author · 65 s videos, 4 GPUs</p>
+  <aside class="notes">
+    <p>That brings us to time, and to <b>Evolve</b>. A world model has to carry its state forward, far and cheaply. That's what FlashForward does. Let's start with a race. Each model generates a 65-second video from the same prompt, chunk by chunk, on the same four GPUs. Each bar is wall-clock time for the denoising. Watch the green one on the right. FlashForward finishes in 21 seconds, on average. HiAR comes in a few seconds later. Self-Forcing needs 65 seconds, so we're more than <b>three times</b> faster.</p>
+    <p><em>[click]</em> Here's every setting: two model sizes, two resolutions. FlashForward beats Self-Forcing in all four settings. And it's not just fast: the video stays stable, even after a full minute.</p>
+  </aside>
+</section>
+
+<!-- s-ff-long · knit65 triple, then the t = 62 s end stills ---------------------------------- -->
+<section class="slide dark" id="s-ff-long" data-title="65 s later" data-section="Time" data-time="45">
+  <div class="reqs"><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <h2 class="title">65 s later: no collapse, <span class="t-time">same identity</span></h2>
+  </header>
+  <div class="bd">
+    <div class="lg-top"><span class="chip lg-chip">New prompt · 65 s · played in real time · 1.3B · 480p</span></div>
+    <div class="lg-grid" data-sync>
+      <div class="lg-col" data-m="sf">
+        <figure class="vid sf">
+          <video data-autoplay muted playsinline preload="none"
+                 poster="media/flashforward/knit65-self-forcing-poster.jpg" src="media/flashforward/knit65-self-forcing.mp4"></video>
+          <img class="lg-end" data-step="1" data-anim="fade" src="media/flashforward/knit65-self-forcing-end.jpg" alt="Self-Forcing at t = 62 s: collapsed into banded noise">
+          <figcaption class="vid-label">Self-Forcing</figcaption>
+          <span class="lg-t num" data-step="1" data-anim="fade">t = 62 s</span>
+        </figure>
+        <p class="lg-score num" data-step="1" data-anim="up"><span class="a">0.8258</span><i>→</i><span class="b">0.7806</span></p>
+      </div>
+      <div class="lg-col" data-m="hiar">
+        <figure class="vid hiar">
+          <video data-autoplay muted playsinline preload="none"
+                 poster="media/flashforward/knit65-hiar-poster.jpg" src="media/flashforward/knit65-hiar.mp4"></video>
+          <img class="lg-end" data-step="1" data-anim="fade" src="media/flashforward/knit65-hiar-end.jpg" alt="HiAR at t = 62 s: the face has turned doll-like">
+          <figcaption class="vid-label">HiAR</figcaption>
+          <span class="lg-t num" data-step="1" data-anim="fade">t = 62 s</span>
+        </figure>
+        <p class="lg-score num" data-step="1" data-anim="up"><span class="a">0.8265</span><i>→</i><span class="b">0.8219</span></p>
+      </div>
+      <div class="lg-col" data-m="ours">
+        <figure class="vid ours">
+          <video data-autoplay muted playsinline preload="none"
+                 poster="media/flashforward/knit65-ours-poster.jpg" src="media/flashforward/knit65-ours.mp4"></video>
+          <img class="lg-end" data-step="1" data-anim="fade" src="media/flashforward/knit65-ours-end.jpg" alt="FlashForward at t = 62 s: same person, same scene">
+          <figcaption class="vid-label">FlashForward</figcaption>
+          <span class="lg-t num" data-step="1" data-anim="fade">t = 62 s</span>
+        </figure>
+        <p class="lg-score num" data-step="1" data-anim="up"><span class="a">0.8404</span><i>→</i><span class="b">0.8395</span></p>
+      </div>
+    </div>
+    <p class="lg-cap caption" data-step="1" data-anim="fade">VBench-Long total, 20 s → 65 s · 1.3B · 480p</p>
+  </div>
+  <p class="src">FlashForward · preprint 2026 · same prompt</p>
+  <aside class="notes">
+    <p>Here's a full sixty-five-second video from each model, played in real time. Watch how each one holds up. On the left, Self-Forcing shifts colour. In the middle, HiAR's face slowly turns smooth. On the right, ours keeps the same woman and the same fire.</p>
+    <p><em>[click]</em> Now jump to the end. Self-Forcing has collapsed into noise. HiAR's face looks doll-like. FlashForward still shows the <b>same person</b>, in the same light. On VBench-Long, our score holds flat at 0.84 to the end. So we get both: speed and stability.</p>
+  </aside>
+</section>
+
+<!-- s-ff-inflight · port of s-inflight ------------------------------------------------------- -->
+<section class="slide" id="s-ff-inflight" data-title="In-flight history" data-section="Time" data-time="55">
+  <div class="reqs"><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <h2 class="title">Every forward already computes the memory</h2>
+  </header>
+  <div class="bd">
+<svg class="fig" viewBox="0 0 1700 780" role="img" aria-label="Anatomy of one denoising forward">
+<defs>
+  <marker id="tffi-ak" class="mk-kv" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker>
+  <marker id="tffi-as" class="mk-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker>
+  <clipPath id="tffi-cl"><rect x="40" y="226" width="290" height="167" rx="14"/></clipPath>
+  <clipPath id="tffi-cr"><rect x="1010" y="226" width="290" height="167" rx="14"/></clipPath>
+  <pattern id="tffi-hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="hatch-bg" width="9" height="9"/><line class="hatch-ln" x1="0" y1="0" x2="0" y2="9"/></pattern>
+</defs>
+<g transform="translate(130 0)">
+<g class="mem-stack">
+<rect class="kv-card" x="590" y="56" width="220" height="58" rx="12"/>
+<rect class="kv-tok" x="610" y="76" width="18" height="18" rx="4"/><rect class="kv-tok" x="636" y="76" width="18" height="18" rx="4"/><rect class="kv-tok" x="662" y="76" width="18" height="18" rx="4"/><rect class="kv-tok" x="688" y="76" width="18" height="18" rx="4"/><rect class="kv-tok" x="714" y="76" width="18" height="18" rx="4"/><rect class="kv-tok" x="740" y="76" width="18" height="18" rx="4"/><rect class="kv-tok" x="766" y="76" width="18" height="18" rx="4"/>
+<rect class="kv-card" x="575" y="72" width="220" height="58" rx="12"/>
+<rect class="kv-tok" x="595" y="92" width="18" height="18" rx="4"/><rect class="kv-tok" x="621" y="92" width="18" height="18" rx="4"/><rect class="kv-tok" x="647" y="92" width="18" height="18" rx="4"/><rect class="kv-tok" x="673" y="92" width="18" height="18" rx="4"/><rect class="kv-tok" x="699" y="92" width="18" height="18" rx="4"/><rect class="kv-tok" x="725" y="92" width="18" height="18" rx="4"/><rect class="kv-tok" x="751" y="92" width="18" height="18" rx="4"/>
+<rect class="kv-card" x="560" y="88" width="220" height="58" rx="12"/>
+<rect class="kv-tok" x="580" y="108" width="18" height="18" rx="4"/><rect class="kv-tok" x="606" y="108" width="18" height="18" rx="4"/><rect class="kv-tok" x="632" y="108" width="18" height="18" rx="4"/><rect class="kv-tok" x="658" y="108" width="18" height="18" rx="4"/><rect class="kv-tok" x="684" y="108" width="18" height="18" rx="4"/><rect class="kv-tok" x="710" y="108" width="18" height="18" rx="4"/><rect class="kv-tok" x="736" y="108" width="18" height="18" rx="4"/>
+<text class="t-lbl t-kvtext" x="830" y="112" data-step-only="0,1" data-anim="fade">memory from earlier chunks</text>
+<text class="t-lbl t-kvtext" x="830" y="112" data-step-only="2" data-anim="fade">memory from earlier chunks · stage k</text>
+</g>
+<path class="ln-kv" d="M670 152 V224" marker-end="url(#tffi-ak)"/>
+<g clip-path="url(#tffi-cl)"><image href="../flashforward/media/primer/bear-noise-2.jpg" x="34" y="214" width="420" height="242" preserveAspectRatio="xMinYMin slice"/></g>
+<rect class="thumb-frame" x="40" y="226" width="290" height="167" rx="14"/>
+<text class="t-lbl t-strong" x="185" y="436" text-anchor="middle">chunk i · stage k</text>
+<text class="t-lbl t-sub" x="185" y="470" text-anchor="middle">(noisy)</text>
+<path class="ln-slate" d="M340 310 H456" marker-end="url(#tffi-as)"/>
+<rect class="fwd" x="470" y="236" width="400" height="150" rx="22"/>
+<text class="t-fwd" x="670" y="296" text-anchor="middle">denoising forward</text>
+<rect class="layer" x="508" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="550" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="592" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="634" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="676" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="718" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="760" y="320" width="30" height="40" rx="6"/>
+<rect class="layer" x="802" y="320" width="30" height="40" rx="6"/>
+<g class="layer-kv" data-step="1" data-anim="fade">
+<rect class="layer-cap" x="508" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="550" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="592" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="634" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="676" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="718" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="760" y="344" width="30" height="16" rx="4"/>
+<rect class="layer-cap" x="802" y="344" width="30" height="16" rx="4"/>
+</g>
+<path class="ln-slate" d="M880 310 H996" marker-end="url(#tffi-as)"/>
+<g clip-path="url(#tffi-cr)"><image href="../flashforward/media/primer/bear-noise-3.jpg" x="1004" y="214" width="420" height="242" preserveAspectRatio="xMinYMin slice"/></g>
+<rect class="thumb-frame" x="1010" y="226" width="290" height="167" rx="14"/>
+<text class="t-lbl t-strong" x="1155" y="436" text-anchor="middle">chunk i · stage k−1</text>
+<text class="t-lbl t-sub" x="1155" y="470" text-anchor="middle">(less noisy)</text>
+<g class="kv-muted">
+<path class="ln-kv" d="M670 390 V466" marker-end="url(#tffi-ak)"/>
+<rect class="kv-out" x="470" y="474" width="400" height="76" rx="14"/><text class="t-kvcard" x="670" y="522" text-anchor="middle">in-flight KV of chunk i</text>
+</g>
+<g class="kv-lit" data-step="1" data-anim="fade">
+<path class="ln-kv" d="M670 390 V466" marker-end="url(#tffi-ak)"/>
+<g class="kv-glow"><rect class="kv-out" x="470" y="474" width="400" height="76" rx="14"/><text class="t-kvcard" x="670" y="522" text-anchor="middle">in-flight KV of chunk i</text></g>
+</g>
+<g class="cap-before" data-step="1" data-step-dim="2">
+<rect class="memonly" x="40" y="612" width="64" height="48" rx="6"/>
+<text class="t-cap" x="128" y="648"><tspan class="t-kvbold">Before:</tspan> thrown away, then recomputed by an extra forward</text>
+</g>
+<g class="next" data-step="2" data-anim="fade">
+<path class="ln-kv ln-kv-big draw" pathLength="100" d="M874 512 H1350 V584"/>
+<path class="draw-head" d="M1337 571 H1363 L1350 598 Z"/>
+<rect class="fwd-ghost" x="1150" y="600" width="400" height="136" rx="22"/>
+<text class="t-ghost-sm" x="1350" y="652" text-anchor="middle">denoising forward</text>
+<text class="t-ghost" x="1350" y="698" text-anchor="middle">chunk i+1 · same stage k</text>
+<rect class="tag-kv" x="930" y="488" width="330" height="48" rx="24"/>
+<text class="t-tag" x="1095" y="521" text-anchor="middle">in-flight history</text>
+<g class="cap-after">
+<circle class="ok-dot" cx="72" cy="720" r="24"/><path class="ok-tick" d="M60 720 l8 9 l16 -18"/>
+<text class="t-cap t-oursbold" x="128" y="731">Reuse it at the same stage: <tspan class="t-zero">0 extra forwards</tspan></text>
+</g>
+</g>
+</g>
+</svg>
+  </div>
+  <p class="src">FlashForward · preprint 2026</p>
+  <aside class="notes">
+    <p>The trick is two memories, one for each time scale. First, the short range. This is one denoising step inside the model. On the left, the current chunk, this bear, still noisy at stage k. The forward pass reads a memory of earlier chunks and gives back a cleaner chunk.</p>
+    <p><em>[click]</em> Here's the thing. To do that, every attention layer computes keys and values for this chunk: the <b>in-flight KV</b>. Self-Forcing and HiAR throw it away, then spend an extra forward pass to rebuild their memory.</p>
+    <p><em>[click]</em> We keep it. When the next chunk reaches the same stage k, it reads this memory, which is exactly as noisy as the chunk itself. That's our in-flight history, a short-range memory of how the scene moves. It costs <b>zero</b> extra forward passes, and it's ready the moment the stage finishes.</p>
+  </aside>
+</section>
+
+<!-- s-ff-drift · port of s-drift -------------------------------------------------------------- -->
+<section class="slide dark" id="s-ff-drift" data-title="History alone drifts" data-section="Time" data-time="40">
+  <div class="reqs"><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <h2 class="title">Short-range memory alone <span class="t-kv">drifts</span></h2>
+  </header>
+  <div class="bd">
+    <div class="drift">
+      <div class="drift-vid">
+        <figure class="vid">
+          <video data-autoplay muted playsinline loop preload="none"
+                 poster="media/flashforward/drift-history-only-poster.jpg" src="media/flashforward/drift-history-only.mp4"></video>
+        </figure>
+        <p class="vid-caption">In-flight history only, no anchors (4-step model)</p>
+        <div class="stamp-wrap"><div class="stamp">VBench: failed to score <span>(flicker)</span></div></div>
+      </div>
+      <div class="drift-side">
+        <div class="mirror-wrap" data-step="1" data-anim="fade"><svg class="mirror" viewBox="0 0 300 150" aria-hidden="true">
+  <path class="mi-stem" d="M150 10 V34"/>
+  <rect class="mi-body" x="20" y="34" width="260" height="100" rx="50"/>
+  <path class="mi-road" d="M112 128 L144 58 M188 128 L156 58"/>
+  <path class="mi-mid" d="M150 118 V104 M150 90 V80 M150 70 V64"/>
+  <g class="mi-noise"><circle cx="70" cy="70" r="4"/><circle cx="92" cy="96" r="3"/><circle cx="60" cy="104" r="3.5"/><circle cx="222" cy="66" r="3.5"/><circle cx="238" cy="100" r="4"/><circle cx="206" cy="112" r="3"/><circle cx="120" cy="50" r="3"/><circle cx="182" cy="46" r="3"/></g>
+</svg></div>
+        <div class="why" data-step="1"><svg class="why-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="ic-frame" x="4" y="4" width="56" height="56" rx="12"/><g class="ic-dots"><circle cx="18" cy="17" r="4"/><circle cx="36" cy="14" r="3"/><circle cx="48" cy="24" r="4.5"/><circle cx="24" cy="32" r="3"/><circle cx="41" cy="38" r="4"/><circle cx="15" cy="47" r="4.5"/><circle cx="31" cy="50" r="3.5"/><circle cx="50" cy="49" r="3"/></g></svg><p><b>Noisy</b><span>→ errors pile up</span></p></div>
+        <div class="why why-2" data-step="1"><svg class="why-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="ic-frame" x="4" y="4" width="56" height="56" rx="12"/><path class="ic-arrow" d="M48 32 H18 M30 19 L17 32 L30 45"/></svg><p><b>Only looks back</b><span>→ nothing holds the future</span></p></div>
+      </div>
+    </div>
+  </div>
+  <p class="src">FlashForward · preprint 2026 · ablation sample</p>
+  <aside class="notes">
+    <p>But in-flight history alone drifts. The rover's shape wobbles, and the sky and light shift from chunk to chunk. It flickers so much that VBench couldn't even score it.</p>
+    <p><em>[click]</em> Two reasons. The memory is noisy, so small errors accumulate. And it only looks back, never ahead, so nothing tells it where the scene is going. It's like driving with a blurry <b>rear-view mirror</b>. So the second memory has to be clean, and look ahead.</p>
+  </aside>
+</section>
+
+<!-- s-ff-anchors · s-anchors + s-two-scales merged: anchors = long-range state, history = short-range motion memory -->
+<section class="slide" id="s-ff-anchors" data-title="Anchors and history" data-section="Time" data-time="70">
+  <div class="reqs"><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <h2 class="title">Two memories: <span class="t-anchor">long-range anchors</span>, <span class="t-time">short-range history</span></h2>
+  </header>
+  <div class="bd">
+    <svg class="defs" width="0" height="0" aria-hidden="true"><defs><pattern id="tffa-noise" width="22" height="22" patternUnits="userSpaceOnUse"><rect class="nz-bg" width="22" height="22"/><circle class="nz-l" cx="7.1" cy="3.3" r="1.4"/><circle class="nz-l" cx="18.1" cy="2.1" r="1.4"/><circle class="nz-l" cx="11.2" cy="0.8" r="1.1"/><circle class="nz-d" cx="5.3" cy="12.1" r="0.9"/><circle class="nz-d" cx="2.7" cy="4.9" r="1.4"/><circle class="nz-d" cx="1.4" cy="12.9" r="0.9"/><circle class="nz-l" cx="1.0" cy="18.9" r="1.1"/><circle class="nz-d" cx="11.9" cy="12.6" r="1.4"/><circle class="nz-l" cx="4.0" cy="12.8" r="1.4"/><circle class="nz-l" cx="2.1" cy="15.7" r="1.4"/><circle class="nz-d" cx="4.5" cy="15.0" r="1.1"/><circle class="nz-l" cx="10.2" cy="20.3" r="1.1"/><circle class="nz-l" cx="17.5" cy="15.4" r="0.9"/><circle class="nz-d" cx="6.6" cy="10.9" r="1.1"/><circle class="nz-l" cx="6.3" cy="21.6" r="0.9"/><circle class="nz-l" cx="3.6" cy="7.5" r="1.1"/><circle class="nz-d" cx="21.2" cy="1.7" r="1.4"/><circle class="nz-l" cx="19.3" cy="6.9" r="1.4"/><circle class="nz-d" cx="10.9" cy="17.5" r="0.9"/><circle class="nz-l" cx="20.8" cy="10.4" r="1.4"/><circle class="nz-d" cx="16.1" cy="6.8" r="1.4"/><circle class="nz-d" cx="18.1" cy="6.3" r="1.1"/><circle class="nz-l" cx="7.6" cy="20.7" r="1.1"/><circle class="nz-l" cx="2.6" cy="1.3" r="1.1"/><circle class="nz-l" cx="5.4" cy="8.6" r="1.1"/><circle class="nz-d" cx="9.9" cy="12.1" r="0.9"/></pattern></defs></svg>
+<svg class="tl" viewBox="0 60 1700 300" role="img" aria-label="81 latents (20 s); clean anchors every 10 latents; the current chunk 6-8 reads anchors 0, 10, 20 and its in-flight history">
+<text class="t-row" x="225" y="222" text-anchor="end">81 latents</text>
+<text class="t-row" x="225" y="254" text-anchor="end">20 s</text>
+<g class="g-cells"><rect class="cell" x="250" y="200" width="14" height="56" rx="3"/><rect class="cell" x="267.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="285.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="303.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="321.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="339" y="200" width="14" height="56" rx="3"/><rect class="cell" x="356.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="374.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="392.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="410.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="428" y="200" width="14" height="56" rx="3"/><rect class="cell" x="445.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="463.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="481.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="499.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="517" y="200" width="14" height="56" rx="3"/><rect class="cell" x="534.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="552.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="570.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="588.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="606" y="200" width="14" height="56" rx="3"/><rect class="cell" x="623.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="641.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="659.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="677.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="695" y="200" width="14" height="56" rx="3"/><rect class="cell" x="712.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="730.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="748.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="766.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="784" y="200" width="14" height="56" rx="3"/><rect class="cell" x="801.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="819.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="837.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="855.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="873" y="200" width="14" height="56" rx="3"/><rect class="cell" x="890.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="908.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="926.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="944.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="962" y="200" width="14" height="56" rx="3"/><rect class="cell" x="979.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="997.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1015.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1033.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1051" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1068.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1086.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1104.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1122.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1140" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1157.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1175.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1193.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1211.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1229" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1246.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1264.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1282.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1300.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1318" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1335.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1353.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1371.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1389.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1407" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1424.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1442.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1460.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1478.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1496" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1513.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1531.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1549.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1567.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1585" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1602.8" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1620.6" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1638.4" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1656.2" y="200" width="14" height="56" rx="3"/><rect class="cell" x="1674" y="200" width="14" height="56" rx="3"/></g>
+<g class="g-now" data-step="1" data-anim="none">
+<rect class="c-hist" x="267.8" y="200" width="14" height="56" rx="3"/><rect class="c-hist" x="285.6" y="200" width="14" height="56" rx="3"/><rect class="c-hist" x="303.4" y="200" width="14" height="56" rx="3"/><rect class="c-hist" x="321.2" y="200" width="14" height="56" rx="3"/><rect class="c-hist" x="339" y="200" width="14" height="56" rx="3"/>
+<rect class="c-cur" x="356.8" y="200" width="14" height="56" rx="3"/><rect class="c-cur" x="374.6" y="200" width="14" height="56" rx="3"/><rect class="c-cur" x="392.4" y="200" width="14" height="56" rx="3"/>
+<rect class="ring" x="351.8" y="195" width="59.6" height="66" rx="7"/>
+</g>
+<g class="g-anch"><rect class="c-anch" x="249" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="427" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="605" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="783" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="961" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="1139" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="1317" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="1495" y="184" width="16" height="88" rx="3"/><rect class="c-anch" x="1673" y="184" width="16" height="88" rx="3"/></g>
+<text class="t-anch" x="969" y="336" text-anchor="middle">clean anchors, planned ahead</text>
+<path class="scale" d="M1503 286 V298 H1681 V286"/>
+<text class="t-scale" x="1592" y="336" text-anchor="middle">2.5 s</text>
+<g class="g-read" data-step="1" data-anim="none">
+<path class="arc" pathLength="1" d="M257 181 C257 70 363.8 70 363.8 178"/>
+<path class="arc" pathLength="1" d="M435 181 C435 118 399.4 118 399.4 178"/>
+<path class="arc" pathLength="1" d="M613 181 C613 34 381.6 34 381.6 178"/>
+<path class="arc-head" d="M356.8 176 H370.8 L363.8 193 Z"/>
+<path class="arc-head" d="M392.4 176 H406.4 L399.4 193 Z"/>
+<path class="arc-head" d="M374.6 176 H388.6 L381.6 193 Z"/>
+<text class="t-read" x="650" y="104"><tspan class="o">the current chunk</tspan> reads <tspan class="a">anchors behind and ahead</tspan></text>
+<path class="br-hist" d="M267.8 286 V298 H353 V286"/>
+<text class="t-hist" x="263.8" y="336">+ its in-flight history</text>
+</g>
+</svg>
+    <div class="cards">
+      <article class="card mem anch">
+        <div class="mem-hd">
+          <svg class="icon" viewBox="0 0 160 120" role="img" aria-label="Signpost">
+            <path class="ic-ln" d="M80 10 V112"/>
+            <path class="ic-ln" d="M84 18 H136 L150 33 L136 48 H84 Z"/>
+            <path class="ic-ln" d="M76 58 H24 L10 73 L24 88 H76 Z"/>
+            <path class="ic-ln thin" d="M98 33 H128 M28 73 H62"/>
+            <path class="ic-ln" d="M40 112 H120"/>
+            <circle class="ic-dot" cx="80" cy="8" r="5"/>
+          </svg>
+          <div class="mem-tt">
+            <h3>Clean anchors</h3>
+            <p class="mem-role">= long-range state</p>
+          </div>
+        </div>
+        <div class="mem-body">
+          <p class="mem-tags">sparse · clean<br>looks both ways</p>
+          <svg class="mini" viewBox="0 0 330 112" aria-hidden="true"><path class="mn-axis" d="M8 96 H318"/><path class="mn-arrow" d="M308 88 L320 96 L308 104"/><rect class="mn-anch" x="50" y="34" width="10" height="56" rx="2"/><rect class="mn-anch" x="150" y="34" width="10" height="56" rx="2"/><rect class="mn-anch" x="250" y="34" width="10" height="56" rx="2"/><rect class="mn-cur" x="86" y="44" width="8" height="46" rx="2"/><rect class="mn-cur" x="96" y="44" width="8" height="46" rx="2"/><rect class="mn-cur" x="106" y="44" width="8" height="46" rx="2"/><text class="mn-now" x="100" y="30">now</text></svg>
+        </div>
+      </article>
+      <article class="card mem hist" data-step="1" data-anim="left">
+        <div class="mem-hd">
+          <svg class="icon" viewBox="0 0 160 120" role="img" aria-label="Rear-view mirror">
+            <path class="ic-ln" d="M80 6 V22"/>
+            <path class="ic-ln" d="M66 6 H94"/>
+            <rect class="ic-ln" x="8" y="22" width="144" height="72" rx="30"/>
+            <rect class="ic-ln thin" x="20" y="33" width="120" height="50" rx="21"/>
+            <path class="ic-ln thin" d="M22 54 H138 M46 83 L76 54 M114 83 L84 54"/>
+            <path class="ic-ln thin dash" d="M80 80 V60"/>
+            <path class="ic-ln" d="M150 108 H34"/>
+            <path class="ic-ln" d="M48 98 L34 108 L48 118"/>
+          </svg>
+          <div class="mem-tt">
+            <h3>In-flight history</h3>
+            <p class="mem-role">= short-range motion</p>
+          </div>
+        </div>
+        <div class="mem-body">
+          <p class="mem-tags">dense · noisy · free<br>looks back only</p>
+          <svg class="mini" viewBox="0 0 330 112" aria-hidden="true"><path class="mn-axis" d="M8 96 H318"/><path class="mn-arrow" d="M308 88 L320 96 L308 104"/><rect class="mn-hist" x="101" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="111" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="121" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="131" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="141" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="151" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="161" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="171" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="181" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="191" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="201" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="211" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="221" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="231" y="44" width="8" height="46" rx="2"/><rect class="mn-hist" x="241" y="44" width="8" height="46" rx="2"/><rect class="mn-cur" x="251" y="44" width="8" height="46" rx="2"/><rect class="mn-cur" x="261" y="44" width="8" height="46" rx="2"/><rect class="mn-cur" x="271" y="44" width="8" height="46" rx="2"/><text class="mn-now" x="265.0" y="30">now</text></svg>
+        </div>
+      </article>
+    </div>
+  </div>
+  <p class="src">FlashForward · preprint 2026 · one backbone, two roles (planner and renderer)</p>
+  <aside class="notes">
+    <p>That's what anchors give us, on a second time scale. The planner first places a few clean <b>anchors</b>, one every ten latents. That's about two and a half seconds of video, planned before the frames in between. In world-model terms, the anchors are the long-range state: sparse and clean. It's the NVG idea again, now in time: commit the structure first, then fill in the rest.</p>
+    <p><em>[click]</em> Then the renderer draws the frames. Look at the highlighted chunk. It reads the anchor behind it and the anchors ahead of it, so it knows where the scene is going. It also reads its in-flight history: a noisy memory of the last few chunks that costs nothing extra. That gives it the short-range motion and the fine appearance. Each forward pass sees only a short sliding window. State from the anchors, motion from the history. That split is what carries us to long videos without drift.</p>
+  </aside>
+</section>
+
+<!-- s-ff-notyet · honest scorecard --------------------------------------------------------------- -->
+<section class="slide" id="s-ff-notyet" data-title="Not yet a world model" data-section="Time" data-time="35" data-steps="1">
+  <div class="reqs"><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <h2 class="title">Rollout, yes. A world model, not yet.</h2>
+  </header>
+  <div class="bd">
+    <div class="ny">
+      <div class="ny-yes">
+        <div class="ny-item yes">
+          <span class="ny-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25 l7 7 l15 -16"/></svg></span>
+          <div class="ny-txt"><b>Long rollout, no drift</b><span class="num ny-big">65 s</span><span>VBench-Long flat from 20 s</span></div>
+        </div>
+        <div class="ny-item yes">
+          <span class="ny-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 25 l7 7 l15 -16"/></svg></span>
+          <div class="ny-txt"><b>Faster than real time</b><span class="num ny-big">65 s in 14.53 s</span><span>denoising only · planner on a 5th GPU</span></div>
+        </div>
+      </div>
+      <div class="ny-no" data-step="1" data-anim="up">
+        <div class="ny-item no">
+          <svg class="ny-ic" viewBox="0 0 64 64" aria-hidden="true"><rect x="22" y="34" width="20" height="20" rx="4"/><path d="M32 34 V16"/><circle cx="32" cy="12" r="6"/><path d="M12 54 H52"/></svg>
+          <div class="ny-txt"><b>Actions</b></div>
+          <span class="ny-x"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 10 L22 22 M22 10 L10 22"/></svg></span>
+        </div>
+        <div class="ny-item no">
+          <svg class="ny-ic" viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="20" width="40" height="28" rx="6"/><path d="M46 30 L58 22 V46 L46 38"/><circle cx="26" cy="34" r="7"/></svg>
+          <div class="ny-txt"><b>Camera control</b></div>
+          <span class="ny-x"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 10 L22 22 M22 10 L10 22"/></svg></span>
+        </div>
+        <div class="ny-item no">
+          <svg class="ny-ic" viewBox="0 0 64 64" aria-hidden="true"><path d="M4 32 C14 16 50 16 60 32 C50 48 14 48 4 32 Z"/><circle cx="32" cy="32" r="9"/></svg>
+          <div class="ny-txt"><b>Anchors from observation</b><span>today: from the prompt</span></div>
+          <span class="ny-x"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 10 L22 22 M22 10 L10 22"/></svg></span>
+        </div>
+        <div class="ny-item no">
+          <svg class="ny-ic" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="24"/><path d="M32 18 V32 L42 38"/></svg>
+          <div class="ny-txt"><b>Off-screen test</b><span>the clock</span></div>
+          <span class="ny-x"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 10 L22 22 M22 10 L10 22"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <p class="ny-next" data-step="1" data-anim="fade">Next: put an <b>actor</b> in the loop <span class="ny-arr">→</span></p>
+  </div>
+  <p class="src">FlashForward · preprint 2026 · timings: 1.3B · 480p</p>
+  <aside class="notes">
+    <p>So FlashForward gives a world model its rollout engine. It runs long, without drift. And it runs faster than <b>real time</b>.</p>
+    <p><em>[click]</em> FlashForward is text-to-video, so a prompt drives it. The pieces on the right come next: actions, the camera, and a world that keeps going off-screen. They grow the engine into a full world model. Let's put an <b>actor</b> in the loop.</p>
+  </aside>
+</section>
+
+<!-- ===== 05a-act.html ===== -->
+<!-- 05a · Action: put an actor in the loop. Dynamics from video (NAVA-WAM), planning in pixels (ProWAM),
+     a 3D world model inside the actor's training (DP4), choosing where to look (ActiveVLA). -->
+
+<section class="slide" id="s-nava" data-title="NAVA-WAM" data-section="Action" data-time="85">
+  <div class="reqs"><span class="req act">Act</span><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <p class="kicker">Act · dynamics from video</p>
+    <h2 class="title">Action priors can be learned by watching</h2>
+  </header>
+  <div class="bd">
+    <div class="nv-stage">
+
+      <!-- step 0: the mechanism -->
+      <div class="nv-mech" data-step-hide="1">
+        <svg viewBox="0 0 1700 680" aria-label="Frozen Video-DiT and trainable Action-DiT; the only loss is future video">
+          <defs>
+            <marker id="nv-head" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+              <path d="M1 1 L11 6 L1 11 Z" class="nv-head-act" />
+            </marker>
+            <marker id="nv-head-m" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+              <path d="M1 1 L11 6 L1 11 Z" class="nv-head-muted" />
+            </marker>
+          </defs>
+
+          <!-- future video + the only loss -->
+          <text class="nv-k" x="120" y="28">future video</text>
+          <rect class="nv-fut" x="120" y="44" width="120" height="84" rx="10" />
+          <rect class="nv-fut" x="256" y="44" width="120" height="84" rx="10" />
+          <rect class="nv-fut" x="392" y="44" width="120" height="84" rx="10" />
+          <path class="nv-link" d="M524 86 H566" marker-end="url(#nv-head-m)" />
+          <rect class="nv-loss" x="580" y="46" width="300" height="80" rx="40" />
+          <text class="nv-loss-t" x="730" y="98">the only loss</text>
+
+          <!-- gradient: past the frozen block, into the Action-DiT -->
+          <path class="nv-grad-bg" d="M880 86 H1210 V238" />
+          <path class="nv-grad" d="M880 86 H1210 V238" marker-end="url(#nv-head)" />
+          <text class="nv-grad-t" x="1232" y="170">gradient</text>
+
+          <!-- the two halves of one transformer -->
+          <rect class="nv-video" x="120" y="250" width="780" height="200" rx="22" />
+          <g class="nv-snow" transform="translate(186 316)">
+            <path d="M0 -26 V26 M-22.5 -13 L22.5 13 M-22.5 13 L22.5 -13" />
+            <path d="M-7 -19 L0 -12 L7 -19 M-7 19 L0 12 L7 19 M-23 -3 L-14 -8 L-20 -16 M23 3 L14 8 L20 16 M-20 16 L-14 8 L-23 3 M20 -16 L14 -8 L23 -3" />
+          </g>
+          <text class="nv-blk-t" x="510" y="350">Video-DiT</text>
+          <text class="nv-blk-s" x="510" y="398">frozen</text>
+
+          <path class="nv-join" d="M914 350 H966" marker-start="url(#nv-head-m)" marker-end="url(#nv-head-m)" />
+
+          <rect class="nv-action" x="980" y="250" width="460" height="200" rx="22" />
+          <path class="nv-flame" transform="translate(1030 316)" d="M2 -30 C14 -16 24 -6 22 10 C20 24 10 30 0 30 C-12 30 -22 22 -22 8 C-22 -4 -14 -10 -10 -20 C-6 -12 -4 -8 0 -6 C4 -14 6 -22 2 -30 Z" />
+          <text class="nv-blk-t act" x="1236" y="350">Action-DiT</text>
+          <text class="nv-blk-s act" x="1236" y="398">trainable</text>
+
+          <!-- inputs -->
+          <text class="nv-k" x="120" y="572">video,</text>
+          <text class="nv-k" x="120" y="608">no actions</text>
+          <image href="media/05a/nava-pretrain-now.jpg" x="300" y="518" width="174" height="132" />
+          <rect class="nv-frame" x="300" y="518" width="174" height="132" rx="4" />
+          <image href="media/05a/nava-pretrain-next.jpg" x="520" y="518" width="174" height="132" />
+          <rect class="nv-frame" x="520" y="518" width="174" height="132" rx="4" />
+          <text class="nv-k c" x="387" y="676">now</text>
+          <text class="nv-k c" x="607" y="676">next, noised</text>
+          <path class="nv-link" d="M387 512 V462" marker-end="url(#nv-head-m)" />
+          <path class="nv-link" d="M607 512 V462" marker-end="url(#nv-head-m)" />
+
+          <!-- the caption: language as a description only -->
+          <rect class="nv-cap" x="738" y="546" width="160" height="80" rx="14" />
+          <text class="nv-cap-t" x="818" y="596">caption</text>
+          <text class="nv-k c nv-cap-s" x="818" y="676">frozen text encoder</text>
+          <path class="nv-link" d="M818 540 V462" marker-end="url(#nv-head-m)" />
+
+          <g class="nv-noise">
+            <rect x="1072" y="540" width="84" height="84" rx="8" />
+            <rect x="1168" y="540" width="84" height="84" rx="8" />
+            <rect x="1264" y="540" width="84" height="84" rx="8" />
+          </g>
+          <text class="nv-k c" x="1210" y="676">noise</text>
+          <path class="nv-link" d="M1210 534 V462" marker-end="url(#nv-head-m)" />
+
+          <!-- no action labels: an empty input slot -->
+          <g class="nv-nolabel">
+            <rect x="1484" y="518" width="174" height="132" rx="10" />
+            <circle cx="1571" cy="584" r="34" />
+            <path d="M1547 608 L1595 560" />
+          </g>
+          <text class="nv-k c nv-nolabel-t" x="1571" y="676">no action labels</text>
+        </svg>
+      </div>
+
+      <!-- step 1: motion transfer, all three rows at once -->
+      <figure class="nv-transfer" data-step-only="1" data-anim="fade">
+        <div class="nv-tf">
+          <img src="media/navawam/motion-transfer.jpg" alt="Motion transfer: Sim, Real and Sim-to-real rows; the borrowed motion is applied to a new scene">
+          <div class="nv-colbox transfer"><span>borrowed motion</span></div>
+          <div class="nv-colbox real"><span>the scene&rsquo;s own motion</span></div>
+        </div>
+      </figure>
+
+      <!-- step 2: real robot, T1 -->
+      <div class="nv-robot" data-step="2" data-anim="fade">
+        <p class="prompt nv-prompt">move the cube to the left side of the bowl</p>
+        <div class="nv-vids">
+          <figure class="nv-clip ours">
+            <div class="vid">
+              <video data-autoplay data-play-step="2" muted playsinline preload="none"
+                     poster="media/navawam/t1-ours-poster.jpg" src="media/navawam/t1-ours.mp4"></video>
+              <figcaption class="vid-label">NAVA-WAM</figcaption>
+            </div>
+            <p class="nv-score num">4/5</p>
+          </figure>
+          <figure class="nv-clip">
+            <div class="vid">
+              <video data-autoplay data-play-step="2" muted playsinline preload="none"
+                     poster="media/navawam/t1-dreamzero-poster.jpg" src="media/navawam/t1-dreamzero.mp4"></video>
+              <figcaption class="vid-label">DreamZero</figcaption>
+            </div>
+            <p class="nv-score num">0/5</p>
+          </figure>
+          <figure class="nv-clip">
+            <div class="vid">
+              <video data-autoplay data-play-step="2" muted playsinline preload="none"
+                     poster="media/navawam/t1-pi05-poster.jpg" src="media/navawam/t1-pi05.mp4"></video>
+              <figcaption class="vid-label">&pi;0.5</figcaption>
+            </div>
+            <p class="nv-score num">0/5</p>
+          </figure>
+        </div>
+        <p class="nv-all num">task 1 of 3 · all 3 tasks &times; 5 trials: 14/15 · 10/15 · 8/15</p>
+        <p class="nv-chipline"><span class="chip act">RoboTwin randomized: +17.9 over MV-WAM</span></p>
+      </div>
+
+    </div>
+  </div>
+  <p class="src">NAVA-WAM · preprint 2026 · co-author</p>
+  <aside class="notes">
+    <p>An actor first needs a sense of how things move. Action-labelled robot data is scarce, but video is not. NAVA-WAM pairs a frozen video diffusion transformer with a smaller, trainable action transformer. The training signal is future video, with no <b>action labels</b> at all, just a caption for each clip. With the video half frozen, the action half must explain what changes next. So it learns how things move, just by watching.</p>
+    <p><em>[click]</em> Here's a test of what those action features learned. On the left is a source clip: the arm moves along the orange arrow. We take its action features and inject them into a completely different scene. In the orange box, the new scene follows the borrowed motion. The blue box shows what that scene actually did: a different motion. So the features carry the motion itself, not the scene. It works in simulation, on real video, and even from simulation to a real robot.</p>
+    <p><em>[click]</em> Then we post-train on labelled robot demos. The task is named in words: put the cube to the left of the bowl. NAVA-WAM gets it right four times out of five. DreamZero and pi zero point five put the cube inside the bowl. Zero out of five.</p>
+    <p>Across all three tasks, it's 14 out of 15.</p>
+    <p>On randomized RoboTwin, it beats MV-WAM by 17.9 points. And the action prior behind all of this came from <b>video</b>.</p>
+  </aside>
+</section>
+
+<section class="slide dark" id="s-prowam" data-title="ProWAM" data-section="Action" data-time="110">
+  <div class="reqs"><span class="req act">Act</span><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <p class="kicker">Act · plan in pixels</p>
+    <h2 class="title">Plan by imagining, not by talking</h2>
+  </header>
+  <div class="bd">
+    <div class="pw-stage">
+
+      <!-- step 0: the teaser is itself a build -->
+      <figure class="pw-teaser" data-step-hide="1">
+        <video data-autoplay muted playsinline preload="none"
+               poster="media/05a/prowam-teaser-end.jpg" src="media/prowam/teaser.mp4"></video>
+      </figure>
+
+      <!-- steps 1-2: stage-1 imagination (video model alone) in scenes it never saw -->
+      <div class="pw-ood" data-step="1" data-anim="fade">
+        <figure class="pw-wall">
+          <video data-autoplay data-play-step="1" loop muted playsinline preload="none"
+                 poster="media/prowam/stage1-ood-wall-poster.jpg" src="media/prowam/stage1-ood-wall.mp4"></video>
+          <figcaption class="pw-key"><span><i class="real"></i>real input</span><span><i class="imag"></i>imagined</span></figcaption>
+        </figure>
+
+        <div class="pw-side">
+          <ul class="pw-facts" data-step-only="1" data-anim="fade">
+            <li>video model alone</li>
+            <li>no action labels</li>
+            <li>scenes never seen</li>
+          </ul>
+
+          <div class="pw-chart" data-step="2" data-anim="fade">
+            <p class="pw-chart-k">Success under perturbation, %</p>
+            <div class="pw-legend"><span><i class="wo"></i>no stage-1 video pre-training</span><span><i class="w"></i>with</span></div>
+            <svg class="pw-dumb" viewBox="0 0 680 330" aria-label="LIBERO-Plus 80.3 to 85.8; RoboTwin randomized 67.4 to 75.7">
+              <!-- x = 40 + (v - 60) * 20 -->
+              <g class="pw-grid">
+                <path d="M40 40 V270 M240 40 V270 M440 40 V270 M640 40 V270" />
+                <text x="40" y="306">60</text><text x="240" y="306">70</text><text x="440" y="306">80</text><text x="640" y="306">90</text>
+              </g>
+              <text class="pw-row-k" x="40" y="62">LIBERO-Plus</text>
+              <path class="pw-bar" d="M446 112 H556" />
+              <circle class="pw-wo" cx="446" cy="112" r="15" />
+              <circle class="pw-w" cx="556" cy="112" r="17" />
+              <text class="pw-v wo" x="430" y="120">80.3</text>
+              <text class="pw-v w" x="582" y="122">85.8</text>
+
+              <text class="pw-row-k" x="40" y="190">RoboTwin randomized</text>
+              <path class="pw-bar" d="M188 240 H354" />
+              <circle class="pw-wo" cx="188" cy="240" r="15" />
+              <circle class="pw-w" cx="354" cy="240" r="17" />
+              <text class="pw-v wo" x="172" y="248">67.4</text>
+              <text class="pw-v w" x="380" y="250">75.7</text>
+            </svg>
+            <p class="pw-foot">randomized scenes: no action demos (seen only as action-free video)</p>
+            <div class="pw-real">
+              <p class="pw-chart-k">Real robot, zero-shot · 4 tasks &times; 5 trials</p>
+              <div class="pw-hb ours"><span class="pw-n">ProWAM</span><span class="pw-track"><i style="--v:70"></i></span><b class="num">70%</b></div>
+              <div class="pw-hb"><span class="pw-n">DreamZero</span><span class="pw-track"><i style="--v:55"></i></span><b class="num">55%</b></div>
+              <div class="pw-hb"><span class="pw-n">&pi;0.5</span><span class="pw-track"><i style="--v:50"></i></span><b class="num">50%</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <p class="src">ProWAM · preprint 2026 · co-author</p>
+  <aside class="notes">
+    <p>NAVA learns dynamics by watching. ProWAM asks the next question: can a robot plan by <b>imagining</b> frames of its own progress? It has a video expert and an action expert. Follow the blue timeline. Before it acts, the video expert imagines a few sub-goal frames, placed by how far along the task they are. Then the action expert, in red, drives the real arm toward them. Each time it replans, the plan re-anchors on the newest camera frame, so it stays grounded in what the robot sees.</p>
+    <p><em>[click]</em> Where does that imagination come from? In stage one, we train the video expert alone, on action-free robot and egocentric video with instruction captions. No action labels, and it has never seen these benchmark scenes. The white frame is the real input. The blue frames are imagined. Look at the bottom row: the roller, the shoe and the blocks all move in sensible ways. That's imagination, learned from plain video.</p>
+    <p><em>[click]</em> And it pays off. Under perturbation on LIBERO-Plus, stage one lifts success from 80.3 to 85.8.</p>
+    <p>On randomized RoboTwin, the model saw plain video of those scenes, but no action demos from them. There, stage one lifts success from 67.4 to 75.7.</p>
+    <p>And on a real Franka arm, zero-shot in new scenes, ProWAM succeeds 70 percent of the time, ahead of both DreamZero and pi zero point five. Language says what to do. Vision shows how the <b>world</b> will go.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-dp4" data-title="DP4" data-section="Action" data-time="75">
+  <div class="reqs"><span class="req act">Act</span><span class="req evolve">Evolve</span></div>
+  <header class="hd">
+    <p class="kicker">Act · a 3D world inside the actor</p>
+    <h2 class="title">A 3D world model shapes the actor</h2>
+  </header>
+  <div class="bd">
+    <div class="dp-stage">
+
+      <!-- step 0: the mechanism -->
+      <div class="dp-mech" data-step-hide="1">
+        <div class="dp-diagram">
+          <span class="dp-a">a<sub>t</sub></span>
+          <img src="media/dp4/gaussian-world-model-diagram.jpg" alt="Gaussian world model at t, a deformable mapper with the action, the future Gaussian world model at t+1, each rendered to RGB-D">
+        </div>
+        <p class="dp-eq">&theta;<sub>t</sub> + <span class="t-act">a<sub>t</sub></span> &rarr; &theta;<sub>t+1</sub></p>
+        <div class="dp-chips">
+          <span class="chip act">renders vs. the next RGB-D frame</span>
+          <span class="chip dp-none">training only</span>
+        </div>
+      </div>
+
+      <!-- step 1: the world model rolls forward -->
+      <div class="dp-roll" data-step-only="1" data-anim="fade">
+        <div class="dp-brace"><span>predicted by the world model</span></div>
+        <img src="media/dp4/world-model-future-strip.jpg" alt="Ground truth at T, then blurry predictions at T, T+3, T+6, T+9">
+        <div class="dp-ticks num">
+          <span class="gt">ground truth · T</span><span>T</span><span>T+3</span><span>T+6</span><span>T+9</span>
+        </div>
+        <p class="dp-honest">blurry and short-horizon</p>
+      </div>
+
+      <!-- step 2: real robot + gains -->
+      <div class="dp-real" data-step="2" data-anim="fade">
+        <div class="dp-vids">
+          <div class="vid">
+            <video data-autoplay data-play-step="2" loop muted playsinline preload="none"
+                   poster="media/dp4/rollout-real-bottle-poster.jpg" src="media/dp4/rollout-real-bottle.mp4"></video>
+            <span class="vid-label">grasp bottle</span>
+          </div>
+          <div class="vid">
+            <video data-autoplay data-play-step="2" loop muted playsinline preload="none"
+                   poster="media/dp4/rollout-real-cups-poster.jpg" src="media/dp4/rollout-real-cups.mp4"></video>
+            <span class="vid-label">stack cups</span>
+          </div>
+          <div class="vid">
+            <video data-autoplay data-play-step="2" loop muted playsinline preload="none"
+                   poster="media/dp4/rollout-real-pour-poster.jpg" src="media/dp4/rollout-real-pour.mp4"></video>
+            <span class="vid-label">pour</span>
+          </div>
+        </div>
+        <p class="dp-prov">policy rollouts · cups clip edited in source (jump cut)</p>
+        <div class="dp-gains">
+          <div class="dp-grp">
+            <p class="dp-gh">simulation</p>
+            <div class="dp-row">
+              <div class="stat"><span class="stat-num t-act num">+16.4</span><span class="stat-label">Adroit</span></div>
+              <div class="stat"><span class="stat-num t-act num">+14.0</span><span class="stat-label">DexArt</span></div>
+              <div class="stat"><span class="stat-num t-act num">+6.45</span><span class="stat-label">RLBench</span></div>
+            </div>
+          </div>
+          <div class="dp-grp real">
+            <p class="dp-gh">real robot</p>
+            <div class="dp-row">
+              <div class="stat"><span class="stat-num t-act num">+8.6</span><span class="stat-label"><span class="num">54.6% overall</span></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="dp-gk">success-rate points over the strongest baseline in each</p>
+      </div>
+
+    </div>
+  </div>
+  <p class="src">DP4 · ICCV 2025 · co-author</p>
+  <aside class="notes">
+    <p>DP4 takes the actor into 3D. From a single RGB-D frame, we build a 3D Gaussian scene. That's the state, theta at time t. A small deformable network takes that state plus the robot's action, and predicts the next state. We render each one to colour and depth, and compare with the real frame. Pixels and geometry are the world model's whole supervision.</p>
+    <p><em>[click]</em> Here's that world model rolling forward. Ground truth on the left, then the model's predictions, out to T plus 9. See how the arm sweeps down toward the bottom drawer. The motion comes through, step by step.</p>
+    <p><em>[click]</em> Here's the payoff. The world model helps during training. At test time, the policy runs alone, at no extra cost. Teaching the policy's features to predict the next 3D state lifts success by 16.4 points on Adroit, and 14 on DexArt.</p>
+    <p>On RLBench, it's plus 6.45. And on a real Kinova arm, grasping, stacking and pouring, it's plus 8.6 over the strongest baseline. A world model inside training makes a <b>better</b> actor.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-activevla" data-title="ActiveVLA" data-section="Action" data-time="75">
+  <div class="reqs"><span class="req consistent">Consistent</span><span class="req act">Act</span></div>
+  <header class="hd">
+    <p class="kicker">Act · choose the view</p>
+    <h2 class="title">Choose where to look</h2>
+  </header>
+  <div class="bd">
+    <div class="av-stage">
+
+      <!-- step 0: turn your head, then lean in -->
+      <div class="av-trip" data-step-hide="1">
+        <figure class="av-t occ"><img src="media/activevla/teaser-occluded-view.jpg" alt="Current view: the apple is hidden behind a toy sheep"></figure>
+        <div class="av-arrow"><svg viewBox="0 0 120 40" aria-hidden="true"><path d="M6 20 H104" /><path d="M90 6 L110 20 L90 34" /></svg><span>move eye</span></div>
+        <figure class="av-t"><img src="media/activevla/teaser-better-view.jpg" alt="A better view from the other side: the apple is visible"></figure>
+        <div class="av-arrow"><svg viewBox="0 0 120 40" aria-hidden="true"><path d="M6 20 H104" /><path d="M90 6 L110 20 L90 34" /></svg><span>zoom</span></div>
+        <figure class="av-t"><img src="media/activevla/teaser-zoom-view.jpg" alt="Zoomed view of the apple"></figure>
+        <p class="av-illu">illustration from the paper&rsquo;s concept figure</p>
+      </div>
+
+      <!-- step 1: candidate virtual cameras, keep the top 3 -->
+      <div class="av-sphere" data-step-only="1" data-anim="fade">
+        <div class="av-sph-labels"><span>candidate virtual cameras</span><span class="act">top 3: visible, close, diverse</span></div>
+        <div class="av-sph">
+          <img class="av-sph-l" src="media/activevla/active-view-sphere.jpg" alt="Candidate virtual cameras on a sphere around the point cloud">
+          <img class="av-sph-r" src="media/activevla/active-view-sphere.jpg" alt="The three selected cameras">
+        </div>
+        <p class="av-illu c">re-renders of the observed point cloud: no camera moves</p>
+      </div>
+
+      <!-- step 2: real robot + benchmarks -->
+      <div class="av-real" data-step="2" data-anim="fade">
+        <div class="av-vids">
+          <figure class="av-clip">
+            <div class="vid">
+              <video data-autoplay data-play-step="2" loop muted playsinline preload="none"
+                     poster="media/activevla/real-towel-drawer-poster.jpg" src="media/activevla/real-towel-drawer.mp4"></video>
+              <span class="vid-label">towel from drawer</span>
+            </div>
+            <p class="av-score num"><b>92%</b> <span>vs 77% RVT-2</span></p>
+          </figure>
+          <figure class="av-clip">
+            <div class="vid">
+              <video data-autoplay data-play-step="2" loop muted playsinline preload="none"
+                     poster="media/activevla/real-block-clutter-poster.jpg" src="media/activevla/real-block-clutter.mp4"></video>
+              <span class="vid-label">block in clutter</span>
+            </div>
+            <p class="av-score num"><b>95%</b> <span>vs 63% RVT-2</span></p>
+          </figure>
+        </div>
+        <div class="av-chips">
+          <span class="chip act num">RLBench avg (sim) 91.8% <span class="av-base">· base 88.2</span></span>
+          <span class="chip act num">COLOSSEUM avg 65.9% <span class="av-base">· base 64.0</span></span>
+          <span class="av-speed">real clips play at 2&times;</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <p class="src">ActiveVLA · CVPR 2026 · co-author</p>
+  <aside class="notes">
+    <p>ActiveVLA adds the observer's side: choosing <b>where to look</b>. Say the apple is hidden behind this toy sheep. You'd move your head, then lean in.</p>
+    <p><em>[click]</em> The robot does the same inside a 3D point cloud fused from RGB-D cameras. Around the region that matters, we place candidate virtual cameras on a sphere. We score each one for visibility, distance and diversity, keep the top three, and zoom in. The robot re-renders the scene it already holds, from the views that help most.</p>
+    <p><em>[click]</em> Here it is on a real arm, under heavy occlusion. Pulling a towel out of a drawer: 92 percent, against 77 for RVT-2.</p>
+    <p>Moving a block out of clutter: 95 against 63. The clips play at double speed. In simulation, it also beats BridgeVLA, the model it builds on, on both RLBench and COLOSSEUM.</p>
+    <p>So the robot holds the scene in 3D and picks the views it needs. And notice what drives this actor: a vision-language model. That raises the last question: where exactly does language belong?</p>
+  </aside>
+</section>
+
+<!-- ===== 05b-lang.html ===== -->
+<!-- 05b · Language: language asks about, or reads out, a visual world. It is not the world state. -->
+
+<section class="slide" id="s-reasongrounder" data-title="ReasonGrounder" data-section="Language" data-time="85">
+  <div class="reqs"><span class="req persist">Persist</span><span class="req interface">Interface</span></div>
+  <header class="hd">
+    <p class="kicker">Language asks</p>
+    <h2 class="title">Words ask; the 3D state holds the answer</h2>
+  </header>
+  <div class="bd">
+    <div class="rg-grid">
+      <!-- the language side: small on purpose -->
+      <div class="rg-ask">
+        <div class="rg-bubble">
+          <span class="rg-who">query <span class="rg-para">(paraphrased)</span></span>
+          <p>&ldquo;Find the red, round, sweet fruit behind the toy sheep.&rdquo;</p>
+        </div>
+        <div class="rg-lvlm">
+          <b>LVLM</b>
+          <span>picks a reference view<br>+ the object</span>
+        </div>
+      </div>
+
+      <svg class="rg-link" viewBox="0 0 90 60" aria-hidden="true">
+        <path d="M4 30 H74" /><path d="M62 16 L80 30 L62 44" />
+      </svg>
+
+      <!-- the world side: one stage, two states -->
+      <div class="rg-stage">
+        <div class="rg-world" data-step-hide="1">
+          <div class="rg-field">
+            <svg class="rg-splat" viewBox="0 0 680 680" aria-hidden="true"></svg>
+            <div class="rg-field-label">
+              <span class="rg-field-t">3D Gaussian field <small>(schematic)</small></span>
+              <span class="rg-field-k">CLIP + SAM features</span>
+            </div>
+          </div>
+          <svg class="rg-out" viewBox="0 0 80 60" aria-hidden="true">
+            <path d="M4 30 H64" /><path d="M52 16 L70 30 L52 44" />
+          </svg>
+          <figure class="rg-answer">
+            <img src="media/reasongrounder/apple-hidden-xray.jpg" alt="A new view: the hidden apple rendered behind the sheep">
+            <figcaption>any new view: the hidden object, rendered<span class="rg-by">ghosting by us</span></figcaption>
+          </figure>
+        </div>
+
+        <figure class="rg-xray" data-step="1" data-anim="fade">
+          <div class="vid rg-vid">
+            <video data-autoplay data-play-step="1" muted playsinline preload="none"
+                   poster="media/reasongrounder/xray-reveal-poster.jpg"
+                   src="media/reasongrounder/xray-reveal.mp4"></video>
+          </div>
+          <figcaption class="rg-cap">paper renders, ghosting by us</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <p class="src">ReasonGrounder · CVPR 2025 · co-author</p>
+  <aside class="notes">
+    <p>ReasonGrounder gives a clean answer. The user asks in words, describing the object without naming it. A vision-language model, LLaVA 1.5, reads that query and a top-down render. It makes two choices: which reference view to use, and which object is meant. That's its whole job.</p>
+    <p>The world itself is a 3D Gaussian field. Its features come from CLIP and SAM, so you can query it with words. But the object's shape, colour and place live in this <b>visual</b> 3D state, and we can render the answer from any new camera. On the right, that's the apple behind the sheep, drawn back in.</p>
+    <p><em>[click]</em> Let's look closer. From this camera, the apple is partly behind the sheep. Now it's fully hidden. It's still in the state, so we render the complete object back. Same for the camera hidden behind the figurine.</p>
+    <p>Remember the orange toy? Same lesson: hidden is <b>not gone</b>. The apple stays in the visual state, ready to be seen from any angle, and language is how we ask for it.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-lexvla" data-title="LexVLA" data-section="Language" data-time="60">
+  <div class="reqs"><span class="req interface">Interface</span></div>
+  <header class="hd">
+    <p class="kicker">Language reads out</p>
+    <h2 class="title">Words are a read-out of vision</h2>
+  </header>
+  <div class="bd">
+    <div class="lx-grid">
+      <!-- left: the image, three states in one cell -->
+      <div class="lx-img">
+        <img src="media/lexvla/knight.jpg" alt="Knight seated on logs beside a horse" data-step-only="0" data-anim="fade">
+        <img src="media/lexvla/knight-box.jpg" alt="Patches on the knight selected" data-step-only="1" data-anim="fade">
+        <img src="media/lexvla/horse-pred.jpg" alt="Patches activated by the word horse" data-step="2" data-anim="fade">
+      </div>
+
+      <!-- middle: the arrow flips direction at step 2 -->
+      <div class="lx-mid">
+        <div class="lx-dir" data-step-only="0" data-anim="fade">
+          <svg viewBox="0 0 200 60" aria-hidden="true"><path d="M8 30 H180" /><path d="M164 14 L186 30 L164 46" /></svg>
+          <span>whole image</span>
+        </div>
+        <div class="lx-dir" data-step-only="1" data-anim="fade">
+          <svg viewBox="0 0 200 60" aria-hidden="true"><path d="M8 30 H180" /><path d="M164 14 L186 30 L164 46" /></svg>
+          <span>selected patches</span>
+        </div>
+        <div class="lx-dir lx-back" data-step="2" data-anim="fade">
+          <svg viewBox="0 0 200 60" aria-hidden="true"><path d="M20 30 H192" /><path d="M36 14 L14 30 L36 46" /></svg>
+          <span>word &rarr; patches</span>
+        </div>
+      </div>
+
+      <!-- right: words, three states in one cell -->
+      <div class="lx-words">
+        <div class="lx-cloud" data-step-only="0" data-anim="fade">
+          <div class="lx-crop"><img src="media/lexvla/knight-wc-global.webp" alt="Global word cloud: horse, medieval, history, sword"></div>
+        </div>
+        <div class="lx-cloud lx-local" data-step-only="1" data-anim="fade">
+          <div class="lx-crop"><img src="media/lexvla/knight-wc-local.webp" alt="Local word cloud: seat, hair, soldier, sword, silver"></div>
+        </div>
+        <p class="lx-cap" data-step-only="0-1" data-anim="none">raw top tokens · the vocabulary is noisy</p>
+        <div class="lx-query" data-step="2" data-anim="fade">
+          <span class="lx-token">horse</span>
+          <div class="lx-bars">
+            <p class="lx-bars-k">word &rarr; patch grounding · PatchDis mIoU · same framework</p>
+            <div class="lx-bar lx-ours"><span class="lx-name">DINOv2 backbone (pre-trained without language)</span><span class="lx-track"><i style="--v:36.3"></i><b class="num">36.3</b></span></div>
+            <div class="lx-bar"><span class="lx-name">CLIP&rsquo;s visual encoder</span><span class="lx-track"><i style="--v:13.9"></i><b class="num">13.9</b></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="src">LexVLA · NeurIPS 2024 · corresponding author</p>
+  <aside class="notes">
+    <p>Language can also read vision out in words. In LexVLA, the visual side is a frozen DINOv2. It's self-supervised and never saw language. A light adapter maps its features onto sparse vocabulary words, aligned with Llama 2. Read out the whole image, and you get horse, medieval, history, sword.</p>
+    <p><em>[click]</em> Select the patches on the knight, and the words change: seat, hair, soldier, silver. The words follow where the <b>vision</b> is.</p>
+    <p><em>[click]</em> It runs the other way, too. Ask for horse, and the horse patches light up. On PatchDis, a word-to-patch test, DINOv2 scores 36.3. Swap in CLIP's visual encoder, in the same framework, and it's 13.9. So in this test, the backbone that never saw a word grounds words better than the one trained with them.</p>
+    <p>Language attaches to vision as a thin read-out. And that completes the map.</p>
+  </aside>
+</section>
+
+<!-- ===== 06-summary.html ===== -->
+<!-- 06 · Summary: the s-map grid again (same authorship marks and legend). Each requirement carries a neutral
+     "shown in isolation" mark (grey half-filled circle), one open (dashed) cell, then the closing line (build 1). -->
+<section class="slide" id="s-summary" data-title="Towards vision-centric world models" data-section="Summary" data-time="70">
+  <header class="hd">
+    <h2 class="title">Towards vision-centric world models</h2>
+  </header>
+  <div class="bd">
+    <div class="wm-stage" data-step-dim="1">
+    <div class="wm-grid">
+      <div class="wm-col persist">
+        <i class="wm-iso" aria-hidden="true"></i>
+        <div class="wm-head"><span class="req persist">Persist</span><span class="wm-part">see the unseen</span></div>
+        <ul class="wm-papers">
+          <li class="wm-lead"><img src="media/map/asuka.jpg" alt="ASUKA" width="96" height="96"><span>ASUKA</span></li>
+          <li><img src="media/map/c2fseg.jpg" alt="C2F-Seg" width="96" height="96"><span>C2F-Seg</span></li>
+          <li><img src="media/map/streetunveiler.jpg" alt="StreetUnveiler" width="96" height="96"><span>StreetUnveiler</span></li>
+        </ul>
+      </div>
+      <div class="wm-col consistent">
+        <i class="wm-iso" aria-hidden="true"></i>
+        <div class="wm-head"><span class="req consistent">Consistent</span><span class="wm-part">across views &amp; edits</span></div>
+        <ul class="wm-papers">
+          <li class="wm-lead"><img src="media/map/seele.jpg" alt="SEELE" width="96" height="96"><span>SEELE</span></li>
+          <li class="wm-corr"><img src="media/map/direct.jpg" alt="DIRECT" width="96" height="96"><span>DIRECT</span></li>
+          <li><img src="media/map/leftrefill.jpg" alt="LeftRefill" width="96" height="96"><span>LeftRefill</span></li>
+          <li><img src="media/map/puffin.jpg" alt="Puffin" width="96" height="96"><span>Puffin</span></li>
+        </ul>
+      </div>
+      <div class="wm-col evolve">
+        <i class="wm-iso" aria-hidden="true"></i>
+        <div class="wm-head"><span class="req evolve">Evolve</span><span class="wm-part">carry it forward in time</span></div>
+        <ul class="wm-papers">
+          <li class="wm-lead"><img src="media/map/nvg.jpg" alt="NVG" width="96" height="96"><span>NVG</span></li>
+          <li class="wm-lead"><img src="media/map/flashforward.jpg" alt="FlashForward" width="96" height="96"><span>FlashForward</span></li>
+        </ul>
+        <div class="wm-open">
+          <div class="wm-open-top">
+            <div class="wm-clock">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <circle class="face" cx="50" cy="50" r="44"/>
+                <g class="marks">
+                  <line x1="50" y1="11" x2="50" y2="18"/><line x1="89" y1="50" x2="82" y2="50"/>
+                  <line x1="50" y1="89" x2="50" y2="82"/><line x1="11" y1="50" x2="18" y2="50"/>
+                </g>
+                <line class="hand hour" x1="50" y1="50" x2="31" y2="35.4"/>
+                <line class="hand min" x1="50" y1="50" x2="82" y2="50"/>
+                <circle class="pin" cx="50" cy="50" r="4"/>
+              </svg>
+              <b class="wm-q">?</b>
+            </div>
+            <span class="req open">Open</span>
+          </div>
+          <p class="wm-open-title">Off-screen evolution</p>
+          <p class="wm-open-sub">persist + evolve at once:<br>the clock keeps running while unseen</p>
+        </div>
+      </div>
+      <div class="wm-col act">
+        <i class="wm-iso" aria-hidden="true"></i>
+        <div class="wm-head"><span class="req act">Act</span><span class="wm-part">act in it</span></div>
+        <ul class="wm-papers">
+          <li><img src="media/map/navawam.jpg" alt="NAVA-WAM" width="96" height="96"><span>NAVA-WAM</span></li>
+          <li><img src="media/map/prowam.jpg" alt="ProWAM" width="96" height="96"><span>ProWAM</span></li>
+          <li><img src="media/map/dp4.jpg" alt="DP4" width="96" height="96"><span>DP4</span></li>
+          <li><img src="media/map/activevla.jpg" alt="ActiveVLA" width="96" height="96"><span>ActiveVLA</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wm-band">
+      <i class="wm-iso" aria-hidden="true"></i>
+      <div class="wm-head"><span class="req interface">Interface</span><span class="wm-part">language asks, reads out</span></div>
+      <div class="wm-paper"><img src="media/map/reasongrounder.jpg" alt="ReasonGrounder" width="96" height="96"><span>ReasonGrounder</span></div>
+      <div class="wm-paper wm-corr"><img src="media/map/lexvla.jpg" alt="LexVLA" width="96" height="96"><span>LexVLA</span></div>
+    </div>
+    <div class="wm-foot">
+      <div class="wm-slot">
+        <p class="wm-line"><i class="wm-iso inline" aria-hidden="true"></i>Each requirement shown largely on its own; no single model combines all four yet.</p>
+      </div>
+      <p class="wm-legend"><span class="wm-key k-first">first author</span><span class="wm-key k-corr">corresponding author</span></p>
+    </div>
+    </div>
+    <div class="wm-close" data-step="1" data-anim="fade">
+      <p class="wm-say"><span class="t-lang">Language</span> names the task.<br><span class="t-space">Vision</span> holds the world.</p>
+      <p class="wm-thanks">Thank you</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>So here's the whole picture.</p>
+    <p><b>Persist</b>: we fill in what an occluder hides, using the visual context, and we invent far fewer objects. On a whole street, we generate just the parts that were never seen.</p>
+    <p>Consistent: drag an object, set its pose, or turn the camera, and the same world answers.</p>
+    <p>Evolve: we roll a video forward, fast and stable, by anchoring what's already committed.</p>
+    <p>Act: the actor learns action priors by watching video. It predicts how a 3D scene responds to its moves, plans with imagined frames, and chooses where to look.</p>
+    <p>And language sits underneath as the interface. It asks, and it reads out. This dashed cell is the open one: persistence and evolution in one hidden state, so the clock keeps running while nobody looks. That's what my work is building toward.</p>
+    <p><em>[click]</em> To sum it up in one sentence: language names the task, and <b>vision</b> holds the world.</p>
+    <p>Thank you. I'm happy to take your questions.</p>
+  </aside>
+</section>
+
+<!-- ===== 07-backup.html ===== -->
+<!-- Section 07 · Backup (builder I): ledger, field. All data-time 0. -->
+
+<!-- ===================================================================== where language enters -->
+<section class="slide" id="s-bk-ledger" data-title="Where language enters" data-section="Backup" data-time="0">
+  <header class="hd">
+    <p class="kicker">Backup · language</p>
+    <h2 class="title">Where language enters, work by work</h2>
+  </header>
+  <div class="bd">
+    <div class="lg-axis">
+      <span class="lg-end">no language</span>
+      <svg class="lg-arrow" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="bkl-grad" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="var(--line)"/><stop offset="1" stop-color="var(--lang)"/></linearGradient></defs>
+        <path d="M0 9 H970 V2 L1000 12 L970 22 V15 H0 Z" fill="url(#bkl-grad)"/>
+      </svg>
+      <span class="lg-end lg-end-lang">language model inside</span>
+    </div>
+    <div class="lg-cols">
+      <div class="lg-col">
+        <h3 class="lg-h">none</h3>
+        <div class="lg-w act"><b>DP4</b><span>3D Gaussian state, RGB-D rendering losses (training-only auxiliary)</span></div>
+      </div>
+      <div class="lg-col">
+        <h3 class="lg-h">learned task embedding</h3>
+        <div class="lg-w space"><b>SEELE</b><span>task inversion, no text input</span></div>
+        <div class="lg-w space"><b>LeftRefill</b><span>task + view prompts, ~0.05M params</span></div>
+      </div>
+      <div class="lg-col">
+        <h3 class="lg-h">visual condition</h3>
+        <div class="lg-w space"><b>ASUKA</b><span>MAE prior replaces the text condition</span></div>
+        <div class="lg-w space"><b>DIRECT</b><span>6-DoF pose + reference image</span></div>
+      </div>
+      <div class="lg-col">
+        <h3 class="lg-h">names the task</h3>
+        <div class="lg-w time"><b>FlashForward</b><span>text-to-video prompt</span></div>
+        <div class="lg-w act"><b>ProWAM</b><span>T5 instruction; plan = visual sub-goals</span></div>
+        <div class="lg-w act"><b>NAVA-WAM</b><span>T5: clip captions + instruction</span></div>
+        <div class="lg-w act"><b>ActiveVLA</b><span>PaliGemma-based VLM actor</span></div>
+      </div>
+      <div class="lg-col">
+        <h3 class="lg-h">asks / reads out</h3>
+        <div class="lg-w lang"><b>ReasonGrounder</b><span>LLaVA reads the query; CLIP-supervised 3D field</span></div>
+        <div class="lg-w lang"><b>LexVLA</b><span>frozen DINOv2 read out in Llama 2 vocabulary</span></div>
+      </div>
+      <div class="lg-col">
+        <h3 class="lg-h">inside the model</h3>
+        <div class="lg-w space"><b>Puffin</b><span>LMM; camera serialized as tokens</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="legend lg-legend">
+    <span><i class="lg-i space"></i>Space</span><span><i class="lg-i time"></i>Time</span><span><i class="lg-i act"></i>Action</span><span><i class="lg-i lang"></i>Language</span>
+  </div>
+  <aside class="notes">
+    <p>Here's where language enters, work by work. <b>DP4</b> uses none: a 3D Gaussian state, trained with rendering losses. SEELE and LeftRefill swap the text prompt for learned task embeddings. ASUKA conditions on a visual prior from a masked autoencoder, and DIRECT on a 3D pose and a reference image.</p>
+    <p>In the middle, language names the task. FlashForward is text-to-video. ProWAM and NAVA-WAM read the instruction with a T5 text encoder. NAVA-WAM also uses it for its pre-training captions. ActiveVLA uses a vision-language model as the actor.</p>
+    <p>On the right, ReasonGrounder and LexVLA use language to ask and read out, and ReasonGrounder's 3D field also stores features distilled from CLIP. Puffin is a multimodal LLM that writes the camera as tokens. That's the line I draw: language names, asks and reads out. The state and its dynamics are visual.</p>
+  </aside>
+</section>
+
+<!-- ===================================================================== field facts -->
+<section class="slide" id="s-bk-field" data-title="The field today" data-section="Backup" data-time="0">
+  <header class="hd">
+    <p class="kicker">Backup · the field</p>
+    <h2 class="title">Physics can come from video; out-of-sight state still freezes</h2>
+  </header>
+  <div class="bd">
+    <div class="fd-rows">
+      <div class="fd-row">
+        <div class="fd-key num t-space">~1 min</div>
+        <div class="fd-txt"><p class="fd-who"><b>Genie 3</b> · DeepMind, Aug 2025</p><p class="fd-what">"visual memory extending as far back as one minute"; real-time 720p, 24 fps</p></div>
+        <div class="fd-tags"><span class="req persist">Persist</span></div>
+      </div>
+      <div class="fd-row">
+        <div class="fd-key num t-space">98%</div>
+        <div class="fd-txt"><p class="fd-who"><b>V-JEPA on IntPhys</b> · Garrido et al., Meta FAIR 2025</p><p class="fd-what">zero-shot from video-only pre-training; multimodal LLMs only marginally above untrained</p><p class="fd-what fd-sub">pixel-prediction VideoMAEv2: near untrained</p></div>
+        <div class="fd-tags"><span class="req evolve">Evolve</span></div>
+      </div>
+      <div class="fd-row">
+        <div class="fd-key fd-key-sm t-time">≠ realism</div>
+        <div class="fd-txt"><p class="fd-who"><b>Physics-IQ</b> · Motamed et al., Google DeepMind 2025</p><p class="fd-what">physical understanding "severely limited, and unrelated to visual realism"</p></div>
+        <div class="fd-tags"><span class="req evolve">Evolve</span></div>
+      </div>
+      <div class="fd-row">
+        <div class="fd-key num t-time">31.7%</div>
+        <div class="fd-txt"><p class="fd-who"><b>WorldMemBench</b> · Oct 2026 · 260 cases, 9 models</p><p class="fd-what">best static-memory model initiates only 31.7% of prescribed events; all 9 weaker at the 3rd return than the 1st (reconstruction metrics)</p></div>
+        <div class="fd-tags"><span class="req persist">Persist</span><span class="req evolve">Evolve</span></div>
+      </div>
+      <div class="fd-row">
+        <div class="fd-key fd-key-sm t-act">frozen</div>
+        <div class="fd-txt"><p class="fd-who"><b>LiveWorld · HyDRA</b> · 2026</p><p class="fd-what">out-of-sight state is "frozen"; hidden subjects become "frozen, distorted, or vanishing"</p></div>
+        <div class="fd-tags"><span class="req persist">Persist</span><span class="req evolve">Evolve</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="src">Genie 3 blog 2025-08-05 · arXiv 2502.11831 · 2501.09038 · 2610.19063 · 2603.07145 · 2603.25716</p>
+  <aside class="notes">
+    <p>The field is moving fast. Genie 3 runs in real time, with visual memory that reaches back about one minute.</p>
+    <p>On physics, Garrido and colleagues at Meta FAIR show that V-JEPA, pre-trained on video alone, reaches <b>98 percent</b> zero-shot on IntPhys. Multimodal LLMs stay close to an untrained model. So does VideoMAEv2, which predicts pixels. Video can be enough, and the objective matters. Physics-IQ adds a useful point: physical understanding is unrelated to visual realism. A good-looking video and a physically correct one are different goals.</p>
+    <p>On memory, the open target is clear. WorldMemBench, from October, finds that the best static-memory model triggers 31.7 percent of the scripted events. LiveWorld and HyDRA both describe out-of-sight state as frozen. That's exactly the gap the clock test names, and the one my work is building toward.</p>
+  </aside>
+</section>
+
+    </div>
+  </div>
+  <script src="js/deck.js"></script>
+  <script src="js/kit.js"></script>
+  <script src="js/sec-02a.js"></script>
+  <script src="js/sec-03a.js"></script>
+  <script src="js/sec-03b.js"></script>
+  <script src="js/sec-04.js"></script>
+  <script src="js/sec-05b.js"></script>
+</body>
+</html>

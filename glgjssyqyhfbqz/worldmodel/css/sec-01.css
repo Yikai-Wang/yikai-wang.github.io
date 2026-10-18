@@ -1,0 +1,196 @@
+/* 01 · Intro (s-intro): portrait + name + works by period, a 4-node timeline, honours row.
+   No clicker builds: the timeline draws itself in when the slide becomes current
+   (static/print mode jumps to the final state because deck.css zeroes animation durations). */
+
+#s-intro { padding: 76px 110px 64px; }
+
+#s-intro .in-kicker { margin: 0 0 30px; color: var(--time); }
+
+/* ---------- Hero: the same 4-column grid as the timeline ----------
+   col 1: portrait (rows 1-2) | cols 2-4: name + role, then the works row, one column per period,
+   so PhD / MMLab / Meta works sit straight above their timeline node. */
+#s-intro .in-hero {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto 1fr;
+  gap: 0 40px;
+}
+
+#s-intro .in-portrait {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 336px;                 /* clip is 300x376: 1.12x, under the 375 px cap */
+  height: 421px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #8b7b6c;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 18px 40px -22px rgba(20, 22, 26, .45);
+}
+#s-intro .in-portrait video { width: 100%; height: 100%; object-fit: cover; }
+#s-intro .in-cap {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 3px 12px;
+  border-radius: 8px;
+  background: rgba(10, 12, 16, .62);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+#s-intro .in-id { grid-column: 2 / span 3; grid-row: 1; padding-top: 4px; }
+#s-intro .in-name {
+  font-size: 140px;
+  font-weight: 800;
+  line-height: .95;
+  letter-spacing: -.045em;
+}
+#s-intro .in-role {
+  margin-top: 20px;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-soft);
+}
+#s-intro .in-role b { color: var(--ink); }
+
+/* Works row: papers shown in this talk, by period */
+#s-intro .in-works {
+  grid-row: 2;
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 10px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+#s-intro .in-works.w-phd { grid-column: 2; }
+#s-intro .in-works.w-mmlab { grid-column: 3; }
+#s-intro .in-works.w-meta { grid-column: 4; }
+#s-intro .in-w,
+#s-intro .in-more {
+  margin: 0;
+  padding: 4px 14px;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+#s-intro .in-w { background: var(--fill); color: var(--ink-soft); }
+#s-intro .in-more { padding: 2px 12px; border: 2px dashed var(--line); font-weight: 600; color: var(--muted); }
+
+/* ---------- Timeline ---------- */
+#s-intro .in-tl {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 40px;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+/* the rail: from the first dot to the last */
+#s-intro .in-tl::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  right: calc((100% - 120px) / 4 - 13px);
+  top: 51px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--slate) 0%, var(--slate) 52%, var(--space) 58%, var(--space) 70%, var(--time) 100%);   /* teal from the gen-vision tick */
+  transform-origin: 0 50%;
+}
+#s-intro .in-node { position: relative; display: flex; flex-direction: column; min-width: 0; }
+#s-intro .in-node + .in-node { margin-top: 0; }
+#s-intro .in-arc {
+  height: 30px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 30px;
+  white-space: nowrap;
+}
+#s-intro .in-dot {
+  position: relative;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  margin: 10px 0 24px -1px;
+  border-radius: 50%;
+  background: #fff;
+  border: 5px solid currentColor;
+}
+#s-intro .in-place { font-size: 34px; font-weight: 700; line-height: 1.2; color: var(--ink); }
+#s-intro .in-what { margin-top: 6px; font-size: 28px; line-height: 1.3; color: var(--ink-soft); }
+#s-intro .in-yr { margin-top: 4px; font-size: 26px; line-height: 1.3; color: var(--muted); }
+#s-intro .in-who { margin-top: 4px; font-size: 24px; line-height: 1.3; color: var(--muted); }
+
+#s-intro .in-node.n-math, #s-intro .in-node.n-stat { color: var(--slate); }
+#s-intro .in-node.n-gen { color: var(--space); }
+#s-intro .in-node.n-wm { color: var(--time); }
+#s-intro .in-node.n-wm .in-dot { background: currentColor; box-shadow: 0 0 0 9px var(--time-soft); }
+#s-intro .in-arc { position: relative; }
+#s-intro .in-arc2 { position: absolute; left: 0; bottom: 100%; }   /* second field stacks above the first */
+
+/* Gen-vision tick late in the PhD (~2023): x = 320 px into the 395 px PhD column, i.e. ~58% of the rail;
+   centred on the rail (top 51 + 2 = 53 px) */
+#s-intro .in-turn { position: absolute; top: 0; left: 320px; color: var(--space); }
+#s-intro .in-turn .in-arc { display: block; }
+#s-intro .in-tick {
+  position: absolute;
+  left: 0;
+  top: 44px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px #fff;
+}
+
+/* ---------- Honours ---------- */
+#s-intro .in-honors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 10px;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+#s-intro .in-honors li {
+  margin: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  font-size: 23px;
+  line-height: 1.3;
+  color: var(--muted);
+  white-space: nowrap;
+}
+#s-intro .in-honors b { color: var(--ink); font-weight: 700; }
+
+/* ---------- Entrance (plays each time the slide becomes current) ---------- */
+@keyframes in-rail { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes in-pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }
+@keyframes in-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+#s-intro.is-current .in-tl::before { animation: in-rail 1.6s cubic-bezier(.45, 0, .2, 1) .35s both; }
+#s-intro.is-current .in-dot { animation: in-pop .45s cubic-bezier(.3, 1.6, .5, 1) both; }
+#s-intro.is-current .in-node > :not(.in-dot) { animation: in-rise .6s var(--ease) both; }
+#s-intro.is-current .in-node.n-math > * { animation-delay: .35s; }
+#s-intro.is-current .in-node.n-stat > * { animation-delay: .8s; }
+#s-intro.is-current .in-node.n-gen > * { animation-delay: 1.25s; }
+#s-intro.is-current .in-node.n-wm > * { animation-delay: 1.7s; }
+#s-intro.is-current .in-node.n-stat > .in-turn { animation-delay: 1.05s; }
+#s-intro.is-current .in-honors li { animation: in-rise .6s var(--ease) 2.1s both; }
+#s-intro.is-current .in-works > * { animation: in-rise .6s var(--ease) both; }
+#s-intro.is-current .w-phd > * { animation-delay: .8s; }
+#s-intro.is-current .w-mmlab > * { animation-delay: 1.25s; }
+#s-intro.is-current .w-meta > * { animation-delay: 1.7s; }
