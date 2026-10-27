@@ -1,4 +1,4 @@
-/* 03b · Space: consistent. Only s-control is scripted: its "before / after" pill follows the SEELE loop,
+/* 08b · Backup (was 03b, Space: consistent). Only s-control is scripted: its "before / after" pill follows the SEELE loop,
    which cycles four 3.2 s examples (input held to 1.2 s, crossfade to 1.7 s, output to 3.2 s). */
 (() => {
   'use strict';

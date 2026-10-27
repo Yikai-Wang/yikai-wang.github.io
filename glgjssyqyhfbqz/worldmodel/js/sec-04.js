@@ -1,4 +1,5 @@
-/* Section 04 · Time: scripted builds for s-ff-race (port of FlashForward s-hook) and s-ff-anchors.
+/* Section 04 · Time: scripted builds for s-ff-race (port of FlashForward s-hook), s-ff-wavefront (port of
+   FlashForward s-wavefront) and s-ff-anchors.
    Every update() renders its step directly; motion only happens when info.animate is true. */
 (() => {
   'use strict';
@@ -98,6 +99,59 @@
       FF.cancel(slide);
       FF.cancel(slide.querySelector('.h2-scale'));
       racing = null;
+    },
+  });
+
+  /* ---------------------------------------------------------------------------------------------
+     s-ff-wavefront: the SVG markup holds the final state of every build. Step 1 animates the rounds
+     lighting up one anti-diagonal at a time (a "now" cursor sweeps the rounds, finished chunks drop
+     into the bottom lane). Any other entry (jump, back, static) shows the final state at once.
+     ------------------------------------------------------------------------------------------- */
+  const WF = { x0: 290, pitch: 140, rounds: 9, ms: 330 };
+
+  const wfReset = (els) => {
+    clearAnims(els);
+    els.forEach((el) => { el.style.opacity = ''; el.style.transform = ''; });
+  };
+
+  Deck.register('s-ff-wavefront', {
+    steps: 2,
+    update(slide, step, info) {
+      const run = FF.run(slide);
+      const nodes = Array.from(slide.querySelectorAll('.wave .nd'));
+      const fins = Array.from(slide.querySelectorAll('.wave .fin'));
+      const now = slide.querySelector('.wave .now');
+      const all = nodes.concat(fins, [now]);
+      wfReset(all);
+      if (!(step === 1 && info.animate && info.prev === 0)) return;
+
+      run.onCancel(() => wfReset(all));
+      nodes.concat(fins).forEach((el) => { el.style.opacity = '0'; });
+      const setNow = (x) => { now.setAttribute('x1', x); now.setAttribute('x2', x); };
+      setNow(WF.x0 - 7);
+      now.style.opacity = '.45';
+      const seq = [];
+      for (let n = 0; n < WF.rounds; n += 1) {
+        seq.push([n === 0 ? 60 : WF.ms, () => {
+          const x1 = WF.x0 + n * WF.pitch - 7;
+          FF.tween({ from: x1, to: x1 + WF.pitch, dur: WF.ms, easing: FF.ease.linear, run, onUpdate: setNow });
+          nodes.filter((el) => +el.dataset.round === n).forEach((el) => {
+            FF.animate(el, [{ opacity: 0, transform: 'scale(.55)' }, { opacity: 1, transform: 'none' }],
+              { duration: 300, easing: 'cubic-bezier(.2,.8,.3,1.2)' }, run);
+          });
+          fins.filter((el) => +el.dataset.round === n).forEach((el) => {
+            FF.animate(el, [{ opacity: 0, transform: 'translateY(-90px)' }, { opacity: 1, transform: 'none' }],
+              { duration: 380, delay: 180, easing: 'cubic-bezier(.3,.9,.3,1)' }, run);
+          });
+        }]);
+      }
+      seq.push([WF.ms + 200, () => {
+        FF.animate(now, [{ opacity: 0.45 }, { opacity: 0 }], { duration: 300 }, run);
+      }]);
+      FF.sequence(run, seq);
+    },
+    leave(slide) {
+      FF.cancel(slide);
     },
   });
 

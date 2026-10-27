@@ -1,6 +1,7 @@
-/* Section 04 · Time: the FlashForward deep dive.
-   s-ff-race (port of s-hook) · s-ff-long (new) · s-ff-inflight (port of s-inflight) · s-ff-drift (port of s-drift) ·
-   s-ff-anchors (s-anchors + s-two-scales) · s-ff-notyet (new). Ported diagrams keep the FF vocabulary:
+/* Section 04 · Time: NVG, then the FlashForward deep dive.
+   s-nvg (at the end of this file) · s-ff-race (port of s-hook) · s-ff-long (new) · s-ff-inflight (port of s-inflight) ·
+   s-ff-wavefront (port of s-wavefront) · s-ff-drift (port of s-drift) · s-ff-anchors (s-anchors + s-two-scales) ·
+   s-ff-ablation (port of s-ablation) · s-ff-notyet (new). Ported diagrams keep the FF vocabulary:
    renderer = --ours, clean anchors = --anchor, KV memory = --kv, baselines = --sf / --hiar. */
 
 /* Titles use the full width: the .reqs tag sits in the top margin above them. */
@@ -391,7 +392,7 @@
 #s-ff-anchors .ic-ln.dash { stroke-dasharray: 6 7; }
 #s-ff-anchors .anch .ic-ln { stroke: var(--anchor); }
 #s-ff-anchors .anch .ic-dot { fill: var(--anchor); }
-#s-ff-anchors .hist .ic-ln { stroke: var(--kv); }
+#s-ff-anchors .hist .ic-ln { stroke: var(--ours); }
 #s-ff-anchors .mem-body {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -448,19 +449,6 @@
 #s-ff-notyet .yes .ny-txt .ny-big { font-size: 34px; font-weight: 700; color: var(--ink); }
 #s-ff-notyet .ny-ic { flex: none; width: 64px; height: 64px; }
 #s-ff-notyet .ny-ic * { fill: none; stroke: var(--muted); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-#s-ff-notyet .ny-x {
-  position: absolute;
-  top: -23px;
-  right: 22px;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--kv);
-}
-#s-ff-notyet .ny-x svg { width: 30px; height: 30px; }
-#s-ff-notyet .ny-x path { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; }
 #s-ff-notyet .ny-next {
   align-self: flex-end;
   font-size: 42px;
@@ -470,3 +458,167 @@
 }
 #s-ff-notyet .ny-next b { color: var(--act); }
 #s-ff-notyet .ny-arr { color: var(--act); }
+/* ---------- s-nvg (moved from sec-03b.css): structure first, then detail ---------- */
+
+/* ---------- s-nvg: structure first, then detail ---------- */
+#s-nvg .bd { justify-content: center; }
+#s-nvg .nvg-stage { display: grid; align-items: center; justify-items: center; }
+#s-nvg .nvg-stage > * { grid-area: 1 / 1; }
+#s-nvg .nvg-a { display: flex; gap: 28px; align-items: flex-start; }
+#s-nvg .nvg-labels {
+  display: grid; grid-template-rows: 167px 167px 64px; align-items: center;
+  font-size: 28px; font-weight: 700; color: var(--muted); text-align: right; width: 150px;
+}
+#s-nvg .nvg-labels .nvg-tok-lab { font-size: 24px; line-height: 1.15; color: var(--time); }
+#s-nvg .nvg-img { position: relative; width: 1500px; height: 334px; }
+#s-nvg .nvg-img img { width: 1500px; height: 334px; image-rendering: pixelated; }
+#s-nvg .nvg-covers { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(9, 1fr); }
+#s-nvg .nvg-covers i { background: var(--bg); opacity: 0; }
+#s-nvg.is-current[data-current-step="0"] .nvg-covers i { animation: nvg-reveal .5s var(--ease) both; }
+#s-nvg.is-current[data-current-step="0"] .nvg-tok span { animation: nvg-count .5s var(--ease) both; }   /* each count with its column */
+#s-nvg.is-current .nvg-covers i:nth-child(2),
+#s-nvg.is-current .nvg-tok span:nth-child(2) { animation-delay: .35s; }
+#s-nvg.is-current .nvg-covers i:nth-child(3),
+#s-nvg.is-current .nvg-tok span:nth-child(3) { animation-delay: .7s; }
+#s-nvg.is-current .nvg-covers i:nth-child(4),
+#s-nvg.is-current .nvg-tok span:nth-child(4) { animation-delay: 1.05s; }
+#s-nvg.is-current .nvg-covers i:nth-child(5),
+#s-nvg.is-current .nvg-tok span:nth-child(5) { animation-delay: 1.4s; }
+#s-nvg.is-current .nvg-covers i:nth-child(6),
+#s-nvg.is-current .nvg-tok span:nth-child(6) { animation-delay: 1.75s; }
+#s-nvg.is-current .nvg-covers i:nth-child(7),
+#s-nvg.is-current .nvg-tok span:nth-child(7) { animation-delay: 2.1s; }
+#s-nvg.is-current .nvg-covers i:nth-child(8),
+#s-nvg.is-current .nvg-tok span:nth-child(8) { animation-delay: 2.45s; }
+#s-nvg.is-current .nvg-covers i:nth-child(9),
+#s-nvg.is-current .nvg-tok span:nth-child(9) { animation-delay: 2.8s; }
+#s-nvg .nvg-tok {
+  display: grid; grid-template-columns: repeat(9, 1fr); height: 64px; align-items: center;
+  font-size: 36px; font-weight: 800; color: var(--time); text-align: center;
+  border-top: 3px solid var(--time-soft);
+}
+#s-nvg .nvg-b { display: flex; align-items: center; gap: 30px; }
+#s-nvg .nvg-ref { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#s-nvg .nvg-ref img { width: 256px; height: 256px; border-radius: 12px; box-shadow: 0 0 0 4px var(--time); }
+#s-nvg .nvg-ref figcaption { font-size: 28px; font-weight: 700; color: var(--time); }
+#s-nvg .nvg-arrow { width: 72px; height: 36px; fill: none; stroke: var(--time); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+#s-nvg .nvg-rows { position: relative; display: grid; grid-template-rows: repeat(4, 160px); align-items: center; }
+#s-nvg .nvg-row { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+#s-nvg .nvg-row > span { font-size: 26px; font-weight: 600; color: var(--ink-soft); }
+#s-nvg .seg { display: flex; gap: 4px; }
+#s-nvg .seg b { width: 24px; height: 24px; border-radius: 5px; border: 2.5px solid var(--muted); background: transparent; }
+#s-nvg .seg.s2 b:nth-child(-n+2),
+#s-nvg .seg.s4 b:nth-child(-n+4),
+#s-nvg .seg.s6 b:nth-child(-n+6) { background: var(--time); border-color: var(--time); }
+#s-nvg .nvg-legend {
+  position: absolute; right: 0; top: 100%; margin-top: 18px;
+  display: flex; gap: 20px; font-size: 22px; color: var(--muted); white-space: nowrap;
+}
+#s-nvg .nvg-legend span { display: inline-flex; align-items: center; gap: 8px; }
+#s-nvg .nvg-legend i { width: 20px; height: 20px; border-radius: 4px; border: 2.5px solid var(--muted); }
+#s-nvg .nvg-legend i.k-fix { background: var(--time); border-color: var(--time); }
+#s-nvg .nvg-grid { width: 640px; height: 640px; border-radius: 12px; }
+#s-nvg .nvg-var { display: flex; flex-direction: column; align-items: center; gap: 10px; height: 640px; width: 170px; font-size: 26px; font-weight: 600; color: var(--muted); text-align: center; line-height: 1.2; }
+#s-nvg .nvg-var svg { flex: 1; width: 30px; fill: none; stroke: var(--time); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+#s-nvg .nvg-var span:last-child { color: var(--time); }
+@keyframes nvg-reveal { from { opacity: 1; } to { opacity: 0; } }
+@keyframes nvg-count { from { opacity: 0; } to { opacity: 1; } }
+
+/* ================================================================================================
+   s-ff-wavefront (light): port of FlashForward s-wavefront (../flashforward/css/sec-03.css). Step 0 = the two
+   inputs of one forward; 1 = one GPU per stage, the wavefront (rounds light up, js/sec-04.js); 2 = warm-up,
+   then one finished chunk per round. The markup holds the final state of every build.
+   ================================================================================================ */
+
+/* Bottom padding keeps the banner clear of the .src line. */
+#s-ff-wavefront .bd { padding-bottom: 28px; }
+#s-ff-wavefront .fig { width: 100%; height: 100%; overflow: visible; }
+#s-ff-wavefront .mk-kv path { fill: var(--kv); }
+#s-ff-wavefront .mk-slate path { fill: var(--slate); }
+#s-ff-wavefront .ln-kv { fill: none; stroke: var(--kv); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-wavefront .ln-slate { fill: none; stroke: var(--slate); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-wavefront .t-row { font-size: 26px; fill: var(--muted); }
+#s-ff-wavefront .t-axis { font-size: 26px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#s-ff-wavefront .lane { fill: var(--surface); }
+#s-ff-wavefront .finish { stroke: var(--slate); stroke-width: 3; stroke-dasharray: 9 7; }
+#s-ff-wavefront .now { stroke: var(--ink); stroke-width: 3; opacity: 0; }
+#s-ff-wavefront .legend i.den-ours { background: var(--ours); }
+#s-ff-wavefront .lg { position: absolute; top: -6px; right: 0; z-index: 1; }
+#s-ff-wavefront .bx { fill: var(--ours); }
+#s-ff-wavefront .bx-src { fill: var(--bg); stroke: var(--ours); stroke-width: 3; }
+#s-ff-wavefront .bx-hi-ring { fill: none; stroke: var(--ours); stroke-width: 3; opacity: .35; }
+#s-ff-wavefront .t-num { font-size: 26px; font-weight: 700; fill: #fff; }
+#s-ff-wavefront .t-num-src { fill: var(--ours); }
+#s-ff-wavefront .t-dep { font-size: 28px; font-weight: 600; }
+#s-ff-wavefront .t-dep-slate { fill: var(--slate); }
+#s-ff-wavefront .t-dep-kv { fill: var(--kv); }
+#s-ff-wavefront .lane-done { fill: var(--done-soft); opacity: .6; }
+#s-ff-wavefront .t-row-done { fill: var(--done); font-weight: 700; }
+#s-ff-wavefront .t-axis-name { font-style: italic; }
+#s-ff-wavefront .fin-frame { fill: none; stroke: var(--done); stroke-width: 4; }
+#s-ff-wavefront .fin-dot { fill: var(--done); stroke: var(--bg); stroke-width: 3; }
+#s-ff-wavefront .fin-tick { fill: none; stroke: #fff; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-wavefront .t-finish { font-size: 28px; font-weight: 700; fill: var(--slate); }
+#s-ff-wavefront .brace { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-ff-wavefront .brace-slate { stroke: var(--muted); }
+#s-ff-wavefront .brace-done { stroke: var(--done); }
+#s-ff-wavefront .t-ann { font-size: 28px; font-weight: 600; fill: var(--muted); }
+#s-ff-wavefront .t-ann-done { fill: var(--done); font-weight: 700; }
+#s-ff-wavefront .t-ann-hiar { fill: var(--hiar-text); font-weight: 600; }
+#s-ff-wavefront .banner {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  margin-left: -300px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background: var(--ours-soft);
+  color: var(--ours);
+  font-size: 32px;
+  font-weight: 700;
+}
+#s-ff-wavefront .banner-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--ours); }
+/* Animated groups scale around their own box. */
+#s-ff-wavefront .nd,
+#s-ff-wavefront .fin { transform-box: fill-box; transform-origin: 50% 50%; }
+
+/* ================================================================================================
+   s-ff-ablation (light): port of FlashForward s-ablation (../flashforward/css/sec-06.css). Rows build in:
+   history only (failed) → clean history + anchors (0.826, slow) → in-flight history + anchors (0.838, fast);
+   build 3: separate planner/renderer adapters 0.820 → 0.838.
+   ================================================================================================ */
+
+#s-ff-ablation .ab-bd { justify-content: center; padding-bottom: 40px; }
+#s-ff-ablation .ab-table { table-layout: fixed; border-collapse: separate; border-spacing: 0; }
+#s-ff-ablation .ab-c1 { width: 55%; }
+#s-ff-ablation .ab-c2 { width: 17%; }
+#s-ff-ablation .ab-c3 { width: 28%; }
+#s-ff-ablation .ab-table th { font-size: 28px; padding: 16px 20px; }
+#s-ff-ablation .ab-table td { padding: 30px 20px; font-size: 42px; vertical-align: middle; }
+#s-ff-ablation .ab-table th:nth-child(3), #s-ff-ablation .ab-table td:nth-child(3) { padding-left: 48px; }
+#s-ff-ablation .ab-table tr[data-step] { transform: none; }
+
+#s-ff-ablation .ab-mem { display: flex; align-items: center; gap: 28px; }
+#s-ff-ablation .ab-icons { display: flex; align-items: center; gap: 8px; width: 200px; flex: none; }
+#s-ff-ablation .ab-ico { width: 96px; height: 72px; flex: none; }
+#s-ff-ablation .ab-name { font-weight: 600; color: var(--ink); }
+#s-ff-ablation tr.ours .ab-name { color: var(--ours); font-weight: 700; }
+#s-ff-ablation .ab-ours-tag { font-weight: 600; }
+
+#s-ff-ablation .ab-val { font-size: 60px; font-weight: 700; letter-spacing: -.01em; }
+#s-ff-ablation tr.ours .ab-val { font-weight: 800; }
+#s-ff-ablation .ab-fail { font-size: 48px; font-weight: 800; color: var(--kv); }
+#s-ff-ablation .ab-why { display: block; font-size: 28px; font-weight: 500; color: var(--kv); opacity: .85; }
+
+#s-ff-ablation .ab-speed { font-size: 34px; padding: 10px 28px; gap: 12px; }
+#s-ff-ablation .ab-chip-slow { background: var(--fill); color: var(--slate); }
+#s-ff-ablation .ab-slow { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+#s-ff-ablation .ab-extra { display: inline-flex; align-items: center; gap: 12px; font-size: 26px; color: var(--muted); line-height: 1.2; }
+#s-ff-ablation .ab-extra svg { flex: none; }
+
+#s-ff-ablation .ab-note { align-self: flex-start; margin-top: 44px; font-size: 38px; }

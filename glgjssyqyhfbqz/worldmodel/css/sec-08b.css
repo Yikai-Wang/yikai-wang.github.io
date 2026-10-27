@@ -1,4 +1,4 @@
-/* 03b · Space: consistent. Every selector is scoped to one of: #s-control #s-puffin #s-hinge #s-nvg */
+/* 08b · Backup (was 03b, Space: consistent). Every selector is scoped to one of: #s-control #s-puffin #s-hinge */
 
 /* ---------- s-control: three control signals, one column per build ---------- */
 #s-control .bd { justify-content: center; gap: 48px; }
@@ -124,67 +124,3 @@
 #s-hinge .hg-bad { fill: none; stroke: #e11d48; stroke-width: 5; stroke-dasharray: 14 10; }
 #s-hinge .hg-good { fill: none; stroke: var(--space); stroke-width: 5; }
 #s-hinge .hg-say { font-size: 42px; font-weight: 700; line-height: 1.25; letter-spacing: -.01em; text-align: center; }
-
-/* ---------- s-nvg: structure first, then detail ---------- */
-#s-nvg .bd { justify-content: center; }
-#s-nvg .nvg-stage { display: grid; align-items: center; justify-items: center; }
-#s-nvg .nvg-stage > * { grid-area: 1 / 1; }
-#s-nvg .nvg-a { display: flex; gap: 28px; align-items: flex-start; }
-#s-nvg .nvg-labels {
-  display: grid; grid-template-rows: 167px 167px 64px; align-items: center;
-  font-size: 28px; font-weight: 700; color: var(--muted); text-align: right; width: 150px;
-}
-#s-nvg .nvg-labels .nvg-tok-lab { font-size: 24px; line-height: 1.15; color: var(--time); }
-#s-nvg .nvg-img { position: relative; width: 1500px; height: 334px; }
-#s-nvg .nvg-img img { width: 1500px; height: 334px; image-rendering: pixelated; }
-#s-nvg .nvg-covers { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(9, 1fr); }
-#s-nvg .nvg-covers i { background: var(--bg); opacity: 0; }
-#s-nvg.is-current[data-current-step="0"] .nvg-covers i { animation: nvg-reveal .5s var(--ease) both; }
-#s-nvg.is-current[data-current-step="0"] .nvg-tok span { animation: nvg-count .5s var(--ease) both; }   /* each count with its column */
-#s-nvg.is-current .nvg-covers i:nth-child(2),
-#s-nvg.is-current .nvg-tok span:nth-child(2) { animation-delay: .35s; }
-#s-nvg.is-current .nvg-covers i:nth-child(3),
-#s-nvg.is-current .nvg-tok span:nth-child(3) { animation-delay: .7s; }
-#s-nvg.is-current .nvg-covers i:nth-child(4),
-#s-nvg.is-current .nvg-tok span:nth-child(4) { animation-delay: 1.05s; }
-#s-nvg.is-current .nvg-covers i:nth-child(5),
-#s-nvg.is-current .nvg-tok span:nth-child(5) { animation-delay: 1.4s; }
-#s-nvg.is-current .nvg-covers i:nth-child(6),
-#s-nvg.is-current .nvg-tok span:nth-child(6) { animation-delay: 1.75s; }
-#s-nvg.is-current .nvg-covers i:nth-child(7),
-#s-nvg.is-current .nvg-tok span:nth-child(7) { animation-delay: 2.1s; }
-#s-nvg.is-current .nvg-covers i:nth-child(8),
-#s-nvg.is-current .nvg-tok span:nth-child(8) { animation-delay: 2.45s; }
-#s-nvg.is-current .nvg-covers i:nth-child(9),
-#s-nvg.is-current .nvg-tok span:nth-child(9) { animation-delay: 2.8s; }
-@keyframes nvg-reveal { from { opacity: 1; } to { opacity: 0; } }
-@keyframes nvg-count { from { opacity: 0; } to { opacity: 1; } }
-#s-nvg .nvg-tok {
-  display: grid; grid-template-columns: repeat(9, 1fr); height: 64px; align-items: center;
-  font-size: 36px; font-weight: 800; color: var(--time); text-align: center;
-  border-top: 3px solid var(--time-soft);
-}
-#s-nvg .nvg-b { display: flex; align-items: center; gap: 30px; }
-#s-nvg .nvg-ref { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-#s-nvg .nvg-ref img { width: 256px; height: 256px; border-radius: 12px; box-shadow: 0 0 0 4px var(--time); }
-#s-nvg .nvg-ref figcaption { font-size: 28px; font-weight: 700; color: var(--time); }
-#s-nvg .nvg-arrow { width: 72px; height: 36px; fill: none; stroke: var(--time); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-#s-nvg .nvg-rows { position: relative; display: grid; grid-template-rows: repeat(4, 160px); align-items: center; }
-#s-nvg .nvg-row { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-#s-nvg .nvg-row > span { font-size: 26px; font-weight: 600; color: var(--ink-soft); }
-#s-nvg .seg { display: flex; gap: 4px; }
-#s-nvg .seg b { width: 24px; height: 24px; border-radius: 5px; border: 2.5px solid var(--muted); background: transparent; }
-#s-nvg .seg.s2 b:nth-child(-n+2),
-#s-nvg .seg.s4 b:nth-child(-n+4),
-#s-nvg .seg.s6 b:nth-child(-n+6) { background: var(--time); border-color: var(--time); }
-#s-nvg .nvg-legend {
-  position: absolute; right: 0; top: 100%; margin-top: 18px;
-  display: flex; gap: 20px; font-size: 22px; color: var(--muted); white-space: nowrap;
-}
-#s-nvg .nvg-legend span { display: inline-flex; align-items: center; gap: 8px; }
-#s-nvg .nvg-legend i { width: 20px; height: 20px; border-radius: 4px; border: 2.5px solid var(--muted); }
-#s-nvg .nvg-legend i.k-fix { background: var(--time); border-color: var(--time); }
-#s-nvg .nvg-grid { width: 640px; height: 640px; border-radius: 12px; }
-#s-nvg .nvg-var { display: flex; flex-direction: column; align-items: center; gap: 10px; height: 640px; width: 170px; font-size: 26px; font-weight: 600; color: var(--muted); text-align: center; line-height: 1.2; }
-#s-nvg .nvg-var svg { flex: 1; width: 30px; fill: none; stroke: var(--time); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-#s-nvg .nvg-var span:last-child { color: var(--time); }

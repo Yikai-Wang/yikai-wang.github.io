@@ -141,3 +141,11 @@
 }
 
 #s-map .wm-key { display: inline-flex; align-items: center; gap: 12px; }
+
+/* Build 1: "Today in depth". The works not covered in depth step back but stay readable (lighter than the
+   engine's default .25 dim); the four focus works, their column headers and the legend keep full strength. */
+#s-map .is-dimmed,
+#s-map .is-shown.is-dimmed { opacity: .45; filter: saturate(.35); }
+
+#s-map .wm-today { color: var(--ink-soft); }
+#s-map .wm-today b { font-weight: 750; }
