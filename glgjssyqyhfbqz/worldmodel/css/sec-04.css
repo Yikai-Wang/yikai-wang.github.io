@@ -1,14 +1,14 @@
 /* Section 04 · Time: NVG, then the FlashForward deep dive.
    s-nvg (at the end of this file) · s-ff-race (port of s-hook) · s-ff-long (new) · s-ff-inflight (port of s-inflight) ·
    s-ff-wavefront (port of s-wavefront) · s-ff-drift (port of s-drift) · s-ff-anchors (s-anchors + s-two-scales) ·
-   s-ff-ablation (port of s-ablation) · s-ff-notyet (new). Ported diagrams keep the FF vocabulary:
+   s-ff-notyet (new). Ported diagrams keep the FF vocabulary:
    renderer = --ours, clean anchors = --anchor, KV memory = --kv, baselines = --sf / --hiar. */
 
 /* Titles use the full width: the .reqs tag sits in the top margin above them. */
 
 /* ================================================================================================
    s-ff-race (dark): step 0 = the real-time race, dropped to the optical centre; step 1 = the block rises
-   and the speed-up grid (14B · 720p first) slides in below, takeaway on the right.
+   and the speed-up grid (vs Self-Forcing and vs HiAR, 14B · 720p first) slides in below, takeaway on the right.
    ================================================================================================ */
 
 #s-ff-race { --drop: 130px; }
@@ -83,31 +83,34 @@
 
 #s-ff-race .h2-cite { margin-top: 8px; }
 
-/* ----- lower band: speed-up grid (left), takeaway (right) ----- */
+/* ----- lower band: speed-up grid (left), takeaway (right) -----
+   Each cell = one setting: the speed-up vs Self-Forcing, then vs HiAR, labelled once in the row under 720p / 480p.
+   Uniform tint; only the race setting (1.3B · 480p) is filled, and the legend swatch in the heading says so. */
 #s-ff-race .h2-lower {
   display: grid;
-  grid-template-columns: 1050px 1fr;
-  column-gap: 80px;
-  margin-top: 18px;
+  grid-template-columns: 980px 1fr;
+  column-gap: 72px;
+  margin-top: 10px;
 }
 #s-ff-race .h2-scale { grid-column: 1; grid-row: 1; }
 #s-ff-race .h2-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   font-size: 32px;
   line-height: 1.2;
 }
 #s-ff-race .h2-head b { font-weight: 800; letter-spacing: -.01em; }
-#s-ff-race .h2-lg { font-size: 24px; font-weight: 600; }
-#s-ff-race .h2-sh { color: var(--sf-text); }
-#s-ff-race .h2-sf { color: var(--ours); }
+#s-ff-race .h2-lg { display: inline-flex; gap: 28px; font-size: 22px; font-weight: 600; color: var(--muted); }
+#s-ff-race .h2-lg > span { display: inline-flex; align-items: center; gap: 10px; }
+/* Legend swatch = the filled 1.3B · 480p cell, i.e. the race above. */
+#s-ff-race .h2-sw { width: 22px; height: 22px; border-radius: 6px; background: var(--ours); }
 
 #s-ff-race .h2-mx {
   display: grid;
-  grid-template-columns: 96px 1fr 1fr;
-  gap: 20px 14px;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 14px 14px;
   align-items: center;
 }
 #s-ff-race .h2-ch {
@@ -119,70 +122,65 @@
   color: var(--muted);
   text-align: center;
 }
+/* One label row for the two numbers of every cell (same two-column grid as the cells). */
+#s-ff-race .h2-sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 20px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ink-soft);
+  text-align: center;
+  white-space: nowrap;
+}
 #s-ff-race .h2-rh { font-size: 32px; font-weight: 800; color: var(--ink-soft); }
 
 #s-ff-race .h2-cell {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 18px;
-  height: 64px;
-  padding: 0 22px;
+  height: 88px;
+  padding: 0 20px;
   border-radius: 14px;
-  background: rgba(91, 155, 234, var(--a, .1));
-  box-shadow: inset 0 0 0 2px rgba(91, 155, 234, calc(var(--a, .1) + .12));
+  background: rgba(91, 155, 234, .08);
+  box-shadow: inset 0 0 0 2px rgba(91, 155, 234, .2);
 }
-/* Tint grows with the speed-up; the 1.3B · 480p cell (bottom-right, the race above) is the hero. */
-#s-ff-race .h2-cell[data-k="b720"] { --a: .06; }
-#s-ff-race .h2-cell[data-k="s720"] { --a: .1; }
-#s-ff-race .h2-cell[data-k="b480"] { --a: .22; }
-
+#s-ff-race .h2-v { display: flex; justify-content: center; }
 #s-ff-race .h2-x {
-  min-width: 128px;
-  font-size: 46px;
+  font-size: 54px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -.02em;
   color: #fff;
-}
-#s-ff-race .h2-s { font-size: 28px; color: var(--muted); white-space: nowrap; }
-
-/* Badge on the top edge of the 1.3B · 480p cell: that is the race above. */
-#s-ff-race .h2-this {
-  position: absolute;
-  top: -15px;
-  right: 16px;
-  padding: 1px 12px;
-  border-radius: 8px;
-  background: #1c2533;
-  box-shadow: 0 0 0 2px rgba(91, 155, 234, .3);
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--ink-soft);
-  white-space: nowrap;
 }
 
 #s-ff-race .h2-cell[data-k="s480"] {
   background: var(--ours);
   box-shadow: 0 0 0 4px rgba(91, 155, 234, .3), 0 10px 36px rgba(91, 155, 234, .35);
 }
-#s-ff-race .h2-cell[data-k="s480"] .h2-x { font-size: 54px; color: #06101d; }
-#s-ff-race .h2-cell[data-k="s480"] .h2-s,
-#s-ff-race .h2-cell[data-k="s480"] .h2-sh,
-#s-ff-race .h2-cell[data-k="s480"] .h2-sf { color: #0b1f3a; }
-#s-ff-race .h2-cell[data-k="s480"] .h2-sf { font-weight: 800; }
+#s-ff-race .h2-cell[data-k="s480"] .h2-x { color: #06101d; }
 
 #s-ff-race .h2-say {
   grid-column: 2;
   grid-row: 1;
   align-self: center;
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -.02em;
 }
 #s-ff-race .h2-say b { color: var(--ours); }
+#s-ff-race .h2-up {
+  display: block;
+  margin-top: 22px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
 
 /* ================================================================================================
    s-ff-long (dark): knit65 triple; build 1 cross-fades each tile to its t = 62 s still + VBench-Long.
@@ -586,39 +584,3 @@
 /* Animated groups scale around their own box. */
 #s-ff-wavefront .nd,
 #s-ff-wavefront .fin { transform-box: fill-box; transform-origin: 50% 50%; }
-
-/* ================================================================================================
-   s-ff-ablation (light): port of FlashForward s-ablation (../flashforward/css/sec-06.css). Rows build in:
-   history only (failed) → clean history + anchors (0.826, slow) → in-flight history + anchors (0.838, fast);
-   build 3: separate planner/renderer adapters 0.820 → 0.838.
-   ================================================================================================ */
-
-#s-ff-ablation .ab-bd { justify-content: center; padding-bottom: 40px; }
-#s-ff-ablation .ab-table { table-layout: fixed; border-collapse: separate; border-spacing: 0; }
-#s-ff-ablation .ab-c1 { width: 55%; }
-#s-ff-ablation .ab-c2 { width: 17%; }
-#s-ff-ablation .ab-c3 { width: 28%; }
-#s-ff-ablation .ab-table th { font-size: 28px; padding: 16px 20px; }
-#s-ff-ablation .ab-table td { padding: 30px 20px; font-size: 42px; vertical-align: middle; }
-#s-ff-ablation .ab-table th:nth-child(3), #s-ff-ablation .ab-table td:nth-child(3) { padding-left: 48px; }
-#s-ff-ablation .ab-table tr[data-step] { transform: none; }
-
-#s-ff-ablation .ab-mem { display: flex; align-items: center; gap: 28px; }
-#s-ff-ablation .ab-icons { display: flex; align-items: center; gap: 8px; width: 200px; flex: none; }
-#s-ff-ablation .ab-ico { width: 96px; height: 72px; flex: none; }
-#s-ff-ablation .ab-name { font-weight: 600; color: var(--ink); }
-#s-ff-ablation tr.ours .ab-name { color: var(--ours); font-weight: 700; }
-#s-ff-ablation .ab-ours-tag { font-weight: 600; }
-
-#s-ff-ablation .ab-val { font-size: 60px; font-weight: 700; letter-spacing: -.01em; }
-#s-ff-ablation tr.ours .ab-val { font-weight: 800; }
-#s-ff-ablation .ab-fail { font-size: 48px; font-weight: 800; color: var(--kv); }
-#s-ff-ablation .ab-why { display: block; font-size: 28px; font-weight: 500; color: var(--kv); opacity: .85; }
-
-#s-ff-ablation .ab-speed { font-size: 34px; padding: 10px 28px; gap: 12px; }
-#s-ff-ablation .ab-chip-slow { background: var(--fill); color: var(--slate); }
-#s-ff-ablation .ab-slow { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-#s-ff-ablation .ab-extra { display: inline-flex; align-items: center; gap: 12px; font-size: 26px; color: var(--muted); line-height: 1.2; }
-#s-ff-ablation .ab-extra svg { flex: none; }
-
-#s-ff-ablation .ab-note { align-self: flex-start; margin-top: 44px; font-size: 38px; }

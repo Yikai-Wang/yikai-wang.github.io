@@ -26,8 +26,12 @@
 <!-- ===== 01-intro.html ===== -->
 <!-- 01 · Intro: the personal introduction is the first page of the talk.
      Facts: .ref/onepage/BRIEF.md + homepage Papers/Service sections. The works row lists only the papers
-     shown in this talk (all on s-map; NVG, FlashForward, NAVA-WAM, ProWAM in depth), placed in the column of the period they were started in (earliest of arXiv /
-     submission date), so it lines up with the timeline below; "+N more" counts the rest of the homepage list. -->
+     shown in this talk (all on s-map; NVG, FlashForward, NAVA-WAM, ProWAM in depth), placed in the column of the
+     period they were started in (earliest of arXiv / submission date), so it lines up with the timeline below;
+     "+N more" counts the rest of the homepage list. Within a period the papers are grouped by topic, using the
+     short topic names of s-map's grey lines (Inpainting, Editing, Image generation, Video generation, Embodied AI,
+     Vision-language). The two paper awards sit on their paper as a gold badge (ASUKA: CVPR'25 Highlight;
+     SEELE: TMLR J2C), so the honours row keeps only service and the grant. -->
 <section class="slide" id="s-intro" data-title="Yikai Wang" data-section="Intro" data-time="60" data-chrome="none">
   <p class="kicker in-kicker">Towards Vision-Centric World Models</p>
 
@@ -44,30 +48,52 @@
       <p class="in-role">Postdoctoral Researcher · <b>Meta</b>, London</p>
     </div>
 
-    <ul class="in-works w-phd">
-      <li class="in-w">ASUKA</li>
-      <li class="in-w">C2F-Seg</li>
-      <li class="in-w">StreetUnveiler</li>
-      <li class="in-w">SEELE</li>
-      <li class="in-w">LeftRefill</li>
-      <li class="in-w">LexVLA</li>
-      <li class="in-more">+8 more</li>
-    </ul>
-    <ul class="in-works w-mmlab">
-      <li class="in-w">Puffin</li>
-      <li class="in-w">DIRECT</li>
-      <li class="in-w">NVG</li>
-      <li class="in-w">DP4</li>
-      <li class="in-w">ActiveVLA</li>
-      <li class="in-w">ReasonGrounder</li>
-      <li class="in-more">+2 more</li>
-    </ul>
-    <ul class="in-works w-meta">
-      <li class="in-w">FlashForward</li>
-      <li class="in-w">NAVA-WAM</li>
-      <li class="in-w">ProWAM</li>
-      <li class="in-more">+5 more</li>
-    </ul>
+    <!-- works by period, grouped by topic (the short topic names of s-map); awards ride on their paper -->
+    <div class="in-works w-phd">
+      <div class="in-grp"><p class="in-topic">Inpainting</p><ul>
+        <li class="in-w">ASUKA<span class="in-award"><span>CVPR&rsquo;25</span><span>Highlight</span></span></li>
+        <li class="in-w">C2F-Seg</li>
+        <li class="in-w">StreetUnveiler</li>
+        <li class="in-w">LeftRefill</li>
+      </ul></div>
+      <div class="in-grp"><p class="in-topic">Editing</p><ul>
+        <li class="in-w">SEELE<span class="in-award"><span>TMLR</span><span>J2C</span></span></li>
+      </ul></div>
+      <div class="in-grp"><p class="in-topic">Vision-language</p><ul>
+        <li class="in-w">LexVLA</li>
+      </ul></div>
+      <i class="in-br" aria-hidden="true"></i>
+      <p class="in-more">+8 more</p>
+    </div>
+    <div class="in-works w-mmlab">
+      <div class="in-grp"><p class="in-topic">Image generation</p><ul>
+        <li class="in-w">Puffin</li>
+        <li class="in-w">NVG</li>
+      </ul></div>
+      <div class="in-grp"><p class="in-topic">Editing</p><ul>
+        <li class="in-w">DIRECT</li>
+      </ul></div>
+      <div class="in-grp"><p class="in-topic">Embodied AI</p><ul>
+        <li class="in-w">DP4</li>
+        <li class="in-w">ActiveVLA</li>
+      </ul></div>
+      <div class="in-grp"><p class="in-topic">Vision-language</p><ul>
+        <li class="in-w">ReasonGrounder</li>
+      </ul></div>
+      <i class="in-br" aria-hidden="true"></i>
+      <p class="in-more">+2 more</p>
+    </div>
+    <div class="in-works w-meta">
+      <div class="in-grp"><p class="in-topic">Video generation</p><ul>
+        <li class="in-w">FlashForward</li>
+      </ul></div>
+      <div class="in-grp"><p class="in-topic">Embodied AI</p><ul>
+        <li class="in-w">NAVA-WAM</li>
+        <li class="in-w">ProWAM</li>
+      </ul></div>
+      <i class="in-br" aria-hidden="true"></i>
+      <p class="in-more">+5 more</p>
+    </div>
   </div>
 
   <ol class="in-tl">
@@ -108,8 +134,6 @@
 
   <ul class="in-honors">
     <li><b>Area Chair</b> NeurIPS&rsquo;25 &amp; &rsquo;26</li>
-    <li><b>CVPR&rsquo;25</b> Highlight</li>
-    <li><b>TMLR</b> J2C</li>
     <li><b>Co-organizer</b> CVPR&rsquo;22 &amp; &rsquo;23 tutorials · ICCV&rsquo;25 workshop</li>
     <li><b>NVIDIA</b> Academic Grant 2025</li>
   </ul>
@@ -123,9 +147,10 @@
 </section>
 
 <!-- ===== 02a-thesis.html ===== -->
-<!-- 02a · Thesis (builder B). Slides: s-world, s-clock. The two what-is-a-world-model slides. -->
+<!-- 02a · Thesis (builder B). Slides: s-world (builds 0-1: world, then the actor), s-clock (steps 0-3: look,
+     look away, three answers, four requirements). The two what-is-a-world-model slides. -->
 
-<section class="slide" id="s-world" data-title="The world has no language" data-section="Research goal" data-time="100">
+<section class="slide" id="s-world" data-title="The world has no language" data-section="Research goal" data-time="75">
   <header class="hd">
     <p class="kicker">What is a world model?</p>
     <h2 class="title">The world has no language</h2>
@@ -189,37 +214,18 @@
         <p class="aside">Language drives the actor.<br>It does not hold the state.</p>
       </div>
       <p class="lbl act-lbl" data-step="1" data-anim="fade"><i>a</i><sub>t</sub></p>
-
-      <!-- build 2: physics is induced from video, not from text -->
-      <div class="phys" data-step="2">
-        <p class="ph-t">Intuitive physics, zero-shot <span>· IntPhys</span></p>
-        <div class="ph-row">
-          <p class="ph-l">V-JEPA <span>· video-only pre-training</span></p>
-          <div class="ph-bar"><span class="trk"><i class="v"></i></span><b class="num">98%</b></div>
-        </div>
-        <div class="ph-row">
-          <p class="ph-l">VideoMAEv2 <span>· video-only, pixel prediction</span></p>
-          <div class="ph-bar"><span class="trk"><i class="m"></i></span><b class="ch">≈ chance</b></div>
-        </div>
-        <div class="ph-row">
-          <p class="ph-l">Multimodal LLMs</p>
-          <div class="ph-bar"><span class="trk"><i class="m"></i></span><b class="ch">≈ chance</b></div>
-        </div>
-        <p class="ph-k">no text needed · what you predict matters</p>
-      </div>
     </div>
   </div>
-  <p class="src"><span>Clip: FlashForward (ours), text-to-video sample</span><span data-step="2" data-anim="fade"> · IntPhys: Garrido et al. · Meta FAIR 2025</span></p>
+  <p class="src">Clip: FlashForward (ours), text-to-video sample</p>
   <aside class="notes">
     <p>For me, a world model has three parts. First, a hidden <b>state</b>, s at time t, and it persists even when nobody's looking. Second, a renderer, which turns that state into your observation, o at time t. Third, dynamics, which move the state forward in response to an action, so the observation moves forward too.</p>
     <p>This video comes from my recent work. It shows a dancing robot. Its arm swings past the crowd, and behind it, the people and the signs stay right where they were. No sentence was needed for that. There are no words inside the world.</p>
     <p><em>[click]</em> Language lives with the actors, outside the world. An actor sees o at time t and sends back an action, a at time t. An LLM can be that actor's brain, taking an instruction like “wave to the crowd”. The LLM drives the actor. The world stays visual.</p>
-    <p><em>[click]</em> What about physics? A recent study tested several models on IntPhys, an intuitive-physics benchmark. V-JEPA, trained on video alone, tells possible from impossible events <b>98 percent</b> of the time. Multimodal LLMs barely beat an untrained model. So does VideoMAEv2, which also learns from video, but predicts raw pixels. So physics can be learned just by watching. What matters is what you predict.</p>
     <p>Text can still set the scene: most video generative models are text-conditioned. But the state and its dynamics are visual. That's my core belief.</p>
   </aside>
 </section>
 
-<section class="slide" id="s-clock" data-title="The clock test" data-section="Research goal" data-time="120" data-steps="4">
+<section class="slide" id="s-clock" data-title="The clock test" data-section="Research goal" data-time="95" data-steps="3">
   <header class="hd">
     <p class="kicker">The clock test · a thought experiment</p>
     <h2 class="title">Look away for five minutes. Look back.</h2>
@@ -316,9 +322,6 @@
         </figure>
       </div>
 
-      <!-- Step 4: reality check -->
-      <p class="reality" data-step="4" data-anim="fade">on memory benchmarks, today’s models land here</p>
-
       <!-- Step 3: four requirements rise out of the test -->
       <div class="treqs">
         <div class="tq" data-step="3"><span class="req persist">Persist</span><p>it exists while unseen</p></div>
@@ -328,14 +331,12 @@
       </div>
     </div>
   </div>
-  <p class="src" data-step="4" data-anim="fade">LiveWorld, HyDRA 2026: out-of-sight state “frozen” · WorldMemBench 2026: best static-memory model initiates only 31.7% of prescribed events · Genie 3: ~1 min visual memory</p>
   <aside class="notes">
     <p>How would we know that a model really holds a world? Here's the test I keep in mind. It's a thought experiment. You look at a clock on the wall. It says ten past ten.</p>
     <p><em>[click]</em> Now you turn to the window for five minutes. The clock is out of view. But it doesn't wait for you. It keeps running.</p>
     <p><em>[click]</em> Then you look back. What should a model show you? On the left, the clock has vanished: no object permanence. In the middle, it's frozen where you left it: the model kept a memory, but a static one. On the right, it shows <b>ten fifteen</b>. That's a world model. It keeps going like the real world, whether or not you're watching.</p>
     <p><em>[click]</em> This one small test gives us four requirements. Persist: the clock still exists while you're not looking. Consistent: it's the same clock, in the same place, across views and edits. Evolve: it keeps moving, because time passes. And act: if someone changes it, it stays changed. The most exciting case combines persist and evolve: the clock keeps running while nobody looks.</p>
-    <p><em>[click]</em> So where's the field today? On memory benchmarks, current video world models land right here, on the <b>frozen</b> card. LiveWorld and HyDRA, both from this year, describe out-of-sight state as frozen. On WorldMemBench, from October, the best static-memory model triggers just 31.7 percent of the scripted events. And Genie 3 reports about one minute of visual memory.</p>
-    <p>That makes the target concrete, and the field wide open. Each requirement is something we can build and measure. In my past work, I've explored each requirement in a different task. Going forward, I want to combine them and push toward vision-centric world models.</p>
+    <p>That makes the target concrete. Each requirement is something we can build and measure. In my past work, I've explored each requirement in a different task. Going forward, I want to combine them and push toward vision-centric world models.</p>
   </aside>
 </section>
 
@@ -410,8 +411,8 @@
 
 <!-- ===== 04-time.html ===== -->
 <!-- Section 04 · Time: NVG (the anchor idea, moved from 03b) then the FlashForward deep dive (ported from ../flashforward, ids renamed s-ff-*).
-     s-nvg · s-ff-race · s-ff-long · s-ff-inflight · s-ff-wavefront · s-ff-drift · s-ff-anchors · s-ff-ablation · s-ff-notyet.
-     (s-ff-wavefront and s-ff-ablation are back from the removed backup: src/removed/07-backup-removed.html.)
+     s-nvg · s-ff-race · s-ff-long · s-ff-inflight · s-ff-wavefront · s-ff-drift · s-ff-anchors · s-ff-notyet.
+     (s-ff-wavefront is back from the removed backup: src/removed/07-backup-removed.html. s-ff-ablation was cut on 2026-10-27.)
      All FlashForward quality numbers are 1.3B · 480p; 14B rows are timing-only (GB300). -->
 
 <!-- s-nvg · moved from 03b: commit structure first (the source of the anchor idea) ----------------- -->
@@ -467,7 +468,7 @@
 
 
 <!-- s-ff-race · port of s-hook ------------------------------------------------------------ -->
-<section class="slide dark" id="s-ff-race" data-title="Rolling forward, 3.06× faster than Self-Forcing" data-section="Time" data-time="70" data-steps="1">
+<section class="slide dark" id="s-ff-race" data-title="Rolling forward, 3.06× faster than Self-Forcing" data-section="Time" data-time="60" data-steps="1">
   <div class="reqs"><span class="req evolve">Evolve</span></div>
   <header class="hd">
     <h2 class="title">Rolling a world forward, <span class="t-time">3.06×</span> faster than Self-Forcing</h2>
@@ -507,27 +508,41 @@
       <p class="h2-cite cite">Denoising path only, mean of 20 videos. Self-Forcing at its fastest (1 GPU): 57.89 s.</p>
     </div>
     <div class="h2-lower">
-      <!-- Speed-up over Self-Forcing, 65 s video, 4 GPUs (arXiv 2609.32540 Table 4). The race setting, 1.3B · 480p, is the hero. -->
+      <!-- Speed-ups of FlashForward over Self-Forcing and over HiAR: 65 s video, 4 GPUs, denoising path, mean of 20 videos
+           (paper Table generation-time). FlashForward = the faster of its two 4-GPU planner allocations (default at
+           1.3B · 480p, context-parallel in the other three cells); 14B on GB300, timing-only. The race, 1.3B · 480p, is the hero. -->
       <div class="h2-scale" data-step="1" data-anim="up">
-        <div class="h2-head"><b>Speed-up over Self-Forcing</b>
-          <span class="h2-lg"><span class="h2-sh">Self-Forcing</span> → <span class="h2-sf">FlashForward</span></span></div>
+        <div class="h2-head"><b>Speed-up vs Self-Forcing and HiAR</b><span class="h2-lg"><span><i class="h2-sw"></i>the race above</span></span></div>
         <div class="h2-mx">
           <span></span><span class="h2-ch">720p</span><span class="h2-ch">480p</span>
+          <span></span><span class="h2-sub"><span>vs Self-Forcing</span><span>vs HiAR</span></span><span class="h2-sub"><span>vs Self-Forcing</span><span>vs HiAR</span></span>
           <span class="h2-rh">14B</span>
-          <div class="h2-cell" data-k="b720"><span class="h2-x num" data-x="1.49">1.49×</span><span class="h2-s num"><span class="h2-sh">269.41</span> → <span class="h2-sf">181.25</span> s</span></div>
-          <div class="h2-cell" data-k="b480"><span class="h2-x num" data-x="2.64">2.64×</span><span class="h2-s num"><span class="h2-sh">137.89</span> → <span class="h2-sf">52.18</span> s</span></div>
+          <div class="h2-cell" data-k="b720">
+            <span class="h2-v"><span class="h2-x num" data-x="1.49">1.49×</span></span>
+            <span class="h2-v"><span class="h2-x num" data-x="1.68">1.68×</span></span>
+          </div>
+          <div class="h2-cell" data-k="b480">
+            <span class="h2-v"><span class="h2-x num" data-x="2.64">2.64×</span></span>
+            <span class="h2-v"><span class="h2-x num" data-x="1.40">1.40×</span></span>
+          </div>
           <span class="h2-rh">1.3B</span>
-          <div class="h2-cell" data-k="s720"><span class="h2-x num" data-x="1.66">1.66×</span><span class="h2-s num"><span class="h2-sh">97.68</span> → <span class="h2-sf">58.89</span> s</span></div>
-          <div class="h2-cell" data-k="s480"><span class="h2-x num" data-x="3.06">3.06×</span><span class="h2-s num"><span class="h2-sh">65.14</span> → <span class="h2-sf">21.29</span> s</span><span class="h2-this">this race</span></div>
+          <div class="h2-cell" data-k="s720">
+            <span class="h2-v"><span class="h2-x num" data-x="1.66">1.66×</span></span>
+            <span class="h2-v"><span class="h2-x num" data-x="1.47">1.47×</span></span>
+          </div>
+          <div class="h2-cell" data-k="s480">
+            <span class="h2-v"><span class="h2-x num" data-x="3.06">3.06×</span></span>
+            <span class="h2-v"><span class="h2-x num" data-x="1.16">1.16×</span></span>
+          </div>
         </div>
       </div>
-      <p class="h2-say" data-step="1" data-anim="fade">Both sizes,<br>both resolutions:<br><b>up to 3× faster.</b></p>
+      <p class="h2-say" data-step="1" data-anim="fade"><b>Fastest</b> in<br>all four settings<span class="h2-up">up to <b class="num">3.06×</b> vs Self-Forcing<br>up to <b class="num">1.68×</b> vs HiAR</span></p>
     </div>
   </div>
-  <p class="src">FlashForward · preprint 2026 · first author · 65 s videos, 4 GPUs</p>
+  <p class="src">FlashForward · preprint 2026 · first author · 65 s videos, 4 GPUs · 14B on GB300, timing only · FlashForward = faster of its two planner settings</p>
   <aside class="notes">
     <p>Here's that work. A world model has to carry its state forward, far and cheaply. That's what <b>FlashForward</b> does. Let's start with a race. Each model generates a 65-second video from the same prompt, chunk by chunk, on the same four GPUs. Each bar is wall-clock time for the denoising. Watch FlashForward, on the right. FlashForward finishes in 21 seconds, on average. HiAR comes in a few seconds later. Self-Forcing needs 65 seconds, so we're more than <b>three times</b> faster.</p>
-    <p><em>[click]</em> Here's every setting: two model sizes, two resolutions. FlashForward beats Self-Forcing in all four settings. And it's not just fast: the video stays stable, even after a full minute.</p>
+    <p><em>[click]</em> Here's every setting: two model sizes, two resolutions, against both baselines. FlashForward is the fastest in all four: up to 3.06 times faster than Self-Forcing, and up to 1.68 times faster than HiAR. The gap to HiAR is largest at 720p and at 14B, the most expensive settings. And it's not just fast: the video stays stable, even after a full minute.</p>
   </aside>
 </section>
 
@@ -894,117 +909,8 @@
   </aside>
 </section>
 
-<!-- s-ff-ablation · port of s-ablation (via the removed backup s-bk-ablation): both memories are needed ---- -->
-<section class="slide" id="s-ff-ablation" data-title="Both memories" data-section="Time" data-time="40">
-  <div class="reqs"><span class="req evolve">Evolve</span></div>
-  <header class="hd">
-    <h2 class="title">Both memories are needed</h2>
-  </header>
-  <div class="bd ab-bd">
-    <table class="table ab-table">
-          <colgroup><col class="ab-c1"><col class="ab-c2"><col class="ab-c3"></colgroup>
-          <thead>
-            <tr><th>Renderer memory</th><th class="r">VBench Total</th><th>Speed</th></tr>
-          </thead>
-          <tbody>
-            <tr class="ab-r1">
-              <td>
-                <div class="ab-mem">
-                  <span class="ab-icons">
-                    <svg class="ab-ico ab-mirror" viewBox="0 0 160 120" aria-hidden="true">
-                      <defs><pattern id="ffa-grain" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="var(--ours-soft)"/><circle cx="3" cy="3" r="2" fill="var(--ours)"/><circle cx="10" cy="6" r="1.6" fill="var(--ours)" opacity=".7"/><circle cx="5.5" cy="11" r="1.7" fill="var(--ours)" opacity=".85"/><circle cx="12.5" cy="12.5" r="1.2" fill="var(--ours)" opacity=".5"/></pattern></defs>
-                      <path d="M80 6V22M66 6H94" fill="none" stroke="var(--ours)" stroke-width="8" stroke-linecap="round"/>
-                      <rect x="8" y="22" width="144" height="72" rx="30" fill="url(#ffa-grain)" stroke="var(--ours)" stroke-width="8"/>
-                      <path d="M150 108H34M48 98 34 108 48 118" fill="none" stroke="var(--ours)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </span>
-                  <span class="ab-name">In-flight history only</span>
-                </div>
-              </td>
-              <td class="r"><span class="ab-fail">failed</span><span class="ab-why">flicker</span></td>
-              <td>
-                <span class="chip done ab-speed">
-                  <svg viewBox="0 0 20 28" width="18" height="26" aria-hidden="true"><path d="M12 1 2 16h7l-2 11 11-16h-7z" fill="currentColor"/></svg>fast
-                </span>
-              </td>
-            </tr>
-            <tr data-step="1" data-anim="fade">
-              <td>
-                <div class="ab-mem">
-                  <span class="ab-icons">
-                    <svg class="ab-ico ab-mirror" viewBox="0 0 160 120" aria-hidden="true">
-                      <path d="M80 6V22M66 6H94" fill="none" stroke="var(--slate)" stroke-width="8" stroke-linecap="round"/>
-                      <rect x="8" y="22" width="144" height="72" rx="30" fill="#fff" stroke="var(--slate)" stroke-width="8"/>
-                      <path d="M50 80 78 38M78 82 100 49" stroke="var(--slate)" stroke-width="6" stroke-linecap="round" opacity=".45"/>
-                      <path d="M150 108H34M48 98 34 108 48 118" fill="none" stroke="var(--slate)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <svg class="ab-ico" viewBox="0 0 64 56" aria-hidden="true">
-                      <path d="M24 10v44" stroke="var(--anchor-text)" stroke-width="4" stroke-linecap="round"/>
-                      <path d="M10 8h36l10 9-10 9H10z" fill="var(--anchor)"/>
-                      <path d="M40 30H14l-8 7 8 7h26z" fill="var(--anchor-bg)" stroke="var(--anchor)" stroke-width="3"/>
-                    </svg>
-                  </span>
-                  <span class="ab-name">Clean history + anchors</span>
-                </div>
-              </td>
-              <td class="r"><span class="ab-val num">0.826</span></td>
-              <td>
-                <div class="ab-slow">
-                  <span class="chip ab-speed ab-chip-slow">
-                    <svg viewBox="0 0 34 24" width="32" height="22" aria-hidden="true"><path d="M4 18c0-8 5-13 12-13s12 5 12 13z" fill="currentColor"/><circle cx="30" cy="14" r="3.4" fill="currentColor"/><path d="M8 18v4M22 18v4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>slow
-                  </span>
-                  <span class="ab-extra">
-                    <svg viewBox="0 0 34 26" width="34" height="26" aria-hidden="true">
-                      <defs><pattern id="ffa-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><rect width="2.4" height="6" fill="var(--kv)"/></pattern></defs>
-                      <rect x="2" y="2" width="30" height="22" rx="5" fill="url(#ffa-hatch)" stroke="var(--kv)" stroke-width="2"/>
-                    </svg>
-                    extra forwards, like Self-Forcing
-                  </span>
-                </div>
-              </td>
-            </tr>
-            <tr class="ours" data-step="2" data-anim="fade">
-              <td>
-                <div class="ab-mem">
-                  <span class="ab-icons">
-                    <svg class="ab-ico ab-mirror" viewBox="0 0 160 120" aria-hidden="true">
-                      <path d="M80 6V22M66 6H94" fill="none" stroke="var(--ours)" stroke-width="8" stroke-linecap="round"/>
-                      <rect x="8" y="22" width="144" height="72" rx="30" fill="url(#ffa-grain)" stroke="var(--ours)" stroke-width="8"/>
-                      <path d="M150 108H34M48 98 34 108 48 118" fill="none" stroke="var(--ours)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <svg class="ab-ico" viewBox="0 0 64 56" aria-hidden="true">
-                      <path d="M24 10v44" stroke="var(--anchor-text)" stroke-width="4" stroke-linecap="round"/>
-                      <path d="M10 8h36l10 9-10 9H10z" fill="var(--anchor)"/>
-                      <path d="M40 30H14l-8 7 8 7h26z" fill="var(--anchor-bg)" stroke="var(--anchor)" stroke-width="3"/>
-                    </svg>
-                  </span>
-                  <span class="ab-name">In-flight history + anchors <span class="ab-ours-tag">(ours)</span></span>
-                </div>
-              </td>
-              <td class="r"><span class="ab-val num">0.838</span></td>
-              <td>
-                <span class="chip done ab-speed">
-                  <svg viewBox="0 0 20 28" width="18" height="26" aria-hidden="true"><path d="M12 1 2 16h7l-2 11 11-16h-7z" fill="currentColor"/></svg>fast
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    <div class="callout ab-note" data-step="3">
-      <b>Separate planner/renderer adapters:</b> <span class="num">0.820 → <b>0.838</b></span> after distillation
-    </div>
-  </div>
-  <p class="src">FlashForward · preprint 2026 · VBench Total, 1.3B · 480p · all variants trained under the same setup</p>
-  <aside class="notes">
-    <p>Do we really need both memories? We trained every variant under the same setup. In-flight history alone is fast, but as we just saw, it flickers.</p>
-    <p><em>[click]</em> Use clean history plus anchors, and the score comes back: 0.826. But clean history costs extra forward passes again, just like Self-Forcing, so it's slow.</p>
-    <p><em>[click]</em> In-flight history plus anchors gives us both: just as fast, and the best score, 0.838.</p>
-    <p><em>[click]</em> One more ingredient: the planner and the renderer each get their own role embedding and LoRA. That lifts the distilled model from 0.820 to <b>0.838</b>.</p>
-  </aside>
-</section>
-
 <!-- s-ff-notyet · honest scorecard --------------------------------------------------------------- -->
-<section class="slide" id="s-ff-notyet" data-title="A rollout engine, ready for an actor" data-section="Time" data-time="35" data-steps="1">
+<section class="slide" id="s-ff-notyet" data-title="A rollout engine, ready for an actor" data-section="Time" data-time="25" data-steps="1">
   <div class="reqs"><span class="req evolve">Evolve</span></div>
   <header class="hd">
     <h2 class="title">A rollout engine, ready for an actor</h2>
@@ -1055,7 +961,7 @@
      learned from plain video). DP4 and ActiveVLA live in 08c-act (backup). -->
 
 <!-- s-nava · the mechanism ------------------------------------------------------------------------- -->
-<section class="slide" id="s-nava" data-title="NAVA-WAM: action priors by watching" data-section="Action" data-time="85">
+<section class="slide" id="s-nava" data-title="NAVA-WAM: action priors by watching" data-section="Action" data-time="115">
   <div class="reqs"><span class="req act">Act</span><span class="req evolve">Evolve</span></div>
   <header class="hd">
     <p class="kicker">Act · dynamics from video</p>
@@ -1071,7 +977,31 @@
           <marker id="nv-head-m" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
             <path d="M1 1 L11 6 L1 11 Z" class="nv-head-muted" />
           </marker>
+          <marker id="nv-head-a" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+            <path d="M1 1 L11 6 L1 11 Z" class="nv-head-act" />
+          </marker>
         </defs>
+
+        <!-- who sees whom inside one transition (rows look at columns): now sees only itself;
+             the noised next frame and the action tokens see all three -->
+        <g class="nv-mask">
+          <text class="nv-k c" x="1569" y="30">who sees whom</text>
+          <text class="nv-m c" x="1513" y="70">now</text>
+          <text class="nv-m c" x="1569" y="70">next</text>
+          <text class="nv-m c" x="1625" y="70">act</text>
+          <text class="nv-m r" x="1478" y="113">now</text>
+          <text class="nv-m r" x="1478" y="169">next</text>
+          <text class="nv-m r" x="1478" y="225">act</text>
+          <rect class="on" x="1490" y="82" width="46" height="46" rx="6" />
+          <rect x="1546" y="82" width="46" height="46" rx="6" />
+          <rect x="1602" y="82" width="46" height="46" rx="6" />
+          <rect class="on" x="1490" y="138" width="46" height="46" rx="6" />
+          <rect class="on" x="1546" y="138" width="46" height="46" rx="6" />
+          <rect class="on" x="1602" y="138" width="46" height="46" rx="6" />
+          <rect class="on" x="1490" y="194" width="46" height="46" rx="6" />
+          <rect class="on" x="1546" y="194" width="46" height="46" rx="6" />
+          <rect class="on" x="1602" y="194" width="46" height="46" rx="6" />
+        </g>
 
         <!-- future video + the only loss -->
         <text class="nv-k" x="120" y="28">future video</text>
@@ -1103,6 +1033,11 @@
         <text class="nv-blk-t act" x="1236" y="350">Action-DiT</text>
         <text class="nv-blk-s act" x="1236" y="398">trainable</text>
 
+        <!-- after pre-training, this same Action-DiT is the policy's action expert -->
+        <path class="nv-keep" d="M1452 350 H1498" marker-end="url(#nv-head-a)" />
+        <text class="nv-keep-t" x="1594" y="342">kept in</text>
+        <text class="nv-keep-t" x="1594" y="378">the policy</text>
+
         <!-- inputs -->
         <text class="nv-k" x="120" y="572">video,</text>
         <text class="nv-k" x="120" y="608">no actions</text>
@@ -1126,7 +1061,7 @@
           <rect x="1168" y="540" width="84" height="84" rx="8" />
           <rect x="1264" y="540" width="84" height="84" rx="8" />
         </g>
-        <text class="nv-k c" x="1210" y="676">noise</text>
+        <text class="nv-k c" x="1210" y="676">action tokens: pure noise</text>
         <path class="nv-link" d="M1210 534 V462" marker-end="url(#nv-head-m)" />
 
         <!-- no action labels: an empty input slot -->
@@ -1145,7 +1080,9 @@
     <p>I've been involved in the world-action-model projects at Meta. In these works, I was mainly involved in exploring and discussing the method design for the video part.</p>
     <p>Remember the dynamics from the start of the talk: the next state, given the current state and an action. Robot data with action labels is scarce. Video is abundant, but it carries no actions.</p>
     <p>NAVA-WAM pairs a frozen video diffusion transformer with a smaller, trainable action transformer. The frozen video model plays the dynamics. It sees the current frame and a noised next frame, and it predicts the future. That future video is the <b>only loss</b>. There are no action labels; a caption describes each clip. The clips come from robot datasets such as Open X-Embodiment and AgiBot World, and from egocentric human video in EgoDex.</p>
-    <p>The gradient flows past the frozen block into the action half. The action half sees the future only through noise, so it can't copy the answer. It has to encode the change. So the action becomes whatever explains what changes next. Later, labelled robot demos ground it in real motor commands. But the prior itself is learned just by <b>watching</b>.</p>
+    <p>Top right: who sees whom. Read it row by row. Inside each step, the current frame looks only at itself. The noised next frame looks at the current frame and at the action tokens. And the action tokens look at both frames.</p>
+    <p>The gradient flows past the frozen block into the action half. The video model is frozen, so the only way to lower the loss is through the action tokens, and it learns to carry exactly what the current frame can't tell you: how things move next. The action half sees the next frame only noised, so it can't copy the answer.</p>
+    <p>And nothing gets thrown away: this same action transformer is <b>kept</b>, grounded with labelled demos, and becomes the policy's action expert. But the prior itself is learned just by <b>watching</b>.</p>
   </aside>
 </section>
 
@@ -1309,7 +1246,7 @@
 </section>
 
 <!-- s-prowam · progress-indexed visual plans ------------------------------------------------------- -->
-<section class="slide dark" id="s-prowam" data-title="ProWAM: plan by imagining" data-section="Action" data-time="85">
+<section class="slide" id="s-prowam" data-title="ProWAM: plan by imagining" data-section="Action" data-time="105">
   <div class="reqs"><span class="req act">Act</span><span class="req evolve">Evolve</span></div>
   <header class="hd">
     <p class="kicker">Act · plan in pixels</p>
@@ -1347,7 +1284,7 @@
           </div>
         </div>
         <div class="pr-foot">
-          <p class="pr-key"><span><i class="real"></i>camera frame</span><span><i class="imag"></i>imagined, one forward pass</span></p>
+          <p class="pr-key"><span><i class="real"></i>camera frame</span><span><i class="imag"></i>imagined, one denoising step</span></p>
           <p class="pr-cap">RoboTwin, closed loop</p>
         </div>
       </div>
@@ -1357,14 +1294,15 @@
   <p class="src">ProWAM · preprint 2026</p>
   <aside class="notes">
     <p>NAVA learns an action prior by watching. ProWAM takes the next step: it plans by <b>imagining</b>. Again there are two experts, one for video and one for actions, and a T5-encoded instruction names the task.</p>
-    <p>Follow the blue timeline. From the current camera frame, the video expert imagines a few sub-goal frames, indexed by task progress: twenty, forty, seventy percent of the way. The sub-goals are placed by progress, not by clock time, so the same plan fits short tasks and long ones. It does all this in one forward pass. The action expert reuses that cache and drives the real arm toward the sub-goals, in red. Compared with denoising video and actions together, that's about ten times fewer passes through the video expert.</p>
-    <p>You've seen this idea before. FlashForward places sparse, clean anchors ahead. Here those anchors become milestones for an actor.</p>
-    <p><em>[click]</em> And the plan stays grounded. This is a closed loop in RoboTwin. From the first camera frame, it imagines three milestones toward placing the burger. Then it replans. The newest camera frame becomes the new start, and the milestones move on to the fries. Every plan re-anchors on what the robot actually sees.</p>
+    <p>Follow the blue timeline. From the current camera frame, the video expert imagines a few sub-goal frames, indexed by task progress: twenty, forty, seventy percent of the way. The sub-goals are placed by progress, not by clock time, so the same plan fits short tasks and long ones. The action expert then drives the real arm toward the sub-goals, in red.</p>
+    <p>Those sparse sub-goals should look familiar. FlashForward places sparse, clean anchors ahead. Here those anchors become milestones for an actor.</p>
+    <p>And ProWAM doesn't need to finish the denoising. The video expert takes a single step, and the action expert reads its attention keys and values directly, reusing them for every action step. Compared with denoising video and actions together, that's about ten times fewer passes through the video expert.</p>
+    <p><em>[click]</em> And the plan stays grounded. This is a closed loop in RoboTwin. From the first camera frame, it imagines three milestones toward placing the burger. These frames are that same single step, turned back into pixels. The layout and the progress toward the goal are already there, which is all the actor needs. Then it replans. The newest camera frame becomes the new start, and the milestones move on to the fries. Every plan re-anchors on what the robot actually sees.</p>
   </aside>
 </section>
 
 <!-- s-prowam-video · imagination from plain video, and what it buys ------------------------------- -->
-<section class="slide dark" id="s-prowam-video" data-title="Imagination from plain video" data-section="Action" data-time="75">
+<section class="slide" id="s-prowam-video" data-title="Imagination from plain video" data-section="Action" data-time="75">
   <div class="reqs"><span class="req act">Act</span><span class="req evolve">Evolve</span></div>
   <header class="hd">
     <p class="kicker">Act · imagination from video</p>

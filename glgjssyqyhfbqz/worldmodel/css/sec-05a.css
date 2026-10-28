@@ -1,5 +1,6 @@
 /* 05a · Action deep dive: s-nava, s-nava-transfer, s-nava-labels, s-nava-robot (NAVA-WAM), s-prowam, s-prowam-video
-   (ProWAM). Colour: --act = NAVA-WAM / ProWAM results; greys = baselines; blue frames = imagined, white = camera.
+   (ProWAM). Colour: --act = NAVA-WAM / ProWAM results; greys = baselines; blue frames = imagined, ink = camera
+   (white = real input inside the OOD wall's dark media panel).
    Every selector is scoped by a slide id. */
 
 #s-nava .kicker,
@@ -44,6 +45,15 @@
 #s-nava .nv-cap { fill: var(--surface); stroke: var(--muted); stroke-width: 2.5; }
 #s-nava .nv-cap-t { font-size: 28px; font-weight: 600; fill: var(--muted); text-anchor: middle; }
 #s-nava .nv-cap-s { font-size: 24px; font-weight: 500; }
+/* who sees whom: a neutral attention mask (filled = can see) */
+#s-nava .nv-mask rect { fill: var(--surface); stroke: var(--line); stroke-width: 2; }
+#s-nava .nv-mask rect.on { fill: var(--muted); stroke: none; }
+#s-nava .nv-m { font-size: 22px; font-weight: 600; fill: var(--muted); }
+#s-nava .nv-m.c { text-anchor: middle; }
+#s-nava .nv-m.r { text-anchor: end; }
+/* the Action-DiT is kept: it becomes the policy's action expert */
+#s-nava .nv-keep { fill: none; stroke: var(--act); stroke-width: 3; }
+#s-nava .nv-keep-t { font-size: 28px; font-weight: 700; fill: var(--act); text-anchor: middle; }
 
 /* ======================= s-nava-transfer: rows revealed one by one ======================= */
 /* Crop media/navawam/motion-transfer-rows.jpg is 1716x868: columns start at 0/287/574/861/1148/1434 px,
@@ -137,11 +147,15 @@
 #s-nava-robot .nr-chipline { margin-top: 34px; }
 #s-nava-robot .nr-chipline .chip { font-size: 28px; padding: 8px 26px; }
 
-/* ======================= s-prowam (dark): teaser, then the closed loop ======================= */
+/* ======================= s-prowam: teaser, then the closed loop ======================= */
+/* Light slide. Teaser = a dark media panel (the video's own background). Closed loop: ink frame = camera frame,
+   blue frame = imagined sub-goal (the same blue the teaser uses for its sub-goal timeline). */
 
+#s-prowam { --pr-imag: #1a8ad8; }  /* close to the cyan the paper's figures use for imagined frames, ≥ 3:1 on white */
 #s-prowam .pr-stage { flex: 1; min-height: 0; display: grid; grid-template-columns: 100%; place-items: center; }
 #s-prowam .pr-stage > * { grid-area: 1 / 1; }
-#s-prowam .pr-teaser video { width: 1280px; height: 458px; }
+#s-prowam .pr-teaser { border-radius: 14px; overflow: hidden; }
+#s-prowam .pr-teaser video { display: block; width: 1280px; height: 458px; }
 /* static / print: show the teaser's last frame (the engine leaves the video on its blank first frame) */
 html.is-static #s-prowam .pr-teaser { background: url(../media/05a/prowam-teaser-end.jpg) center / 1280px 458px no-repeat; }
 html.is-static #s-prowam .pr-teaser video { visibility: hidden; }
@@ -149,22 +163,22 @@ html.is-static #s-prowam .pr-teaser video { visibility: hidden; }
 #s-prowam .pr-loop { display: flex; flex-direction: column; align-items: center; }
 #s-prowam .pr-strip { display: flex; align-items: flex-end; }
 #s-prowam .pr-grp { position: relative; display: grid; grid-template-columns: repeat(4, 186px); column-gap: 14px; }
-#s-prowam .pr-axis { position: absolute; left: 93px; right: 6px; top: 49px; height: 4px; background: #3b82f6; }
+#s-prowam .pr-axis { position: absolute; left: 93px; right: 6px; top: 49px; height: 4px; background: var(--pr-imag); }
 #s-prowam .pr-axis i {
   position: absolute; right: -14px; top: -8px; width: 0; height: 0;
-  border-left: 18px solid #3b82f6; border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+  border-left: 18px solid var(--pr-imag); border-top: 10px solid transparent; border-bottom: 10px solid transparent;
 }
 #s-prowam .pr-cell figcaption {
   position: relative; z-index: 1; text-align: center;
-  font-size: 30px; font-weight: 700; line-height: 34px; color: #60a5fa;
+  font-size: 30px; font-weight: 700; line-height: 34px; color: var(--pr-imag);
 }
 #s-prowam .pr-cell figcaption::after {
-  content: ""; display: block; width: 16px; height: 16px; margin: 9px auto 0; border-radius: 50%; background: #3b82f6;
+  content: ""; display: block; width: 16px; height: 16px; margin: 9px auto 0; border-radius: 50%; background: var(--pr-imag);
 }
 #s-prowam .pr-cell.real figcaption { color: var(--ink); }
-#s-prowam .pr-cell.real figcaption::after { background: #fff; }
-#s-prowam .pr-cell img { display: block; width: 186px; height: auto; margin-top: 18px; border-radius: 4px; box-shadow: 0 0 0 4px #3b82f6; }
-#s-prowam .pr-cell.real img { box-shadow: 0 0 0 4px #fff; }
+#s-prowam .pr-cell.real figcaption::after { background: var(--ink); }
+#s-prowam .pr-cell img { display: block; width: 186px; height: auto; margin-top: 18px; border-radius: 4px; box-shadow: 0 0 0 4px var(--pr-imag); }
+#s-prowam .pr-cell.real img { box-shadow: 0 0 0 4px var(--ink); }
 
 #s-prowam .pr-replan {
   width: 120px; height: 146px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
@@ -174,26 +188,34 @@ html.is-static #s-prowam .pr-teaser video { visibility: hidden; }
 #s-prowam .pr-replan path { fill: none; stroke: var(--muted); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 
 #s-prowam .pr-foot { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 34px; }
-#s-prowam .pr-key { display: flex; gap: 40px; font-size: 26px; color: var(--muted); }
+#s-prowam .pr-key { display: flex; gap: 40px; font-size: 26px; color: var(--ink-soft); }
 #s-prowam .pr-key span { display: inline-flex; align-items: center; gap: 12px; }
-#s-prowam .pr-key i { width: 26px; height: 20px; border: 3px solid #fff; border-radius: 3px; }
-#s-prowam .pr-key i.imag { border-color: #3b82f6; }
+#s-prowam .pr-key i { width: 26px; height: 20px; border: 3px solid var(--ink); border-radius: 3px; }
+#s-prowam .pr-key i.imag { border-color: var(--pr-imag); }
 #s-prowam .pr-cap { font-size: 26px; color: var(--muted); }
 
-/* ======================= s-prowam-video (dark) ======================= */
+/* ======================= s-prowam-video ======================= */
+/* Light slide. The OOD wall stays a dark media panel: its own frames are white (real input) or blue (imagined),
+   so the legend swatches are small copies of that panel. */
 
 #s-prowam-video .bd { justify-content: center; align-items: center; }
-#s-prowam-video .pw-ood { display: grid; grid-template-columns: 960px 680px; gap: 60px; align-items: center; }
-#s-prowam-video .pw-wall video { width: 960px; height: 488px; border-radius: 8px; }
-#s-prowam-video .pw-key { display: flex; gap: 40px; margin-top: 18px; font-size: 26px; color: var(--muted); }
+#s-prowam-video .pw-ood { display: grid; grid-template-columns: 980px 680px; gap: 40px; align-items: center; }
+#s-prowam-video .pw-wall video {
+  display: block; box-sizing: content-box; width: 960px; height: 488px; padding: 10px;
+  background: #0b0d12; border-radius: 14px;
+}
+#s-prowam-video .pw-key { display: flex; gap: 40px; margin-top: 18px; font-size: 26px; color: var(--ink-soft); }
 #s-prowam-video .pw-key span { display: inline-flex; align-items: center; gap: 12px; }
-#s-prowam-video .pw-key i { width: 26px; height: 20px; border: 3px solid #fff; border-radius: 3px; }
-#s-prowam-video .pw-key i.imag { border-color: #3b82f6; }
+#s-prowam-video .pw-key i {
+  width: 36px; height: 28px; border-radius: 5px; background: #0b0d12;
+  box-shadow: inset 0 0 0 4px #0b0d12, inset 0 0 0 7px #fff;
+}
+#s-prowam-video .pw-key i.imag { box-shadow: inset 0 0 0 4px #0b0d12, inset 0 0 0 7px #1a8ad8; }
 
 #s-prowam-video .pw-side { display: grid; align-items: center; }
 #s-prowam-video .pw-side > * { grid-area: 1 / 1; }
 #s-prowam-video .pw-facts { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 34px; }
-#s-prowam-video .pw-facts li { position: relative; padding-left: 50px; font-size: 46px; font-weight: 700; line-height: 1.15; }
+#s-prowam-video .pw-facts li { position: relative; padding-left: 50px; font-size: 46px; font-weight: 700; line-height: 1.15; color: var(--ink); }
 #s-prowam-video .pw-facts li + li { margin-top: 0; }
 #s-prowam-video .pw-facts li::before {
   content: ""; position: absolute; left: 0; top: .5em; width: 28px; height: 6px; border-radius: 3px; background: var(--act);
@@ -202,17 +224,17 @@ html.is-static #s-prowam .pr-teaser video { visibility: hidden; }
 #s-prowam-video .pw-chart-k { font-size: 26px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 #s-prowam-video .pw-legend { display: flex; gap: 28px; margin-top: 10px; font-size: 24px; color: var(--ink-soft); }
 #s-prowam-video .pw-legend span { display: inline-flex; align-items: center; gap: 10px; }
-#s-prowam-video .pw-legend i { width: 20px; height: 20px; border-radius: 50%; background: var(--sf); }
+#s-prowam-video .pw-legend i { width: 20px; height: 20px; border-radius: 50%; background: var(--sf-text); }
 #s-prowam-video .pw-legend i.w { background: var(--act); }
 #s-prowam-video .pw-dumb { width: 680px; height: auto; margin-top: 4px; overflow: visible; }
 #s-prowam-video .pw-grid path { stroke: var(--line); stroke-width: 2; }
 #s-prowam-video .pw-grid text { font-size: 24px; fill: var(--muted); text-anchor: middle; }
 #s-prowam-video .pw-row-k { font-size: 30px; font-weight: 600; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 8px; stroke-linejoin: round; }
-#s-prowam-video .pw-bar { stroke: var(--act); stroke-width: 6; opacity: .55; }
-#s-prowam-video .pw-wo { fill: var(--sf); }
+#s-prowam-video .pw-bar { stroke: var(--act); stroke-width: 6; opacity: .45; }
+#s-prowam-video .pw-wo { fill: var(--sf-text); }
 #s-prowam-video .pw-w { fill: var(--act); }
 #s-prowam-video .pw-v { font-size: 30px; font-weight: 700; paint-order: stroke; stroke: var(--bg); stroke-width: 8px; stroke-linejoin: round; }
-#s-prowam-video .pw-v.wo { fill: var(--muted); text-anchor: end; }
+#s-prowam-video .pw-v.wo { fill: var(--sf-text); text-anchor: end; }
 #s-prowam-video .pw-v.w { fill: var(--act); }
 
 #s-prowam-video .pw-foot { margin-top: 4px; font-size: 22px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
@@ -221,7 +243,7 @@ html.is-static #s-prowam .pr-teaser video { visibility: hidden; }
 #s-prowam-video .pw-n { font-size: 28px; color: var(--ink-soft); }
 #s-prowam-video .pw-track { height: 24px; border-radius: 6px; background: var(--fill); overflow: hidden; }
 #s-prowam-video .pw-track i { display: block; height: 100%; width: calc(var(--v) * 1%); background: var(--sf); border-radius: 6px; }
-#s-prowam-video .pw-hb b { font-size: 30px; color: var(--muted); }
+#s-prowam-video .pw-hb b { font-size: 30px; color: var(--sf-text); }
 #s-prowam-video .pw-hb.ours .pw-n { color: var(--ink); font-weight: 700; }
 #s-prowam-video .pw-hb.ours .pw-track i { background: var(--act); }
 #s-prowam-video .pw-hb.ours b { color: var(--act); }

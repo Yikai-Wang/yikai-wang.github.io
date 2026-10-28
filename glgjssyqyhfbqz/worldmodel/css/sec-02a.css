@@ -1,4 +1,4 @@
-/* 02a · Thesis: s-world, s-clock (builder B). Every selector is scoped to its slide id. */
+/* 02a · Thesis: s-world (builds 0-1), s-clock (steps 0-3) (builder B). Every selector is scoped to its slide id. */
 
 /* =====================================================================
    s-world: state / render / dynamics around a world with no words in it
@@ -64,27 +64,6 @@
 #s-world .bubble .llm { padding: 6px 14px; border-radius: 12px; background: var(--lang); color: #fff; font-size: 24px; font-weight: 800; letter-spacing: .06em; }
 #s-world .bubble .say { font-size: 32px; font-weight: 600; font-style: italic; }
 #s-world .actor .aside { position: absolute; left: 222px; top: 258px; margin: 0; font-size: 26px; line-height: 1.35; color: var(--muted); white-space: nowrap; }
-
-/* IntPhys evidence: sits under the actor, clear of the a_t label (x <= 1060) and the robot (y <= 410) */
-#s-world .phys {
-  position: absolute; left: 1090px; top: 428px; width: 610px;
-  padding: 14px 26px 14px; border-radius: 20px; background: var(--surface);
-  display: flex; flex-direction: column; gap: 10px;
-}
-#s-world .ph-t { font-size: 26px; line-height: 1.2; font-weight: 700; color: var(--ink); }
-#s-world .ph-t span { font-weight: 500; color: var(--muted); }
-#s-world .ph-row { display: flex; flex-direction: column; gap: 7px; }
-#s-world .ph-l { font-size: 26px; line-height: 1.1; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
-#s-world .ph-l span { font-size: 24px; font-weight: 400; color: var(--muted); }
-#s-world .ph-bar { position: relative; display: flex; align-items: center; gap: 16px; height: 22px; }
-#s-world .trk { position: relative; display: block; width: 440px; height: 22px; border-radius: 7px; background: #e6e9ed; }
-#s-world .trk::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 3px dashed var(--muted); }
-#s-world .trk i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 7px; }
-#s-world .trk i.v { width: 98%; background: var(--space); }
-#s-world .trk i.m { width: 50%; background: #aeb4bd; }
-#s-world .ph-bar b { font-size: 32px; line-height: 1; font-weight: 800; color: var(--space); }
-#s-world .ph-bar b.ch { position: absolute; left: 236px; top: 50%; transform: translateY(-50%); font-size: 26px; font-weight: 700; color: var(--muted); white-space: nowrap; }
-#s-world .ph-k { margin-top: 0; font-size: 24px; line-height: 1.2; font-style: italic; color: var(--muted); }
 
 /* =====================================================================
    s-clock: the clock test
@@ -163,18 +142,6 @@
 #s-clock .m-gone { fill: none; stroke: #b9bfc7; stroke-width: 4; stroke-dasharray: 12 12; }
 #s-clock .m-nail { fill: #8a9099; }
 #s-clock .m-vf { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-
-/* step 4: reality check on the frozen card */
-#s-clock[data-current-step="4"] .card.c-frz { box-shadow: 0 0 0 6px var(--ink); }
-#s-clock .reality {
-  position: absolute; left: 0; right: 0; top: 474px; width: fit-content; margin: 0 auto;
-  padding: 14px 32px; border-radius: 999px; background: var(--ink); color: #fff;
-  font-size: 32px; font-weight: 700; white-space: nowrap;
-}
-#s-clock .reality::before {
-  content: ""; position: absolute; left: 50%; top: -15px; margin-left: -16px;
-  border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 16px solid var(--ink);
-}
 
 /* step 3: four requirement tags rise out of the test */
 #s-clock .treqs { position: absolute; left: 0; top: 576px; width: 1700px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }

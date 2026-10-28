@@ -1,4 +1,5 @@
-/* 02a · Thesis (builder B): the clock test (s-clock). s-world is static markup + builds. */
+/* 02a · Thesis (builder B): the clock test (s-clock, steps 0-3: look, look away, three answers, four
+   requirements; steps 2-3 are CSS builds). s-world is static markup + builds. */
 (() => {
   'use strict';
 
@@ -59,7 +60,7 @@
   };
 
   Deck.register('s-clock', {
-    steps: 4,
+    steps: 3,
 
     init(slide) {
       const room = slide.querySelector('.room');

@@ -67,8 +67,8 @@
     run.onCancel(() => { cancelAnimationFrame(raf); if (racing === run) racing = null; });
   };
 
-  // Step 1: speed-ups over Self-Forcing count up from 1.00x, the 1.3B · 480p hero last. Own run key, so the
-  // race keeps going underneath.
+  // Step 1: the eight speed-ups (vs Self-Forcing, vs HiAR, per setting) count up from 1.00x, the 1.3B · 480p
+  // hero last. Own run key, so the race keeps going underneath.
   const countScale = (slide, animate) => {
     const scale = slide.querySelector('.h2-scale');
     const run = FF.run(scale);
@@ -77,7 +77,7 @@
       el.textContent = `${el.dataset.x}×`;
       if (!animate) return;
       el.textContent = '1.00×';
-      FF.wait(250 + i * 140, run).then((ok) => {
+      FF.wait(250 + i * 90, run).then((ok) => {
         if (ok) FF.countUp(el, to, { from: 1, dur: 900, decimals: 2, suffix: '×', run });
       });
     });
