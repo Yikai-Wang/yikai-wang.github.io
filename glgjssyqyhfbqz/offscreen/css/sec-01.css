@@ -1,0 +1,7 @@
+/* 01 · Title */
+#s-title .tt-clock { position: absolute; right: 150px; top: 120px; width: 400px; height: 400px; overflow: visible; }
+#s-title .tt-sec line { stroke: var(--ours); stroke-width: 6; stroke-linecap: round; }
+#s-title .tt-pin { fill: var(--ours); }
+#s-title .kicker { margin-bottom: 26px; }
+#s-title .talk-sub { color: var(--ink-soft); }
+#s-title .affil { color: var(--muted); opacity: 1; }

@@ -1,0 +1,13 @@
+/* 03 · Field */
+#s-field .fd-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 31px; }
+#s-field .fd-table th { text-align: left; padding: 0 26px 18px; font-size: 24px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 3px solid var(--ink); }
+#s-field .fd-table td { padding: 20px 26px; vertical-align: middle; border-bottom: 2px solid var(--line-soft); color: var(--ink-soft); line-height: 1.25; }
+#s-field .fd-table td:first-child { width: 600px; color: var(--ink); }
+#s-field .fd-table td:nth-child(2) { width: 470px; white-space: nowrap; }
+#s-field .fd-table .ex { display: block; margin-top: 6px; font-size: 24px; color: var(--muted); }
+#s-field .fd-table tr.lang td:first-child b { color: var(--lang); }
+#s-field .fd-table tr.ours td { background: var(--ours-soft); color: var(--ours); border-bottom: none; }
+#s-field .fd-table tr.ours td b { color: var(--ours); }
+#s-field .fd-table tr.ours .ex { color: var(--ours); opacity: .8; }
+#s-field .fd-table tr.ours td:first-child { border-radius: 16px 0 0 16px; }
+#s-field .fd-table tr.ours td:last-child { border-radius: 0 16px 16px 0; font-weight: 600; }

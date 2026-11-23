@@ -1,0 +1,13 @@
+/* 06 · Close */
+#s-summary .sm-row { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+#s-summary .sm-list { list-style: none; padding: 0; counter-reset: sm; display: flex; flex-direction: column; gap: 34px; }
+#s-summary .sm-list li { counter-increment: sm; display: flex; flex-direction: column; gap: 6px; padding-left: 92px; position: relative; }
+#s-summary .sm-list li + li { margin-top: 0; }
+#s-summary .sm-list li::before { content: counter(sm); position: absolute; left: 0; top: 2px; width: 60px; height: 60px; border-radius: 50%; background: var(--ours); color: #fff; font-size: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+#s-summary .sm-list b { font-size: 46px; font-weight: 700; color: var(--ink); }
+#s-summary .sm-list span { font-size: 30px; color: var(--muted); }
+#s-summary .sm-clock { width: 340px; height: 340px; margin-right: 60px; overflow: visible; }
+#s-summary .bd { justify-content: center; }
+#s-summary .sm-say { margin-top: 90px; font-size: 54px; font-weight: 600; letter-spacing: -.015em; color: var(--ink-soft); }
+#s-summary .sm-say b { color: var(--ink); }
+#s-summary .sm-thanks { margin-top: 18px; font-size: 32px; color: var(--muted); }

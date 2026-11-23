@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The World Keeps Running · Yikai Wang</title>
+  <link rel="icon" href="../../apple-touch-icon.png">
+  <link rel="stylesheet" href="css/deck.css?v=9c006729">
+  <link rel="stylesheet" href="css/sec-01.css?v=18acc89d">
+  <link rel="stylesheet" href="css/sec-02.css?v=03de5431">
+  <link rel="stylesheet" href="css/sec-03.css?v=e2699db8">
+  <link rel="stylesheet" href="css/sec-04.css?v=a87e1d2f">
+  <link rel="stylesheet" href="css/sec-05.css?v=36727076">
+  <link rel="stylesheet" href="css/sec-06.css?v=3c4b622c">
+</head>
+<body>
+  <!-- Present from Google Chrome (some FlashForward clips are AV1). Press H for keyboard shortcuts, S for the presenter view. -->
+  <div class="deck-viewport">
+    <div class="deck-stage" id="deck">
+<!-- ===== 01-title.html ===== -->
+<!-- 01 · Title. A ticking wall clock (SVG animateTransform) sits top-right; the title block sits bottom-left. -->
+<section class="slide title-slide" id="s-title" data-title="The World Keeps Running" data-section="Intro" data-time="20" data-chrome="none">
+  <svg class="tt-clock" viewBox="-200 -200 400 400" width="400" height="400" aria-hidden="true">
+    <g class="oc-clock" data-clock="10:10" data-r="170"></g>
+    <g class="tt-sec">
+      <line x1="0" y1="34" x2="0" y2="-142"></line>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="60s" repeatCount="indefinite"></animateTransform>
+    </g>
+    <circle class="tt-pin" r="7"></circle>
+  </svg>
+  <p class="kicker">Research proposal</p>
+  <h1 class="talk-title">The World Keeps Running</h1>
+  <p class="talk-sub">Learning off-screen state evolution for vision-centric world models</p>
+  <p class="authors"><b>Yikai Wang</b></p>
+  <p class="affil">Postdoctoral Researcher · Meta, London</p>
+  <aside class="notes">
+    <p>Hi everyone, I'm <b>Yikai Wang</b>, a postdoc at Meta in London. Today I'd like to propose what I think is the next key problem for world models. It's simple to state: keeping the world running while nobody's watching.</p>
+  </aside>
+</section>
+
+<!-- ===== 02-problem.html ===== -->
+<!-- 02 · Problem: s-world and s-clock (ported from the world-model deck), s-gap, s-why. -->
+
+<section class="slide" id="s-world" data-title="The world has no language" data-section="Problem" data-time="55">
+  <header class="hd">
+    <p class="kicker">What is a world model?</p>
+    <h2 class="title">The world has no language</h2>
+  </header>
+  <div class="bd">
+    <div class="wstage">
+      <svg class="wsvg" viewBox="0 0 1700 730" width="1700" height="730" aria-hidden="true">
+        <defs>
+          <marker id="w-head-ink" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+            <path d="M1 1 L10 6 L1 11 Z" fill="#14161a"></path>
+          </marker>
+          <marker id="w-head-act" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+            <path d="M1 1 L10 6 L1 11 Z" fill="#ea580c"></path>
+          </marker>
+        </defs>
+        <!-- state: the whole world panel -->
+        <path class="brace" d="M2 54 V44 H918 V54"></path>
+        <rect class="panel" x="0" y="60" width="920" height="568" rx="36"></rect>
+        <!-- render: world -> observer -->
+        <line class="arw" x1="936" y1="290" x2="1150" y2="290" marker-end="url(#w-head-ink)"></line>
+        <!-- dynamics: a loop on the bottom edge of the world -->
+        <g class="dyn" transform="translate(110 628)">
+          <circle class="disc" r="40"></circle>
+          <path class="loop" d="M 12 -20.8 A 24 24 0 1 1 -12 -20.8"></path>
+          <path class="loop-head" d="M -1.6 -26.8 L -10.5 -10.1 L -20.5 -27.5 Z"></path>
+        </g>
+        <!-- build 1: the action returns into the world -->
+        <g class="act-arrow" data-step="1" data-anim="fade">
+          <line class="arw act" x1="1150" y1="390" x2="936" y2="390" marker-end="url(#w-head-act)"></line>
+        </g>
+      </svg>
+
+      <figure class="vid wvid">
+        <video data-autoplay loop muted playsinline preload="none" poster="media/clips/robot20-ours-poster.jpg" src="media/clips/robot20-ours.mp4"></video>
+      </figure>
+
+      <p class="lbl state"><b>state</b><span class="gl">persists</span></p>
+      <p class="lbl render"><b>render</b></p>
+      <p class="lbl dynamics"><b>dynamics</b></p>
+
+      <!-- step 0: an observer at the end of the render arrow (becomes the actor's eyes) -->
+      <svg class="eye" data-step-hide="1" viewBox="0 0 160 90" width="160" height="90" aria-hidden="true">
+        <path d="M6 45 Q80 -18 154 45 Q80 108 6 45 Z" class="e-lid"></path>
+        <circle cx="80" cy="45" r="22" class="e-iris"></circle>
+        <circle cx="88" cy="38" r="6" class="e-glint"></circle>
+      </svg>
+
+      <!-- build 1: an actor outside the world; language lives on its side -->
+      <div class="actor" data-step="1" data-anim="left">
+        <div class="bubble"><span class="llm">LLM</span><span class="say">“wave to the crowd”</span></div>
+        <svg class="bot" viewBox="0 0 200 210" width="200" height="210" aria-hidden="true">
+          <line x1="100" y1="40" x2="100" y2="14" class="b-line"></line>
+          <circle cx="100" cy="12" r="10" class="b-fill"></circle>
+          <rect x="34" y="40" width="132" height="100" rx="30" class="b-head"></rect>
+          <circle cx="76" cy="90" r="13" class="b-eye"></circle>
+          <circle cx="124" cy="90" r="13" class="b-eye"></circle>
+          <rect x="18" y="74" width="16" height="34" rx="7" class="b-fill"></rect>
+          <rect x="166" y="74" width="16" height="34" rx="7" class="b-fill"></rect>
+          <path d="M44 210 V186 Q44 154 76 154 H124 Q156 154 156 186 V210 Z" class="b-head"></path>
+        </svg>
+        <p class="aside">Language drives the actor.<br>It does not hold the state.</p>
+      </div>
+      <p class="lbl act-lbl" data-step="1" data-anim="fade"><b>action</b></p>
+    </div>
+  </div>
+  <p class="src">Clip: FlashForward (ours), text-to-video sample</p>
+  <aside class="notes">
+    <p>Let me start with what I mean by a world model. It has three parts. A hidden <b>state</b> that persists even when nobody's looking. A renderer, which turns that state into what you see. And dynamics, which carry the state forward when an action comes in.</p>
+    <p>This clip is from my recent work, FlashForward. The robot's arm swings past the crowd, and behind it, everything stays where it should. No sentence was needed for that.</p>
+    <p><em>[click]</em> Language lives with the actor, outside the world. An LLM can drive the actor, with an instruction like “wave to the crowd”. But the state and its dynamics are visual. That's what I mean by a <b>vision-centric</b> world model.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-clock" data-title="The clock test" data-section="Problem" data-time="90" data-steps="3">
+  <header class="hd">
+    <p class="kicker">The clock test · a thought experiment</p>
+    <h2 class="title">Look away for five minutes. Look back.</h2>
+  </header>
+  <div class="bd">
+    <div class="cstage">
+      <!-- Steps 0-1: the room, the clock, the viewfinder -->
+      <div class="scene" data-step-hide="2">
+        <svg class="room" viewBox="0 -40 1700 700" width="1700" height="700" aria-hidden="true">
+          <defs>
+            <linearGradient id="clk-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#bcd7f2"></stop>
+              <stop offset="1" stop-color="#eaf3fb"></stop>
+            </linearGradient>
+            <clipPath id="clk-glass"><rect x="1024" y="94" width="372" height="332"></rect></clipPath>
+            <mask id="clk-mask" maskUnits="userSpaceOnUse" x="0" y="-40" width="1700" height="700">
+              <rect y="-40" width="1700" height="700" fill="#fff"></rect>
+              <rect class="hole" x="110" y="70" width="440" height="400" rx="26" fill="#000"></rect>
+            </mask>
+          </defs>
+          <!-- wall and floor -->
+          <rect class="wall" y="-40" width="1700" height="700" rx="28"></rect>
+          <path class="floor" d="M0 580 H1700 V632 Q1700 660 1672 660 H28 Q0 660 0 632 Z"></path>
+          <line class="skirt" x1="0" y1="580" x2="1700" y2="580"></line>
+          <!-- clock face (hands are drawn above the veil by js/sec-02a.js) -->
+          <g class="face-layer"></g>
+          <!-- window -->
+          <rect class="frame" x="1010" y="80" width="400" height="360" rx="6"></rect>
+          <g clip-path="url(#clk-glass)">
+            <rect x="1024" y="94" width="372" height="332" fill="url(#clk-sky)"></rect>
+            <circle cx="1320" cy="160" r="30" fill="#fde68a"></circle>
+            <ellipse cx="1110" cy="170" rx="56" ry="16" fill="#fff" opacity=".9"></ellipse>
+            <ellipse cx="1150" cy="158" rx="34" ry="14" fill="#fff" opacity=".9"></ellipse>
+            <path d="M1024 372 Q1110 320 1200 352 T1396 336 V426 H1024 Z" fill="#86b98f"></path>
+            <path d="M1024 398 Q1150 360 1260 392 T1396 386 V426 H1024 Z" fill="#5f9e6e"></path>
+          </g>
+          <line class="mullion" x1="1210" y1="94" x2="1210" y2="426"></line>
+          <line class="mullion" x1="1024" y1="260" x2="1396" y2="260"></line>
+          <rect class="sill" x="990" y="440" width="440" height="18" rx="4"></rect>
+          <!-- plant -->
+          <g class="plant" transform="translate(0 40)">
+            <path d="M1548 470 Q1520 400 1486 352" class="stem"></path>
+            <path d="M1552 470 Q1556 380 1572 318" class="stem"></path>
+            <path d="M1556 470 Q1590 410 1626 372" class="stem"></path>
+            <ellipse cx="1486" cy="352" rx="40" ry="17" transform="rotate(-35 1486 352)" class="leaf"></ellipse>
+            <ellipse cx="1572" cy="314" rx="40" ry="17" transform="rotate(-78 1572 314)" class="leaf l2"></ellipse>
+            <ellipse cx="1626" cy="370" rx="40" ry="17" transform="rotate(28 1626 370)" class="leaf"></ellipse>
+            <ellipse cx="1516" cy="414" rx="32" ry="14" transform="rotate(-20 1516 414)" class="leaf l2"></ellipse>
+            <ellipse cx="1598" cy="420" rx="32" ry="14" transform="rotate(24 1598 420)" class="leaf l2"></ellipse>
+            <path d="M1500 466 H1604 L1592 540 H1512 Z" class="pot"></path>
+            <rect x="1494" y="458" width="116" height="18" rx="5" class="pot-rim"></rect>
+          </g>
+          <!-- everything outside the view is dimmed -->
+          <rect class="veil" y="-40" width="1700" height="700" rx="28" mask="url(#clk-mask)"></rect>
+          <g class="ghost-ring-layer"><circle class="ghost-ring" cx="330" cy="270" r="166"></circle></g>
+          <g class="hand-layer"></g>
+          <text class="unseen" x="330" y="484">unseen</text>
+          <text class="counter num" x="780" y="300">+5 min</text>
+          <!-- the viewfinder (moved by js) -->
+          <g class="vf" transform="translate(110 70)">
+            <rect class="vf-box" width="440" height="400" rx="26"></rect>
+            <path class="vf-corner" d="M0 70 V26 Q0 0 26 0 H70 M370 0 H414 Q440 0 440 26 V70 M440 330 V374 Q440 400 414 400 H370 M70 400 H26 Q0 400 0 374 V330"></path>
+            <circle class="vf-rec" cx="32" cy="32" r="9"></circle>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Step 2: three possible answers -->
+      <div class="cards">
+        <figure class="card c-van" data-step="2">
+          <svg class="mini" viewBox="0 0 456 280" width="456" height="280" aria-hidden="true">
+            <rect class="m-wall" width="456" height="280" rx="16"></rect>
+            <circle class="m-gone" cx="228" cy="140" r="102"></circle>
+            <circle class="m-nail" cx="228" cy="62" r="7"></circle>
+            <path class="m-vf" d="M18 58 V30 Q18 18 30 18 H58 M398 18 H426 Q438 18 438 30 V58 M438 222 V250 Q438 262 426 262 H398 M58 262 H30 Q18 262 18 250 V222"></path>
+          </svg>
+          <figcaption><span class="mk no" aria-hidden="true">✗</span><b>Vanished</b><span class="gl">no permanence</span></figcaption>
+        </figure>
+        <figure class="card c-frz" data-step="2">
+          <svg class="mini" viewBox="0 0 456 280" width="456" height="280" aria-hidden="true">
+            <rect class="m-wall" width="456" height="280" rx="16"></rect>
+            <g class="m-clock" data-h="10" data-m="10"></g>
+            <path class="m-vf" d="M18 58 V30 Q18 18 30 18 H58 M398 18 H426 Q438 18 438 30 V58 M438 222 V250 Q438 262 426 262 H398 M58 262 H30 Q18 262 18 250 V222"></path>
+          </svg>
+          <figcaption><span class="mk no" aria-hidden="true">✗</span><b>Frozen at 10:10</b><span class="gl">static memory</span></figcaption>
+        </figure>
+        <figure class="card c-ok" data-step="2">
+          <svg class="mini" viewBox="0 0 456 280" width="456" height="280" aria-hidden="true">
+            <rect class="m-wall" width="456" height="280" rx="16"></rect>
+            <g class="m-clock" data-h="10" data-m="15"></g>
+            <path class="m-vf" d="M18 58 V30 Q18 18 30 18 H58 M398 18 H426 Q438 18 438 30 V58 M438 222 V250 Q438 262 426 262 H398 M58 262 H30 Q18 262 18 250 V222"></path>
+          </svg>
+          <figcaption><span class="mk yes" aria-hidden="true">✓</span><b>10:15</b><span class="gl">a world model</span></figcaption>
+        </figure>
+      </div>
+
+      <!-- Step 3: four requirements rise out of the test -->
+      <div class="treqs">
+        <div class="tq" data-step="3"><span class="req persist">Persist</span><p>it exists while unseen</p></div>
+        <div class="tq side" data-step="3"><span class="req consistent">Consistent</span><p>same clock, same place,<br>across views and edits</p></div>
+        <div class="tq" data-step="3"><span class="req evolve">Evolve</span><p>it keeps moving: time passes</p></div>
+        <div class="tq side" data-step="3"><span class="req act">Act</span><p>an actor changes it,<br>and it stays changed</p></div>
+      </div>
+      <p class="focus" data-step="3" data-anim="fade"><b>Persist + Evolve at once</b> = off-screen evolution</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>How would we know that a model really holds a world? Here's the test I keep in mind. You look at a clock on the wall. It says ten past ten.</p>
+    <p><em>[click]</em> Now you turn to the window for five minutes. The clock is out of view. But it doesn't wait for you. It keeps running.</p>
+    <p><em>[click]</em> Then you look back. What should a model show you? On the left, the clock has vanished: no object permanence. In the middle, it's frozen where you left it: the model kept a memory, but a static one. On the right, it shows <b>ten fifteen</b>. That's a world model. It keeps going whether or not you're watching.</p>
+    <p><em>[click]</em> This one small test gives us four requirements. Persist: the clock still exists while you're not looking. Consistent: it's the same clock, in the same place. Evolve: it keeps moving, because time passes. And act: if someone changes it, it stays changed. My past work explored each of these on its own. Today I'll focus on two of them at once: <b>persist and evolve</b>. The clock still exists, and it keeps running, while nobody looks. I call this <b>off-screen evolution</b>, and I think it's the next key problem for world models.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-gap" data-title="Today's models freeze the unseen" data-section="Problem" data-time="55">
+  <header class="hd">
+    <p class="kicker">The state of the art · 2026</p>
+    <h2 class="title">Today's world models freeze the unseen</h2>
+  </header>
+  <div class="bd">
+    <div class="gp-row">
+      <div class="gp-stat">
+        <p class="gp-num num">&lt;10<small>%</small></p>
+        <p class="gp-lbl">success for every model tested</p>
+        <p class="gp-src">StEvo-Bench · ECCV 2026</p>
+      </div>
+      <div class="gp-stat">
+        <p class="gp-num num">0<small>%</small></p>
+        <p class="gp-lbl">for camera-controlled world<br>models, Genie 3 included</p>
+        <p class="gp-src">StEvo-Bench · ECCV 2026</p>
+      </div>
+      <div class="gp-stat">
+        <p class="gp-num num">9/9</p>
+        <p class="gp-lbl">models get worse from<br>the 1st revisit to the 3rd</p>
+        <p class="gp-src">WorldMemBench · 2026</p>
+      </div>
+    </div>
+    <div class="gp-foot">
+      <p class="gp-say">They remember what things <b>looked like</b>, not what things are <b class="t-ours">doing now</b>.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>And today's models don't pass it. A benchmark at ECCV this year starts a process in front of the camera, hides it, and checks what comes back. Every model they tested, including Veo 3 and Sora 2 Pro, succeeds less than <b>ten percent</b> of the time. And every camera-controlled world model, Genie 3 included, scores <b>zero</b>.</p>
+    <p>Another benchmark, WorldMemBench, sends the camera back to the same place again and again. All nine models get worse with every return.</p>
+    <p>The pattern is the same everywhere. These models remember what things looked like. They don't know what things are doing now. The unseen world gets frozen.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-why" data-title="A camera sees a slice" data-section="Problem" data-time="60">
+  <header class="hd">
+    <h2 class="title">A camera sees a slice. The world keeps going.</h2>
+  </header>
+  <div class="bd">
+    <div class="wy-stage">
+      <svg class="plan" viewBox="0 0 1000 700" width="1000" height="700" aria-hidden="true">
+        <rect class="pl-floor" x="6" y="6" width="988" height="688" rx="30"></rect>
+        
+        <!-- the camera's slice of the room (clipped to the room when it turns) -->
+        <clipPath id="wy-room"><rect x="6" y="6" width="988" height="688" rx="30"></rect></clipPath>
+        <g clip-path="url(#wy-room)"><g class="pl-fov-g"><path class="pl-fov" d="M500 572 L318 128 L682 128 Z"></path></g></g>
+        <!-- counter with the task, in view -->
+        <rect class="pl-furn" x="340" y="28" width="320" height="100" rx="14"></rect>
+        <rect class="pl-board" x="420" y="50" width="160" height="56" rx="10"></rect>
+        <circle class="pl-tomato" cx="468" cy="78" r="16"></circle>
+        <path class="pl-knife" d="M508 64 L562 94"></path>
+        <!-- static furniture -->
+        <rect class="pl-furn pl-static pl-table" x="196" y="250" width="124" height="176" rx="14"></rect>
+        <g class="pl-static pl-plant" transform="translate(262 612)">
+          <circle r="38" class="pl-pot"></circle>
+          <ellipse rx="30" ry="12" transform="rotate(-30)" class="pl-leaf"></ellipse>
+          <ellipse rx="30" ry="12" transform="rotate(40)" class="pl-leaf"></ellipse>
+          <ellipse rx="30" ry="12" transform="rotate(100)" class="pl-leaf"></ellipse>
+        </g>
+        <!-- the wall clock -->
+        <g class="oc-clock pl-clock" data-clock="10:10" data-r="50" transform="translate(96 186)"></g>
+        <!-- a tap filling a cup -->
+        <rect class="pl-furn" x="26" y="410" width="160" height="230" rx="14"></rect>
+        <path class="pl-tap" d="M58 440 H112 V468"></path>
+        <line class="pl-stream" x1="112" y1="472" x2="112" y2="520"></line>
+        <clipPath id="wy-cup"><path d="M78 500 H146 L139 600 H85 Z"></path></clipPath>
+        <g clip-path="url(#wy-cup)"><rect class="pl-water" x="70" y="500" width="84" height="100"></rect></g>
+        <path class="pl-cup" d="M78 500 H146 L139 600 H85 Z"></path>
+        <!-- a stove with a pot -->
+        <rect class="pl-furn" x="790" y="28" width="180" height="150" rx="14"></rect>
+        <path class="pl-steam s1" d="M846 86 q-10 -14 0 -28 q10 -14 0 -28"></path>
+        <path class="pl-steam s2" d="M880 80 q-10 -14 0 -28 q10 -14 0 -28"></path>
+        <path class="pl-steam s3" d="M914 86 q-10 -14 0 -28 q10 -14 0 -28"></path>
+        <rect class="pl-potbody" x="828" y="96" width="104" height="58" rx="10"></rect>
+        <rect class="pl-potrim" x="818" y="90" width="124" height="14" rx="7"></rect>
+        <!-- a ball rolling behind a box -->
+        <g class="pl-ball-g"><circle class="pl-ball" cx="600" cy="470" r="22"></circle></g>
+        <rect class="pl-box" x="770" y="300" width="130" height="130" rx="10"></rect>
+        <path class="pl-tape" d="M770 365 H900"></path>
+        <!-- a person walking toward the camera's view -->
+        <g class="pl-person-g"><g class="pl-person" transform="translate(900 610)">
+          <circle cy="-62" r="20"></circle>
+          <path d="M-28 4 V-20 Q-28 -40 -8 -40 H8 Q28 -40 28 -20 V4 Z"></path>
+        </g></g>
+        <!-- the robot and its camera -->
+        <g class="pl-robot" transform="translate(500 618)">
+          <rect x="-56" y="-40" width="112" height="80" rx="24" class="pl-head"></rect>
+          <circle cy="-40" r="16" class="pl-lens"></circle>
+          <circle cx="-22" cy="0" r="9" class="pl-eye"></circle>
+          <circle cx="22" cy="0" r="9" class="pl-eye"></circle>
+        </g>
+        
+      </svg>
+      <div class="wy-side" data-step="1" data-anim="left">
+        <div class="wy-item"><span class="wy-k">Robots</span><span class="wy-v">a cup filling, a person stepping in</span></div>
+        <div class="wy-item"><span class="wy-k">Cars</span><span class="wy-v">a pedestrian behind a parked van</span></div>
+        <div class="wy-item"><span class="wy-k">Wearables</span><span class="wy-v">the stove left on in the kitchen</span></div>
+        <p class="wy-say">Freeze the unseen, and you act on <b>stale facts</b>.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Why does this matter? Because every agent lives like this. Here's a robot in a kitchen. Its camera sees one slice of the room: the cutting board in front of it. Everything else keeps going. The cup is filling. The pot is heating up. A ball rolls behind a box. Someone walks toward the robot. And the clock keeps running. None of that is in view, and all of it matters for what the robot should do next.</p>
+    <p><em>[click]</em> It's the same for every agent. A robot needs to know the cup is about to overflow. A car needs to know there's a pedestrian behind that parked van. A wearable assistant should know you left the stove on. A world model that freezes the unseen hands its actor <b>stale facts</b>.</p>
+  </aside>
+</section>
+
+<!-- ===== 03-field.html ===== -->
+<!-- 03 · Field: where the unseen lives in today's approaches (one table, ours appears at build 1). -->
+<section class="slide" id="s-field" data-title="How models carry the unseen" data-section="Field" data-time="85">
+  <header class="hd">
+    <p class="kicker">Related work · 2026</p>
+    <h2 class="title">How today's models carry the unseen</h2>
+  </header>
+  <div class="bd">
+    <table class="fd-table">
+      <thead>
+        <tr><th>Approach</th><th>While unseen</th><th>On return</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Static memory</b><span class="ex">WorldMem · VMem · GEN3C · Genie 3</span></td>
+          <td>nothing</td>
+          <td>copies the last view: <b>frozen</b></td>
+        </tr>
+        <tr>
+          <td><b>Raw-history retrieval</b><span class="ex">HyDRA · ReMind</span></td>
+          <td>nothing</td>
+          <td>re-derives the change from stored frames, every time</td>
+        </tr>
+        <tr>
+          <td><b>Pixel simulation</b><span class="ex">LiveWorld · World Observer</span></td>
+          <td>renders it as video</td>
+          <td>reads the render; cost grows with entities and area</td>
+        </tr>
+        <tr class="lang">
+          <td><b>Language narration</b><span class="ex">EvoWorld · AnchorWorld</span></td>
+          <td>a prompt says what happens</td>
+          <td>shows <b>that</b> it changed, not <b>how much</b></td>
+        </tr>
+        <tr class="ours" data-step="1" data-anim="up">
+          <td><b>Store the process, jump on demand</b><span class="ex">this proposal</span></td>
+          <td>nothing</td>
+          <td>one jump by Δ, written back</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes">
+    <p>Today there are four answers. <b>Static memory</b>, like WorldMem, VMem, GEN3C or Genie 3, stores past views and copies them back. It's great for consistency, but the clock comes back frozen.</p>
+    <p>Retrieval methods like HyDRA and ReMind store the raw history and ask the generator to work out the change each time it reads. Pixel simulation, in LiveWorld and World Observer, keeps rendering the unseen part as video. That works, but the cost grows with every entity it watches. And EvoWorld and AnchorWorld let a language model write what happens off-screen. That tells you that something changed, not how much.</p>
+    <p><em>[click]</em> My proposal sits in a new spot. Nothing is computed while the region is unseen. When it matters again, the model makes <b>one jump</b> by the elapsed time, and writes the result back.</p>
+  </aside>
+</section>
+
+<!-- ===== 04-idea.html ===== -->
+<!-- 04 · Idea: s-insight, s-jump, s-triggers, s-anchors, s-learn (generated by src/gen/s04.py). -->
+
+<section class="slide dark statement" id="s-insight" data-title="A state, not a simulation" data-section="Idea" data-time="45">
+  <p class="kicker">Core insight</p>
+  <p class="say">The unseen world needs a <span class="t-anchor">state</span>, not a simulation.</p>
+  <p class="say-sub">You don't watch the clock in your head while you look away. You remember that it was running, and since when.</p>
+  <div class="in-row" data-step="1">
+    <div class="in-pill"><b>Hidden is not gone</b><span>ASUKA · C2F-Seg · StreetUnveiler</span></div>
+    <span class="in-arr" aria-hidden="true">→</span>
+    <div class="in-pill next"><b>Hidden is not paused</b><span>this proposal</span></div>
+  </div>
+  <aside class="notes">
+    <p>So here's the core insight. The unseen world needs a <b>state</b>, not a simulation. Think about what you do yourself. While you look away, you don't watch the clock in your head. You just remember that it was running, and since when. When you look back, you work out ten fifteen in one step, with no simulation in between.</p>
+    <p><em>[click]</em> My work on inpainting and occlusion, ASUKA, C2F-Seg and StreetUnveiler, showed that hidden is not gone. This proposal takes the next step: hidden is <b>not paused</b>.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-jump" data-title="Store the process, jump on demand" data-section="Idea" data-time="100">
+  <header class="hd">
+    <h2 class="title">Store the process, jump on demand</h2>
+  </header>
+  <div class="bd">
+    <svg class="jp" viewBox="0 0 1700 730" width="1700" height="730" aria-hidden="true">
+      <defs>
+        <marker id="jp-ah" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L10 6 L1 11 Z" class="jp-ah-ink"></path></marker>
+        <marker id="jp-ah-a" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L10 6 L1 11 Z" class="jp-ah-anchor"></path></marker>
+      </defs>
+      <text class="jp-hd" x="280" y="30">t₀ · it leaves view</text>
+      <text class="jp-hd" x="760" y="30" data-step="1" data-anim="fade">away for Δ = 5 min</text>
+      <text class="jp-hd" x="1400" y="30" data-step="2" data-anim="fade">t₀ + Δ · you look back</text>
+
+      <!-- left: in view, then stored -->
+      <g class="oc-clock" data-clock="10:10" data-r="100" transform="translate(280 190)"></g>
+      <path class="oc-vf" d="M150.0 105.0 V77.0 Q150.0 65.0 162.0 65.0 H190.0 M370.0 65.0 H398.0 Q410.0 65.0 410.0 77.0 V105.0 M410.0 275.0 V303.0 Q410.0 315.0 398.0 315.0 H370.0 M190.0 315.0 H162.0 Q150.0 315.0 150.0 303.0 V275.0"></path>
+      <line class="jp-arw" x1="280" y1="332" x2="280" y2="372" marker-end="url(#jp-ah)"></line>
+      <text class="oc-sm" x="304" y="360">store</text>
+      <g class="jp-card ">
+          <rect x="110" y="384" width="340" height="180" rx="22"></rect>
+          <text class="oc-xs jp-cap" x="138" y="424">process state</text>
+          <text class="oc-lbl" x="138" y="468">clock · running</text>
+          <text class="oc-sm" x="138" y="506">1 turn per hour</text>
+          <text class="oc-lbl oc-mono" x="138" y="544">10:10 @ t₀</text>
+        </g>
+
+      <!-- middle: nothing is computed -->
+      <g data-step="1" data-anim="fade">
+        <g class="oc-clock ghost" data-clock="10:10" data-r="100" transform="translate(760 190)"></g>
+        <text class="oc-sm jp-mid" x="760" y="200">not simulated</text>
+        <line class="jp-shelf" x1="458" y1="474" x2="938" y2="474"></line>
+        <text class="oc-sm jp-mid" x="698" y="452">kept as is</text>
+        <text class="jp-zero jp-mid" x="698" y="522">no compute while away</text>
+      </g>
+
+      <!-- right: one jump, then render -->
+      <g data-step="2" data-anim="fade">
+        <rect class="jp-j" x="950" y="424" width="220" height="100" rx="20"></rect>
+        <text class="jp-jt jp-mid" x="1060" y="487">J(s, Δ)</text>
+        <text class="oc-sm jp-mid" x="1060" y="562">one step</text>
+        <line class="jp-arw" x1="1172" y1="474" x2="1222" y2="474" marker-end="url(#jp-ah)"></line>
+        <g class="jp-card new">
+          <rect x="1230" y="384" width="340" height="180" rx="22"></rect>
+          <text class="oc-xs jp-cap" x="1258" y="424">process state</text>
+          <text class="oc-lbl" x="1258" y="468">clock · running</text>
+          <text class="oc-sm" x="1258" y="506">1 turn per hour</text>
+          <text class="oc-lbl oc-mono" x="1258" y="544">10:15 @ t₀+Δ</text>
+        </g>
+        <line class="jp-arw" x1="1400" y1="378" x2="1400" y2="336" marker-end="url(#jp-ah)"></line>
+        <text class="oc-sm" x="1424" y="364">render</text>
+        <g class="oc-clock ours" data-clock="10:15" data-r="100" transform="translate(1400 190)"></g>
+        <path class="oc-vf" d="M1270.0 105.0 V77.0 Q1270.0 65.0 1282.0 65.0 H1310.0 M1490.0 65.0 H1518.0 Q1530.0 65.0 1530.0 77.0 V105.0 M1530.0 275.0 V303.0 Q1530.0 315.0 1518.0 315.0 H1490.0 M1310.0 315.0 H1282.0 Q1270.0 315.0 1270.0 303.0 V275.0"></path>
+      </g>
+
+      <!-- write back -->
+      <g data-step="3" data-anim="fade">
+        <path class="jp-wb" d="M1400 568 V640 H280 V578" marker-end="url(#jp-ah-a)"></path>
+        <text class="jp-wbt jp-mid" x="840" y="694">write back: the next revisit starts from 10:15</text>
+      </g>
+    </svg>
+  </div>
+  <aside class="notes">
+    <p>Here's how it works, with the clock. At time t-zero, the clock leaves view. The model stores a small visual state. Not just what the clock looks like, but what it's <b>doing</b>: it's running, at one turn per hour, it shows ten past ten, and it's stamped with the time. What it looks like goes to memory. What it's doing goes to the state.</p>
+    <p><em>[click]</em> Then you look away for five minutes. And here's the key: <b>nothing is computed</b>. The state just sits there. No frames are rendered, and no simulation runs, however long you're away.</p>
+    <p><em>[click]</em> When you look back, a learned jump operator, J, takes the stored state and the elapsed time, delta, and carries the state forward in a <b>single step</b>. Ten fifteen. Then the renderer draws it, with the clock's appearance from memory. It's one step whether you looked away for five seconds or five minutes.</p>
+    <p><em>[click]</em> Finally, the jumped state is <b>written back</b>. So the next time you come back, the model starts from ten fifteen, not from the old frames. That's what keeps repeated revisits from drifting, which is exactly where today's models get worse.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-triggers" data-title="Jump only when it matters" data-section="Idea" data-time="60">
+  <header class="hd">
+    <h2 class="title">Jump only when it matters</h2>
+  </header>
+  <div class="bd">
+    <div class="tg-stage">
+      <svg class="plan" viewBox="0 0 1000 700" width="1000" height="700" aria-hidden="true">
+        <rect class="pl-floor" x="6" y="6" width="988" height="688" rx="30"></rect>
+        
+        <!-- the camera's slice of the room (clipped to the room when it turns) -->
+        <clipPath id="tg-room"><rect x="6" y="6" width="988" height="688" rx="30"></rect></clipPath>
+        <g clip-path="url(#tg-room)"><g class="pl-fov-g"><path class="pl-fov" d="M500 572 L318 128 L682 128 Z"></path></g></g>
+        <!-- counter with the task, in view -->
+        <rect class="pl-furn" x="340" y="28" width="320" height="100" rx="14"></rect>
+        <rect class="pl-board" x="420" y="50" width="160" height="56" rx="10"></rect>
+        <circle class="pl-tomato" cx="468" cy="78" r="16"></circle>
+        <path class="pl-knife" d="M508 64 L562 94"></path>
+        <!-- static furniture -->
+        <rect class="pl-furn pl-static pl-table" x="196" y="250" width="124" height="176" rx="14"></rect>
+        <g class="pl-static pl-plant" transform="translate(262 612)">
+          <circle r="38" class="pl-pot"></circle>
+          <ellipse rx="30" ry="12" transform="rotate(-30)" class="pl-leaf"></ellipse>
+          <ellipse rx="30" ry="12" transform="rotate(40)" class="pl-leaf"></ellipse>
+          <ellipse rx="30" ry="12" transform="rotate(100)" class="pl-leaf"></ellipse>
+        </g>
+        <!-- the wall clock -->
+        <g class="oc-clock pl-clock" data-clock="10:10" data-r="50" transform="translate(96 186)"></g>
+        <!-- a tap filling a cup -->
+        <rect class="pl-furn" x="26" y="410" width="160" height="230" rx="14"></rect>
+        <path class="pl-tap" d="M58 440 H112 V468"></path>
+        <line class="pl-stream" x1="112" y1="472" x2="112" y2="520"></line>
+        <clipPath id="tg-cup"><path d="M78 500 H146 L139 600 H85 Z"></path></clipPath>
+        <g clip-path="url(#tg-cup)"><rect class="pl-water" x="70" y="500" width="84" height="100"></rect></g>
+        <path class="pl-cup" d="M78 500 H146 L139 600 H85 Z"></path>
+        <!-- a stove with a pot -->
+        <rect class="pl-furn" x="790" y="28" width="180" height="150" rx="14"></rect>
+        <path class="pl-steam s1" d="M846 86 q-10 -14 0 -28 q10 -14 0 -28"></path>
+        <path class="pl-steam s2" d="M880 80 q-10 -14 0 -28 q10 -14 0 -28"></path>
+        <path class="pl-steam s3" d="M914 86 q-10 -14 0 -28 q10 -14 0 -28"></path>
+        <rect class="pl-potbody" x="828" y="96" width="104" height="58" rx="10"></rect>
+        <rect class="pl-potrim" x="818" y="90" width="124" height="14" rx="7"></rect>
+        <!-- a ball rolling behind a box -->
+        <g class="pl-ball-g"><circle class="pl-ball" cx="600" cy="470" r="22"></circle></g>
+        <rect class="pl-box" x="770" y="300" width="130" height="130" rx="10"></rect>
+        <path class="pl-tape" d="M770 365 H900"></path>
+        <!-- a person walking toward the camera's view -->
+        <g class="pl-person-g"><g class="pl-person" transform="translate(900 610)">
+          <circle cy="-62" r="20"></circle>
+          <path d="M-28 4 V-20 Q-28 -40 -8 -40 H8 Q28 -40 28 -20 V4 Z"></path>
+        </g></g>
+        <!-- the robot and its camera -->
+        <g class="pl-robot" transform="translate(500 618)">
+          <rect x="-56" y="-40" width="112" height="80" rx="24" class="pl-head"></rect>
+          <circle cy="-40" r="16" class="pl-lens"></circle>
+          <circle cx="-22" cy="0" r="9" class="pl-eye"></circle>
+          <circle cx="22" cy="0" r="9" class="pl-eye"></circle>
+        </g>
+        
+        <circle class="tg-ring static" cx="258" cy="338" r="112" data-step-only="0" data-anim="fade"></circle>
+        <circle class="tg-ring static" cx="262" cy="612" r="60" data-step-only="0" data-anim="fade"></circle>
+        <circle class="tg-ring" cx="96" cy="186" r="72" data-step-only="1" data-anim="fade"></circle>
+        <circle class="tg-ring dash" cx="900" cy="580" r="78" data-step-only="2" data-anim="fade"></circle>
+        <path class="tg-arm" d="M446 600 Q300 516 168 556" data-step="3" data-anim="fade"></path>
+        <circle class="tg-ring" cx="112" cy="550" r="76" data-step="3" data-anim="fade"></circle>
+      </svg>
+      <div class="tg-side">
+        <div class="tg-item static"><i></i><p><b>Static</b> never touched</p></div>
+        <div class="tg-item" data-step="1"><i></i><p><b>Revisit</b> it comes back into view</p></div>
+        <div class="tg-item dash" data-step="2"><i></i><p><b>Might walk in</b> a cheap check, now and then</p></div>
+        <div class="tg-item" data-step="3"><i></i><p><b>Touched</b> the actor reaches for it</p></div>
+        <p class="tg-say" data-step="3">Cost follows what you <b>look back at</b>, not the size of the world or the time away.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>So when does the model jump? Only when it matters. Most of the world is static: the table, the plant. Those regions are <b>never touched</b>.</p>
+    <p><em>[click]</em> First trigger: a revisit. The camera turns back to the clock, so the clock jumps forward.</p>
+    <p><em>[click]</em> Second: something might walk into view on its own. Only regions with a moving process, like this person, get a cheap check every now and then.</p>
+    <p><em>[click]</em> Third: the actor touches something. When the robot reaches for the cup, the cup jumps first. So the cost follows what you look back at. It doesn't grow with the size of the world, or with how long you looked away. That's what makes it practical for worlds that run for hours.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-anchors" data-title="FlashForward already jumps" data-section="Idea" data-time="55">
+  <header class="hd">
+    <h2 class="title">FlashForward already jumps</h2>
+  </header>
+  <div class="bd">
+    <svg class="an" viewBox="0 0 1700 560" width="1700" height="560" aria-hidden="true">
+      <text class="an-name ff" x="0" y="128">FlashForward</text>
+      <text class="oc-xs" x="0" y="164">video, chunk by chunk</text>
+      <g>
+        <rect class="an-anc" x="290" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="312" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="334" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="356" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="378" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="400" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="422" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="444" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="466" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="488" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="510" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="532" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="554" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="576" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="598" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="620" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="642" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="664" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="686" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="708" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="730" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="752" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="774" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="796" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="818" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="840" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="862" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="884" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="906" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="928" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="950" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="972" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="994" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1016" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1038" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1060" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1082" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1104" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1126" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1148" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="1170" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="1192" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1214" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1236" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1258" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1280" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1302" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1324" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1346" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1368" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="1390" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="1412" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1434" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1456" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1478" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1500" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1522" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1544" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1566" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1588" y="104" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="1610" y="92" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="1632" y="104" width="16" height="56" rx="3"></rect>
+      </g>
+      <text class="oc-sm an-mid" x="969.0" y="222">clean anchors planned ahead, frames filled in between</text>
+
+      <g data-step="1" data-anim="fade"><g transform="translate(0 40)">
+        <text class="an-name" x="0" y="388">Off-screen</text>
+        <text class="oc-xs" x="0" y="424">one region over time</text>
+        <rect class="an-cell" x="290" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="312" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="334" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="356" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="378" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="400" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="422" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="444" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="466" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="488" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="510" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="532" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="554" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="576" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="598" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="620" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="642" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="664" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-anc" x="1346" y="352" width="16" height="80" rx="3"></rect>
+        <rect class="an-cell" x="1368" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1390" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1412" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1434" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1456" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1478" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1500" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1522" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1544" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1566" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1588" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1610" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-cell" x="1632" y="364" width="16" height="56" rx="3"></rect>
+        <rect class="an-gap" x="682" y="364" width="658" height="56" rx="10"></rect>
+        <text class="oc-sm an-mid" x="1011.0" y="401">looked away · nothing rendered</text>
+        <path class="an-arc" d="M672 356 C672 262 1354 262 1354 344"></path>
+        <text class="an-jt an-mid" x="1011.0" y="270">one jump, J(s, Δ)</text>
+        <path class="an-brace" d="M682 440 V452 H1340 V440"></path>
+        <text class="an-d an-mid" x="1011.0" y="494">Δ</text>
+      </g></g>
+    </svg>
+    <p class="an-say" data-step="1" data-anim="fade">Same move. The gap is the time you looked away.</p>
+  </div>
+  <p class="src">FlashForward · preprint 2026</p>
+  <aside class="notes">
+    <p>This idea grows straight out of my own work. In <b>FlashForward</b>, the planner already jumps. It places clean anchors ten latents ahead, before any frame in between is rendered, and the renderer fills in the rest.</p>
+    <p><em>[click]</em> Off-screen evolution is the same move. While the region is in view, we render as usual. When you look away, nothing is rendered. When you come back, one jump places a clean anchor at the right moment, and rendering picks up from there. The gap is simply the time you looked away. And the jump can be coarse: a few tokens carry where things are and how far they've got. <b>Jump coarse, render fine.</b> It's the same idea as the sub-goals in ProWAM, which jump ahead by task progress, not clock time.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-learn" data-title="The answer key is in video" data-section="Idea" data-time="75">
+  <header class="hd">
+    <h2 class="title">The answer key is already in video</h2>
+  </header>
+  <div class="bd">
+    <div class="ln-grid">
+      <article class="ln-card">
+        <svg class="ln-fig" viewBox="0 0 480 220" width="480" height="220" aria-hidden="true">
+          <rect class="ln-fr" x="20" y="50" width="62" height="86" rx="8"></rect>
+          <rect class="ln-fr" x="92" y="50" width="62" height="86" rx="8"></rect>
+          <rect class="ln-fr" x="164" y="50" width="62" height="86" rx="8"></rect>
+          <text class="ln-dots" x="290" y="104">· · ·</text>
+          <rect class="ln-fr target" x="370" y="44" width="74" height="98" rx="10"></rect>
+          <text class="oc-xs ln-mid" x="123" y="176">up to t₀</text>
+          <text class="oc-xs ln-mid ln-a" x="407" y="176">t₀ + Δ</text>
+          <path class="ln-brace" d="M232 156 V166 H364 V156"></path>
+          <text class="oc-sm ln-mid" x="298" y="200">Δ</text>
+        </svg>
+        <h3>Any video with a time gap</h3>
+        <p>Predict the frame at t₀ + Δ. Two short jumps make one long one.</p>
+      </article>
+      <article class="ln-card" data-step="1">
+        <svg class="ln-fig" viewBox="0 0 480 220" width="480" height="220" aria-hidden="true">
+          <rect class="ln-pano" x="20" y="30" width="440" height="160" rx="14"></rect>
+          <path class="ln-hill" d="M20 150 Q90 100 160 140 T300 128 T460 140 V176 Q460 190 446 190 H34 Q20 190 20 176 Z"></path>
+          <circle class="ln-sun" cx="392" cy="70" r="18"></circle>
+          <circle class="ln-dot" cx="88" cy="132" r="9"></circle>
+          <circle class="ln-dot" cx="340" cy="120" r="9"></circle>
+          <rect class="ln-view" x="170" y="44" width="120" height="132" rx="10"></rect>
+          <text class="oc-xs ln-mid ln-o" x="230" y="212">viewport</text>
+        </svg>
+        <h3>360° and multi-view video</h3>
+        <p>Crop a viewport. The rest records what happened off-screen.</p>
+      </article>
+      <article class="ln-card" data-step="2">
+        <svg class="ln-fig" viewBox="0 0 480 220" width="480" height="220" aria-hidden="true">
+          <path class="ln-path" d="M90 170 C40 120 70 40 170 40 S400 40 410 110 S300 190 120 176"></path>
+          <path class="ln-head" d="M132 166 L112 176 L132 188 Z"></path>
+          <circle class="ln-start" cx="90" cy="172" r="14"></circle>
+          <text class="oc-xs" x="18" y="212">leave</text>
+          <text class="oc-xs ln-a" x="150" y="212">return</text>
+        </svg>
+        <h3>Natural revisits</h3>
+        <p>Egocentric and robot video. The frame on return is the answer.</p>
+      </article>
+    </div>
+    <p class="ln-say" data-step="2">No text describes what happens off-screen.</p>
+  </div>
+  <aside class="notes">
+    <p>Can we learn this without labels? Yes, because the answer key is already in video. First, any video with a time gap. Take the frames up to t-zero and predict the frame at t-zero plus delta. That trains the jump directly, from about a million clips, with no labels at all. Fixed cameras and time-lapses are ideal, because whatever changes between the two frames is the world, not the camera. And we add one simple rule: jumping two minutes and then three must land in the same place as jumping five at once. That way, the many short gaps in video also teach the model to make long jumps.</p>
+    <p><em>[click]</em> Second, 360-degree and multi-camera video. We crop a viewport and move it around. The rest of the frame records exactly what happened off-screen, so we can supervise every moment of the look-away.</p>
+    <p><em>[click]</em> Third, natural revisits in egocentric and robot video. When the camera comes back, the frame it sees is the answer key. And notice what's not needed: no text describes what happens off-screen. The dynamics come from <b>vision</b>.</p>
+  </aside>
+</section>
+
+<!-- ===== 05-plan.html ===== -->
+<!-- 05 · Plan: s-curve, s-exp, s-act, s-risks, s-outcomes, s-plan (generated by src/gen/s05.py). -->
+
+<section class="slide" id="s-curve" data-title="The clock curve" data-section="Plan" data-time="95">
+  <header class="hd">
+    <h2 class="title">Measure it: the clock curve</h2>
+  </header>
+  <div class="bd">
+    <div class="cv-stage">
+      <svg class="cv" viewBox="0 0 1040 700" width="1040" height="700" aria-hidden="true">
+        <!-- x: 0-20 min look-away at 42 px/min from x=150; y: clock on return, 10:10 at y=600, 24 px/min -->
+        <g data-step="1" data-anim="fade">
+          <rect class="cv-band" x="150" y="70" width="210" height="530"></rect>
+          <text class="oc-xs cv-mid" x="255" y="104">seen in training</text>
+          <text class="oc-xs cv-mid" x="675" y="104">longer than training</text>
+        </g>
+        <line class="cv-grid" x1="150" y1="480" x2="990" y2="480"></line>
+        <line class="cv-grid" x1="150" y1="360" x2="990" y2="360"></line>
+        <line class="cv-grid" x1="150" y1="240" x2="990" y2="240"></line>
+        <line class="cv-grid" x1="150" y1="120" x2="990" y2="120"></line>
+        <line class="cv-ax" x1="150" y1="600" x2="1010" y2="600"></line>
+        <line class="cv-ax" x1="150" y1="600" x2="150" y2="80"></line>
+        <text class="oc-xs cv-end" x="134" y="609">10:10</text>
+        <text class="oc-xs cv-end" x="134" y="489">10:15</text>
+        <text class="oc-xs cv-end" x="134" y="369">10:20</text>
+        <text class="oc-xs cv-end" x="134" y="249">10:25</text>
+        <text class="oc-xs cv-end" x="134" y="129">10:30</text>
+        <line class="cv-tk" x1="150" y1="600" x2="150" y2="612"></line><text class="oc-xs cv-mid" x="150" y="646">0</text>
+        <line class="cv-tk" x1="360" y1="600" x2="360" y2="612"></line><text class="oc-xs cv-mid" x="360" y="646">5</text>
+        <line class="cv-tk" x1="570" y1="600" x2="570" y2="612"></line><text class="oc-xs cv-mid" x="570" y="646">10</text>
+        <line class="cv-tk" x1="780" y1="600" x2="780" y2="612"></line><text class="oc-xs cv-mid" x="780" y="646">15</text>
+        <line class="cv-tk" x1="990" y1="600" x2="990" y2="612"></line><text class="oc-xs cv-mid" x="990" y="646">20</text>
+        <text class="oc-sm cv-mid" x="570" y="692">minutes looked away</text>
+        <text class="oc-sm cv-mid" transform="translate(44 340) rotate(-90)">clock on return</text>
+        <!-- build 1: the goal runs under the dashed truth -->
+        <g data-step="1" data-anim="fade">
+          <line class="cv-wm" x1="150" y1="600" x2="990" y2="120"></line>
+          <text class="cv-lw" x="700" y="250">our goal</text>
+        </g>
+        <line class="cv-truth" x1="150" y1="600" x2="990" y2="120"></line>
+        <text class="cv-lt" x="982" y="98">true time</text>
+        <line class="cv-frozen" x1="150" y1="595" x2="990" y2="595"></line>
+        <text class="cv-lf" x="982" y="576">frozen at 10:10</text>
+        <polyline class="cv-narr" points="150,595 192,595 192,504 990,504"></polyline>
+        <text class="cv-ln" x="982" y="486">narrated: wrong amount</text>
+        <!-- readout at 10 min, matching the clocks on the right -->
+        <line class="cv-guide" x1="570" y1="600" x2="570" y2="360"></line>
+        <circle class="cv-dot cv-d-true" cx="570" cy="360" r="10"></circle>
+        <circle class="cv-dot cv-d-lang" cx="570" cy="504" r="10"></circle>
+        <circle class="cv-dot cv-d-sf" cx="570" cy="595" r="10"></circle>
+      </svg>
+      <div class="cv-side">
+        <p class="cv-k">Look away 10 min</p>
+        <svg class="cv-read" viewBox="0 0 600 190" width="600" height="190" aria-hidden="true">
+          <g class="oc-clock" data-clock="10:20" data-r="44" transform="translate(60 52)"></g>
+          <text class="cv-ct cv-t-ink" x="60" y="140">10:20</text><text class="oc-xs cv-mid" x="60" y="174">true</text>
+          <g class="oc-clock cv-c-sf" data-clock="10:10" data-r="44" transform="translate(205 52)"></g>
+          <text class="cv-ct cv-t-sf" x="205" y="140">10:10</text><text class="oc-xs cv-mid" x="205" y="174">frozen</text>
+          <g class="oc-clock cv-c-lang" data-clock="10:14" data-r="44" transform="translate(350 52)"></g>
+          <text class="cv-ct cv-t-lang" x="350" y="140">10:14</text><text class="oc-xs cv-mid" x="350" y="174">narrated</text>
+          <g data-step="1" data-anim="fade">
+            <g class="oc-clock ours" data-clock="10:20" data-r="44" transform="translate(495 52)"></g>
+            <text class="cv-ct cv-t-ours" x="495" y="140">10:20</text><text class="oc-xs cv-mid" x="495" y="174">our goal</text>
+          </g>
+        </svg>
+        <div class="cv-more" data-step="2" data-anim="left">
+          <p class="cv-k cv-k2">Clock skill</p>
+          <p class="cv-s1">How much of the frozen error we remove</p>
+          <p class="cv-s">0 = frozen · 1 = perfect</p>
+          <p class="cv-k cv-k2">Examples</p>
+          <div class="cv-chips">
+            <span>a clock ticking</span><span>a cup filling</span><span>a ball rolling</span><span>a person walking</span><span>the robot’s own actions</span><span>a still scene</span><span>and more…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>How do we measure it? I propose the <b>clock curve</b>. Take one scene with a clock. Look away for one minute, five, ten, twenty, every time from the same start. When you look back, read the clock out of the frame, and plot it against how long you looked away.</p>
+    <p>The dashed line is the true time. A frozen model stays at ten-ten forever. A model that narrates in text knows that something changed, so it jumps once, but always by the same amount. Look away for ten minutes: the true clock says ten-twenty, the frozen model says ten-ten, and the narrated one says ten-fourteen.</p>
+    <p><em>[click]</em> Our goal is a world model that stays on the dashed line, and keeps following it for look-aways longer than anything it saw in training. The clock test is one point on this curve. The clock curve is all of them.</p>
+    <p><em>[click]</em> We sum it up as <b>clock skill</b>: how much of the frozen model's error we remove. Zero means no better than freezing, and one is perfect. And it isn't just clocks. It works for any process we can read out of a frame: a cup filling, a ball rolling, a person walking, the results of the robot's own actions, and even a still scene, where the right answer is no change at all.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-exp" data-title="The decisive test" data-section="Plan" data-time="85">
+  <header class="hd">
+    <h2 class="title">The decisive test: how to carry the unseen</h2>
+  </header>
+  <div class="bd">
+    <div class="ex-grid">
+      <div></div>
+      <p class="ex-ch">ordinary video</p>
+      <p class="ex-ch" data-step="1">time-gap and look-away video</p>
+      <p class="ex-rh">Raw-history retrieval</p>
+      <div class="ex-cell "><svg class="ex-sp" viewBox="0 0 300 110" width="300" height="110" aria-hidden="true"><line class="ex-tru" x1="10" y1="100" x2="290" y2="14"></line><line class="ex-m frz" x1="10" y1="98" x2="290" y2="98"></line></svg><p>mostly freezes</p></div>
+      <div class="ex-cell " data-step="1"><svg class="ex-sp" viewBox="0 0 300 110" width="300" height="110" aria-hidden="true"><line class="ex-tru" x1="10" y1="100" x2="290" y2="14"></line><polyline class="ex-m" points="10,100 110,69 290,69"></polyline></svg><p>keeps time only as far as its context</p></div>
+      <p class="ex-rh">Stepping every frame</p>
+      <div class="ex-cell "><svg class="ex-sp" viewBox="0 0 300 110" width="300" height="110" aria-hidden="true"><line class="ex-tru" x1="10" y1="100" x2="290" y2="14"></line><line class="ex-m frz" x1="10" y1="98" x2="290" y2="98"></line></svg><p>mostly freezes</p></div>
+      <div class="ex-cell " data-step="1"><svg class="ex-sp" viewBox="0 0 300 110" width="300" height="110" aria-hidden="true"><line class="ex-tru" x1="10" y1="100" x2="290" y2="14"></line><polyline class="ex-m" points="10,100 80,79 150,56 220,36 290,15"></polyline></svg><p>keeps time<span class="ex-cost">cost grows with time away</span></p></div>
+      <p class="ex-rh ours">Store the process, jump</p>
+      <div class="ex-cell "><svg class="ex-sp" viewBox="0 0 300 110" width="300" height="110" aria-hidden="true"><line class="ex-tru" x1="10" y1="100" x2="290" y2="14"></line><line class="ex-m frz" x1="10" y1="98" x2="290" y2="98"></line></svg><p>mostly freezes</p></div>
+      <div class="ex-cell ours" data-step="1"><svg class="ex-sp" viewBox="0 0 300 110" width="300" height="110" aria-hidden="true"><line class="ex-tru" x1="10" y1="100" x2="290" y2="14"></line><polyline class="ex-m" points="10,100 80,79 150,56 220,36 290,15"></polyline></svg><p>keeps time<span class="ex-cost">cost stays flat</span></p></div>
+    </div>
+    <p class="ex-also">Also tested: longer look-aways · repeated revisits · things walking in · language vs. vision</p>
+  </div>
+  <aside class="notes">
+    <p>The central experiment asks one question: how should the unseen be carried? We compare three ways, on the same backbone, with the same data and the same compute. Raw-history retrieval, which is where today's memory methods sit. Stepping the state at every frame, the classic filter. And storing the process, with a jump. On ordinary video, I expect all three to mostly freeze, because nothing there rewards keeping time.</p>
+    <p><em>[click]</em> With time-gap and look-away data, the picture splits. Retrieval keeps time only as far as its context reaches. Stepping keeps time, but its cost grows with every second you're away. The jump keeps time at a <b>flat cost</b>. That's the result that matters most: the right structure, learned from the right data.</p>
+    <p>Around it, we also test look-aways longer than training, repeated revisits, things walking into view on their own, and language against vision. And we probe the stored state directly while it's hidden, so we know the model tracks the process, not just a plausible ending.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-act" data-title="Act with it" data-section="Plan" data-time="55">
+  <header class="hd">
+    <h2 class="title">Act with it: plan with what you cannot see</h2>
+  </header>
+  <div class="bd">
+    <div class="ac-grid">
+      <article class="ac-card">
+        <svg class="ac-fig" viewBox="0 0 440 230" width="440" height="230" aria-hidden="true">
+          <path class="ac-tap" d="M60 40 H150 V76"></path>
+          <line class="ac-stream" x1="150" y1="82" x2="150" y2="118"></line>
+          <clipPath id="ac-cup"><path d="M108 112 H192 L184 216 H116 Z"></path></clipPath>
+          <rect class="ac-water" x="100" y="122" width="100" height="100" clip-path="url(#ac-cup)"></rect>
+          <path class="ac-cup" d="M108 112 H192 L184 216 H116 Z"></path>
+          <path class="ac-fov" d="M330 210 L270 60 L420 60 Z"></path>
+          <circle class="ac-cam" cx="330" cy="210" r="14"></circle>
+        </svg>
+        <h3>Stop the tap in time</h3>
+        <p>while finishing another task</p>
+      </article>
+      <article class="ac-card">
+        <svg class="ac-fig" viewBox="0 0 440 230" width="440" height="230" aria-hidden="true">
+          <path class="ac-trail" d="M40 200 Q160 180 250 130"></path>
+          <circle class="ac-ball" cx="268" cy="118" r="20"></circle>
+          <rect class="ac-box" x="230" y="40" width="160" height="150" rx="10"></rect>
+          <path class="ac-tape" d="M230 115 H390"></path>
+          <text class="ac-q" x="396" y="64">?</text>
+        </svg>
+        <h3>Find the rolled-away ball</h3>
+        <p>it went behind the box</p>
+      </article>
+      <article class="ac-card">
+        <svg class="ac-fig" viewBox="0 0 440 230" width="440" height="230" aria-hidden="true">
+          <rect class="ac-belt" x="20" y="130" width="400" height="44" rx="22"></rect>
+          <circle class="ac-roll" cx="44" cy="152" r="12"></circle>
+          <circle class="ac-roll" cx="396" cy="152" r="12"></circle>
+          <rect class="ac-item" x="70" y="84" width="58" height="46" rx="6"></rect>
+          <path class="ac-mv" d="M150 104 H210"></path>
+          <path class="ac-mvh" d="M206 94 L222 104 L206 114 Z"></path>
+          <path class="ac-fov" d="M330 216 L262 30 L420 30 Z"></path>
+        </svg>
+        <h3>Catch the next item</h3>
+        <p>the conveyor brings it into view</p>
+      </article>
+    </div>
+    <div class="ac-foot">
+      <span class="ac-pill">as a planner: imagined sub-goals</span>
+      <span class="ac-pill">as a training signal</span>
+      <span class="ac-vs">vs. the same model with <b>frozen</b> memory</span>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>And then the part I care about most: <b>acting</b>. A world model is only as useful as the decisions it supports. So we build robot tasks where the important thing happens off-screen. Stop the tap before the cup overflows, while finishing another task. Find the ball that rolled behind a box. Catch the next item when the conveyor brings it into view.</p>
+    <p>We use the world model in two ways: as a planner that imagines sub-goals, the way ProWAM does, and as a training signal for the policy, the way DP4 does. The test is simple: does a model that keeps time beat the same model with frozen memory? That number tells us how much off-screen evolution matters for acting.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-risks" data-title="What could go wrong" data-section="Plan" data-time="60">
+  <header class="hd">
+    <h2 class="title">What could go wrong, and how we'll know</h2>
+  </header>
+  <div class="bd">
+    <div class="rk-grid">
+      <article class="rk-card">
+        <svg class="rk-ic" viewBox="0 0 160 100" width="160" height="100" aria-hidden="true">
+          <line class="rk-tru" x1="10" y1="90" x2="150" y2="12"></line>
+          <line class="rk-flat" x1="10" y1="88" x2="150" y2="88"></line>
+        </svg>
+        <h3>It learns to freeze</h3>
+        <p class="rk-p">Most off-screen video is static.</p>
+        <p class="rk-a">Balance the data toward motion; probe the state while it's hidden.</p>
+      </article>
+      <article class="rk-card">
+        <svg class="rk-ic" viewBox="0 0 160 100" width="160" height="100" aria-hidden="true">
+          <path class="rk-kettle" d="M44 92 H112 Q118 92 116 84 L108 46 Q104 34 92 34 H64 Q52 34 48 46 L40 84 Q38 92 44 92 Z"></path>
+          <path class="rk-spout" d="M112 58 L140 40"></path>
+          <path class="rk-lid" d="M58 34 Q78 2 98 34"></path>
+          <text class="rk-q" x="78" y="78">?</text>
+        </svg>
+        <h3>Invisible processes</h3>
+        <p class="rk-p">On or off, a kettle looks the same.</p>
+        <p class="rk-a">Reason from history, such as the action that switched it on.</p>
+      </article>
+      <article class="rk-card">
+        <svg class="rk-ic" viewBox="0 0 160 100" width="160" height="100" aria-hidden="true">
+          <circle class="rk-b1" cx="54" cy="56" r="22"></circle>
+          <path class="rk-vase" d="M104 92 H132 Q140 70 128 54 V40 H108 V54 Q96 70 104 92 Z"></path>
+          <path class="rk-hit" d="M84 30 L92 40 M80 56 L94 56 M84 82 L92 72"></path>
+        </svg>
+        <h3>Hidden things interact</h3>
+        <p class="rk-p">The ball rolls into the vase.</p>
+        <p class="rk-a">Jump nearby movers together; check against frame-by-frame simulation.</p>
+      </article>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Three things could get in the way, and each one has a clear check. First, freezing is attractive. Most off-screen video really is static, so a model can learn that nothing ever changes. We balance the data toward motion, and we probe the stored state while it's hidden, so we see it right away if it happens.</p>
+    <p>Second, some processes are invisible. A kettle that's on looks like one that's off. So we reason from history, such as the action that switched it on. If someone pressed the button a minute ago, the water is heating, even though nothing looks different.</p>
+    <p>Third, hidden things interact: the ball rolls into the vase. We jump nearby movers together, and we check against frame-by-frame simulation on exactly those scenes.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-outcomes" data-title="Every outcome tells us something" data-section="Plan" data-time="45">
+  <header class="hd">
+    <h2 class="title">Every outcome tells us something</h2>
+  </header>
+  <div class="bd">
+    <div class="ot-grid">
+      <div class="ot-fork"><p class="ot-if"><span>if</span>plain memory also keeps time</p><p class="ot-then"><span>then</span>the bottleneck is data, not the design</p></div>
+      <div class="ot-fork"><p class="ot-if"><span>if</span>frame-by-frame simulation clearly beats one jump</p><p class="ot-then"><span>then</span>simulate the few moving things, at a coarse rate</p></div>
+      <div class="ot-fork"><p class="ot-if"><span>if</span>text gets the amounts right too</p><p class="ot-then"><span>then</span>add language to the state for slow changes</p></div>
+      <div class="ot-fork"><p class="ot-if"><span>if</span>time-gap video alone is enough</p><p class="ot-then"><span>then</span>skip the curated data and just scale</p></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>What I like about this plan is that every outcome tells us something. If plain memory also keeps time, the bottleneck is data, not the design, and we put everything into data. If frame-by-frame simulation clearly beats one jump, we simulate just the few moving things, at a coarse rate, and leave the static world alone.</p>
+    <p>If text gets the amounts right too, we add language to the state for slow changes. And if time-gap video alone is enough, we skip the curated data and simply scale.</p>
+  </aside>
+</section>
+
+<section class="slide" id="s-plan" data-title="Plan" data-section="Plan" data-time="40">
+  <header class="hd">
+    <h2 class="title">Plan: measure, learn, apply</h2>
+  </header>
+  <div class="bd">
+    <div class="pn-row">
+      <article class="pn-step"><p class="pn-n">1</p><h3>Measure</h3><p class="pn-what">Clock-curve benchmark</p><p class="pn-how">synthetic scenes with exact state; real 360° and multi-camera clips</p></article>
+      <span class="pn-arr" aria-hidden="true">→</span>
+      <article class="pn-step"><p class="pn-n">2</p><h3>Learn</h3><p class="pn-what">The jump model</p><p class="pn-how">learned from ordinary video, without labels</p></article>
+      <span class="pn-arr" aria-hidden="true">→</span>
+      <article class="pn-step"><p class="pn-n">3</p><h3>Apply</h3><p class="pn-what">Many applications</p><p class="pn-how">robots, driving, wearable assistants, games and simulators</p></article>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Here's the plan, in three steps. We start with measurement, because the clock curve is useful on its own: it shows the whole field where models stand. So first, <b>measure</b>: a clock-curve benchmark, with synthetic scenes where we know the exact state, and real 360-degree and multi-camera clips. Second, <b>learn</b>: the jump model, learned from ordinary video, without labels. Third, <b>apply</b> it wherever the unseen matters: robots, driving, wearable assistants, games and simulators.</p>
+  </aside>
+</section>
+
+<!-- ===== 06-close.html ===== -->
+<!-- 06 · Close -->
+<section class="slide" id="s-summary" data-title="The world keeps running" data-section="Summary" data-time="40">
+  <header class="hd">
+    <h2 class="title">The world keeps running</h2>
+  </header>
+  <div class="bd">
+    <div class="sm-row">
+      <ol class="sm-list">
+        <li><b>Store the process, jump on demand</b><span>a state, not a simulation</span></li>
+        <li><b>Learned from video alone</b><span>the answer key is already there</span></li>
+        <li><b>Measured by the clock curve</b><span>then put to work in robots</span></li>
+      </ol>
+      <svg class="sm-clock" viewBox="-170 -170 340 340" width="340" height="340" aria-hidden="true">
+        <g class="oc-clock ours" data-clock="10:15" data-r="150"></g>
+      </svg>
+    </div>
+    <p class="sm-say">Language names the task. <b>Vision holds the world.</b></p>
+    <p class="sm-thanks">Thank you</p>
+  </div>
+  <aside class="notes">
+    <p>So, to sum up. The unseen world needs a state, not a simulation: store the process, and jump on demand. We can learn it from video alone, because video already holds the answer key. And we can measure it with the clock curve, then put it to work in robots that plan with what they can't see.</p>
+    <p>Today's world models remember what things looked like. I want to build ones that know what things are doing now. Language names the task. <b>Vision holds the world.</b> Thank you. I'm happy to take your questions.</p>
+  </aside>
+</section>
+
+    </div>
+  </div>
+  <script src="js/deck.js?v=48653782"></script>
+  <script src="js/kit.js?v=d0388812"></script>
+  <script src="js/sec-00.js?v=f72f53fb"></script>
+  <script src="js/sec-02.js?v=3440baef"></script>
+</body>
+</html>
